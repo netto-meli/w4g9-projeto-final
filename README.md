@@ -61,7 +61,7 @@ FROM hub.furycloud.io/mercadolibre/java:1.11-runtime-mini
 
 You can find all available tags for your `Dockerfile.runtime` [here](https://github.com/mercadolibre/fury_java-mini-runtime#supported-tags)
 
-2. Start coding!
+2. Start coding!!
 
 ### Questions
 
