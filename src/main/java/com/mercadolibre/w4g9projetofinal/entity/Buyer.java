@@ -12,11 +12,15 @@ import java.util.Objects;
 @Setter
 @ToString
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Inheritance(strategy= InheritanceType.SINGLE_TABLE)
 public class Buyer extends User{
     private String address;
+
+    public Buyer(Long id, String name, String address) {
+        super(id, name);
+        this.address = address;
+    }
 
     @Override
     public boolean equals(Object o) {

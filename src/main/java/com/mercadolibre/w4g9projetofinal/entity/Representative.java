@@ -19,6 +19,11 @@ public class Representative extends User{
     // todo enum
     private String job;
 
+    public Representative(Long id, String name, String job) {
+        super(id, name);
+        this.job = job;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

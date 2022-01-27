@@ -14,7 +14,6 @@ import java.util.Objects;
 @Setter
 @ToString
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Inheritance(strategy= InheritanceType.SINGLE_TABLE)
 public class Seller extends User{
@@ -24,6 +23,12 @@ public class Seller extends User{
     @OneToMany
     @ToString.Exclude
     private List<Batch> batchList;
+
+    public Seller(Long id, String name, List<Advertise> advertiseList, List<Batch> batchList) {
+        super(id, name);
+        this.advertiseList = advertiseList;
+        this.batchList = batchList;
+    }
 
     @Override
     public boolean equals(Object o) {
