@@ -1,27 +1,20 @@
 package com.mercadolibre.w4g9projetofinal.entity;
 
-import com.mercadolibre.w4g9projetofinal.entity.enums.CargoRepresentante;
 import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.util.Objects;
 
-@Data
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Representative {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
-    private CargoRepresentante job;
-    private String email;
+public class Representative extends User{
+    // todo enum
+    private String job;
 
     @Override
     public boolean equals(Object o) {

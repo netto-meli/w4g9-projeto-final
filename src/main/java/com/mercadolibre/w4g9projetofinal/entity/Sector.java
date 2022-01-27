@@ -7,25 +7,23 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
-@Data
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 public class Sector {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String type;
-
     @ManyToOne
     private Warehouse warehouse;
-
     @OneToMany
     @ToString.Exclude
     private List<InboundOrder> inboundOrderList;
-
     private int stockLimit;
     private int currentStock;
     private float minTeperature;
