@@ -1,6 +1,8 @@
 package com.mercadolibre.w4g9projetofinal.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.Hibernate;
 
 import javax.persistence.Entity;
