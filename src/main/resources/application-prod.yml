@@ -5,17 +5,4 @@ spring:
     driverClassName: com.mysql.jdbc.Driver
     url: jdbc:mysql://${DB_MYSQL_DESAENV05_PRJTFINAL_PRJTFINAL_ENDPOINT}/prjtfinal?useSSL=true&serverTimezone=UTC&characterEncoding=UTF-8
     username: prjtfinal_WPROD
-    password: 'DB_MYSQL_DESAENV05_PRJTFINAL_PRJTFINAL_WPROD'
-  jpa:
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-    defer-datasource-initialization: true
-    hibernate:
-      ddl-auto: update
-db:
-  endpoint: 'DB_MYSQL_DESAENV05_PRJTFINAL_PRJTFINAL_ENDPOINT'
-  name: 'prjtfinal'
-  maximum-pool-size: '10'
-  idle-timeout: '30000'
-  connection-timeout: '4000'
-  max-lifetime: '3600000'
-  minimum-idle: '3'
+    password: ${DB_MYSQL_DESAENV05_PRJTFINAL_PRJTFINAL_WPROD}

@@ -1,7 +1,7 @@
-package com.mercadolibre.w4g9projetofinal.controller;
+package com.mercadolibre.fernando_netto_projeto_final.controller;
 
-import com.mercadolibre.w4g9projetofinal.entity.Warehouse;
-import com.mercadolibre.w4g9projetofinal.service.WarehouseService;
+import com.mercadolibre.fernando_netto_projeto_final.entity.Warehouse;
+import com.mercadolibre.fernando_netto_projeto_final.service.WarehouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +14,7 @@ public class WarehouseController {
 
     @GetMapping("/api")
     public Warehouse api() {
-        Warehouse wh = new Warehouse();
+        Warehouse wh = new Warehouse(1L, "ziks");
         return warehouseService.save(wh);
     }
 }

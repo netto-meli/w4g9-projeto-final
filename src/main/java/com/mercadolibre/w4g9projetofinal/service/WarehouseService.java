@@ -1,7 +1,7 @@
-package com.mercadolibre.w4g9projetofinal.service;
+package com.mercadolibre.fernando_netto_projeto_final.service;
 
-import com.mercadolibre.w4g9projetofinal.entity.Warehouse;
-import com.mercadolibre.w4g9projetofinal.repository.WarehouseRepository;
+import com.mercadolibre.fernando_netto_projeto_final.entity.Warehouse;
+import com.mercadolibre.fernando_netto_projeto_final.repository.WarehouseRepository;
 import org.springframework.stereotype.Service;
 
 @Service
