@@ -6,12 +6,15 @@ import org.hibernate.Hibernate;
 import javax.persistence.Entity;
 import java.util.Objects;
 
-@Getter
-@Setter
-@ToString
-@AllArgsConstructor
+@Data
 @Entity
+@NoArgsConstructor
 public class Fresh extends Product{
+
+    public Fresh(Long id, String name, String description, float minTemperature, float maxTemperature) {
+        super(id, name, description, minTemperature, maxTemperature);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
