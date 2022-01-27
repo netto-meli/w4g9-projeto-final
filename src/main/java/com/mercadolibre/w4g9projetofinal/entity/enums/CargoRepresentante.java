@@ -2,8 +2,8 @@ package com.mercadolibre.w4g9projetofinal.entity.enums;
 
 public enum CargoRepresentante {
 
-    SUPERVISOR(1, "Supervisor"),
-    LIDER(2, "Líder");
+    SUPERVISOR(0, "Supervisor"),
+    LIDER(1, "Líder");
 
     private int cod;
     private String descricao;
