@@ -17,8 +17,8 @@ public class RepresentativeService {
     @Autowired
     private RepresentativeRepository repository;
 
-    public List<RepresentativeResponseDTO> findAll() {
-        List<RepresentativeResponseDTO> list = repository.findAll().stream().map(x -> new RepresentativeResponseDTO(x.getId(), x.getName(), x.getJob())).collect(Collectors.toList());
+    public List<Representative> findAll() {
+        List<Representative> list = repository.findAll();
         return list;
     }
 
@@ -27,10 +27,7 @@ public class RepresentativeService {
         return obj.orElse(null);
     }
 
-    public Representative insert(RepresentativeResponseDTO objDto) {
-        Representative obj = new Representative(objDto.getId(), objDto.getName(), objDto.getJob());
-        obj.setId(null);
-        obj.setJob(CargoRepresentante.toEnum(obj.getJob().getCod()));
+    public Representative insert(Representative obj) {
         return repository.save(obj);
     }
 }

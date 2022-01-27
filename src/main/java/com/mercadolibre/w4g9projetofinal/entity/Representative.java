@@ -21,6 +21,7 @@ public class Representative {
     private Long id;
     private String name;
     private CargoRepresentante job;
+    private String email;
 
     @Override
     public boolean equals(Object o) {

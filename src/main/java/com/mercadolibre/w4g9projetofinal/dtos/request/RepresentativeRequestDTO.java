@@ -11,4 +11,5 @@ import lombok.NoArgsConstructor;
 public class RepresentativeRequestDTO {
     private String name;
     private CargoRepresentante job;
+    private String email;
 }

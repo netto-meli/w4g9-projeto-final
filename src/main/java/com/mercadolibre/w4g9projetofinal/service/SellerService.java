@@ -16,8 +16,8 @@ public class SellerService {
     @Autowired
     private SellerRepository repository;
 
-    public List<SellerResponseDTO> findAll() {
-        List<SellerResponseDTO> list = repository.findAll().stream().map(x -> new SellerResponseDTO(x.getId(), x.getName())).collect(Collectors.toList());
+    public List<Seller> findAll() {
+        List<Seller> list = repository.findAll();
         return list;
     }
 
@@ -26,9 +26,7 @@ public class SellerService {
         return obj.orElse(null);
     }
 
-    public Seller insert(SellerResponseDTO obj) {
-        Seller newObj = new Seller(obj.getId(), obj.getName());
-        newObj.setId(null);
-        return repository.save(newObj);
+    public Seller insert(Seller obj) {
+        return repository.save(obj);
     }
 }

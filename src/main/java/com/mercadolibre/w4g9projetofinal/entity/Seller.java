@@ -19,6 +19,8 @@ public class Seller {
     private Long id;
     private String name;
 
+    private String email;
+
     @OneToMany
     @ToString.Exclude
     private List<Advertise> advertiseList = new ArrayList<>();
@@ -27,9 +29,10 @@ public class Seller {
     @ToString.Exclude
     private List<Batch> batchList = new ArrayList<>();
 
-    public Seller(Long id, String name) {
+    public Seller(Long id, String name, String email) {
         this.id = id;
         this.name = name;
+        this.email = email;
     }
 
     @Override

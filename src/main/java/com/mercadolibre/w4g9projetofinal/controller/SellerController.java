@@ -1,5 +1,7 @@
 package com.mercadolibre.w4g9projetofinal.controller;
 
+import com.mercadolibre.w4g9projetofinal.dtos.converter.SellerConverter;
+import com.mercadolibre.w4g9projetofinal.dtos.request.SellerRequestDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.SellerResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Seller;
 import com.mercadolibre.w4g9projetofinal.service.SellerService;
@@ -20,7 +22,7 @@ public class SellerController {
 
     @GetMapping
     public ResponseEntity<List<SellerResponseDTO>> findAll(){
-        List<SellerResponseDTO> list = service.findAll();
+        List<SellerResponseDTO> list = SellerConverter.fromDTO(service.findAll());
         return ResponseEntity.ok(list);
     }
 
@@ -31,9 +33,11 @@ public class SellerController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> insert(@RequestBody SellerResponseDTO obj) {
-        service.insert(obj);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+    public ResponseEntity<Void> insert(@RequestBody SellerRequestDTO obj) {
+        Seller newObj = SellerConverter.convertDtoToEntity(obj);
+        newObj = service.insert(newObj);
+        SellerResponseDTO newObj2 = SellerConverter.convertEntityToDto(newObj);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj2.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 }
