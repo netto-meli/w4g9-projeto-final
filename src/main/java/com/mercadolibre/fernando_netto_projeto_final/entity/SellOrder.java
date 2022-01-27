@@ -16,19 +16,18 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Warehouse {
+public class SellOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String location;
+    private int quantity;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Warehouse warehouse = (Warehouse) o;
-        return id != null && Objects.equals(id, warehouse.id);
+        SellOrder sellOrder = (SellOrder) o;
+        return id != null && Objects.equals(id, sellOrder.id);
     }
 
     @Override

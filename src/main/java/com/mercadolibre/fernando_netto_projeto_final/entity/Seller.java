@@ -4,9 +4,8 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -16,19 +15,20 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Warehouse {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
-    private String location;
+public class Seller extends User{
+    @OneToMany
+    @ToString.Exclude
+    private List<Advertise> advertiseList;
+    @OneToMany
+    @ToString.Exclude
+    private List<Batch> batchList;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Warehouse warehouse = (Warehouse) o;
-        return id != null && Objects.equals(id, warehouse.id);
+        Seller seller = (Seller) o;
+        return getId() != null && Objects.equals(getId(), seller.getId());
     }
 
     @Override

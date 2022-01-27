@@ -14,7 +14,7 @@ public class WarehouseController {
 
     @GetMapping("/api")
     public Warehouse api() {
-        Warehouse wh = new Warehouse(1L, "ziks");
+        Warehouse wh = new Warehouse();
         return warehouseService.save(wh);
     }
 }

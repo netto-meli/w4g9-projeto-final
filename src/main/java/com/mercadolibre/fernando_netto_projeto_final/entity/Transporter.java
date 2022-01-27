@@ -3,10 +3,8 @@ package com.mercadolibre.fernando_netto_projeto_final.entity;
 import lombok.*;
 import org.hibernate.Hibernate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -16,19 +14,27 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Warehouse {
+public class Transporter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String location;
+    @OneToMany
+    @ToString.Exclude
+    private List<Fresh> freshList;
+    @OneToMany
+    @ToString.Exclude
+    private List<Cold> coldList;
+    @OneToMany
+    @ToString.Exclude
+    private List<Frozen> frozenList;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Warehouse warehouse = (Warehouse) o;
-        return id != null && Objects.equals(id, warehouse.id);
+        Transporter that = (Transporter) o;
+        return id != null && Objects.equals(id, that.id);
     }
 
     @Override

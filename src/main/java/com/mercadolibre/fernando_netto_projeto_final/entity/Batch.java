@@ -3,10 +3,8 @@ package com.mercadolibre.fernando_netto_projeto_final.entity;
 import lombok.*;
 import org.hibernate.Hibernate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Getter
@@ -16,19 +14,23 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Warehouse {
+public class Batch {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String location;
+    private String quantity;
+    private String currentTemperature;
+    private LocalDate dueDate;
+    private LocalDate manufactureDate;
+    @OneToOne
+    private Advertise advertise;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Warehouse warehouse = (Warehouse) o;
-        return id != null && Objects.equals(id, warehouse.id);
+        Batch batch = (Batch) o;
+        return id != null && Objects.equals(id, batch.id);
     }
 
     @Override
