@@ -5,23 +5,27 @@ import org.hibernate.Hibernate;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Getter
-@Setter
-@ToString
-@RequiredArgsConstructor
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 public class Seller extends User{
+
     @OneToMany
     @ToString.Exclude
-    private List<Advertise> advertiseList;
+    private List<Advertise> advertiseList = new ArrayList<>();
+
     @OneToMany
     @ToString.Exclude
-    private List<Batch> batchList;
+    private List<Batch> batchList = new ArrayList<>();
+
+    public Seller(Long id, String name) {
+        super(id, name);
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -6,14 +6,11 @@ import org.hibernate.Hibernate;
 import javax.persistence.Entity;
 import java.util.Objects;
 
-@Getter
-@Setter
-@ToString
-@RequiredArgsConstructor
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 @Entity
 public class Cold extends Product{
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
