@@ -4,6 +4,8 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import java.util.List;
 import java.util.Objects;
@@ -14,6 +16,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Inheritance(strategy= InheritanceType.SINGLE_TABLE)
 public class Seller extends User{
     @OneToMany
     @ToString.Exclude

@@ -4,6 +4,8 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import java.util.Objects;
 
 @Getter
@@ -12,6 +14,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Inheritance(strategy= InheritanceType.SINGLE_TABLE)
 public class Representative extends User{
     // todo enum
     private String job;
