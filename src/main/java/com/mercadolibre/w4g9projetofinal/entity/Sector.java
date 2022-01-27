@@ -3,37 +3,38 @@ package com.mercadolibre.w4g9projetofinal.entity;
 import lombok.*;
 import org.hibernate.Hibernate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
-/***
- * @author Rafael Menezes
- * @author Fernando
- * @version 1.0
- * @since Release 01 da aplicação
- */
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Warehouse {
+public class Sector {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String location;
+    private String type;
+    @ManyToOne
+    private Warehouse warehouse;
+    @OneToMany
+    @ToString.Exclude
+    private List<InboundOrder> inboundOrderList;
+    private int stockLimit;
+    private int currentStock;
+    private float minTeperature;
+    private float maxTeperature;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Warehouse warehouse = (Warehouse) o;
-        return id != null && Objects.equals(id, warehouse.id);
+        Sector sector = (Sector) o;
+        return id != null && Objects.equals(id, sector.id);
     }
 
     @Override
