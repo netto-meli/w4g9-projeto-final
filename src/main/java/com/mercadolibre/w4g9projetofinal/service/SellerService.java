@@ -25,4 +25,10 @@ public class SellerService {
         Optional<Seller> obj = repository.findById(id);
         return obj.orElse(null);
     }
+
+    public Seller insert(SellerDTO obj) {
+        Seller newObj = new Seller(obj.getId(), obj.getName());
+        newObj.setId(null);
+        return repository.save(newObj);
+    }
 }
