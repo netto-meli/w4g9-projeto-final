@@ -1,6 +1,6 @@
 package com.mercadolibre.w4g9projetofinal.controller;
 
-import com.mercadolibre.w4g9projetofinal.dtos.RepresentativeDTO;
+import com.mercadolibre.w4g9projetofinal.dtos.response.RepresentativeResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Representative;
 import com.mercadolibre.w4g9projetofinal.service.RepresentativeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +19,8 @@ public class RepresentativeController {
     private RepresentativeService service;
 
     @GetMapping
-    public ResponseEntity<List<RepresentativeDTO>> findAll() {
-        List<RepresentativeDTO> list = service.findAll();
+    public ResponseEntity<List<RepresentativeResponseDTO>> findAll() {
+        List<RepresentativeResponseDTO> list = service.findAll();
         return ResponseEntity.ok(list);
     }
 
@@ -31,7 +31,7 @@ public class RepresentativeController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> insert(@RequestBody RepresentativeDTO obj) {
+    public ResponseEntity<Void> insert(@RequestBody RepresentativeResponseDTO obj) {
         service.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();

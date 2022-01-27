@@ -1,4 +1,4 @@
-package com.mercadolibre.w4g9projetofinal.dtos;
+package com.mercadolibre.w4g9projetofinal.dtos.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SellerDTO {
-
-    private Long id;
+public class SellerRequestDTO {
     private String name;
 }

@@ -1,6 +1,6 @@
 package com.mercadolibre.w4g9projetofinal.service;
 
-import com.mercadolibre.w4g9projetofinal.dtos.RepresentativeDTO;
+import com.mercadolibre.w4g9projetofinal.dtos.response.RepresentativeResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Representative;
 import com.mercadolibre.w4g9projetofinal.entity.enums.CargoRepresentante;
 import com.mercadolibre.w4g9projetofinal.repository.RepresentativeRepository;
@@ -17,8 +17,8 @@ public class RepresentativeService {
     @Autowired
     private RepresentativeRepository repository;
 
-    public List<RepresentativeDTO> findAll() {
-        List<RepresentativeDTO> list = repository.findAll().stream().map(x -> new RepresentativeDTO(x.getId(), x.getName(), x.getJob())).collect(Collectors.toList());
+    public List<RepresentativeResponseDTO> findAll() {
+        List<RepresentativeResponseDTO> list = repository.findAll().stream().map(x -> new RepresentativeResponseDTO(x.getId(), x.getName(), x.getJob())).collect(Collectors.toList());
         return list;
     }
 
@@ -27,7 +27,7 @@ public class RepresentativeService {
         return obj.orElse(null);
     }
 
-    public Representative insert(RepresentativeDTO objDto) {
+    public Representative insert(RepresentativeResponseDTO objDto) {
         Representative obj = new Representative(objDto.getId(), objDto.getName(), objDto.getJob());
         obj.setId(null);
         obj.setJob(CargoRepresentante.toEnum(obj.getJob().getCod()));

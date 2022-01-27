@@ -1,6 +1,6 @@
 package com.mercadolibre.w4g9projetofinal.controller;
 
-import com.mercadolibre.w4g9projetofinal.dtos.SellerDTO;
+import com.mercadolibre.w4g9projetofinal.dtos.response.SellerResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Seller;
 import com.mercadolibre.w4g9projetofinal.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +19,8 @@ public class SellerController {
     private SellerService service;
 
     @GetMapping
-    public ResponseEntity<List<SellerDTO>> findAll(){
-        List<SellerDTO> list = service.findAll();
+    public ResponseEntity<List<SellerResponseDTO>> findAll(){
+        List<SellerResponseDTO> list = service.findAll();
         return ResponseEntity.ok(list);
     }
 
@@ -31,7 +31,7 @@ public class SellerController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> insert(@RequestBody SellerDTO obj) {
+    public ResponseEntity<Void> insert(@RequestBody SellerResponseDTO obj) {
         service.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();

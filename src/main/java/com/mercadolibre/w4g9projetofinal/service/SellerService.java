@@ -1,6 +1,6 @@
 package com.mercadolibre.w4g9projetofinal.service;
 
-import com.mercadolibre.w4g9projetofinal.dtos.SellerDTO;
+import com.mercadolibre.w4g9projetofinal.dtos.response.SellerResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Seller;
 import com.mercadolibre.w4g9projetofinal.repository.SellerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +16,8 @@ public class SellerService {
     @Autowired
     private SellerRepository repository;
 
-    public List<SellerDTO> findAll() {
-        List<SellerDTO> list = repository.findAll().stream().map(x -> new SellerDTO(x.getId(), x.getName())).collect(Collectors.toList());
+    public List<SellerResponseDTO> findAll() {
+        List<SellerResponseDTO> list = repository.findAll().stream().map(x -> new SellerResponseDTO(x.getId(), x.getName())).collect(Collectors.toList());
         return list;
     }
 
@@ -26,7 +26,7 @@ public class SellerService {
         return obj.orElse(null);
     }
 
-    public Seller insert(SellerDTO obj) {
+    public Seller insert(SellerResponseDTO obj) {
         Seller newObj = new Seller(obj.getId(), obj.getName());
         newObj.setId(null);
         return repository.save(newObj);
