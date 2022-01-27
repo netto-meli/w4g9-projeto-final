@@ -1,2 +1,8 @@
 # "prod" suffix properties file. Scopes name samples: "prod", "web-prod", "api-prod", etc.
 # Overrides application.yml default properties
+spring:
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://${DB_MYSQL_DESAENV05_PRJTFINAL_PRJTFINAL_ENDPOINT}/prjtfinal?useSSL=true&serverTimezone=UTC&characterEncoding=UTF-8
+    username: prjtfinal_WPROD
+    password: ${DB_MYSQL_DESAENV05_PRJTFINAL_PRJTFINAL_WPROD}
