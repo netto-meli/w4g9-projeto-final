@@ -24,4 +24,10 @@ public class RepresentativeConverter {
         List<RepresentativeResponseDTO> list2 = list.stream().map(x -> new RepresentativeResponseDTO(x.getId(), x.getName(), x.getJob(), x.getEmail())).collect(Collectors.toList());
         return list2;
     }
+
+    public static void updateRepresentation(Representative obj, Representative newObj) {
+        newObj.setName(obj.getName());
+        newObj.setJob(obj.getJob());
+        newObj.setEmail(obj.getEmail());
+    }
 }

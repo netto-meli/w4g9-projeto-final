@@ -24,4 +24,10 @@ public class SellerConverter {
         List<SellerResponseDTO> list2 = list.stream().map(x -> new SellerResponseDTO(x.getId(), x.getName(), x.getEmail())).collect(Collectors.toList());
         return list2;
     }
+
+    public static void updateSeller(Seller obj, Seller newObj) {
+        newObj.setId(obj.getId());
+        newObj.setName(obj.getName());
+        newObj.setEmail(obj.getEmail());
+    }
 }
