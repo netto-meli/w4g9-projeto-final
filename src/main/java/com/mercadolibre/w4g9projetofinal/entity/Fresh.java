@@ -8,7 +8,12 @@ import java.util.Objects;
 
 @Data
 @Entity
+@NoArgsConstructor
 public class Fresh extends Product{
+
+    public Fresh(Long id, String name, String description, float minTemperature, float maxTemperature) {
+        super(id, name, description, minTemperature, maxTemperature);
+    }
 
     @Override
     public boolean equals(Object o) {

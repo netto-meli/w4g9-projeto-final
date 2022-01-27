@@ -1,6 +1,6 @@
-package com.mercadolibre.fernando_netto_projeto_final.repository;
+package com.mercadolibre.w4g9projetofinal.repository;
 
-import com.mercadolibre.fernando_netto_projeto_final.entity.Warehouse;
+import com.mercadolibre.w4g9projetofinal.entity.Warehouse;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

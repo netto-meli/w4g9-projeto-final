@@ -1,7 +1,7 @@
-package com.mercadolibre.fernando_netto_projeto_final.controller;
+package com.mercadolibre.w4g9projetofinal.controller;
 
-import com.mercadolibre.fernando_netto_projeto_final.entity.Warehouse;
-import com.mercadolibre.fernando_netto_projeto_final.service.WarehouseService;
+import com.mercadolibre.w4g9projetofinal.entity.Warehouse;
+import com.mercadolibre.w4g9projetofinal.service.WarehouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

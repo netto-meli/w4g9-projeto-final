@@ -1,4 +1,4 @@
-package com.mercadolibre.fernando_netto_projeto_final.entity;
+package com.mercadolibre.w4g9projetofinal.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
