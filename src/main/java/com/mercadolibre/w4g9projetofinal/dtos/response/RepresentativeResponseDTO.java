@@ -1,5 +1,6 @@
 package com.mercadolibre.w4g9projetofinal.dtos.response;
 
+import com.mercadolibre.w4g9projetofinal.entity.enums.CargoRepresentante;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,9 +8,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SellerResponseDTO {
-
+public class RepresentativeResponseDTO {
     private Long id;
     private String name;
+    private CargoRepresentante job;
     private String email;
 }

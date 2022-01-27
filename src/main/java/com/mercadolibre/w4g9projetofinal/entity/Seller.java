@@ -3,31 +3,36 @@ package com.mercadolibre.w4g9projetofinal.entity;
 import lombok.*;
 import org.hibernate.Hibernate;
 
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Getter
-@Setter
-@ToString
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Inheritance(strategy= InheritanceType.SINGLE_TABLE)
-public class Seller extends User{
-    @OneToMany
-    @ToString.Exclude
-    private List<Advertise> advertiseList;
-    @OneToMany
-    @ToString.Exclude
-    private List<Batch> batchList;
+public class Seller {
 
-    public Seller(Long id, String name, List<Advertise> advertiseList, List<Batch> batchList) {
-        super(id, name);
-        this.advertiseList = advertiseList;
-        this.batchList = batchList;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String name;
+
+    private String email;
+
+    @OneToMany
+    @ToString.Exclude
+    private List<Advertise> advertiseList = new ArrayList<>();
+
+    @OneToMany
+    @ToString.Exclude
+    private List<Batch> batchList = new ArrayList<>();
+
+    public Seller(Long id, String name, String email) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
     }
 
     @Override
