@@ -1,26 +1,28 @@
 package com.mercadolibre.w4g9projetofinal.entity;
 
-import com.mercadolibre.w4g9projetofinal.entity.enums.CargoRepresentante;
 import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import java.util.Objects;
 
-@Data
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Representative {
+@Inheritance(strategy= InheritanceType.SINGLE_TABLE)
+public class Representative extends User{
+    // todo enum
+    private String job;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
-    private CargoRepresentante job;
+    public Representative(Long id, String name, String job) {
+        super(id, name);
+        this.job = job;
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -4,21 +4,23 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import java.util.Objects;
 
-@Data
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
-public class Buyer{
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@Inheritance(strategy= InheritanceType.SINGLE_TABLE)
+public class Buyer extends User{
     private String address;
+
+    public Buyer(Long id, String name, String address) {
+        super(id, name);
+        this.address = address;
+    }
 
     @Override
     public boolean equals(Object o) {
