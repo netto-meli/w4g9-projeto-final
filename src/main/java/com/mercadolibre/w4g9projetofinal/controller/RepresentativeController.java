@@ -13,6 +13,12 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
+/***
+ * Classe de controle para Representative
+ *
+ * @author Marcos Sá
+ */
+
 @RestController
 @RequestMapping(value = "/representatives")
 public class RepresentativeController {

@@ -6,6 +6,12 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
+/***
+ * Classe StandardError que gera retorno padrão para respostas de erros
+ *
+ * @author Marcos Sá
+ */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

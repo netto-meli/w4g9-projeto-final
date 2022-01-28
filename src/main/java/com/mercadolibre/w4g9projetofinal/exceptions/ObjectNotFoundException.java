@@ -1,15 +1,17 @@
 package com.mercadolibre.w4g9projetofinal.exceptions;
 
 /***
- * @author Leo
+ * @author Marcos Sá
  */
 public class ObjectNotFoundException extends RuntimeException{
 
+    /***
+     * Construtor da classe
+     *
+     * @param msg Mensagem sobre a exceção recebida
+     */
     public ObjectNotFoundException(String msg) {
         super(msg);
     }
 
-    public ObjectNotFoundException(String msg, Throwable cause) {
-        super(msg, cause);
-    }
 }
