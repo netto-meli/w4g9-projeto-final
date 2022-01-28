@@ -13,28 +13,28 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Sector {
+public class Section {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String type;
     @ManyToOne
     private Warehouse warehouse;
+    private String name;
+    private String type;
+    private int currentStock;
+    private int stockLimit;
+    private float minTeperature;
+    private float maxTeperature;
     @OneToMany
     @ToString.Exclude
     private List<InboundOrder> inboundOrderList;
-    private int stockLimit;
-    private int currentStock;
-    private float minTeperature;
-    private float maxTeperature;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Sector sector = (Sector) o;
-        return id != null && Objects.equals(id, sector.id);
+        Section section = (Section) o;
+        return id != null && Objects.equals(id, section.id);
     }
 
     @Override

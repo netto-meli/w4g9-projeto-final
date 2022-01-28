@@ -1,10 +1,18 @@
 package com.mercadolibre.w4g9projetofinal.dtos.request;
 
-import java.util.ArrayList;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.util.List;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class InboundOrderRequestDTO {
-        public String orderNumber;
-        public String orderDate;
-        public SectionRequestDTO section;
-        public ArrayList<BatchStockRequestDTO> batch5tock;
+        private int orderNumber;
+        private LocalDate orderDate;
+        private SectionRequestDTO section;
+        private List<BatchRequestDTO> batchStock;
 }

@@ -20,6 +20,8 @@ public class Advertise {
     private String description;
     @OneToOne
     private Product product;
+    @OneToOne
+    private Seller seller;
     private BigDecimal price;
     // todo enum
     private String status;
