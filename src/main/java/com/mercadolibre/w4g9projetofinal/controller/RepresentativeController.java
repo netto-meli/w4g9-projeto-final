@@ -1,8 +1,8 @@
 package com.mercadolibre.w4g9projetofinal.controller;
 
-import com.mercadolibre.w4g9projetofinal.entity.dtos.converter.RepresentativeConverter;
-import com.mercadolibre.w4g9projetofinal.entity.dtos.request.RepresentativeRequestDTO;
-import com.mercadolibre.w4g9projetofinal.entity.dtos.response.RepresentativeResponseDTO;
+import com.mercadolibre.w4g9projetofinal.dtos.converter.RepresentativeConverter;
+import com.mercadolibre.w4g9projetofinal.dtos.request.RepresentativeRequestDTO;
+import com.mercadolibre.w4g9projetofinal.dtos.response.RepresentativeResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Representative;
 import com.mercadolibre.w4g9projetofinal.service.RepresentativeService;
 import org.springframework.beans.factory.annotation.Autowired;

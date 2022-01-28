@@ -1,6 +1,7 @@
 package com.mercadolibre.w4g9projetofinal.service;
 
 import com.mercadolibre.w4g9projetofinal.entity.Seller;
+import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.SellerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class SellerService {
 
     public Seller findById(Long id) {
         Optional<Seller> obj = repository.findById(id);
-        return obj.orElse(null);
+        return obj.orElseThrow( () -> new ObjectNotFoundException("Vendedor não encontrado! Por favor verifique o id."));
     }
 
     public Seller insert(Seller obj) {

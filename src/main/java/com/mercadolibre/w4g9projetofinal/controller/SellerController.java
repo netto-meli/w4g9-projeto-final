@@ -1,8 +1,8 @@
 package com.mercadolibre.w4g9projetofinal.controller;
 
-import com.mercadolibre.w4g9projetofinal.entity.dtos.converter.SellerConverter;
-import com.mercadolibre.w4g9projetofinal.entity.dtos.request.SellerRequestDTO;
-import com.mercadolibre.w4g9projetofinal.entity.dtos.response.SellerResponseDTO;
+import com.mercadolibre.w4g9projetofinal.dtos.converter.SellerConverter;
+import com.mercadolibre.w4g9projetofinal.dtos.request.SellerRequestDTO;
+import com.mercadolibre.w4g9projetofinal.dtos.response.SellerResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Seller;
 import com.mercadolibre.w4g9projetofinal.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;

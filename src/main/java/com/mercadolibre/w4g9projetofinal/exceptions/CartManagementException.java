@@ -5,7 +5,7 @@ import java.io.IOException;
 /*** Exceção no gerenciamento do carrinho
  * @author Fernando Netto
  */
-public class CartManagementException extends IOException {
+public claCartManagementException extends IOException {
     /***
      * serialVersionUID gerado pelo IntelliJ
      */
