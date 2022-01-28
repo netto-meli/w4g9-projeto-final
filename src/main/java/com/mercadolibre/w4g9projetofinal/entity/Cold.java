@@ -6,10 +6,12 @@ import org.hibernate.Hibernate;
 import javax.persistence.Entity;
 import java.util.Objects;
 
-@Data
+@Getter
+@Setter
+@ToString
 @Entity
 @NoArgsConstructor
-public class Cold extends Product {
+public class Cold extends Product{
 
     public Cold(Long id, String name, String description, float minTemperature, float maxTemperature) {
         super(id, name, description, minTemperature, maxTemperature);

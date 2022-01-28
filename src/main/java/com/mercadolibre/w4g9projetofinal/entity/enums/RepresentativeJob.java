@@ -1,18 +1,14 @@
 package com.mercadolibre.w4g9projetofinal.entity.enums;
 
-public enum StatusAnuncio {
+public enum RepresentativeJob {
 
-    ATIVO(0, "Ativo"),
-    INATIVO(1, "Inativo"),
-    PAUSADO(2, "Pausado"),
-    REMOVIDO(3, "Removido"),
-    PENDENTE(4, "Pendente"),
-    FINALIZADO(5, "Finalizado");
+    SUPERVISOR(0, "Supervisor"),
+    LIDER(1, "Líder");
 
     private int cod;
     private String descricao;
 
-    private StatusAnuncio(int cod, String descricao) {
+    private RepresentativeJob(int cod, String descricao) {
         this.cod = cod;
         this.descricao = descricao;
     }
@@ -26,12 +22,12 @@ public enum StatusAnuncio {
         return descricao;
     }
 
-    public static StatusAnuncio toEnum(Integer cod) {
+    public static RepresentativeJob toEnum(Integer cod) {
         if(cod == null) {
             return null;
         }
 
-        for(StatusAnuncio x : StatusAnuncio.values()) {
+        for(RepresentativeJob x : RepresentativeJob.values()) {
             if(cod.equals(x.getCod())) {
                 return x;
             }

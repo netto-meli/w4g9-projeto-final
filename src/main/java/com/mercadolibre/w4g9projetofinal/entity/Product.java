@@ -10,6 +10,8 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public abstract class Product {
 
     @Id

@@ -35,6 +35,8 @@ public class Batch {
 
     @OneToOne
     private Advertise advertise;
+    @ManyToOne
+    private InboundOrder inboundOrder;
 
     @Override
     public boolean equals(Object o) {
