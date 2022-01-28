@@ -1,12 +1,19 @@
 package com.mercadolibre.w4g9projetofinal.service;
 
 import com.mercadolibre.w4g9projetofinal.entity.Representative;
+import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.RepresentativeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
+/***
+ * Classe de serviço para Representative
+ *
+ * @author Marcos Sá
+ */
 
 @Service
 public class RepresentativeService {
@@ -21,7 +28,7 @@ public class RepresentativeService {
 
     public Representative findById(Long id) {
         Optional<Representative> obj = repository.findById(id);
-        return obj.orElse(null);
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Representante não encontrado! Por favor verifique o id."));
     }
 
     public Representative insert(Representative obj) {

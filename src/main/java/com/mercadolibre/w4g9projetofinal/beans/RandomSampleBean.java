@@ -1,6 +1,6 @@
 package com.mercadolibre.w4g9projetofinal.beans;
 
-import com.mercadolibre.w4g9projetofinal.entity.dtos.SampleDTO;
+import com.mercadolibre.w4g9projetofinal.dtos.SampleDTO;
 import java.util.concurrent.ThreadLocalRandom;
 import org.springframework.stereotype.Component;
 

@@ -1,4 +1,4 @@
-package com.mercadolibre.w4g9projetofinal.entity.dtos.request;
+package com.mercadolibre.w4g9projetofinal.dtos.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,9 +8,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class BatchRequestDTO {
+@NoArgsConstructor
+public class BatchResponseDTO {
     private int batchNumber;
     // todo abdvertise ID <- not product
     private Long productId;

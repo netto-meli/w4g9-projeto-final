@@ -1,6 +1,6 @@
-package com.mercadolibre.w4g9projetofinal.entity.dtos.converter;
+package com.mercadolibre.w4g9projetofinal.dtos.converter;
 
-import com.mercadolibre.w4g9projetofinal.entity.dtos.request.AdvertiseRequestDTO;
+import com.mercadolibre.w4g9projetofinal.dtos.request.AdvertiseRequestDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Advertise;
 
 public class AdvertiseConverter {
