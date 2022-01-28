@@ -1,8 +1,5 @@
 package com.mercadolibre.w4g9projetofinal.controller;
 
-import com.mercadolibre.w4g9projetofinal.dtos.converter.WarehouseConverter;
-import com.mercadolibre.w4g9projetofinal.dtos.request.WarehouseRequestDTO;
-import com.mercadolibre.w4g9projetofinal.dtos.response.WarehouseResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Warehouse;
 import com.mercadolibre.w4g9projetofinal.service.WarehouseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +13,8 @@ public class WarehouseController {
     WarehouseService warehouseService;
 
     @GetMapping("/api")
-    public WarehouseResponseDTO api() {
-        WarehouseRequestDTO request = new WarehouseRequestDTO();
-        Warehouse wh = WarehouseConverter.convertDtoToEntity(request);
-        wh = warehouseService.save(wh);
-        WarehouseResponseDTO response = WarehouseConverter.convertEntityToDto(wh);
-        return response;
+    public Warehouse api() {
+        Warehouse wh = new Warehouse(1L, "ziks", "Cuiabá");
+        return warehouseService.save(wh);
     }
 }

@@ -1,4 +1,4 @@
-package com.mercadolibre.w4g9projetofinal.dtos.response;
+package com.mercadolibre.w4g9projetofinal.entity.dtos.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

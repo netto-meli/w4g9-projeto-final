@@ -1,9 +1,8 @@
 package com.mercadolibre.w4g9projetofinal.controller;
 
-import com.mercadolibre.w4g9projetofinal.dtos.converter.RepresentativeConverter;
-import com.mercadolibre.w4g9projetofinal.dtos.converter.SellerConverter;
-import com.mercadolibre.w4g9projetofinal.dtos.request.RepresentativeRequestDTO;
-import com.mercadolibre.w4g9projetofinal.dtos.response.RepresentativeResponseDTO;
+import com.mercadolibre.w4g9projetofinal.entity.dtos.converter.RepresentativeConverter;
+import com.mercadolibre.w4g9projetofinal.entity.dtos.request.RepresentativeRequestDTO;
+import com.mercadolibre.w4g9projetofinal.entity.dtos.response.RepresentativeResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Representative;
 import com.mercadolibre.w4g9projetofinal.service.RepresentativeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,4 +40,19 @@ public class RepresentativeController {
        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj2.getId()).toUri();
        return ResponseEntity.created(uri).build();
     }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Void> update(@RequestBody RepresentativeRequestDTO newObj, @PathVariable Long id) {
+        Representative obj = RepresentativeConverter.convertDtoToEntity(newObj);
+        obj.setId(id);
+        obj = service.update(obj);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.ok().build();
+    }
+
 }

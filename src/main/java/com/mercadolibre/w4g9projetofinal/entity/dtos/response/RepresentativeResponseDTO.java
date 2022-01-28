@@ -1,4 +1,4 @@
-package com.mercadolibre.w4g9projetofinal.dtos.request;
+package com.mercadolibre.w4g9projetofinal.entity.dtos.response;
 
 import com.mercadolibre.w4g9projetofinal.entity.enums.CargoRepresentante;
 import lombok.AllArgsConstructor;
@@ -8,8 +8,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RepresentativeRequestDTO {
+public class RepresentativeResponseDTO {
+    private Long id;
     private String name;
-    private CargoRepresentante job;
     private String email;
+    private CargoRepresentante job;
 }

@@ -1,10 +1,14 @@
 package com.mercadolibre.w4g9projetofinal.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.mercadolibre.w4g9projetofinal.util.LocalDateDeserializer;
+import com.mercadolibre.w4g9projetofinal.util.LocalTimeDeserializer;
 import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Getter
@@ -17,10 +21,20 @@ public class Batch {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String quantity;
-    private String currentTemperature;
+    private int initialQuantity;
+    private int currentQuantity;
+    private float currentTemperature;
+    private float minTemperature;
+
+    @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate dueDate;
-    private LocalDate manufactureDate;
+
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    private LocalDate manufacturingDate;
+
+    @JsonDeserialize(using = LocalTimeDeserializer.class)
+    private LocalDateTime manufacturingTime;
+
     @OneToOne
     private Advertise advertise;
 

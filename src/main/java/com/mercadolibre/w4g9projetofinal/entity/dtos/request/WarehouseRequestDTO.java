@@ -1,4 +1,4 @@
-package com.mercadolibre.w4g9projetofinal.dtos.request;
+package com.mercadolibre.w4g9projetofinal.entity.dtos.request;
 
 import lombok.*;
 
