@@ -8,5 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BuyerRequestDTO {
+    private String name;
     public String address;
+    private String email;
 }

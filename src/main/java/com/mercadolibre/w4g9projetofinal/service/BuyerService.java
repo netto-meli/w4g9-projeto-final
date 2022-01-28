@@ -41,6 +41,8 @@ public class BuyerService {
 
     private static void updateRepresentation(Buyer buyer, Buyer newBuyer) {
         newBuyer.setAddress(buyer.getAddress());
+        newBuyer.setEmail(buyer.getEmail());
+        newBuyer.setName(buyer.getName());
     }
 
 }

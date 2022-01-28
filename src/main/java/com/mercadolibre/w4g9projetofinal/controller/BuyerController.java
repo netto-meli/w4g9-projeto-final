@@ -4,6 +4,7 @@ import com.mercadolibre.w4g9projetofinal.dtos.converter.BuyerConverter;
 import com.mercadolibre.w4g9projetofinal.dtos.request.BuyerRequestDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.BuyerResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Buyer;
+import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.service.BuyerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(value = "/buyer")
+@RequestMapping(value = "/api/v1/fresh-products/buyer")
 public class BuyerController {
 
     @Autowired
@@ -24,6 +25,9 @@ public class BuyerController {
     @GetMapping
     public ResponseEntity<List<BuyerResponseDTO>> findAll() {
         List<BuyerResponseDTO> list = BuyerConverter.fromDTOBuyer(service.findAll());
+        if(list == null || list.isEmpty()){
+            throw new ObjectNotFoundException("Ainda nao consta dados cadastrados");
+        }
         return ResponseEntity.ok(list);
     }
 

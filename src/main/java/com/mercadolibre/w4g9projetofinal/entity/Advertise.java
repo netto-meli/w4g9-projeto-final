@@ -30,13 +30,13 @@ public class Advertise {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (!(o instanceof Advertise)) return false;
         Advertise advertise = (Advertise) o;
-        return id != null && Objects.equals(id, advertise.id);
+        return getId().equals(advertise.getId()) && getDescription().equals(advertise.getDescription()) && Objects.equals(getProduct(), advertise.getProduct()) && Objects.equals(getSeller(), advertise.getSeller()) && getPrice().equals(advertise.getPrice()) && getStatus() == advertise.getStatus();
     }
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hash(getId(), getDescription(), getProduct(), getSeller(), getPrice(), getStatus());
     }
 }
