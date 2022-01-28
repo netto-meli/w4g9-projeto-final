@@ -7,15 +7,14 @@ import java.util.List;
 
 public class InboundOrderConverter {
 
-    public static InboundOrder convertDtoToEntity (InboundOrderRequestDTO iorDTO, Representative representative){
+    public static InboundOrder convertDtoToEntity (InboundOrderRequestDTO iorDTO){
         List<Batch> batchList = BatchConverter.convertDtoListToEntityList(iorDTO.getBatchStock());
-        InboundOrder io = new InboundOrder(
+        return new InboundOrder(
                 (long) iorDTO.getOrderNumber(),
                 iorDTO.getOrderDate(),
                 null,
-                representative,
+                null,
                 batchList);
-        return io;
     }
 
 }

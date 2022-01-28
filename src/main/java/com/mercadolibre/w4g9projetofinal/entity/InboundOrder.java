@@ -1,7 +1,5 @@
 package com.mercadolibre.w4g9projetofinal.entity;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.mercadolibre.w4g9projetofinal.util.LocalDateDeserializer;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -10,7 +8,9 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
-@Data
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -18,18 +18,16 @@ public class InboundOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate orderDate;
-
     @OneToOne
     private Seller seller;
-
     @OneToOne
     private Representative representative;
-
-    @OneToMany
     @ToString.Exclude
+    @OneToMany(
+            mappedBy = "inboundOrder",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
     private List<Batch> batchList;
 
     @Override

@@ -6,7 +6,9 @@ import org.hibernate.Hibernate;
 import javax.persistence.Entity;
 import java.util.Objects;
 
-@Data
+@Getter
+@Setter
+@ToString
 @Entity
 @NoArgsConstructor
 public class Frozen extends Product{

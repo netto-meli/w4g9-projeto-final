@@ -28,7 +28,7 @@ public class BatchConverter {
 
     public static Batch convertDtoToEntity (BatchRequestDTO b){
         return new Batch(
-                null,
+                (long) b.getBatchNumber(),
                 b.getInitialQuantity(),
                 b.getCurrentQuantity(),
                 b.getCurrentTemperature(),
@@ -36,12 +36,13 @@ public class BatchConverter {
                 b.getDueDate(),
                 b.getManufacturingDate(),
                 b.getManufacturingTime(),
-                new Advertise( b.getProductId() ,
+                new Advertise( b.getAdvertiseId(),
                         null,
                         null,
                         null,
                         null,
-                        null)
+                        null),
+                null
         );
     }
     public static BatchResponseDTO convertEntityToDto (Batch b){
