@@ -26,7 +26,7 @@ public class SectionController {
 
     @GetMapping
     @ResponseBody
-    public List lista(){
+    public List<SectionRequestDTO> lista(){
         List sections = sectionRepository.findAll();
         return SectionRequestDTO.convert(sections);
     }
