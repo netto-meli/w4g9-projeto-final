@@ -1,12 +1,9 @@
 package com.mercadolibre.w4g9projetofinal.controller;
 
 import com.mercadolibre.w4g9projetofinal.dtos.converter.BuyerConverter;
-import com.mercadolibre.w4g9projetofinal.dtos.converter.RepresentativeConverter;
 import com.mercadolibre.w4g9projetofinal.dtos.request.BuyerRequestDTO;
-import com.mercadolibre.w4g9projetofinal.dtos.request.RepresentativeRequestDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.BuyerResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Buyer;
-import com.mercadolibre.w4g9projetofinal.entity.Representative;
 import com.mercadolibre.w4g9projetofinal.service.BuyerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -46,10 +43,10 @@ public class BuyerController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Void> update(@RequestBody BuyerRequestDTO newbuyer, @PathVariable Long id) {
-        Buyer buyer = BuyerConverter.convertDtoToEntityBuyer(newbuyer);
+    public ResponseEntity<Void> update(@RequestBody BuyerRequestDTO newBuyer, @PathVariable Long id) {
+        Buyer buyer = BuyerConverter.convertDtoToEntityBuyer(newBuyer);
         buyer.setId(id);
-        buyer = service.update(obj);
+        service.update(buyer);
         return ResponseEntity.noContent().build();
     }
 
