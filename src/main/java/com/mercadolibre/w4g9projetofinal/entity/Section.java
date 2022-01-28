@@ -7,8 +7,6 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-
-@Getter
 @Setter
 @ToString
 @NoArgsConstructor
@@ -50,6 +48,38 @@ public class Section {
 
     public Long getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public Warehouse getWarehouse() {
+        return warehouse;
+    }
+
+    public List<InboundOrder> getInboundOrderList() {
+        return inboundOrderList;
+    }
+
+    public int getStockLimit() {
+        return stockLimit;
+    }
+
+    public int getCurrentStock() {
+        return currentStock;
+    }
+
+    public float getMinTeperature() {
+        return minTeperature;
+    }
+
+    public float getMaxTeperature() {
+        return maxTeperature;
     }
 
     @Override

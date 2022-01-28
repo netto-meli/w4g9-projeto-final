@@ -48,6 +48,18 @@ public class SectionController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<SectionResponseDTO> atualizar(@PathVariable Long id, @RequestBody SectionRequestDTO sectionDTO){
+        Optional<Section> optional = sectionRepository.findById(id);
+        if (optional.isPresent()) {
+            Section section = sectionDTO.atualizar(id, sectionRepository);
+            return ResponseEntity.ok(new SectionResponseDTO(section));
+        }
+        return ResponseEntity.notFound().build();
+    }
+
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity<?> remover(@PathVariable Long id){
@@ -58,3 +70,4 @@ public class SectionController {
         }
         return ResponseEntity.notFound().build();
     }
+}
