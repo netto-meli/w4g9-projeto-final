@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SectionRequestDTO {
-    private String sectionCode;
-    private String warehouseCode;
+public class BuyerRequestDTO {
+    public String address;
 }

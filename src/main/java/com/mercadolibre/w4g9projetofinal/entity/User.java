@@ -4,32 +4,27 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.Objects;
 
-@Data
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-public class Advertise {
+@MappedSuperclass
+public abstract class User{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String description;
-    @OneToOne
-    private Product product;
-    @OneToOne
-    private Seller seller;
-    private BigDecimal price;
-    // todo enum
-    private String status;
+    private String name;
+    private String email;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Advertise advertise = (Advertise) o;
-        return id != null && Objects.equals(id, advertise.id);
+        User user = (User) o;
+        return id != null && Objects.equals(id, user.id);
     }
 
     @Override

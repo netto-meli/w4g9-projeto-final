@@ -8,9 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RepresentativeResponseDTO {
+public class BuyerResponseDTO {
     private Long id;
-    private String name;
-    private String email;
-    private CargoRepresentante job;
+    String address;
 }
