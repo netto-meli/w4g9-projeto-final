@@ -1,4 +1,4 @@
-package com.mercadolibre.w4g9projetofinal.dtos.request;
+package com.mercadolibre.w4g9projetofinal.entity.dtos.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class WarehouseRequestDTO {
+public class SellerRequestDTO {
+
     private String name;
-    private String location;
+    private String email;
 }

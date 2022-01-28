@@ -1,7 +1,5 @@
 package com.mercadolibre.w4g9projetofinal.service;
 
-import com.mercadolibre.w4g9projetofinal.dtos.converter.SellerConverter;
-import com.mercadolibre.w4g9projetofinal.dtos.response.SellerResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Seller;
 import com.mercadolibre.w4g9projetofinal.repository.SellerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class SellerService {
@@ -33,12 +30,20 @@ public class SellerService {
 
     public Seller update(Seller newObj) {
         Seller obj = findById(newObj.getId());
-        SellerConverter.updateSeller(newObj, obj);
+        updateSeller(newObj, obj);
         return repository.save(obj);
     }
 
     public void delete(Long id) {
         Seller obj = findById(id);
         repository.delete(obj);
+    }
+
+
+    //Método para update de Seller
+    private static void updateSeller(Seller obj, Seller newObj) {
+        newObj.setId(obj.getId());
+        newObj.setName(obj.getName());
+        newObj.setEmail(obj.getEmail());
     }
 }

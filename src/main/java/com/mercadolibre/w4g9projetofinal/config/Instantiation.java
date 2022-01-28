@@ -30,11 +30,11 @@ public class Instantiation implements CommandLineRunner {
         Seller s5 = new Seller(null, "Rafael Menezes", "vrr.marcos@hotmail.com");
         sellerRepository.saveAll(Arrays.asList(s1, s2, s3, s4, s5));
 
-        Representative r1 = new Representative(null, "Marcos Sá", CargoRepresentante.LIDER, "email@gmail.com");
-        Representative r2 = new Representative(null, "Marcos Sá", CargoRepresentante.SUPERVISOR, "email@gmail.com");
-        Representative r3 = new Representative(null, "Marcos Sá", CargoRepresentante.LIDER, "email@gmail.com");
-        Representative r4 = new Representative(null, "Marcos Sá", CargoRepresentante.SUPERVISOR, "email@gmail.com");
-        Representative r5 = new Representative(null, "Marcos Sá", CargoRepresentante.LIDER, "email@gmail.com");
+        Representative r1 = new Representative(null, "Marcos Sá", "email@gmail.com", CargoRepresentante.LIDER);
+        Representative r2 = new Representative(null, "Marcos Sá", "email@gmail.com", CargoRepresentante.SUPERVISOR);
+        Representative r3 = new Representative(null, "Marcos Sá", "email@gmail.com", CargoRepresentante.LIDER);
+        Representative r4 = new Representative(null, "Marcos Sá", "email@gmail.com", CargoRepresentante.SUPERVISOR);
+        Representative r5 = new Representative(null, "Marcos Sá", "email@gmail.com", CargoRepresentante.LIDER);
         representativeRepository.saveAll(Arrays.asList(r1, r2, r3, r4, r5));
 
 

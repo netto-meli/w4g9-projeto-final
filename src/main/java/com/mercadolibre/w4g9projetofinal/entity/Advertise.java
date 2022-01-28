@@ -16,11 +16,14 @@ public class Advertise {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String description;
+
     @OneToOne
     private Product product;
+
     @OneToOne
     private Seller seller;
     private BigDecimal price;
+
     // todo enum
     private String status;
 

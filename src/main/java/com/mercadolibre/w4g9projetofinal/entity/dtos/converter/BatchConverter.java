@@ -1,7 +1,7 @@
-package com.mercadolibre.w4g9projetofinal.dtos.converter;
+package com.mercadolibre.w4g9projetofinal.entity.dtos.converter;
 
-import com.mercadolibre.w4g9projetofinal.dtos.request.BatchRequestDTO;
-import com.mercadolibre.w4g9projetofinal.dtos.response.BatchResponseDTO;
+import com.mercadolibre.w4g9projetofinal.entity.dtos.request.BatchRequestDTO;
+import com.mercadolibre.w4g9projetofinal.entity.dtos.response.BatchResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Advertise;
 import com.mercadolibre.w4g9projetofinal.entity.Batch;
 
