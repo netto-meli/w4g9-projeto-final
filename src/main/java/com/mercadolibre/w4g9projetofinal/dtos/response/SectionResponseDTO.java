@@ -3,9 +3,10 @@ package com.mercadolibre.w4g9projetofinal.dtos.response;
 import com.mercadolibre.w4g9projetofinal.entity.Section;
 import com.mercadolibre.w4g9projetofinal.entity.Warehouse;
 import com.mercadolibre.w4g9projetofinal.repository.WarehouseRepository;
+import lombok.Data;
 
 import java.util.Optional;
-
+@Data
 public class SectionResponseDTO {
     private Long id;
     private String name;
