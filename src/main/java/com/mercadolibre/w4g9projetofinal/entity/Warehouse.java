@@ -24,6 +24,7 @@ public class Warehouse {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+    private String location;
 
     @Override
     public boolean equals(Object o) {

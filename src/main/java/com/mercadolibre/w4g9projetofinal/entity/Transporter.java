@@ -16,12 +16,15 @@ public class Transporter {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
     @OneToMany
     @ToString.Exclude
     private List<Fresh> freshList;
+
     @OneToMany
     @ToString.Exclude
     private List<Cold> coldList;
+
     @OneToMany
     @ToString.Exclude
     private List<Frozen> frozenList;

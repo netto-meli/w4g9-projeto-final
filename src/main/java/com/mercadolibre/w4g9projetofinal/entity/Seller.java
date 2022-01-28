@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,15 +20,14 @@ import java.util.Objects;
 public class Seller extends User{
     @OneToMany
     @ToString.Exclude
-    private List<Advertise> advertiseList;
+    private List<Advertise> advertiseList = new ArrayList<>();
+
     @OneToMany
     @ToString.Exclude
-    private List<Batch> batchList;
+    private List<Batch> batchList = new ArrayList<>();
 
-    public Seller(Long id, String name, String email, List<Advertise> advertiseList, List<Batch> batchList) {
+    public Seller(Long id, String name, String email) {
         super(id, name, email);
-        this.advertiseList = advertiseList;
-        this.batchList = batchList;
     }
 
     @Override

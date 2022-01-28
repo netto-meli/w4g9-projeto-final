@@ -17,6 +17,7 @@ public class Section {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne
     private Warehouse warehouse;
     private String name;
@@ -25,6 +26,7 @@ public class Section {
     private int stockLimit;
     private float minTeperature;
     private float maxTeperature;
+
     @OneToMany
     @ToString.Exclude
     private List<InboundOrder> inboundOrderList;
