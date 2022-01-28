@@ -5,12 +5,10 @@ import com.mercadolibre.w4g9projetofinal.dtos.converter.InboundOrderConverter;
 import com.mercadolibre.w4g9projetofinal.dtos.converter.SectionConverter;
 import com.mercadolibre.w4g9projetofinal.dtos.request.InboundOrderRequestDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.BatchResponseDTO;
-import com.mercadolibre.w4g9projetofinal.entity.InboundOrder;
-import com.mercadolibre.w4g9projetofinal.entity.Representative;
-import com.mercadolibre.w4g9projetofinal.entity.Section;
-import com.mercadolibre.w4g9projetofinal.entity.Seller;
+import com.mercadolibre.w4g9projetofinal.entity.*;
 import com.mercadolibre.w4g9projetofinal.service.AdvertiseService;
 import com.mercadolibre.w4g9projetofinal.service.InboundOrderService;
+import com.mercadolibre.w4g9projetofinal.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,11 +40,11 @@ public class InboundOrderController {
         InboundOrder io = InboundOrderConverter.convertDtoToEntity(inboundOrderRequestDTO);
         Section section = SectionConverter.convertDtoToEntity(inboundOrderRequestDTO.getSection());
         inboundOrderService.validateBatchesToSection(section, inboundOrderRequestDTO.getBatchStock());
-        Seller seller = advertiseService.findSellerByAdvertiseId(
+        Advertise advertise = advertiseService.findById(
                 Objects.requireNonNull( inboundOrderRequestDTO.getBatchStock()
                                 .stream().findFirst().orElse(null))
                         .getAdvertiseId());
-        io.setSeller(seller);
+        io.setSeller(advertise.getSeller());
         io.setRepresentative(representative);
         io = inboundOrderService.save(io);
         List<BatchResponseDTO> response = BatchConverter.convertEntityListToDtoList(io.getBatchList());

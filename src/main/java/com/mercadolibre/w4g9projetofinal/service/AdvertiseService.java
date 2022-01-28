@@ -27,10 +27,6 @@ public class AdvertiseService {
         return obj.orElseThrow( () -> new ObjectNotFoundException("Anuncio não encontrado! Por favor verifique o id."));
     }
 
-    public Seller findSellerByAdvertiseId(Long id) {
-        return repository.findSellerByAdvertiseId(id);
-    }
-
     public Advertise insert(Advertise advertise) {
         return repository.save(advertise);
     }
@@ -54,5 +50,4 @@ public class AdvertiseService {
         newAdvertise.setProduct(advertise.getProduct());
         newAdvertise.setStatus(advertise.getStatus());
     }
-
 }
