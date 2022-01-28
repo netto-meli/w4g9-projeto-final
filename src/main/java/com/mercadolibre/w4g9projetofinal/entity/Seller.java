@@ -24,8 +24,8 @@ public class Seller extends User{
     @ToString.Exclude
     private List<Batch> batchList;
 
-    public Seller(Long id, String name, List<Advertise> advertiseList, List<Batch> batchList) {
-        super(id, name);
+    public Seller(Long id, String name, String email, List<Advertise> advertiseList, List<Batch> batchList) {
+        super(id, name, email);
         this.advertiseList = advertiseList;
         this.batchList = batchList;
     }

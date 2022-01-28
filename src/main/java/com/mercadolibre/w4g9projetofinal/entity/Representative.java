@@ -1,5 +1,6 @@
 package com.mercadolibre.w4g9projetofinal.entity;
 
+import com.mercadolibre.w4g9projetofinal.entity.enums.CargoRepresentante;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -16,11 +17,10 @@ import java.util.Objects;
 @Entity
 @Inheritance(strategy= InheritanceType.SINGLE_TABLE)
 public class Representative extends User{
-    // todo enum
-    private String job;
+    private CargoRepresentante job;
 
-    public Representative(Long id, String name, String job) {
-        super(id, name);
+    public Representative(Long id, String name, String email, CargoRepresentante job) {
+        super(id, name, email);
         this.job = job;
     }
 
