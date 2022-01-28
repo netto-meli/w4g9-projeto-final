@@ -1,5 +1,6 @@
 package com.mercadolibre.w4g9projetofinal.entity;
 
+import com.mercadolibre.w4g9projetofinal.entity.enums.AdvertiseStatus;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -21,11 +22,10 @@ public class Advertise {
     @OneToOne(fetch = FetchType.EAGER,
             cascade = CascadeType.ALL)
     private Product product;
-    @OneToOne
+    @ManyToOne
     private Seller seller;
     private BigDecimal price;
-    // todo enum
-    private String status;
+    private AdvertiseStatus status;
 
     @Override
     public boolean equals(Object o) {

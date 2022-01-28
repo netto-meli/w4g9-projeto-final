@@ -18,6 +18,8 @@ public class BuyerConverter {
     }
 
     public static List<BuyerResponseDTO> fromDTOBuyer(List<Buyer> listBuyer) {
-        return listBuyer.stream().map(buyer -> new BuyerResponseDTO(buyer.getId(), buyer.getAddress())).collect(Collectors.toList());
+        return listBuyer.stream()
+                .map(BuyerConverter::convertEntityToDtoBuyer)
+                .collect(Collectors.toList());
     }
 }

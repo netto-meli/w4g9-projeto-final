@@ -18,8 +18,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class BatchRequestDTO {
     private int batchNumber;
-    // todo abdvertise ID <- not product
-    private Long productId;
+    private Long advertiseId;
     private float currentTemperature;
     private float minimumTemperature;
     private int initialQuantity;

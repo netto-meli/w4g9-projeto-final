@@ -4,7 +4,6 @@ import com.mercadolibre.w4g9projetofinal.dtos.request.BatchRequestDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.BatchResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Advertise;
 import com.mercadolibre.w4g9projetofinal.entity.Batch;
-import com.mercadolibre.w4g9projetofinal.entity.Frozen;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,12 +36,13 @@ public class BatchConverter {
                 b.getDueDate(),
                 b.getManufacturingDate(),
                 b.getManufacturingTime(),
-                new Advertise( b.getProductId() ,
-                        null,
-                        new Frozen(1L,"","",2f,2f ),
+                new Advertise( b.getAdvertiseId(),
                         null,
                         null,
-                        null)
+                        null,
+                        null,
+                        null),
+                null
         );
     }
     public static BatchResponseDTO convertEntityToDto (Batch b){

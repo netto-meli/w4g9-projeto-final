@@ -18,18 +18,7 @@ public class AdvertiseService {
         this.advertiseRepository = advertiseRepository;
     }
 
-    public Advertise save(){
-        Advertise advertise = new Advertise(1L, "gffj", null, new Seller(1L, "l", "l", null, null ), BigDecimal.ONE, "l");
-        Frozen fro = new Frozen(1L, "l", "l", 0.1f, 0.4f);
-        advertise.setProduct(fro);
-        return advertiseRepository.save(advertise);
+    public Seller findSellerByAdvertiseId(Long id) {
+        return advertiseRepository.findSellerByAdvertise_Id(id);
     }
-
-    public Seller findSellerByadvertiseId(Long id) {
-        return new Seller();
-    }
-
-
-
-
 }

@@ -24,7 +24,9 @@ public class InboundOrder {
     @OneToOne
     private Representative representative;
     @ToString.Exclude
-    @OneToMany(fetch = FetchType.LAZY,
+    @OneToMany(
+            mappedBy = "inboundOrder",
+            fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     private List<Batch> batchList;
 

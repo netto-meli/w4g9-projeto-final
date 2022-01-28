@@ -1,6 +1,9 @@
 package com.mercadolibre.w4g9projetofinal.service;
 
+import com.mercadolibre.w4g9projetofinal.dtos.converter.SectionConverter;
+import com.mercadolibre.w4g9projetofinal.dtos.request.BatchRequestDTO;
 import com.mercadolibre.w4g9projetofinal.entity.InboundOrder;
+import com.mercadolibre.w4g9projetofinal.entity.Section;
 import com.mercadolibre.w4g9projetofinal.repository.InboundOrderRepository;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +35,8 @@ public class InboundOrderService {
         return inboundOrderRepository.findById( id ).orElse(null);
     }
 
-
-
-
+    public void validateBatchesToSection(Section section, List<BatchRequestDTO> batchStock) {
+        // todo se der ruim, throw exception section
+        // todo e se sector esta certo com warrehouse
+    }
 }
