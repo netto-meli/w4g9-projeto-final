@@ -15,9 +15,6 @@ consumidos pelo comprador que os solicita. Os contratos referem-se à História 
 ### User Story
 
 
-
-
-
 |                                      User Story Code: ml-add-products-to-cart-01                                       | Horas estimadas |
 |:----------------------------------------------------------------------------------------------------------------------:|:---------------:|
 |                             **User Story Name: Adicionar produto ao carrinho de compras**                              |                 |
