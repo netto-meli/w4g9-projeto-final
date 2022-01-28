@@ -38,7 +38,7 @@ public class SectionRequestDTO {
     public static List<SectionRequestDTO> convert(List<Section> sections){
         return sections
                 .stream()
-                .map(section -> new SectionRequestDTO(section))
+                .map(SectionRequestDTO::new)
                 .collect(Collectors.toList());
     }
     public Section convertToSection(WarehouseRepository warehouseRepository){
@@ -49,7 +49,7 @@ public class SectionRequestDTO {
         return null;
     }
     public Section atualizar(Long id, SectionRepository sectionRepository) {
-        Section section = (Section) sectionRepository.getById(id);
+        Section section = sectionRepository.getById(id);
         section.setName(this.name);
         section.setType(this.type);
         section.setWarehouse(this.warehouseCode);
