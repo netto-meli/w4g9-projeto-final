@@ -1,7 +1,7 @@
-package com.mercadolibre.w4g9projetofinal.entity.dtos.converter;
+package com.mercadolibre.w4g9projetofinal.dtos.converter;
 
-import com.mercadolibre.w4g9projetofinal.entity.dtos.request.RepresentativeRequestDTO;
-import com.mercadolibre.w4g9projetofinal.entity.dtos.response.RepresentativeResponseDTO;
+import com.mercadolibre.w4g9projetofinal.dtos.request.RepresentativeRequestDTO;
+import com.mercadolibre.w4g9projetofinal.dtos.response.RepresentativeResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Representative;
 
 import java.util.List;

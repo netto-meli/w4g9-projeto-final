@@ -1,4 +1,4 @@
-package com.mercadolibre.w4g9projetofinal.entity.dtos;
+package com.mercadolibre.w4g9projetofinal.dtos;
 
 import java.io.Serializable;
 

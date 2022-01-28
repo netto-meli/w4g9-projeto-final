@@ -1,10 +1,10 @@
 package com.mercadolibre.w4g9projetofinal.controller;
 
-import com.mercadolibre.w4g9projetofinal.entity.dtos.converter.BatchConverter;
-import com.mercadolibre.w4g9projetofinal.entity.dtos.converter.InboundOrderConverter;
-import com.mercadolibre.w4g9projetofinal.entity.dtos.converter.SectionConverter;
-import com.mercadolibre.w4g9projetofinal.entity.dtos.request.InboundOrderRequestDTO;
-import com.mercadolibre.w4g9projetofinal.entity.dtos.response.BatchResponseDTO;
+import com.mercadolibre.w4g9projetofinal.dtos.converter.BatchConverter;
+import com.mercadolibre.w4g9projetofinal.dtos.converter.InboundOrderConverter;
+import com.mercadolibre.w4g9projetofinal.dtos.converter.SectionConverter;
+import com.mercadolibre.w4g9projetofinal.dtos.request.InboundOrderRequestDTO;
+import com.mercadolibre.w4g9projetofinal.dtos.response.BatchResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.*;
 import com.mercadolibre.w4g9projetofinal.service.AdvertiseService;
 import com.mercadolibre.w4g9projetofinal.service.InboundOrderService;
