@@ -25,7 +25,8 @@ public class Batch {
     private LocalDate dueDate;
     private LocalDate manufacturingDate;
     private LocalDateTime manufacturingTime;
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
     private Advertise advertise;
 
     @Override

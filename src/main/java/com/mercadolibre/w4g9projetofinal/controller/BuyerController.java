@@ -41,4 +41,19 @@ public class BuyerController {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(buyerFinal.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Void> update(@RequestBody BuyerRequestDTO newBuyer, @PathVariable Long id) {
+        Buyer buyer = BuyerConverter.convertDtoToEntityBuyer(newBuyer);
+        buyer.setId(id);
+        service.update(buyer);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.ok().build();
+    }
+
 }

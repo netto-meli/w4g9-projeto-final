@@ -1,7 +1,6 @@
 package com.mercadolibre.w4g9projetofinal.controller;
 
 import com.mercadolibre.w4g9projetofinal.dtos.converter.RepresentativeConverter;
-import com.mercadolibre.w4g9projetofinal.dtos.converter.SellerConverter;
 import com.mercadolibre.w4g9projetofinal.dtos.request.RepresentativeRequestDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.RepresentativeResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Representative;
@@ -13,6 +12,12 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+
+/***
+ * Classe de controle para Representative
+ *
+ * @author Marcos Sá
+ */
 
 @RestController
 @RequestMapping(value = "/representatives")
