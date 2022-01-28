@@ -21,8 +21,10 @@ public class InboundOrder {
     private LocalDate orderDate;
     @OneToOne
     private Seller seller;
+
     @OneToOne
     private Representative representative;
+
     @OneToMany
     @ToString.Exclude
     private List<Batch> batchList;
