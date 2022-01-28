@@ -40,6 +40,14 @@ public class SectionController {
         return ResponseEntity.created(uri).body(new SectionResponseDTO(section));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<SectionRequestDTO> detalhar(@PathVariable Long id){
+        Optional<Section> section = sectionRepository.findById(id);
+        if (section.isPresent()) {
+            return ResponseEntity.ok(new SectionRequestDTO(section.get()));
+        }
+        return ResponseEntity.notFound().build();
+    }
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity<?> remover(@PathVariable Long id){
