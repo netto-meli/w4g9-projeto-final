@@ -1,12 +1,9 @@
 package com.mercadolibre.w4g9projetofinal.entity;
 
-import com.mercadolibre.w4g9projetofinal.entity.enums.RepresentativeJob;
 import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import java.util.Objects;
 
 @Getter
@@ -15,14 +12,9 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Inheritance(strategy= InheritanceType.SINGLE_TABLE)
 public class Representative extends User{
-    private RepresentativeJob job;
-
-    public Representative(Long id, String name, String email, RepresentativeJob job) {
-        super(id, name, email);
-        this.job = job;
-    }
+    // todo enum
+    private String job;
 
     @Override
     public boolean equals(Object o) {

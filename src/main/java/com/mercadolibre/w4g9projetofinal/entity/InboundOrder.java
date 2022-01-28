@@ -23,11 +23,8 @@ public class InboundOrder {
     private Seller seller;
     @OneToOne
     private Representative representative;
+    @OneToMany
     @ToString.Exclude
-    @OneToMany(
-            mappedBy = "inboundOrder",
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
     private List<Batch> batchList;
 
     @Override

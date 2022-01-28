@@ -4,27 +4,37 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-public abstract class Product {
+public class Sector {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String description;
-    private float minTemperature;
-    private float maxTemperature;
+    private String type;
+    @ManyToOne
+    private Warehouse warehouse;
+    @OneToMany
+    @ToString.Exclude
+    private List<InboundOrder> inboundOrderList;
+    private int stockLimit;
+    private int currentStock;
+    private float minTeperature;
+    private float maxTeperature;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Product product = (Product) o;
-        return id != null && Objects.equals(id, product.id);
+        Sector sector = (Sector) o;
+        return id != null && Objects.equals(id, sector.id);
     }
 
     @Override
