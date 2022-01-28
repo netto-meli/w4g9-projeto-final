@@ -1,5 +1,6 @@
 package com.mercadolibre.w4g9projetofinal.service;
 
+import com.mercadolibre.w4g9projetofinal.dtos.converter.SellerConverter;
 import com.mercadolibre.w4g9projetofinal.dtos.response.SellerResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Seller;
 import com.mercadolibre.w4g9projetofinal.repository.SellerRepository;
@@ -28,5 +29,16 @@ public class SellerService {
 
     public Seller insert(Seller obj) {
         return repository.save(obj);
+    }
+
+    public Seller update(Seller newObj) {
+        Seller obj = findById(newObj.getId());
+        SellerConverter.updateSeller(newObj, obj);
+        return repository.save(obj);
+    }
+
+    public void delete(Long id) {
+        Seller obj = findById(id);
+        repository.delete(obj);
     }
 }

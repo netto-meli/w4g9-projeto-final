@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class SellerConverter {
 
     public static Seller convertDtoToEntity (SellerRequestDTO objDTO){
-        return new Seller(null, objDTO.getName(), objDTO.getEmail());
+        return new Seller(null, objDTO.getName(), objDTO.getEmail(), null, null);
     }
 
     public static SellerResponseDTO convertEntityToDto (Seller obj){
@@ -23,5 +23,11 @@ public class SellerConverter {
     public static List<SellerResponseDTO> fromDTO(List<Seller> list) {
         List<SellerResponseDTO> list2 = list.stream().map(x -> new SellerResponseDTO(x.getId(), x.getName(), x.getEmail())).collect(Collectors.toList());
         return list2;
+    }
+
+    public static void updateSeller(Seller obj, Seller newObj) {
+        newObj.setId(obj.getId());
+        newObj.setName(obj.getName());
+        newObj.setEmail(obj.getEmail());
     }
 }

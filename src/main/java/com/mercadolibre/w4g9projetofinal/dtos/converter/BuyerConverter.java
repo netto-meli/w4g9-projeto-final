@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class BuyerConverter {
 
     public static Buyer convertDtoToEntityBuyer(BuyerRequestDTO buyer) {
-        return new Buyer(null, buyer.getAddress());
+        return new Buyer(null, null, null, buyer.getAddress());
     }
 
     public static BuyerResponseDTO convertEntityToDtoBuyer(Buyer newBuyer) {
