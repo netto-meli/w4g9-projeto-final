@@ -7,6 +7,13 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+
+/**
+ * @author fbontempo
+ * @version 0.1
+ * @see {@link com.mercadolibre.w4g9projetofinal.dtos.request.SectionRequestDTO}
+ * @see {@link com.mercadolibre.w4g9projetofinal.dtos.response.SectionResponseDTO}
+ */
 @Setter
 @ToString
 @NoArgsConstructor

@@ -6,6 +6,12 @@ import com.mercadolibre.w4g9projetofinal.repository.WarehouseRepository;
 import lombok.Data;
 
 import java.util.Optional;
+/**
+ * @author fbontempo
+ * @version 0.1
+ * @see {@link Section}
+ * @see {@link com.mercadolibre.w4g9projetofinal.dtos.request.SectionRequestDTO}
+ * */
 @Data
 public class SectionResponseDTO {
     private Long id;

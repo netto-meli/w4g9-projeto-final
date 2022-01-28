@@ -11,6 +11,12 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+/**
+ * @author fbontempo
+ * @version 0.1
+ * @see {@link Section}
+ * @see {@link com.mercadolibre.w4g9projetofinal.dtos.response.SectionResponseDTO}
+ * */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
