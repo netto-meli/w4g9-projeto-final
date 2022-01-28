@@ -1,6 +1,7 @@
 package com.mercadolibre.w4g9projetofinal.service;
 
 import com.mercadolibre.w4g9projetofinal.entity.Advertise;
+import com.mercadolibre.w4g9projetofinal.entity.Seller;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.AdvertiseRepository;
 import com.mercadolibre.w4g9projetofinal.repository.WarehouseRepository;
@@ -24,6 +25,10 @@ public class AdvertiseService {
     public Advertise findById(Long id) {
         Optional<Advertise> obj = repository.findById(id);
         return obj.orElseThrow( () -> new ObjectNotFoundException("Anuncio não encontrado! Por favor verifique o id."));
+    }
+
+    public Seller findSellerByAdvertiseId(Long id) {
+        return repository.findSellerByAdvertise_Id(id);
     }
 
     public Advertise insert(Advertise advertise) {
