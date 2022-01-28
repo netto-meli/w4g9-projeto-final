@@ -4,9 +4,6 @@ import com.mercadolibre.w4g9projetofinal.entity.Advertise;
 import com.mercadolibre.w4g9projetofinal.entity.Seller;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.AdvertiseRepository;
-import com.mercadolibre.w4g9projetofinal.repository.WarehouseRepository;
-import net.bytebuddy.asm.Advice;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,8 +12,11 @@ import java.util.Optional;
 @Service
 public class AdvertiseService {
 
-    @Autowired
     AdvertiseRepository repository;
+
+    public AdvertiseService(AdvertiseRepository repository) {
+        this.repository = repository;
+    }
 
     public List<Advertise> findAll() {
        return repository.findAll();
@@ -28,7 +28,7 @@ public class AdvertiseService {
     }
 
     public Seller findSellerByAdvertiseId(Long id) {
-        return repository.findSellerByAdvertise_Id(id);
+        return repository.findSellerByAdvertiseId(id);
     }
 
     public Advertise insert(Advertise advertise) {
