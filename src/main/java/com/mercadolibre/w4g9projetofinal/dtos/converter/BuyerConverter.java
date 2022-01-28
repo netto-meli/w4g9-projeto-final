@@ -2,7 +2,6 @@ package com.mercadolibre.w4g9projetofinal.dtos.converter;
 
 import com.mercadolibre.w4g9projetofinal.dtos.request.BuyerRequestDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.BuyerResponseDTO;
-import com.mercadolibre.w4g9projetofinal.entity.Buyer;
 
 import java.util.List;
 import java.util.stream.Collectors;
