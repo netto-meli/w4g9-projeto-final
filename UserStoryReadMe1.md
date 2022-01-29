@@ -49,59 +49,60 @@ se possa mostrar ao colaborador que vai procurar o produto (picking).
 <details><summary>Request</summary><p>
 
 ```JSON
-{"inboundorder": {
-  "orderNumber":"int",
-  "orderDate":"LocalDate",
-  "section":{
-    "sectionCode":"string",
-    "warehouseCode":"string"
-  },
-  "batch5tock":[
-    {
-    "batchNumber":"int",
-    "productId":"String",
-    "currentTemperature":"Float",
-    "minimumTemperature":"Float",
-    "initialQuantity":"int",
-    "currentQuantity":"int",
-    "manufacturingDate":"LocalDate",
-    "manufacturingTime":"LocalDateTime",
-    "dueDate":"LocalDate",
-    "batchNumber":"int"
-    }
-  ]
+{
+  "inbound_order": {
+    "order_number": "int",
+    "order_date": "LocalDate",
+    "section": {
+      "section_code": "string",
+      "warehouse_code": "string"
+    },
+    "batch_stock": [
+      {
+        "batch_number": "int",
+        "advertise_id": "String",
+        "current_temperature": "Float",
+        "minimum_temperature": "Float",
+        "initial_quantity": "int",
+        "current_quantity": "int",
+        "manufacturing_date": "LocalDate",
+        "manufacturing_time": "LocalDateTime",
+        "due_date": "LocalDate"
+      }
+    ]
   }
 }
 ```
-</details></p>
+</p>
+</details>
 
 <details><summary>Response</summary><p>
 
 ```JSON
 { "batchStock": [
       {
-        "batchNumber":"int",
-        "productId":"String",
-        "currentTemperature":"Float",
-        "minimumTemperature":"Float",
-        "initialQuantity":"int",
-        "currentQuantity":"int",
-        "manufacturingDate":"LocalDate",
-        "manufacturingTime":"LocalDateTime",
-        "dueDate":"LocalDate",
-        "batchNumber":"int"
+        "batch_number":"int",
+        "product_nd":"String",
+        "current_temperature":"Float",
+        "minimum_temperature":"Float",
+        "initial_quantity":"int",
+        "current_quantity":"int",
+        "manufacturing_Date":"LocalDate",
+        "manufacturing_Time":"LocalDateTime",
+        "due_date":"LocalDate"
       }
 ]}
 ```
-</details></p>
+</p>
+</details>
 
 ### Contratos relativos a User Story
 | HTTP | Modelo de URI                                                                                                                                        | Descrição                                                                                                            | US-code |
 |---|------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|---|
 | POST | /api/v1/fresh-products/inboundorder/                                                                                                                 | Cadastre um lote com o estoque de produtos que o compõe. Devolva o lote criado com o código de status "201 CREATED". | ml-insert-batch-in-fulfillment-warehouse-01 |
-| PUT | /api/v1/fresh-products/inboundorder/ | Caso o lote já exista e deva ser atualizado. Devolva o estoque atualizado com o código de status "201 CREATED".      | ml-insert-batch-in-fulfillment-warehouse-01 |
+| PUT | /api/v1/fresh-products/inboundorder/ | Caso o lote já exista e deva ser atualizado. <br>Devolva o estoque atualizado com o código de status "201 CREATED".  | ml-insert-batch-in-fulfillment-warehouse-01 |
 
 > Observação:
 Contemple outros tipos de erros.
 Use o script de carregamento
-Trabalhe com o token de acesso para o pedido como um cliente autenticado.
+Trabalhe com o token de acesso para o sellOrder como um cliente autenticado.

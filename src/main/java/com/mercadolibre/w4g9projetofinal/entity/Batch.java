@@ -5,6 +5,7 @@ import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Getter
@@ -15,14 +16,18 @@ import java.util.Objects;
 @Entity
 public class Batch {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String quantity;
-    private String currentTemperature;
+    private int initialQuantity;
+    private int currentQuantity;
+    private float currentTemperature;
+    private float minTemperature;
     private LocalDate dueDate;
-    private LocalDate manufactureDate;
+    private LocalDate manufacturingDate;
+    private LocalDateTime manufacturingTime;
     @OneToOne
     private Advertise advertise;
+    @ManyToOne
+    private InboundOrder inboundOrder;
 
     @Override
     public boolean equals(Object o) {

@@ -6,95 +6,37 @@ import org.hibernate.Hibernate;
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
-/**
- * @author fbontempo
- * @version 0.1
- * @see {@link com.mercadolibre.w4g9projetofinal.dtos.request.SectionRequestDTO}
- * @see {@link com.mercadolibre.w4g9projetofinal.dtos.response.SectionResponseDTO}
- */
+@Getter
 @Setter
 @ToString
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Section {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String type;
     @ManyToOne
     private Warehouse warehouse;
-    @OneToMany
-    @ToString.Exclude
-    private List<InboundOrder> inboundOrderList;
-    private int stockLimit;
+    private String name;
+    private String refrigerationType;
     private int currentStock;
+    private int stockLimit;
     private float minTeperature;
     private float maxTeperature;
-
-    public Section(Long id, String name, String type, Warehouse warehouse) {
-        this.id = id;
-        this.name = name;
-        this.type = type;
-        this.warehouse = warehouse;
-    }
-
-    public Section(Long id, String name, String type, Warehouse warehouse, int stockLimit, int currentStock, float minTeperature, float maxTeperature) {
-        this.id = id;
-        this.name = name;
-        this.type = type;
-        this.warehouse = warehouse;
-        //this.inboundOrderList = inboundOrderList;
-        this.stockLimit = stockLimit;
-        this.currentStock = currentStock;
-        this.minTeperature = minTeperature;
-        this.maxTeperature = maxTeperature;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public Warehouse getWarehouse() {
-        return warehouse;
-    }
-
-    public List<InboundOrder> getInboundOrderList() {
-        return inboundOrderList;
-    }
-
-    public int getStockLimit() {
-        return stockLimit;
-    }
-
-    public int getCurrentStock() {
-        return currentStock;
-    }
-
-    public float getMinTeperature() {
-        return minTeperature;
-    }
-
-    public float getMaxTeperature() {
-        return maxTeperature;
-    }
+    @ToString.Exclude
+    @OneToMany(mappedBy = "section",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private List<InboundOrder> inboundOrderList;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Section sector = (Section) o;
-        return id != null && Objects.equals(id, sector.id);
+        Section section = (Section) o;
+        return id != null && Objects.equals(id, section.id);
     }
 
     @Override

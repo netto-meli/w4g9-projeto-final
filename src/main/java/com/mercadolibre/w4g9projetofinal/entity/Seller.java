@@ -3,8 +3,7 @@ package com.mercadolibre.w4g9projetofinal.entity;
 import lombok.*;
 import org.hibernate.Hibernate;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,15 +11,20 @@ import java.util.Objects;
 @Setter
 @ToString
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
+@Inheritance(strategy= InheritanceType.SINGLE_TABLE)
 public class Seller extends User{
-    @OneToMany
     @ToString.Exclude
+    @OneToMany(
+            mappedBy = "seller",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
     private List<Advertise> advertiseList;
-    @OneToMany
-    @ToString.Exclude
-    private List<Batch> batchList;
+
+    public Seller(Long id, String name, String email, List<Advertise> advertiseList, List<Batch> batchList) {
+        super(id, name, email);
+        this.advertiseList = advertiseList;
+    }
 
     @Override
     public boolean equals(Object o) {

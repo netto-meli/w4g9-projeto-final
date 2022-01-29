@@ -10,6 +10,8 @@ import java.util.Objects;
 @Setter
 @ToString
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public abstract class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
