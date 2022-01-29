@@ -37,8 +37,7 @@ public class InboundOrderController {
         // todo autentication
         Representative representative = new Representative(1L,null, null, null);
         InboundOrder inboundOrder = InboundOrderConverter.convertDtoToEntity(inboundOrderRequestDTO);
-        Section section = SectionConverter.convertDtoToEntity(inboundOrderRequestDTO.getSection());
-        sectionService.validateSectionBatches(section, inboundOrder.getBatchList());
+        sectionService.validateSectionBatches(inboundOrder.getSection(), inboundOrder.getBatchList());
         Advertise advertise = advertiseService.findById(
                 Objects.requireNonNull( inboundOrderRequestDTO.getBatchStock()
                                 .stream().findFirst().orElse(null))

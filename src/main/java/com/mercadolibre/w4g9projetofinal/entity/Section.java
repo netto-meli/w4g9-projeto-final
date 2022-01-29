@@ -20,13 +20,15 @@ public class Section {
     @ManyToOne
     private Warehouse warehouse;
     private String name;
-    private String type;
+    private String refrigerationType;
     private int currentStock;
     private int stockLimit;
     private float minTeperature;
     private float maxTeperature;
-    @OneToMany
     @ToString.Exclude
+    @OneToMany(mappedBy = "section",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
     private List<InboundOrder> inboundOrderList;
 
     @Override

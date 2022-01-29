@@ -19,5 +19,6 @@ public class InboundOrderResponseDTO {
         @JsonDeserialize(using = LocalDateDeserializer.class)
         @JsonSerialize(using = LocalDateSerializer.class)
         private LocalDate orderDate;
+        private SectionResponseDTO section;
         private List<BatchResponseDTO> batchStock;
 }

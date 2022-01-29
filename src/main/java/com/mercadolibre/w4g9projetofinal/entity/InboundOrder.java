@@ -28,6 +28,8 @@ public class InboundOrder {
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     private List<Batch> batchList;
+    @ManyToOne
+    private Section section;
 
     @Override
     public boolean equals(Object o) {
