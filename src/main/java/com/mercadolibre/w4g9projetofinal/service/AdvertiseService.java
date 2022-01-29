@@ -1,22 +1,19 @@
 package com.mercadolibre.w4g9projetofinal.service;
 
 import com.mercadolibre.w4g9projetofinal.entity.Advertise;
-import com.mercadolibre.w4g9projetofinal.entity.Seller;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.AdvertiseRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class AdvertiseService {
 
-    AdvertiseRepository repository;
-
-    public AdvertiseService(AdvertiseRepository repository) {
-        this.repository = repository;
-    }
+    private AdvertiseRepository repository;
 
     public List<Advertise> findAll() {
        return repository.findAll();

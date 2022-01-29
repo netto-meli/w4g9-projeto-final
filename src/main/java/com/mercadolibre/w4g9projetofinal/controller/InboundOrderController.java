@@ -5,17 +5,14 @@ import com.mercadolibre.w4g9projetofinal.dtos.converter.InboundOrderConverter;
 import com.mercadolibre.w4g9projetofinal.dtos.converter.SectionConverter;
 import com.mercadolibre.w4g9projetofinal.dtos.request.InboundOrderRequestDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.BatchResponseDTO;
+import com.mercadolibre.w4g9projetofinal.dtos.response.InboundOrderResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.*;
 import com.mercadolibre.w4g9projetofinal.service.AdvertiseService;
 import com.mercadolibre.w4g9projetofinal.service.InboundOrderService;
-import com.mercadolibre.w4g9projetofinal.service.SellerService;
+import com.mercadolibre.w4g9projetofinal.service.SectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
@@ -30,6 +27,8 @@ public class InboundOrderController {
     InboundOrderService inboundOrderService;
     @Autowired
     AdvertiseService advertiseService;
+    @Autowired
+    SectionService sectionService;
 
     @PostMapping
     public ResponseEntity<List<BatchResponseDTO>> createInboundOrder(
@@ -37,20 +36,20 @@ public class InboundOrderController {
             UriComponentsBuilder uriBuilder) {
         // todo autentication
         Representative representative = new Representative(1L,null, null, null);
-        InboundOrder io = InboundOrderConverter.convertDtoToEntity(inboundOrderRequestDTO);
+        InboundOrder inboundOrder = InboundOrderConverter.convertDtoToEntity(inboundOrderRequestDTO);
         Section section = SectionConverter.convertDtoToEntity(inboundOrderRequestDTO.getSection());
-        inboundOrderService.validateBatchesToSection(section, inboundOrderRequestDTO.getBatchStock());
+        sectionService.validateSectionBatches(section, inboundOrder.getBatchList());
         Advertise advertise = advertiseService.findById(
                 Objects.requireNonNull( inboundOrderRequestDTO.getBatchStock()
                                 .stream().findFirst().orElse(null))
                         .getAdvertiseId());
-        io.setSeller(advertise.getSeller());
-        io.setRepresentative(representative);
-        io = inboundOrderService.save(io);
-        List<BatchResponseDTO> response = BatchConverter.convertEntityListToDtoList(io.getBatchList());
+        inboundOrder.setSeller(advertise.getSeller());
+        inboundOrder.setRepresentative(representative);
+        inboundOrder = inboundOrderService.save(inboundOrder);
+        List<BatchResponseDTO> response = BatchConverter.convertEntityListToDtoList(inboundOrder.getBatchList());
         URI uri = uriBuilder
                 .path("/{id}")
-                .buildAndExpand(io.getId())
+                .buildAndExpand(inboundOrder.getId())
                 .toUri();
         return ResponseEntity.created(uri).body(response);
     }
@@ -68,18 +67,18 @@ public class InboundOrderController {
                 .toUri();
         return ResponseEntity.created(uri).body(response);
     }
-/*
+
+    @GetMapping("/{id}")
+    public ResponseEntity<InboundOrderResponseDTO> findInboundOrderById(@PathVariable Long id) {
+        InboundOrder io = inboundOrderService.findById(id);
+        InboundOrderResponseDTO response = InboundOrderConverter.convertEntityToDto(io);
+        return ResponseEntity.ok().body(response);
+    }
+
     @GetMapping
     public ResponseEntity<List<InboundOrderResponseDTO>> findAllInboundOrders() {
         List<InboundOrder> inboundOrderList = inboundOrderService.findAll();
         List<InboundOrderResponseDTO> response = InboundOrderConverter.convertEntityListToDtoList(inboundOrderList);
         return ResponseEntity.ok().body(response);
     }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<InboundOrderResponseDTO> findInboundOrderById(@PathVariable Long id) {
-        InboundOrder io = inboundOrderService.findById(id);
-        InboundOrderResponseDTO response = InboundOrderConverter.convertEntityToDto(io, new Representative());
-        return ResponseEntity.ok().body(response);
-    }*/
 }

@@ -3,7 +3,7 @@ package com.mercadolibre.w4g9projetofinal.service;
 import com.mercadolibre.w4g9projetofinal.entity.Seller;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.SellerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,14 +16,13 @@ import java.util.Optional;
  */
 
 @Service
+@AllArgsConstructor
 public class SellerService {
 
-    @Autowired
     private SellerRepository repository;
 
     public List<Seller> findAll() {
-        List<Seller> list = repository.findAll();
-        return list;
+        return repository.findAll();
     }
 
     public Seller findById(Long id) {
@@ -45,7 +44,6 @@ public class SellerService {
         Seller obj = findById(id);
         repository.delete(obj);
     }
-
 
     //Método para update de Seller
     private static void updateSeller(Seller obj, Seller newObj) {

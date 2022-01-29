@@ -3,6 +3,7 @@ package com.mercadolibre.w4g9projetofinal.service;
 
 import com.mercadolibre.w4g9projetofinal.entity.Warehouse;
 import com.mercadolibre.w4g9projetofinal.repository.WarehouseRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +12,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class WarehouseService {
 
-    @Autowired
-   private WarehouseRepository warehouseRepository;
+    private WarehouseRepository warehouseRepository;
 
     public List<Warehouse> findAll()
     {
@@ -25,10 +26,6 @@ public class WarehouseService {
     {
         Optional<Warehouse> wh = warehouseRepository.findById(id);
         return wh.orElse(null);
-    }
-
-    public WarehouseService( WarehouseRepository warehouseRepository ) {
-        this.warehouseRepository = warehouseRepository;
     }
 
     public Warehouse insert (Warehouse wh) {

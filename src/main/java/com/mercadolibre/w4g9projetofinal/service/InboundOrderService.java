@@ -3,20 +3,19 @@ package com.mercadolibre.w4g9projetofinal.service;
 import com.mercadolibre.w4g9projetofinal.dtos.request.BatchRequestDTO;
 import com.mercadolibre.w4g9projetofinal.entity.InboundOrder;
 import com.mercadolibre.w4g9projetofinal.entity.Section;
+import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.InboundOrderRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class InboundOrderService {
 
-    InboundOrderRepository inboundOrderRepository;
-
-    public InboundOrderService(InboundOrderRepository inboundOrdereRepository ) {
-        this.inboundOrderRepository = inboundOrdereRepository;
-    }
+    private InboundOrderRepository inboundOrderRepository;
 
     public InboundOrder save(InboundOrder io) {
         return inboundOrderRepository.save(io);
@@ -30,12 +29,7 @@ public class InboundOrderService {
     }
 
     public InboundOrder findById( Long id ) {
-        // todo NULL
-        return inboundOrderRepository.findById( id ).orElse(null);
-    }
-
-    public void validateBatchesToSection(Section section, List<BatchRequestDTO> batchStock) {
-        // todo se der ruim, throw exception section
-        // todo e se sector esta certo com warrehouse
+        return inboundOrderRepository.findById(id)
+                .orElseThrow( () -> new ObjectNotFoundException("Inbound Order not found! Please check the id.") );
     }
 }

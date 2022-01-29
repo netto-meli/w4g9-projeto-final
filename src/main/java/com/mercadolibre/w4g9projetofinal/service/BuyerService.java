@@ -3,6 +3,7 @@ package com.mercadolibre.w4g9projetofinal.service;
 import com.mercadolibre.w4g9projetofinal.entity.Buyer;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.BuyerRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +11,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class BuyerService {
 
-    @Autowired
     private BuyerRepository repository;
 
     public List<Buyer> findAll() {

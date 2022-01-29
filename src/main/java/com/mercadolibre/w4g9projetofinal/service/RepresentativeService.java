@@ -3,6 +3,7 @@ package com.mercadolibre.w4g9projetofinal.service;
 import com.mercadolibre.w4g9projetofinal.entity.Representative;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.RepresentativeRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,14 +17,13 @@ import java.util.Optional;
  */
 
 @Service
+@AllArgsConstructor
 public class RepresentativeService {
 
-    @Autowired
     private RepresentativeRepository repository;
 
     public List<Representative> findAll() {
-        List<Representative> list = repository.findAll();
-        return list;
+        return repository.findAll();
     }
 
     public Representative findById(Long id) {

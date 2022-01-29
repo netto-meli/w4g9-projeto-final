@@ -16,7 +16,6 @@ import java.util.Objects;
 @Entity
 public class Batch {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int initialQuantity;
     private int currentQuantity;
