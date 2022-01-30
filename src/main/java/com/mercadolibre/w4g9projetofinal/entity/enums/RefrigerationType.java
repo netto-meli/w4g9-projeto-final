@@ -1,19 +1,20 @@
 package com.mercadolibre.w4g9projetofinal.entity.enums;
 
-public enum RepresentativeJob {
+public enum RefrigerationType {
 
-    SUPERVISOR(0, "Supervisor"),
-    LIDER(1, "Líder");
+    FROZEN("FF", "Congelado"),
+    COLD("RF", "Resfriado"),
+    FRESH("FS", "Fresco");
 
-    private int cod;
+    private String cod;
     private String descricao;
 
-    private RepresentativeJob(int cod, String descricao) {
+    private RefrigerationType(String cod, String descricao) {
         this.cod = cod;
         this.descricao = descricao;
     }
 
-    public int getCod() {
+    public String getCod() {
         return cod;
     }
 
@@ -22,12 +23,12 @@ public enum RepresentativeJob {
         return descricao;
     }
 
-    public static RepresentativeJob toEnum(Integer cod) {
+    public static RefrigerationType toEnum(String cod) {
         if (cod == null) {
             return null;
         }
 
-        for (RepresentativeJob x : RepresentativeJob.values()) {
+        for (RefrigerationType x : RefrigerationType.values()) {
             if (cod.equals(x.getCod())) {
                 return x;
             }

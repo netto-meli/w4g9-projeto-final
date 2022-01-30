@@ -22,7 +22,7 @@ public class AdvertiseController {
 
     @GetMapping
     public ResponseEntity<List<AdvertiseResponseDTO>> findAll() {
-        List<AdvertiseResponseDTO> list = AdvertiseConverter.fromDTOAdvertise(service.findAll());
+        List<AdvertiseResponseDTO> list = AdvertiseConverter.convertEntityListToDtoList(service.findAll());
         return ResponseEntity.ok(list);
     }
 
@@ -34,16 +34,16 @@ public class AdvertiseController {
 
     @PostMapping
     public ResponseEntity<Void> insert(@RequestBody AdvertiseRequestDTO advertise) {
-        Advertise newAdvertise = AdvertiseConverter.convertDtoToEntityAdvertise(advertise);
+        Advertise newAdvertise = AdvertiseConverter.convertDtoToEntity(advertise);
         newAdvertise = service.insert(newAdvertise);
-        AdvertiseResponseDTO newAdvertisedto = AdvertiseConverter.convertEntityToDtoAdvertise(newAdvertise);
+        AdvertiseResponseDTO newAdvertisedto = AdvertiseConverter.convertEntityToDto(newAdvertise);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newAdvertisedto.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<Void> update(@RequestBody AdvertiseRequestDTO advertiseDto, @PathVariable Long id) {
-        Advertise advertise = AdvertiseConverter.convertDtoToEntityAdvertise(advertiseDto);
+        Advertise advertise = AdvertiseConverter.convertDtoToEntity(advertiseDto);
         advertise.setId(id);
         service.update(advertise);
         return ResponseEntity.noContent().build();

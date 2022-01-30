@@ -20,7 +20,7 @@ public class SellerConverter {
         return new SellerResponseDTO(obj.getId(), obj.getName(), obj.getEmail());
     }
 
-    public static List<SellerResponseDTO> fromDTO(List<Seller> list) {
+    public static List<SellerResponseDTO> convertEntityListToDtoList(List<Seller> list) {
         List<SellerResponseDTO> list2 = new ArrayList<>();
         for (Seller s : list) {
             list2.add(convertEntityToDto(s));

@@ -17,7 +17,7 @@ public class RepresentativeConverter {
         return new RepresentativeResponseDTO(obj.getId(), obj.getName(), obj.getEmail(), obj.getJob());
     }
 
-    public static List<RepresentativeResponseDTO> fromDTO(List<Representative> list) {
+    public static List<RepresentativeResponseDTO> convertEntityListToDtoList(List<Representative> list) {
         List<RepresentativeResponseDTO> list2 = new ArrayList<>();
         for (Representative r : list) {
             list2.add(convertEntityToDto(r));

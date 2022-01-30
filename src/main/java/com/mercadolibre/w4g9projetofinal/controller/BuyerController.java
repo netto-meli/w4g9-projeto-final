@@ -24,7 +24,7 @@ public class BuyerController {
 
     @GetMapping
     public ResponseEntity<List<BuyerResponseDTO>> findAll() {
-        List<BuyerResponseDTO> list = BuyerConverter.fromDTOBuyer(service.findAll());
+        List<BuyerResponseDTO> list = BuyerConverter.convertEntityListToDtoList(service.findAll());
         if(list == null || list.isEmpty()){
             throw new ObjectNotFoundException("Ainda nao consta dados cadastrados");
         }
@@ -39,16 +39,16 @@ public class BuyerController {
 
     @PostMapping
     public ResponseEntity<Void> insert(@RequestBody BuyerRequestDTO buyer) {
-        Buyer newBuyer = BuyerConverter.convertDtoToEntityBuyer(buyer);
+        Buyer newBuyer = BuyerConverter.convertDtoToEntity(buyer);
         newBuyer = service.insert(newBuyer);
-        BuyerResponseDTO buyerFinal = BuyerConverter.convertEntityToDtoBuyer(newBuyer);
+        BuyerResponseDTO buyerFinal = BuyerConverter.convertEntityToDto(newBuyer);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(buyerFinal.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<Void> update(@RequestBody BuyerRequestDTO newBuyer, @PathVariable Long id) {
-        Buyer buyer = BuyerConverter.convertDtoToEntityBuyer(newBuyer);
+        Buyer buyer = BuyerConverter.convertDtoToEntity(newBuyer);
         buyer.setId(id);
         service.update(buyer);
         return ResponseEntity.noContent().build();

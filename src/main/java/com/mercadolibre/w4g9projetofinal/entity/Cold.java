@@ -3,6 +3,7 @@ package com.mercadolibre.w4g9projetofinal.entity;
 import lombok.*;
 import org.hibernate.Hibernate;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import java.util.Objects;
 
@@ -11,6 +12,7 @@ import java.util.Objects;
 @ToString
 @Entity
 @NoArgsConstructor
+@DiscriminatorValue("RF")
 public class Cold extends Product{
 
     public Cold(Long id, String name, String description, float minTemperature, float maxTemperature) {

@@ -28,7 +28,7 @@ public class RepresentativeController {
 
     @GetMapping
     public ResponseEntity<List<RepresentativeResponseDTO>> findAll() {
-        List<RepresentativeResponseDTO> list = RepresentativeConverter.fromDTO(service.findAll());
+        List<RepresentativeResponseDTO> list = RepresentativeConverter.convertEntityListToDtoList(service.findAll());
         return ResponseEntity.ok(list);
     }
 

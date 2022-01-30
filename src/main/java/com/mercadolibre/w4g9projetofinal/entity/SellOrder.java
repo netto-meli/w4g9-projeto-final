@@ -1,17 +1,11 @@
 package com.mercadolibre.w4g9projetofinal.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.Hibernate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Objects;
 
 /*** Entidade para persistência de Pedido
@@ -32,30 +26,115 @@ public class SellOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     /***
-     * ID do Cliente no tipo Long
+     * Cliente do tipo Buyer
      */
-    private Long idCliente;
+    @ManyToOne
+    private Buyer buyer;
     /***
-     * Lista de ItemCarrinho (produto no pedido) no formato BigDecimal
+     * Indicador se a ordem de compra ja foi realizada ou se ainda é um carrinho de compras
      */
-    //private List<ItemCarrinho> listaItensCarrinho;
+    private boolean cart;
+    /***
+     * Lista de ItemCarrinho (produto no pedido) no formato List de CartItem
+     */
+    @ToString.Exclude
+    @OneToMany(
+            mappedBy = "sellOrder",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private List<OrderItem> orderItemList;
     /***
      * Valor do frete do Pedido no formato BigDecimal
      */
-    private BigDecimal valorFrete;
+    private BigDecimal shippingRate;
     /***
      * Valor total do Pedido no formato BigDecimal
      */
-    private BigDecimal valorTotal;
+    private BigDecimal totalValue;
 
+    /*** Método para buscar dentro do pedido, o produto selecionado
+     *
+     * @param advertise ID do Produto para o método buscar os dados de ItemCarinho
+     * @return ItemCarrinho contendo o produto buscado e quantidade no carrinho
+     */
+    public OrderItem getOrderItem(Advertise advertise) {
+        return orderItemList.stream()
+                .filter( ic -> ic.getAdvertise().equals(advertise))
+                .findAny()
+                .orElse(null);
+    }
 
+    /*** Método para atualizar o carrinho, conforme foram adicionados ou removidos itens de um produto
+     *
+     * @param qtdProduct Quantidade de itens do produto
+     * @param advertise Anuncio do produto
+     * @param orderItem Produto para atualizar no carrinho
+     */
+    public int updateCart(int qtdProduct, Advertise advertise, OrderItem orderItem) {
+        if (orderItem == null) {
+            orderItem = new OrderItem(null, qtdProduct, advertise, this);
+            this.orderItemList.add(orderItem);
+        } else {
+            orderItem.setQuantity(orderItem.getQuantity() + qtdProduct);
+            int idx = this.orderItemList.indexOf(orderItem);
+            this.orderItemList.set(idx, orderItem);
+        }
+        this.calcTotalValueOrder();
+        return orderItem.getQuantity();
+    }
 
+    /*** Método para calcular o valor total de itens de um produto no carrinho
+     *
+     */
+    public void calcTotalValueOrder(){
+        BigDecimal orderPrice = BigDecimal.ZERO;
+        boolean isFreeShipping = true;
+        for (OrderItem item : orderItemList) {
+            BigDecimal totalValueForProduct = item.calculaValorTotalProduto();
+            orderPrice = totalValueForProduct.add(orderPrice);
+            // Se algum dos produtos no pedido não tiver frete gratis,
+            // o pedido precisa calcular o valor do frete
+            if (!item.getAdvertise().isFreeShipping()) isFreeShipping = false;
+        }
+        calculateShipping(isFreeShipping);
+        this.totalValue = orderPrice.add(this.shippingRate);
+    }
+
+    /*** Método para calcular o frete
+     *
+     * @param isFreeShipping Informação se o pedido somente contém produtos com frete grátis
+     */
+    private void calculateShipping(boolean isFreeShipping) {
+        this.shippingRate = BigDecimal.ZERO;
+        if (!isFreeShipping) {
+            this.shippingRate = mockShippingRateByAddress(this.buyer.getAddress());
+        }
+    }
+
+    /*** Método MOCK para cálculo do frete baseado nos caracteres do endereço
+     *
+     * @param address Endereço do cliente, para calcular o frete atual
+     * @return Valor do Frete calculado
+     */
+    private BigDecimal mockShippingRateByAddress(String address) {
+        long tempShippingRate = 0;
+        if (address == null) address = "a";
+        // remove todos os espaços em branco
+        String mockFrete = address.toLowerCase().replaceAll("\\s", "");
+        final String alphabet = "abcdefghijklmnopqrstuvwxyz";
+        for(int i=0; i < mockFrete.length(); i++){
+            tempShippingRate += (alphabet.indexOf(mockFrete.charAt(i))) + 1;
+            // Acrescenta em +1; pois se não houver o caractere na lista,
+            // o método indexOf retorna -1.
+            // Ex: números, caracteres especiais...
+        }
+        return BigDecimal.valueOf(tempShippingRate);
+    }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
+        if (this == o ) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         SellOrder sellOrder = (SellOrder) o;
         return id != null && Objects.equals(id, sellOrder.id);
@@ -64,86 +143,5 @@ public class SellOrder {
     @Override
     public int hashCode() {
         return getClass().hashCode();
-    }
-
-
-
-
-
-    /*** Método para buscar dentro do pedido, o produto selecionado
-     *
-     * @param idProduto ID do Produto para o método buscar os dados de ItemCarinho
-     * @return ItemCarrinho contendo o produto buscado e quantidade no carrinho
-     */
-    public CartItem getItemCarrinho(Long idProduto) {
-        return null;/*listaItensCarrinho.stream()
-                .filter( ic -> ic.getProduto().getId().equals(idProduto))
-                .findAny()
-                .orElse(null);*/
-    }
-
-    /*** Método para atualizar o carrinho, conforme foram adicionados ou removidos itens de um produto
-     *
-     * @param cartItem Produto para atualizar no carrinho
-     * @param endereco Endereço do cliente, para calcular o frete atual
-     */
-    public void atualizaCarrinho(CartItem cartItem, String endereco) {
-        //listaItensCarrinho.removeIf(itemCarrinho::equals);
-        /*
-        if (itemCarrinho.getQuantidade() > 0 ) {
-            listaItensCarrinho.add(itemCarrinho);
-            if (!itemCarrinho.getProduto().isFreteGratis())
-                this.calculaValorTotalPedido(endereco);
-        }*/
-    }
-
-    /*** Método para calcular o valor total de itens de um produto no carrinho
-     *
-     * @param endereco Endereço do cliente, para calcular o frete atual
-     */
-    public void calculaValorTotalPedido(String endereco){
-        BigDecimal valorPedido = BigDecimal.ZERO;
-        boolean isFreteGratis = true;
-        //for (ItemCarrinho item : listaItensCarrinho) {
-          //  BigDecimal valorTotalUmProduto = item.calculaValorTotalProduto();
-            //valorPedido = valorTotalUmProduto.add(valorPedido);
-            // Se algum dos produtos no pedido não tiver frete gratis,
-            // o pedido precisa calcular o valor do frete
-          //  //if (!item.getProduto().isFreteGratis()) isFreteGratis = false;
-        //}
-        //calculaFrete(isFreteGratis, endereco);
-        //this.valorTotal = valorPedido.add(this.valorFrete);
-    }
-
-    /*** Método para calcular o frete
-     *
-     * @param isFreteGratis Informação se o pedido somente contém produtos com frete grátis
-     * @param endereco Endereço do cliente, para calcular o frete atual
-     */
-    private void calculaFrete(boolean isFreteGratis, String endereco) {
-        this.valorFrete = BigDecimal.ZERO;
-        if (!isFreteGratis) {
-            this.valorFrete = mockFreteByEnderecoString(endereco);
-        }
-    }
-
-    /*** Método MOCK para cálculo do frete baseado nos caracteres do endereço
-     *
-     * @param endereco Endereço do cliente, para calcular o frete atual
-     * @return Valor do Frete calculado
-     */
-    private BigDecimal mockFreteByEnderecoString(String endereco) {
-        long tempValorFrete = 0;
-        if (endereco == null) endereco = "a";
-        // remove todos os espaços em branco
-        String mockFrete = endereco.toLowerCase().replaceAll("\\s", "");
-        final String alphabet = "abcdefghijklmnopqrstuvwxyz";
-        for(int i=0; i < mockFrete.length(); i++){
-            tempValorFrete += (alphabet.indexOf(mockFrete.charAt(i))) + 1;
-            // Acrescenta em +1; pois se não houver o caractere na lista,
-            // o método indexOf retorna -1.
-            // Ex: números, caracteres especiais...
-        }
-        return BigDecimal.valueOf(tempValorFrete);
     }
 }

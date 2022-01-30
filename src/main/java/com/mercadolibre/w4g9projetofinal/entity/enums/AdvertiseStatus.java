@@ -27,12 +27,12 @@ public enum AdvertiseStatus {
     }
 
     public static AdvertiseStatus toEnum(Integer cod) {
-        if(cod == null) {
+        if (cod == null) {
             return null;
         }
 
-        for(AdvertiseStatus x : AdvertiseStatus.values()) {
-            if(cod.equals(x.getCod())) {
+        for (AdvertiseStatus x : AdvertiseStatus.values()) {
+            if (cod.equals(x.getCod())) {
                 return x;
             }
         }

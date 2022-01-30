@@ -1,5 +1,6 @@
 package com.mercadolibre.w4g9projetofinal.entity;
 
+import com.mercadolibre.w4g9projetofinal.entity.enums.RefrigerationType;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -20,7 +21,7 @@ public class Section {
     @ManyToOne
     private Warehouse warehouse;
     private String name;
-    private String refrigerationType;
+    private RefrigerationType refrigerationType;
     private int currentStock;
     private int stockLimit;
     private float minTeperature;
@@ -42,5 +43,13 @@ public class Section {
     @Override
     public int hashCode() {
         return getClass().hashCode();
+    }
+
+    /*** Realiza baixa no estoque da quantidade de itens de um produto que foi vendido
+     *
+     * @param qtd Quantidade de itens vendidos de um produto.
+     */
+    public void updateStock(int qtd) {
+        currentStock -= qtd;
     }
 }

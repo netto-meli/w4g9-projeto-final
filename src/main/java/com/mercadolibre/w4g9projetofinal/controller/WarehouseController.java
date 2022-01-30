@@ -25,7 +25,7 @@ public class WarehouseController {
 
     public ResponseEntity<List<WarehouseResponseDTO>> findAll()
     {
-        List<WarehouseResponseDTO> lista = WarehouseConverter.fromDTO(warehouseService.findAll());
+        List<WarehouseResponseDTO> lista = WarehouseConverter.convertEntityListToDtoList(warehouseService.findAll());
         return ResponseEntity.ok(lista);
     }
 
