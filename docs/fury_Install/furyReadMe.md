@@ -6,9 +6,6 @@ We provide a basic model for JDK 11 / Spring based web applications.
 
 Please address any questions and comments to [Fury Issue Tracker](https://github.com/mercadolibre/fury/issues).
 
-[![](https://mermaid.ink/img/pako:eNpVkM1qw0AMhF9F6JRC_AI-BBo7ySWQQnPz5iC8cnZJ9oe1TAm2373rpIVWJ6H5Zhg0Yhs0Y4nXRNHAuVYe8rw3lUm2F0f9BYpiMx1YwAXPjwm2q0OA3oQYrb--vfjtAkE1HheMQYz1t_klVU__yfMEdXOkKCFe_irnrzDBrrEfJsf_V0zi7No3HZUdFS0lqCg9EVyj4-TI6lx9XC4KxbBjhWVeNXc03EWh8nNGh6hJeKethIQ56t7zGmmQ8PnwLZaSBv6Fakv5E-6Hmr8B2pxc3Q)](https://mermaid.live/edit#pako:eNpVkM1qw0AMhF9F6JRC_AI-BBo7ySWQQnPz5iC8cnZJ9oe1TAm2373rpIVWJ6H5Zhg0Yhs0Y4nXRNHAuVYe8rw3lUm2F0f9BYpiMx1YwAXPjwm2q0OA3oQYrb--vfjtAkE1HheMQYz1t_klVU__yfMEdXOkKCFe_irnrzDBrrEfJsf_V0zi7No3HZUdFS0lqCg9EVyj4-TI6lx9XC4KxbBjhWVeNXc03EWh8nNGh6hJeKethIQ56t7zGmmQ8PnwLZaSBv6Fakv5E-6Hmr8B2pxc3Q)
-
-
 ## Usage
 
 ### SCOPE

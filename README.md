@@ -5,6 +5,8 @@ O objetivo deste projeto final é implementar uma API REST no âmbito do slogan 
 os conteúdos trabalhados durante o BOOTCAMP MELI. (Git, Java, Spring, Armazenamento,
 Qualidade e Segurança).
 
+[![](https://mermaid.ink/img/pako:eNpVkM1qw0AMhF9F6JRC_AI-BBo7ySWQQnPz5iC8cnZJ9oe1TAm2373rpIVWJ6H5Zhg0Yhs0Y4nXRNHAuVYe8rw3lUm2F0f9BYpiMx1YwAXPjwm2q0OA3oQYrb--vfjtAkE1HheMQYz1t_klVU__yfMEdXOkKCFe_irnrzDBrrEfJsf_V0zi7No3HZUdFS0lqCg9EVyj4-TI6lx9XC4KxbBjhWVeNXc03EWh8nNGh6hJeKethIQ56t7zGmmQ8PnwLZaSBv6Fakv5E-6Hmr8B2pxc3Q)](https://mermaid.live/edit#pako:eNpVkM1qw0AMhF9F6JRC_AI-BBo7ySWQQnPz5iC8cnZJ9oe1TAm2373rpIVWJ6H5Zhg0Yhs0Y4nXRNHAuVYe8rw3lUm2F0f9BYpiMx1YwAXPjwm2q0OA3oQYrb--vfjtAkE1HheMQYz1t_klVU__yfMEdXOkKCFe_irnrzDBrrEfJsf_V0zi7No3HZUdFS0lqCg9EVyj4-TI6lx9XC4KxbBjhWVeNXc03EWh8nNGh6hJeKethIQ56t7zGmmQ8PnwLZaSBv6Fakv5E-6Hmr8B2pxc3Q)
+
 _Kickoff do projeto:_ ***26/01/2022***
 
 #### Enunciado
