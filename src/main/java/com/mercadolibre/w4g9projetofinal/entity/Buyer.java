@@ -16,8 +16,8 @@ import java.util.Objects;
 public class Buyer extends User{
     private String address;
 
-    public Buyer(Long id, String name, String email, String role, String address) {
-        super(id, name, email, role);
+    public Buyer(Long id, String name, String email, String role, String password, String address) {
+        super(id, name, email, role, password);
         this.address = address;
     }
 

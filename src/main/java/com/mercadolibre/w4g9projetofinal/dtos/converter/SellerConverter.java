@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class SellerConverter {
 
     public static Seller convertDtoToEntity (SellerRequestDTO objDTO){
-        return new Seller(null, objDTO.getName(), objDTO.getEmail(), null, null, null);
+        return new Seller(null, objDTO.getName(), objDTO.getEmail(), null, null, null, null);
     }
 
     public static SellerResponseDTO convertEntityToDto (Seller obj){

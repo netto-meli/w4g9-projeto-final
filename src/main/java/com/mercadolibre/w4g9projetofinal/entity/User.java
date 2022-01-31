@@ -20,6 +20,7 @@ public abstract class User{
     private String name;
     private String email;
     private String role;
+    private String password;
 
     @Override
     public boolean equals(Object o) {

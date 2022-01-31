@@ -20,8 +20,8 @@ public class Seller extends User{
             cascade = CascadeType.ALL)
     private List<Advertise> advertiseList;
 
-    public Seller(Long id, String name, String email, String role, List<Advertise> advertiseList, List<Batch> batchList) {
-        super(id, name, email, role);
+    public Seller(Long id, String name, String email, String role, String password, List<Advertise> advertiseList, List<Batch> batchList) {
+        super(id, name, email, role, password);
         this.advertiseList = advertiseList;
     }
 
