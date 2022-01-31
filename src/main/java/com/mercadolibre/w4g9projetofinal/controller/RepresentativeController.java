@@ -20,7 +20,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping(value = "/representatives")
+@RequestMapping(value = "/api/v1/fresh-products/representative")
 public class RepresentativeController {
 
     @Autowired

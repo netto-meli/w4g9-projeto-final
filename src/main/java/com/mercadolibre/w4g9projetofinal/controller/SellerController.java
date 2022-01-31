@@ -27,7 +27,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping(value = "/sellers")
+@RequestMapping(value = "/api/v1/fresh-products/seller")
 public class SellerController {
 
     @Autowired

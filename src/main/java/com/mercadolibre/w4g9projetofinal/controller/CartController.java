@@ -27,7 +27,7 @@ import java.net.URI;
  * @author Fernando Netto
  */
 @RestController
-@RequestMapping(value = "/api/v1/fresh-products/cart/")
+@RequestMapping(value = "/api/v1/fresh-products/cart")
 public class CartController {
 
 	/*** Instancia de serviço: <b>CarrinhoService</b> com notação <i>{@literal @}Autowired</i> do lombok
