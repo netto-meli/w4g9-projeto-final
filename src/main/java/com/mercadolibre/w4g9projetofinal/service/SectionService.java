@@ -1,16 +1,19 @@
 package com.mercadolibre.w4g9projetofinal.service;
 
+import com.mercadolibre.w4g9projetofinal.dtos.converter.SectionConverter;
+import com.mercadolibre.w4g9projetofinal.dtos.request.SectionRequestDTO;
+import com.mercadolibre.w4g9projetofinal.dtos.response.SectionResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Batch;
-import com.mercadolibre.w4g9projetofinal.entity.OrderItem;
 import com.mercadolibre.w4g9projetofinal.entity.Section;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.exceptions.SectionManagementException;
 import com.mercadolibre.w4g9projetofinal.repository.SectionRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -67,6 +70,42 @@ public class SectionService {
         return currentStock;
     }
 
+    public ResponseEntity<SectionResponseDTO> searchDetailSection(Long id){
+        Optional<Section> section = sectionRepository.findById(id);
+        if (section.isPresent()) {
+            return ResponseEntity.ok(SectionConverter.convertEntityToDto(section.get()));
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    public Section registerSectionDtoRequest(SectionRequestDTO sectionRequestDTO){
+        Section section = SectionConverter.convertDtoToEntity(sectionRequestDTO);
+        sectionRepository.save(section);
+        return section;
+    }
+
+    public ResponseEntity<SectionResponseDTO> updateSection(Long id, SectionRequestDTO sectionDTO){
+        Optional<Section> optional = sectionRepository.findById(id);
+        if (optional.isPresent()) {
+            Section section = sectionDTO.atualizar(id, sectionRepository);
+            return ResponseEntity.ok(SectionConverter.convertEntityToDto(section));
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    public ResponseEntity<?> deleteSectionById(Long id){
+        Optional<Section> optional = sectionRepository.findById(id);
+        if (optional.isPresent()) {
+            sectionRepository.deleteById(id);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    public List<SectionResponseDTO> sectionListAvailable(){
+        List<Section> sections = sectionRepository.findAll();
+        return SectionConverter.convertEntityListToDtoList(sections);
+    }
 
     public Section save(Section section){
         return sectionRepository.save(section);
