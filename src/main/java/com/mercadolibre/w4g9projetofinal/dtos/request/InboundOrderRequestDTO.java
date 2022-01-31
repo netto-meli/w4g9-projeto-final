@@ -20,6 +20,6 @@ public class InboundOrderRequestDTO {
         @JsonDeserialize(using = LocalDateDeserializer.class)
         @JsonSerialize(using = LocalDateSerializer.class)
         private LocalDate orderDate;
-        private SectionRequestDTO section;
+        private SectionRequestDTOForInboundOrder section;
         private List<BatchRequestDTO> batchStock;
 }
