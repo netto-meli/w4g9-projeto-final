@@ -4,6 +4,7 @@ import com.mercadolibre.w4g9projetofinal.entity.Representative;
 import com.mercadolibre.w4g9projetofinal.entity.Seller;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.RepresentativeRepository;
+import com.mercadolibre.w4g9projetofinal.repository.SellerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -22,20 +23,34 @@ import java.util.Optional;
 @AllArgsConstructor
 public class RepresentativeService {
 
+    /*** Instancia de BCryptPasswordEncoder: <b>BCryptPasswordEncoder</b>.
+     */
     @Autowired
     private BCryptPasswordEncoder pe;
 
+    /*** Instancia de repositório: <b>RepresentativeRepository</b>.
+     */
+    @Autowired
     private RepresentativeRepository repository;
 
+
+    /*** Método que retorna lista de Representatives */
     public List<Representative> findAll() {
         return repository.findAll();
     }
 
+
+    /*** Método que busca Representative por Id
+     * @param id ID do Representative a ser retornado
+     */
     public Representative findById(Long id) {
         Optional<Representative> obj = repository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Representante não encontrado! Por favor verifique o id."));
     }
 
+    /*** Método que busca Representative por Email
+     * @param email email do Representative a ser retornado
+     */
     public Representative findByEmail(String email) {
         Representative obj = repository.findByEmail(email);
         if (obj == null) {
@@ -45,17 +60,28 @@ public class RepresentativeService {
         return obj;
     }
 
+    /*** Método que insere um Representative
+     * @param obj objeto Representative a ser inserido
+     */
     public Representative insert(Representative obj) {
         obj.setPassword(pe.encode(obj.getPassword()));
         return repository.save(obj);
     }
 
+    /*** Método que atualiza um Representative já existente
+     *
+     * @param newObj Objeto com informações para atualização de um Representative existente
+     */
     public Representative update(Representative newObj) {
         Representative obj = findById(newObj.getId());
         updateRepresentation(newObj, obj);
         return repository.save(obj);
     }
 
+    /*** Método deleta um Representative do Bando de dados
+     *
+     * @param id ID do Representative a ser deletado
+     */
     public void delete(Long id) {
         Representative obj = findById(id);
         repository.delete(obj);

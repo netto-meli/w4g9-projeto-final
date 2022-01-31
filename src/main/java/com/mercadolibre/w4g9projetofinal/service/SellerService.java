@@ -22,20 +22,33 @@ import java.util.Optional;
 @AllArgsConstructor
 public class SellerService {
 
+    /*** Instancia de BCryptPasswordEncoder: <b>BCryptPasswordEncoder</b>.
+     */
     @Autowired
     private BCryptPasswordEncoder pe;
 
+
+    /*** Instancia de repositório: <b>SellerRepository</b>.
+     */
+    @Autowired
     private SellerRepository repository;
 
+    /*** Método que retorna lista de Sellers */
     public List<Seller> findAll() {
         return repository.findAll();
     }
 
+    /*** Método que busca Seller por Id
+     * @param id ID do Seller a ser retornado
+     */
     public Seller findById(Long id) {
         Optional<Seller> obj = repository.findById(id);
         return obj.orElseThrow( () -> new ObjectNotFoundException("Vendedor não encontrado! Por favor verifique o id."));
     }
 
+    /*** Método que busca Seller por Email
+     * @param email email do Seller a ser retornado
+     */
     public Seller findByEmail(String email) {
         Seller obj = repository.findByEmail(email);
         if (obj == null) {
@@ -45,17 +58,29 @@ public class SellerService {
         return obj;
     }
 
+    /*** Método que insere um Seller
+     * @param obj objeto Seller a ser inserido
+     */
     public Seller insert(Seller obj) {
         obj.setPassword(pe.encode(obj.getPassword()));
         return repository.save(obj);
     }
 
+    /*** Método que atualiza um Seller já existente
+     *
+     * @param newObj Objeto com informações para atualização de um seller existente
+     */
     public Seller update(Seller newObj) {
         Seller obj = findById(newObj.getId());
         updateSeller(newObj, obj);
         return repository.save(obj);
     }
 
+
+    /*** Método deleta um Seller do Bando de dados
+     *
+     * @param id ID do Seller a ser deletado
+     */
     public void delete(Long id) {
         Seller obj = findById(id);
         repository.delete(obj);
