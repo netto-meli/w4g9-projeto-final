@@ -1,4 +1,4 @@
-package com.mercadolibre.w4g9projetofinal.entity.dtos.response;
+package com.mercadolibre.w4g9projetofinal.dtos.response;
 
 import com.mercadolibre.w4g9projetofinal.entity.enums.RepresentativeJob;
 import lombok.AllArgsConstructor;

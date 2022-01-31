@@ -1,4 +1,4 @@
-package com.mercadolibre.w4g9projetofinal.entity.dtos.request;
+package com.mercadolibre.w4g9projetofinal.dtos.response;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -14,9 +14,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class BatchRequestDTO {
+@NoArgsConstructor
+public class BatchResponseDTO {
     private int batchNumber;
     private Long advertiseId;
     private float currentTemperature;

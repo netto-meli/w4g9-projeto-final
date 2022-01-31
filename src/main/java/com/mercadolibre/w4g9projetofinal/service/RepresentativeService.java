@@ -4,6 +4,7 @@ import com.mercadolibre.w4g9projetofinal.entity.Representative;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.RepresentativeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +20,9 @@ import java.util.Optional;
 public class RepresentativeService {
 
     @Autowired
+    private BCryptPasswordEncoder pe;
+
+    @Autowired
     private RepresentativeRepository repository;
 
     public List<Representative> findAll() {
@@ -32,6 +36,7 @@ public class RepresentativeService {
     }
 
     public Representative insert(Representative obj) {
+        obj.setPass(pe.encode(obj.getPass()));
         return repository.save(obj);
     }
 

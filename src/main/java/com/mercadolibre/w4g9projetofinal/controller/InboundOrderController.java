@@ -38,7 +38,7 @@ public class InboundOrderController {
             @RequestBody InboundOrderRequestDTO inboundOrderRequestDTO,
             UriComponentsBuilder uriBuilder) {
         // todo autentication
-        Representative representative = new Representative(1L,null, null, null);
+        Representative representative = new Representative(1L,null, null, null, null);
         InboundOrder io = InboundOrderConverter.convertDtoToEntity(inboundOrderRequestDTO);
         Section section = SectionConverter.convertDtoToEntity(inboundOrderRequestDTO.getSection());
         inboundOrderService.validateBatchesToSection(section, inboundOrderRequestDTO.getBatchStock());

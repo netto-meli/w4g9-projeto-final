@@ -19,8 +19,8 @@ import java.util.Objects;
 public class Representative extends User{
     private RepresentativeJob job;
 
-    public Representative(Long id, String name, String email, RepresentativeJob job) {
-        super(id, name, email);
+    public Representative(Long id, String name, String email, RepresentativeJob job, String pass) {
+        super(id, name, email, pass);
         this.job = job;
     }
 

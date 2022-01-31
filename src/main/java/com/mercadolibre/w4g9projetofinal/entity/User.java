@@ -18,6 +18,7 @@ public abstract class User{
     private Long id;
     private String name;
     private String email;
+    private String pass;
 
     @Override
     public boolean equals(Object o) {

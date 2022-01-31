@@ -1,4 +1,4 @@
-package com.mercadolibre.w4g9projetofinal.entity.dtos.request;
+package com.mercadolibre.w4g9projetofinal.dtos.request;
 
 import com.mercadolibre.w4g9projetofinal.entity.Product;
 import com.mercadolibre.w4g9projetofinal.entity.Seller;

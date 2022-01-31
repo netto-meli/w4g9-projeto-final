@@ -1,6 +1,6 @@
-package com.mercadolibre.w4g9projetofinal.entity.dtos.converter;
+package com.mercadolibre.w4g9projetofinal.dtos.converter;
 
-import com.mercadolibre.w4g9projetofinal.entity.dtos.request.SectionRequestDTO;
+import com.mercadolibre.w4g9projetofinal.dtos.request.SectionRequestDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Section;
 import com.mercadolibre.w4g9projetofinal.entity.Warehouse;
 
