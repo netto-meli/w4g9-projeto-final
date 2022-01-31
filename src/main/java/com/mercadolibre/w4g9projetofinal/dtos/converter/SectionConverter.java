@@ -6,7 +6,6 @@ import com.mercadolibre.w4g9projetofinal.entity.Section;
 import com.mercadolibre.w4g9projetofinal.entity.Warehouse;
 
 public class SectionConverter {
-    // todo se der ruim, dar getsection by id
     public static Section convertDtoToEntity (SectionRequestDTO sectionRequestDTO) {
         return new Section(
                 Long.valueOf( sectionRequestDTO.getSectionCode() ),
