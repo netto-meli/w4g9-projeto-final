@@ -2,6 +2,7 @@ package com.mercadolibre.w4g9projetofinal.dtos.converter;
 
 import com.mercadolibre.w4g9projetofinal.dtos.request.BuyerRequestDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.BuyerResponseDTO;
+import com.mercadolibre.w4g9projetofinal.entity.Buyer;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,7 +10,7 @@ import java.util.stream.Collectors;
 public class BuyerConverter {
 
     public static Buyer convertDtoToEntity(BuyerRequestDTO buyer) {
-        return new Buyer(null, buyer.getName(), buyer.getEmail(), null, null, buyer.getAddress());
+        return new Buyer(null, buyer.getName(), buyer.getEmail(), buyer.getPass(), buyer.getAddress());
     }
 
     public static BuyerResponseDTO convertEntityToDto(Buyer newBuyer) {

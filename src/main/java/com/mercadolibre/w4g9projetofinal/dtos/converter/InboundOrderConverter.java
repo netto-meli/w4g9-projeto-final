@@ -11,6 +11,7 @@ import java.util.List;
 
 public class InboundOrderConverter {
 
+    /*
     public static InboundOrder convertDtoToEntity (InboundOrderRequestDTO iorDTO){
         List<Batch> batchList = BatchConverter.convertDtoListToEntityList(iorDTO.getBatchStock());
         Section section = SectionConverter.convertDtoToEntity(iorDTO.getSection());
@@ -40,4 +41,6 @@ public class InboundOrderConverter {
         }
         return inboundOrderDTOList;
     }
+
+     */
 }

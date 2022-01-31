@@ -21,6 +21,8 @@ public class Batch {
     private String currentTemperature;
     private LocalDate dueDate;
     private LocalDate manufactureDate;
+    private  Integer currentQuantity;
+
     @OneToOne
     private Advertise advertise;
 
@@ -60,5 +62,8 @@ public class Batch {
     @Override
     public int hashCode() {
         return getClass().hashCode();
+    }
+
+    public void setInboundOrder(InboundOrder inboundOrder) {
     }
 }

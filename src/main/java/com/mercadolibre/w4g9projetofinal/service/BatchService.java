@@ -38,10 +38,12 @@ public class BatchService {
         return batch;
     }
 
+
     /*** Método que dá baixa de Produtos no estoque
      *
      * @param orderItemList Lista de Produtos com as respectivas quantidades para dar baixa no estoque
      */
+    /*
     public void updateStock(List<OrderItem> orderItemList) {
         List<Batch> batchIterable = new ArrayList<>();
         for (OrderItem cartItem : orderItemList) {
@@ -54,4 +56,6 @@ public class BatchService {
         }
         repository.saveAll(batchIterable);
     }
+
+     */
 }

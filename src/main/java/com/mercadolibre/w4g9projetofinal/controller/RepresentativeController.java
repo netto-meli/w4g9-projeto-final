@@ -4,6 +4,7 @@ import com.mercadolibre.w4g9projetofinal.dtos.converter.RepresentativeConverter;
 import com.mercadolibre.w4g9projetofinal.dtos.request.RepresentativeRequestDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.RepresentativeResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Representative;
+import com.mercadolibre.w4g9projetofinal.entity.Seller;
 import com.mercadolibre.w4g9projetofinal.service.RepresentativeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping(value = "/api/v1/fresh-products/representative")
+@RequestMapping(value = "/representatives")
 public class RepresentativeController {
 
     @Autowired
@@ -35,6 +36,12 @@ public class RepresentativeController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<Representative> findById(@PathVariable Long id) {
         Representative obj = service.findById(id);
+        return ResponseEntity.ok(obj);
+    }
+
+    @GetMapping(value = "/email")
+    public ResponseEntity<Representative> findByEmail(@RequestParam(value = "value") String email) {
+        Representative obj = service.findByEmail(email);
         return ResponseEntity.ok(obj);
     }
 

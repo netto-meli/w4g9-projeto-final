@@ -17,18 +17,22 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BatchRequestDTO {
+
     private int batchNumber;
     private Long advertiseId;
     private float currentTemperature;
     private float minimumTemperature;
     private int initialQuantity;
     private int currentQuantity;
+
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate manufacturingDate;
+
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     private LocalDateTime manufacturingTime;
+
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate dueDate;

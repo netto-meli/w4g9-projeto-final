@@ -16,6 +16,7 @@ public class WarehouseService {
 
     private WarehouseRepository warehouseRepository;
 
+    /*
     public List<Warehouse> findAll()
     {
         return warehouseRepository.findAll();
@@ -40,6 +41,8 @@ public class WarehouseService {
     public Warehouse update(Warehouse wh) {
         return null;
     }
+
+     */
 }
 
 

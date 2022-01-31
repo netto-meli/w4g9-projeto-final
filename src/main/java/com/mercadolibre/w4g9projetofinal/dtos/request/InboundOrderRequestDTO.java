@@ -15,10 +15,13 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class InboundOrderRequestDTO {
+
         private int orderNumber;
+
         @JsonDeserialize(using = LocalDateDeserializer.class)
         @JsonSerialize(using = LocalDateSerializer.class)
         private LocalDate orderDate;
+
         private SectionRequestDTO section;
         private List<BatchRequestDTO> batchStock;
 }

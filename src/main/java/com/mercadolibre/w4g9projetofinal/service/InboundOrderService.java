@@ -24,6 +24,7 @@ public class InboundOrderService {
     @Autowired
     private SectionService sectionService;
 
+    /*
     public InboundOrder createInboundOrder(Representative representative, InboundOrder inboundOrder) {
         Section section = sectionService.validateSectionBatches(
                 inboundOrder.getSection(),
@@ -39,6 +40,8 @@ public class InboundOrderService {
         inboundOrder.setInboundOrderToBatchList();
         return this.save(inboundOrder);
     }
+
+     */
 
     public InboundOrder save(InboundOrder io) {
         return inboundOrderRepository.save(io);

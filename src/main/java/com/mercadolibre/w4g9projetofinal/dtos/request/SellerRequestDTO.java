@@ -10,6 +10,7 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SellerRequestDTO {
+
     private String name;
     private String email;
 

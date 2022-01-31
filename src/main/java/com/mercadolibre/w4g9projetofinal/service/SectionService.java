@@ -23,6 +23,7 @@ public class SectionService {
                 .orElseThrow(() -> new ObjectNotFoundException("Section not found! Please check the id."));
     }
 
+    /*
     public Section validateSectionBatches(Section section, List<Batch> batchStock) {
 
         Section dbSection = this.findById(section.getId());
@@ -34,6 +35,9 @@ public class SectionService {
         return dbSection;
     }
 
+     */
+
+    /*
     private void validateBatchSection(List<Batch> batchStock, Section dbSection) {
         StringBuilder msg = new StringBuilder();
         boolean throwExeption = false;
@@ -56,6 +60,8 @@ public class SectionService {
             throw new SectionManagementException(msg.toString());
         }
     }
+
+     */
 
     private int validateAvailableSpaceInStock(int initialQuantity, int currentStock, String name, Long id) {
         if ( initialQuantity > currentStock )

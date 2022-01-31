@@ -1,6 +1,6 @@
 package com.mercadolibre.w4g9projetofinal.security;
 
-import com.mercadolibre.w4g9projetofinal.entity.enums.Perfil;
+import com.mercadolibre.w4g9projetofinal.entity.enums.Profile;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -25,7 +25,7 @@ public class UserSS implements UserDetails {
         return id;
     }
 
-    public UserSS(Long id, String email, String senha, Set<Perfil> perfis) {
+    public UserSS(Long id, String email, String senha, Set<Profile> perfis) {
         super();
         this.id = id;
         this.email = email;
