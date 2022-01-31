@@ -1,0 +1,1 @@
+{"openapi":"3.0.1","info":{"title":"fernando-netto-projeto-final","description":"fernando-netto-projeto-final","contact":{"name":"fernando netto","email":"fernando.netto@mercadolivre.com"},"version":"last"},"servers":[{"url":"http://localhost:8080","description":"Scope local"}],"paths":{},"components":{}}

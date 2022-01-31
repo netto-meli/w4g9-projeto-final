@@ -10,6 +10,10 @@ import java.util.Objects;
 @Setter
 @ToString
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@DiscriminatorColumn(name="product_type",
+        discriminatorType = DiscriminatorType.STRING)
 public abstract class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

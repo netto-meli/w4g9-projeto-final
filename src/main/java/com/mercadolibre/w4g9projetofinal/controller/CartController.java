@@ -1,9 +1,10 @@
 package com.mercadolibre.w4g9projetofinal.controller;
 
+import com.mercadolibre.w4g9projetofinal.dtos.converter.SellOrderConverter;
 import com.mercadolibre.w4g9projetofinal.entity.SellOrder;
 import com.mercadolibre.w4g9projetofinal.exceptions.CartManagementException;
-import com.mercadolibre.w4g9projetofinal.service.CarrinhoService;
-import com.mercadolibre.w4g9projetofinal.dtos.request.SellOrderRequestDTO;
+import com.mercadolibre.w4g9projetofinal.service.CartService;
+import com.mercadolibre.w4g9projetofinal.dtos.response.SellOrderResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,111 +27,111 @@ import java.net.URI;
  * @author Fernando Netto
  */
 @RestController
-@RequestMapping("/loja")
+@RequestMapping(value = "/api/v1/fresh-products/cart")
 public class CartController {
 
 	/*** Instancia de serviço: <b>CarrinhoService</b> com notação <i>{@literal @}Autowired</i> do lombok
 	 */
 	@Autowired
-	private CarrinhoService carrinhoService;
+	private CartService cartService;
 
 	/*** Método para adicionar novo produto ao carrinho de compras do cliente.<br>
 	 * POST - /loja/adicionaNoCarrinho/{idCliente}{@literal ?}idProduto={idProduto}{@literal &}qtdProduto={qtdProduto}
 	 *
-	 * @param idCliente ID do Cliente que está fazendo o pedido
-	 * @param idProduto ID do Produto que o cliente deseja acrescentar no carrinho de compras
-	 * @param qtdProduto Quantos itens do produto selecionado, o Cliente deseja adicionar no carrinho
+	 * @param idBuyer ID do Cliente que está fazendo o pedido
+	 * @param idAdvertise ID do Produto que o cliente deseja acrescentar no carrinho de compras
+	 * @param qtdProduct Quantos itens do produto selecionado, o Cliente deseja adicionar no carrinho
 	 * @param uriBuilder UriComponentsBuilder que gera URI para o ResponseEntity
 	 * @return Retorna payload de PedidoDTO em um ResponseEntity com status <b>CREATED</b> e
-	 * <i>GET</i>: "/loja/carrinhoAberto/{idCliente}"
+	 * <i>GET</i>: "/loja/cart/{idCliente}"
 	 * @throws CartManagementException exception
 	 */
-	@PostMapping("/adicionaNoCarrinho/{idCliente}")
-	public ResponseEntity<SellOrderRequestDTO> adicionaProdutosNoCarrinho(
-			@PathVariable String idCliente,
-			@RequestParam(value = "idProduto", defaultValue = "0") String idProduto,
-			@RequestParam(value = "qtdProduto", defaultValue = "0") String qtdProduto,
+	@PostMapping("/addProduct/{idBuyer}")
+	public ResponseEntity<SellOrderResponseDTO> addAdvertiseItemsToCart(
+			@PathVariable Long idBuyer,
+			@RequestParam(value = "idAdvertise", defaultValue = "0") Long idAdvertise,
+			@RequestParam(value = "qtdProduct", defaultValue = "0") int qtdProduct,
 			UriComponentsBuilder uriBuilder) throws CartManagementException {
-			SellOrder sellOrderAberto = null;//carrinhoService.adicionarProdutosNoCarrinho(idCliente,idProduto,qtdProduto);
+			SellOrder cart = cartService.addAdvertiseItemsToCart(idBuyer, idAdvertise,qtdProduct);
 			URI uri = uriBuilder
-					.path("/carrinhoAberto/{idCliente}")
-					.buildAndExpand(sellOrderAberto.getIdCliente())
+					.path("/{idBuyer}")
+					.buildAndExpand(cart.getBuyer().getId())
 					.toUri();
-			return ResponseEntity.created(uri).body(SellOrderRequestDTO.converte(sellOrderAberto));
+			return ResponseEntity.created(uri).body(SellOrderConverter.convertEntityToDto(cart));
 	}
 
 	/*** Método para retirar uma quantidade "<i>qtdRetirar</i>" de um produto no carrinho de compras do cliente.<br>
-	 * GET — /loja/retiraDoCarrinho/{idCliente}{@literal ?}idProduto={idProduto}{@literal &}qtdRetirar={qtdRetirar}
+	 * GET — /loja/retiraDoCarrinho/{idBuyer}{@literal ?}idProduto={idProduto}{@literal &}qtdRetirar={qtdRetirar}
 	 *
-	 * @param idCliente ID do Cliente que está fazendo o pedido
-	 * @param idProduto ID do Produto que o cliente deseja acrescentar no carrinho de compras
-	 * @param qtdRetirar Quantos itens do produto selecionado, o Cliente deseja retirar do carrinho
+	 * @param idBuyer ID do Cliente que está fazendo o pedido
+	 * @param idAdvertise ID do Produto que o cliente deseja acrescentar no carrinho de compras
+	 * @param qtdRemove Quantos itens do produto selecionado, o Cliente deseja retirar do carrinho
 	 * @param uriBuilder UriComponentsBuilder que gera URI para o ResponseEntity
 	 * @return Retorna payload de PedidoDTO em um ResponseEntity com status <b>CREATED</b> e
-	 * <i>GET</i>: "/loja/carrinhoAberto/{idCliente}"
+	 * <i>GET</i>: "/loja/cart/{idBuyer}"
 	 * @throws CartManagementException excecao
 	 */
-	@PostMapping("/retiraDoCarrinho/{idCliente}")
-	public ResponseEntity<SellOrderRequestDTO>  retiraProdutosDoCarrinho(
-			@PathVariable String idCliente,
-			@RequestParam(value = "idProduto", defaultValue = "0") String idProduto,
-			@RequestParam(value = "qtdRetirar", defaultValue = "0") String qtdRetirar,
+	@PostMapping("/removeProduct/{idBuyer}")
+	public ResponseEntity<SellOrderResponseDTO>  removeAdvertiseItemsFromCart(
+			@PathVariable Long idBuyer,
+			@RequestParam(value = "idAdvertise", defaultValue = "0") Long idAdvertise,
+			@RequestParam(value = "qtdRemove", defaultValue = "0") int qtdRemove,
 			UriComponentsBuilder uriBuilder) throws CartManagementException {
-			SellOrder sellOrderAberto = null;//carrinhoService.retirarProdutosDoCarrinho(idCliente,idProduto,qtdRetirar);
+			SellOrder sellOrderAberto = cartService.removeAdvertiseItemsFromCart(idBuyer, idAdvertise,qtdRemove);
 			URI uri = uriBuilder
-					.path("/carrinhoAberto/{idCliente}")
-					.buildAndExpand(sellOrderAberto.getIdCliente())
+					.path("/{idBuyer}")
+					.buildAndExpand(sellOrderAberto.getBuyer().getId())
 					.toUri();
-			return ResponseEntity.created(uri).body(SellOrderRequestDTO.converte(sellOrderAberto));
+			return ResponseEntity.created(uri).body(SellOrderConverter.convertEntityToDto(sellOrderAberto));
 	}
 
 	/*** Método para limpar o carrinho de compras do cliente.<br>
-	 * POST - /loja/limpaCarrinho/{idCliente}
+	 * POST - /loja/limpaCarrinho/{idBuyer}
 	 *
-	 * @param idCliente ID do Cliente que está fazendo o pedido
+	 * @param idBuyer ID do Cliente que está fazendo o pedido
 	 * @param uriBuilder UriComponentsBuilder que gera URI para o ResponseEntity
 	 * @return Retorna mensagem informando que o carrinho está vazio em um ResponseEntity com status <b>CREATED</b> e
-	 * 	 * <i>GET</i>: "/loja/carrinhoAberto/{idCliente}"
+	 * 	 * <i>GET</i>: "/loja/cart/{idBuyer}"
 	 */
-	@PostMapping("/limpaCarrinho/{idCliente}")
-	public ResponseEntity<String> limpaCarrinho(@PathVariable String idCliente,
+	@PostMapping("/emptyCart/{idBuyer}")
+	public ResponseEntity<String> emptyCart(@PathVariable Long idBuyer,
 								UriComponentsBuilder uriBuilder){
-		//carrinhoService.limparCarrinho(idCliente);
+		cartService.emptyCart(idBuyer);
 		URI uri = uriBuilder
-				.path("/carrinhoAberto/{idCliente}")
-				.buildAndExpand(idCliente)
+				.path("/{idBuyer}")
+				.buildAndExpand(idBuyer)
 				.toUri();
 		return ResponseEntity.created(uri).body("Seu carrinho está vazio");
 	}
 
 	/*** Método para exibir os produtos do carrinho de compras do cliente.<br>
-	 * GET — /loja/carrinhoAberto/{idCliente}
+	 * GET — /loja/cart/{idCliente}
 	 *
-	 * @param idCliente ID do Cliente que está fazendo o pedido
+	 * @param idBuyer ID do Cliente que está fazendo o pedido
 	 * @return Retorna payload de PedidoDTO em um ResponseEntity com status <b>OK</b>
 	 */
-	@GetMapping("/carrinhoAberto/{idCliente}")
-	public ResponseEntity<SellOrderRequestDTO>  exibirCarrinhoAberto(@PathVariable String idCliente){
-		SellOrder sellOrderAberto = null;//carrinhoService.exibirCarrinhoAberto(idCliente);
-		return ResponseEntity.ok(SellOrderRequestDTO.converte(sellOrderAberto));
+	@GetMapping("/{idBuyer}")
+	public ResponseEntity<SellOrderResponseDTO> showCart(@PathVariable Long idBuyer){
+		SellOrder cart = cartService.getCart(idBuyer);
+		return ResponseEntity.ok(SellOrderConverter.convertEntityToDto(cart));
 	}
 
 	/*** Método para o cliente fechar o pedido com os produtos no carrinho.<br>
-	 * POST — /loja/fechaCarrinho/{idCliente}
+	 * POST — /loja/fechaCarrinho/{idBuyer}
 	 *
-	 * @param idCliente ID do Cliente que está fazendo o pedido
+	 * @param idBuyer ID do Cliente que está fazendo o pedido
 	 * @param uriBuilder UriComponentsBuilder que gera URI para o ResponseEntity
 	 * @return Retorna payload de PedidoDTO em um ResponseEntity com status <b>CREATED</b> e
 	 * <i>GET</i>: "/loja/pedidos/{id}" implementado no Controller:
 	 */
-	@PostMapping("/fechaCarrinho/{idCliente}")
-	public ResponseEntity<SellOrderRequestDTO> fecharPedido(@PathVariable String idCliente,
-															UriComponentsBuilder uriBuilder) {
-			SellOrder sellOrder = null;//carrinhoService.fecharCarrinho(idCliente);
+	@PostMapping("/createSellOrder/{idBuyer}")
+	public ResponseEntity<SellOrderResponseDTO> createSellOrder(@PathVariable Long idBuyer,
+															 UriComponentsBuilder uriBuilder) {
+			SellOrder sellOrder = cartService.createSellOrder(idBuyer);
 			URI uri = uriBuilder
-					.path("/pedidos/{id}")
+					.path("/{idBuyer}")
 					.buildAndExpand(sellOrder.getId())
 					.toUri();
-			return ResponseEntity.created(uri).body(SellOrderRequestDTO.converte(sellOrder));
+			return ResponseEntity.created(uri).body(SellOrderConverter.convertEntityToDto(sellOrder));
 	}
 }

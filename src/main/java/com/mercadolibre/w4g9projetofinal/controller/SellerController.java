@@ -21,7 +21,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping(value = "/sellers")
+@RequestMapping(value = "/api/v1/fresh-products/seller")
 public class SellerController {
 
     @Autowired
@@ -32,7 +32,7 @@ public class SellerController {
 
     @GetMapping
     public ResponseEntity<List<SellerResponseDTO>> findAll(){
-        List<SellerResponseDTO> list = SellerConverter.fromDTO(service.findAll());
+        List<SellerResponseDTO> list = SellerConverter.convertEntityListToDtoList(service.findAll());
         return ResponseEntity.ok(list);
     }
 

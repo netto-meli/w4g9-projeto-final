@@ -5,6 +5,19 @@ O objetivo deste projeto final é implementar uma API REST no âmbito do slogan 
 os conteúdos trabalhados durante o BOOTCAMP MELI. (Git, Java, Spring, Armazenamento,
 Qualidade e Segurança).
 
+``` plantuml
+        @startuml
+            node node1
+            node node2
+            node node3
+            node node4
+            node node5
+            node1 -- node2 : label1
+            node1 .. node3 : label2
+            node1 ~~ node4 : label3
+            node1 == node5
+        @enduml
+```
 _Kickoff do projeto:_ ***26/01/2022***
 
 #### Enunciado
@@ -74,17 +87,17 @@ Seu desafio é nos ajudar a continuar democratizando o comércio eletrônico e t
 a LATAM, criando os artefatos necessários para permitir as seguintes funcionalidades:
 
 * Ser capaz de inserir um lote de produtos no armazém de distribuição para registrar
-essa existência no estoque.
+  essa existência no estoque.
 * Ter as informações necessárias para entender em que setor deve ser armazenada a
-mercadoria para que fique em bom estado enquanto estiver no almoxarifado e para
-que se possa mostrar ao colaborador que vai procurar o produto (picking) onde está .
+  mercadoria para que fique em bom estado enquanto estiver no almoxarifado e para
+  que se possa mostrar ao colaborador que vai procurar o produto (picking) onde está .
 * Ser capaz de detectar se há produtos que estão prestes a expirar para tomar alguma
-medida a esse respeito (pode ser devolvê-los ao Vendedor, jogá-los fora ou realizar
-alguma ação comercial específica para liquidá-los).
+  medida a esse respeito (pode ser devolvê-los ao Vendedor, jogá-los fora ou realizar
+  alguma ação comercial específica para liquidá-los).
 * Para poder consultar o estoque, listar quais produtos estão em qual armazém e dado
-um produto específico, entender também em qual armazém ele está armazenado.
+  um produto específico, entender também em qual armazém ele está armazenado.
 * Poder cadastrar o sellOrder de compra para que os colaboradores dentro do Fullfilment
-possam montar o (s) sellOrder (s) para despachá-los.
+  possam montar o (s) sellOrder (s) para despachá-los.
 
 ### Diretrizes para planejamento e dinâmica de trabalho
 Para a realização do projeto propomos trabalhar com uma Metodologia de Trabalho
@@ -136,9 +149,9 @@ A data de entrega e fechamento é até às **9h** do dia **11/01/2022**. Espera-
 seguintes produções sejam entregues:
 
 * A entrega deve ser feita via GitHub. Para entregar o projeto, crie um projeto de
-teste no Fury com seu [nome-sobrenome] no ramo "Projeto final". Em seguida,
-execute um push de sua pasta de projeto local para sua pasta no repositório
-GitHub.
+  teste no Fury com seu [nome-sobrenome] no ramo "Projeto final". Em seguida,
+  execute um push de sua pasta de projeto local para sua pasta no repositório
+  GitHub.
 * Projeto Git com script de carregamento (projeto individual url)
 * Projeto implantado no Fury com banco de dados (url de produção individual)
 * Documentação (uma pasta de documentos dentro do repositório git)

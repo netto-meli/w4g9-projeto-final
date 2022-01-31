@@ -23,12 +23,12 @@ public enum RepresentativeJob {
     }
 
     public static RepresentativeJob toEnum(Integer cod) {
-        if(cod == null) {
+        if (cod == null) {
             return null;
         }
 
-        for(RepresentativeJob x : RepresentativeJob.values()) {
-            if(cod.equals(x.getCod())) {
+        for (RepresentativeJob x : RepresentativeJob.values()) {
+            if (cod.equals(x.getCod())) {
                 return x;
             }
         }

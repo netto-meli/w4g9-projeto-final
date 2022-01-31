@@ -20,7 +20,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping(value = "/representatives")
+@RequestMapping(value = "/api/v1/fresh-products/representative")
 public class RepresentativeController {
 
     @Autowired
@@ -28,7 +28,7 @@ public class RepresentativeController {
 
     @GetMapping
     public ResponseEntity<List<RepresentativeResponseDTO>> findAll() {
-        List<RepresentativeResponseDTO> list = RepresentativeConverter.fromDTO(service.findAll());
+        List<RepresentativeResponseDTO> list = RepresentativeConverter.convertEntityListToDtoList(service.findAll());
         return ResponseEntity.ok(list);
     }
 

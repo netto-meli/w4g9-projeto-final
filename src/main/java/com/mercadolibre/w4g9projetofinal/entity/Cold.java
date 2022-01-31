@@ -1,20 +1,24 @@
 package com.mercadolibre.w4g9projetofinal.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.Hibernate;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import java.util.Objects;
 
 @Getter
 @Setter
 @ToString
-@AllArgsConstructor
 @Entity
+@NoArgsConstructor
+@DiscriminatorValue("RF")
 public class Cold extends Product{
+
+    public Cold(Long id, String name, String description, float minTemperature, float maxTemperature) {
+        super(id, name, description, minTemperature, maxTemperature);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

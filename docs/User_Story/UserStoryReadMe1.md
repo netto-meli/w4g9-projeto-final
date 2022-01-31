@@ -60,7 +60,7 @@ se possa mostrar ao colaborador que vai procurar o produto (picking).
     "batch_stock": [
       {
         "batch_number": "int",
-        "product_id": "String",
+        "advertise_id": "String",
         "current_temperature": "Float",
         "minimum_temperature": "Float",
         "initial_quantity": "int",
@@ -72,9 +72,9 @@ se possa mostrar ao colaborador que vai procurar o produto (picking).
     ]
   }
 }
-
 ```
-</details></p>
+</p>
+</details>
 
 <details><summary>Response</summary><p>
 
@@ -93,7 +93,8 @@ se possa mostrar ao colaborador que vai procurar o produto (picking).
       }
 ]}
 ```
-</details></p>
+</p>
+</details>
 
 ### Contratos relativos a User Story
 | HTTP | Modelo de URI                                                                                                                                        | Descrição                                                                                                            | US-code |

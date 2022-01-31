@@ -18,4 +18,5 @@ public class AdvertiseRequestDTO {
     private Seller seller;
     private BigDecimal price;
     private AdvertiseStatus status;
+    private boolean freeShipping;
 }
