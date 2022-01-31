@@ -16,7 +16,7 @@ import java.util.Optional;
 public class SectionResponseDTO {
     private Long id;
     private String name;
-    private String type;
+    private String refrigerationType;
     private Warehouse warehouseCode;
     private int stockLimit;
     private int currentStock;
@@ -26,7 +26,7 @@ public class SectionResponseDTO {
     public SectionResponseDTO(Section section) {
         this.id = section.getId();
         this.name = section.getName();
-        this.type = section.getType();
+        this.refrigerationType = section.getRefrigerationType();
         this.warehouseCode = section.getWarehouse();
         this.stockLimit = section.getStockLimit();
         this.currentStock = section.getCurrentStock();
@@ -37,18 +37,11 @@ public class SectionResponseDTO {
     public Section convert(WarehouseRepository warehouseRepository){
         Optional<Warehouse> warehouse = warehouseRepository.findById(warehouseCode.getId());
         if (warehouse.isPresent()) {
-            return new Section(id, name, type, warehouse.get());
+            return new Section(id, name, refrigerationType, warehouse.get(), stockLimit, currentStock,
+                    minTeperature,
+                    maxTeperature);
         }
         return null;
     }
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class SectionResponseDTO {
-    private String sectionCode;
-    private String warehouseCode;
 }

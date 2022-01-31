@@ -31,6 +31,17 @@ public class Section {
             cascade = CascadeType.ALL)
     private List<InboundOrder> inboundOrderList;
 
+    public Section(Long id, String name, String refrigerationType, Warehouse warehouse, int stockLimit, int currentStock, float minTeperature, float maxTeperature) {
+        this.id = id;
+        this.name = name;
+        this.refrigerationType = refrigerationType;
+        this.warehouse = warehouse;
+        this.stockLimit = stockLimit;
+        this.currentStock = currentStock;
+        this.minTeperature = minTeperature;
+        this.maxTeperature = maxTeperature;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -33,7 +33,7 @@ public class SectionRequestDTO {
     public SectionRequestDTO(Section section) {
         this.id = section.getId();
         this.name = section.getName();
-        this.type = section.getType();
+        this.type = section.getRefrigerationType();
         this.warehouseCode = section.getWarehouse();
         this.stockLimit = section.getStockLimit();
         this.currentStock = section.getCurrentStock();
@@ -57,7 +57,7 @@ public class SectionRequestDTO {
     public Section atualizar(Long id, SectionRepository sectionRepository) {
         Section section = sectionRepository.getById(id);
         section.setName(this.name);
-        section.setType(this.type);
+        section.setRefrigerationType(this.type);
         section.setWarehouse(this.warehouseCode);
         section.setStockLimit(this.stockLimit);
         section.setCurrentStock(this.currentStock);
