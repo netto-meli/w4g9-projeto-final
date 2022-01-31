@@ -9,27 +9,31 @@ import java.util.stream.Collectors;
 
 public class AdvertiseConverter {
 
-    public static Advertise convertDtoToEntityAdvertise(AdvertiseRequestDTO advertise) {
+    public static Advertise convertDtoToEntity(AdvertiseRequestDTO advertise) {
         return new Advertise(
                 null,
                 advertise.getDescription(),
                 advertise.getProduct(),
                 advertise.getSeller(),
                 advertise.getPrice(),
-                advertise.getStatus());
+                advertise.getStatus(),
+                advertise.isFreeShipping());
     }
 
-    public static AdvertiseResponseDTO convertEntityToDtoAdvertise(Advertise newAdvertise) {
+    public static AdvertiseResponseDTO convertEntityToDto(Advertise newAdvertise) {
         return new AdvertiseResponseDTO(
                 newAdvertise.getId(),
-                newAdvertise.getStatus(),
                 newAdvertise.getDescription(),
-                newAdvertise.getProduct());
+                newAdvertise.getProduct(),
+                newAdvertise.getSeller(),
+                newAdvertise.getPrice(),
+                newAdvertise.getStatus(),
+                newAdvertise.isFreeShipping());
     }
 
-    public static List<AdvertiseResponseDTO> fromDTOAdvertise(List<Advertise> listAdvertise) {
+    public static List<AdvertiseResponseDTO> convertEntityListToDtoList(List<Advertise> listAdvertise) {
         return listAdvertise.stream()
-                .map(AdvertiseConverter::convertEntityToDtoAdvertise)
+                .map(AdvertiseConverter::convertEntityToDto)
                 .collect(Collectors.toList());
     }
 }

@@ -10,14 +10,14 @@ import java.util.List;
 public class RepresentativeConverter {
 
     public static Representative convertDtoToEntity (RepresentativeRequestDTO objDTO){
-        return new Representative(null, objDTO.getName(), objDTO.getEmail(), objDTO.getJob());
+        return new Representative(null, objDTO.getName(), objDTO.getEmail(), null, null, objDTO.getJob());
     }
 
     public static RepresentativeResponseDTO convertEntityToDto (Representative obj){
         return new RepresentativeResponseDTO(obj.getId(), obj.getName(), obj.getEmail(), obj.getJob());
     }
 
-    public static List<RepresentativeResponseDTO> fromDTO(List<Representative> list) {
+    public static List<RepresentativeResponseDTO> convertEntityListToDtoList(List<Representative> list) {
         List<RepresentativeResponseDTO> list2 = new ArrayList<>();
         for (Representative r : list) {
             list2.add(convertEntityToDto(r));

@@ -35,7 +35,7 @@ public class SellerController {
 
     @GetMapping
     public ResponseEntity<List<SellerResponseDTO>> findAll(){
-        List<SellerResponseDTO> list = SellerConverter.fromDTO(service.findAll());
+        List<SellerResponseDTO> list = SellerConverter.convertEntityListToDtoList(service.findAll());
         return ResponseEntity.ok(list);
     }
 

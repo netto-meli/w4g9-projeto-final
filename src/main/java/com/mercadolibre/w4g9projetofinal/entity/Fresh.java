@@ -3,6 +3,7 @@ package com.mercadolibre.w4g9projetofinal.entity;
 import lombok.*;
 import org.hibernate.Hibernate;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import java.util.Objects;
 
@@ -11,6 +12,7 @@ import java.util.Objects;
 @ToString
 @Entity
 @NoArgsConstructor
+@DiscriminatorValue("FS")
 public class Fresh extends Product{
 
     public Fresh(Long id, String name, String description, float minTemperature, float maxTemperature) {

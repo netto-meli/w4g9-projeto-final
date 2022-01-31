@@ -13,12 +13,11 @@ import java.util.Objects;
 @ToString
 @NoArgsConstructor
 @Entity
-@Inheritance(strategy= InheritanceType.SINGLE_TABLE)
 public class Buyer extends User{
     private String address;
 
-    public Buyer(Long id, String name, String email, String address) {
-        super(id, name, email);
+    public Buyer(Long id, String name, String email, String role, String password, String address) {
+        super(id, name, email, role, password);
         this.address = address;
     }
 

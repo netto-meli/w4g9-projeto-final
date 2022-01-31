@@ -2,6 +2,7 @@
 *.idea
 *.iml
 *.swp
+data/
 target/
 .settings
 .classpath

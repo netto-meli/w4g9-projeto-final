@@ -26,6 +26,7 @@ public class Advertise {
     private Seller seller;
     private BigDecimal price;
     private AdvertiseStatus status;
+    private boolean freeShipping;
 
     @Override
     public boolean equals(Object o) {

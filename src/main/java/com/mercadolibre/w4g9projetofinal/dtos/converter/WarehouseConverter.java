@@ -16,7 +16,7 @@ public class WarehouseConverter {
         return new WarehouseResponseDTO();
     }
 
-    public static List<WarehouseResponseDTO> fromDTO(List<Warehouse> all) {
+    public static List<WarehouseResponseDTO> convertEntityListToDtoList(List<Warehouse> all) {
         return null;
     }
 }

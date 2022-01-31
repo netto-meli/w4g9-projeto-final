@@ -13,14 +13,14 @@ import java.util.stream.Collectors;
 public class SellerConverter {
 
     public static Seller convertDtoToEntity (SellerRequestDTO objDTO){
-        return new Seller(null, objDTO.getName(), objDTO.getEmail(), null, null);
+        return new Seller(null, objDTO.getName(), objDTO.getEmail(), null, null, null, null);
     }
 
     public static SellerResponseDTO convertEntityToDto (Seller obj){
         return new SellerResponseDTO(obj.getId(), obj.getName(), obj.getEmail());
     }
 
-    public static List<SellerResponseDTO> fromDTO(List<Seller> list) {
+    public static List<SellerResponseDTO> convertEntityListToDtoList(List<Seller> list) {
         List<SellerResponseDTO> list2 = new ArrayList<>();
         for (Seller s : list) {
             list2.add(convertEntityToDto(s));

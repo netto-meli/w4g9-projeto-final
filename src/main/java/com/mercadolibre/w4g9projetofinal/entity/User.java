@@ -9,15 +9,18 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
 @AllArgsConstructor
-@MappedSuperclass
+@NoArgsConstructor
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class User{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String email;
+    private String role;
+    private String password;
 
     @Override
     public boolean equals(Object o) {

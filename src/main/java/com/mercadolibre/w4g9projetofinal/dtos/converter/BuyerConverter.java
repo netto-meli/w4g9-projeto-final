@@ -9,17 +9,17 @@ import java.util.stream.Collectors;
 
 public class BuyerConverter {
 
-    public static Buyer convertDtoToEntityBuyer(BuyerRequestDTO buyer) {
-        return new Buyer(null, buyer.getName(), buyer.getEmail(), buyer.getAddress());
+    public static Buyer convertDtoToEntity(BuyerRequestDTO buyer) {
+        return new Buyer(null, buyer.getName(), buyer.getEmail(), null, null, buyer.getAddress());
     }
 
-    public static BuyerResponseDTO convertEntityToDtoBuyer(Buyer newBuyer) {
+    public static BuyerResponseDTO convertEntityToDto(Buyer newBuyer) {
         return new BuyerResponseDTO(newBuyer.getId(), newBuyer.getName(), newBuyer.getEmail(), newBuyer.getAddress());
     }
 
-    public static List<BuyerResponseDTO> fromDTOBuyer(List<Buyer> listBuyer) {
+    public static List<BuyerResponseDTO> convertEntityListToDtoList(List<Buyer> listBuyer) {
         return listBuyer.stream()
-                .map(BuyerConverter::convertEntityToDtoBuyer)
+                .map(BuyerConverter::convertEntityToDto)
                 .collect(Collectors.toList());
     }
 }
