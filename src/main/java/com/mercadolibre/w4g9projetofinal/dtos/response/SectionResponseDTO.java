@@ -4,7 +4,9 @@ import com.mercadolibre.w4g9projetofinal.entity.Section;
 import com.mercadolibre.w4g9projetofinal.entity.Warehouse;
 import com.mercadolibre.w4g9projetofinal.entity.enums.RefrigerationType;
 import com.mercadolibre.w4g9projetofinal.repository.WarehouseRepository;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Optional;
 /**
@@ -14,6 +16,8 @@ import java.util.Optional;
  * @see {@link com.mercadolibre.w4g9projetofinal.dtos.request.SectionRequestDTO}
  * */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class SectionResponseDTO {
     private Long id;
     private String name;
@@ -23,26 +27,4 @@ public class SectionResponseDTO {
     private int currentStock;
     private float minTeperature;
     private float maxTeperature;
-
-    public SectionResponseDTO(Section section) {
-        this.id = section.getId();
-        this.name = section.getName();
-        this.refrigerationType = section.getRefrigerationType();
-        this.warehouseCode = section.getWarehouse();
-        this.stockLimit = section.getStockLimit();
-        this.currentStock = section.getCurrentStock();
-        this.minTeperature = section.getMinTeperature();
-        this.maxTeperature = section.getMaxTeperature();
-    }
-
-    public Section convert(WarehouseRepository warehouseRepository){
-        Optional<Warehouse> warehouse = warehouseRepository.findById(warehouseCode.getId());
-        if (warehouse.isPresent()) {
-            return new Section(id, name, refrigerationType, warehouse.get(), stockLimit, currentStock,
-                    minTeperature,
-                    maxTeperature);
-        }
-        return null;
-    }
-
 }

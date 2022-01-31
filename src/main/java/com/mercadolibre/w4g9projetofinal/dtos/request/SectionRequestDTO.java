@@ -25,41 +25,17 @@ public class SectionRequestDTO {
     private Long id;
     private String name;
     private RefrigerationType type;
-    private Warehouse warehouseCode;
+    private Warehouse warehouse;
     private int stockLimit;
     private int currentStock;
     private float minTeperature;
     private float maxTeperature;
 
-    public SectionRequestDTO(Section section) {
-        this.id = section.getId();
-        this.name = section.getName();
-        this.type = section.getRefrigerationType();
-        this.warehouseCode = section.getWarehouse();
-        this.stockLimit = section.getStockLimit();
-        this.currentStock = section.getCurrentStock();
-        this.minTeperature = section.getMinTeperature();
-        this.maxTeperature = section.getMaxTeperature();
-    }
-
-    public static List<SectionRequestDTO> convert(List<Section> sections){
-        return sections
-                .stream()
-                .map(SectionRequestDTO::new)
-                .collect(Collectors.toList());
-    }
-    public Section convertToSection(WarehouseRepository warehouseRepository){
-        Optional<Warehouse> warehouse = warehouseRepository.findById(warehouseCode.getId());
-        if (warehouse.isPresent()) {
-            return new Section(id, name, type, warehouse.get(), stockLimit, currentStock, minTeperature, maxTeperature);
-        }
-        return null;
-    }
     public Section atualizar(Long id, SectionRepository sectionRepository) {
         Section section = sectionRepository.getById(id);
         section.setName(this.name);
         section.setRefrigerationType(this.type);
-        section.setWarehouse(this.warehouseCode);
+        section.setWarehouse(this.warehouse);
         section.setStockLimit(this.stockLimit);
         section.setCurrentStock(this.currentStock);
         section.setMinTeperature(this.minTeperature);

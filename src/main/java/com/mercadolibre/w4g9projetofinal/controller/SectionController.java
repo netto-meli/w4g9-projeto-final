@@ -1,5 +1,6 @@
 package com.mercadolibre.w4g9projetofinal.controller;
 
+import com.mercadolibre.w4g9projetofinal.dtos.converter.SectionConverter;
 import com.mercadolibre.w4g9projetofinal.dtos.request.SectionRequestDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.SectionResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Section;
@@ -21,30 +22,30 @@ public class SectionController {
 
     @Autowired
     private SectionRepository sectionRepository;
-    @Autowired
-    private WarehouseRepository warehouseRepository;
 
     @GetMapping
     @ResponseBody
-    public List<SectionRequestDTO> lista(){
-        List sections = sectionRepository.findAll();
-        return SectionRequestDTO.convert(sections);
+    public List<SectionResponseDTO> lista(){
+        List<Section> sections = sectionRepository.findAll();
+        return SectionConverter.convertEntityListToDtoList(sections);
     }
 
     @PostMapping
     public ResponseEntity<SectionResponseDTO> cadastrar(@RequestBody SectionRequestDTO sectionRequestDTO,
                                                         UriComponentsBuilder uriBuilder){
-        Section section = sectionRequestDTO.convertToSection(warehouseRepository);
+        Section section = SectionConverter.convertDtoToEntity(sectionRequestDTO);
+        //todo service
         sectionRepository.save(section);
         URI uri = uriBuilder.path("/section/{id}").buildAndExpand(section.getId()).toUri();
-        return ResponseEntity.created(uri).body(new SectionResponseDTO(section));
+        return ResponseEntity.created(uri).body(SectionConverter.convertEntityToDto(section));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SectionRequestDTO> detalhar(@PathVariable Long id){
+    public ResponseEntity<SectionResponseDTO> detalhar(@PathVariable Long id){
+        //todo service
         Optional<Section> section = sectionRepository.findById(id);
         if (section.isPresent()) {
-            return ResponseEntity.ok(new SectionRequestDTO(section.get()));
+            return ResponseEntity.ok(SectionConverter.convertEntityToDto(section.get()));
         }
         return ResponseEntity.notFound().build();
     }
@@ -52,10 +53,11 @@ public class SectionController {
     @PutMapping("/{id}")
     @Transactional
     public ResponseEntity<SectionResponseDTO> atualizar(@PathVariable Long id, @RequestBody SectionRequestDTO sectionDTO){
+        // todo service
         Optional<Section> optional = sectionRepository.findById(id);
         if (optional.isPresent()) {
             Section section = sectionDTO.atualizar(id, sectionRepository);
-            return ResponseEntity.ok(new SectionResponseDTO(section));
+            return ResponseEntity.ok(SectionConverter.convertEntityToDto(section));
         }
         return ResponseEntity.notFound().build();
     }
@@ -63,6 +65,7 @@ public class SectionController {
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity<?> remover(@PathVariable Long id){
+        // todo service
         Optional<Section> optional = sectionRepository.findById(id);
         if (optional.isPresent()) {
             sectionRepository.deleteById(id);
