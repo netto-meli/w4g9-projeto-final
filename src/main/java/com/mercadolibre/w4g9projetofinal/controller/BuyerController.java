@@ -5,7 +5,7 @@ import com.mercadolibre.w4g9projetofinal.dtos.request.BuyerRequestDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.BuyerResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Buyer;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
-import com.mercadolibre.w4g9projetofinal.service.BuyerService;
+import com.mercadolibre.w4g9projetofinal.controller.service.BuyerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +35,12 @@ public class BuyerController {
     public ResponseEntity<Buyer> findById(@PathVariable Long id) {
         Buyer buyer = service.findById(id);
         return ResponseEntity.ok(buyer);
+    }
+
+    @GetMapping(value = "/email")
+    public ResponseEntity<Buyer> findByEmail(@RequestParam(value = "value") String email) {
+         Buyer obj = service.findByEmail(email);
+        return ResponseEntity.ok(obj);
     }
 
     @PostMapping

@@ -1,10 +1,12 @@
-package com.mercadolibre.w4g9projetofinal.service;
+package com.mercadolibre.w4g9projetofinal.controller.service;
 
 import com.mercadolibre.w4g9projetofinal.entity.Representative;
+import com.mercadolibre.w4g9projetofinal.entity.Seller;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.RepresentativeRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +22,9 @@ import java.util.Optional;
 @AllArgsConstructor
 public class RepresentativeService {
 
+    @Autowired
+    private BCryptPasswordEncoder pe;
+
     private RepresentativeRepository repository;
 
     public List<Representative> findAll() {
@@ -31,7 +36,17 @@ public class RepresentativeService {
         return obj.orElseThrow(() -> new ObjectNotFoundException("Representante não encontrado! Por favor verifique o id."));
     }
 
+    public Representative findByEmail(String email) {
+        Representative obj = repository.findByEmail(email);
+        if (obj == null) {
+            throw new ObjectNotFoundException(
+                    "Usuário não encontrado");
+        }
+        return obj;
+    }
+
     public Representative insert(Representative obj) {
+        obj.setPassword(pe.encode(obj.getPassword()));
         return repository.save(obj);
     }
 

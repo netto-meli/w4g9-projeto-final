@@ -1,6 +1,10 @@
 package com.mercadolibre.w4g9projetofinal.entity;
 
-import lombok.*;
+import com.mercadolibre.w4g9projetofinal.entity.enums.Profile;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
@@ -20,9 +24,11 @@ public class Seller extends User{
             cascade = CascadeType.ALL)
     private List<Advertise> advertiseList;
 
-    public Seller(Long id, String name, String email, String role, String password, List<Advertise> advertiseList, List<Batch> batchList) {
-        super(id, name, email, role, password);
+    public Seller(Long id, String name, String email, String password, List<Advertise> advertiseList) {
+        super(id, name, email, password);
         this.advertiseList = advertiseList;
+
+        addProfile(Profile.USUARIO);
     }
 
     @Override

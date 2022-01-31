@@ -7,7 +7,7 @@ import com.mercadolibre.w4g9projetofinal.dtos.response.BatchResponseDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.InboundOrderResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.InboundOrder;
 import com.mercadolibre.w4g9projetofinal.entity.Representative;
-import com.mercadolibre.w4g9projetofinal.service.InboundOrderService;
+import com.mercadolibre.w4g9projetofinal.controller.service.InboundOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,7 +34,7 @@ public class InboundOrderController {
             @RequestBody InboundOrderRequestDTO inboundOrderRequestDTO,
             UriComponentsBuilder uriBuilder) {
         // todo autentication
-        Representative representative = new Representative(1L,null, null, null, null, null);
+        Representative representative = new Representative(1L,null, null, null, null);
         InboundOrder inboundOrder = InboundOrderConverter.convertDtoToEntity(inboundOrderRequestDTO);
         inboundOrder = inboundOrderService.createInboundOrder(representative, inboundOrder);
         List<BatchResponseDTO> response = BatchConverter.convertEntityListToDtoList(inboundOrder.getBatchList());

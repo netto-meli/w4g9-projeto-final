@@ -1,14 +1,14 @@
 package com.mercadolibre.w4g9projetofinal.repository;
 
-import com.mercadolibre.w4g9projetofinal.entity.Buyer;
+import com.mercadolibre.w4g9projetofinal.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-
 @Repository
-public interface BuyerRepository extends JpaRepository <Buyer, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
     @Transactional(readOnly = true)
-    Buyer findByEmail(String email);
+    User findByEmail(String email);
+
 }

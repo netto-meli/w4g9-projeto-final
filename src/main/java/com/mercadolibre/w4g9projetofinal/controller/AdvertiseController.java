@@ -4,7 +4,7 @@ import com.mercadolibre.w4g9projetofinal.dtos.converter.AdvertiseConverter;
 import com.mercadolibre.w4g9projetofinal.dtos.request.AdvertiseRequestDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.AdvertiseResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Advertise;
-import com.mercadolibre.w4g9projetofinal.service.AdvertiseService;
+import com.mercadolibre.w4g9projetofinal.controller.service.AdvertiseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

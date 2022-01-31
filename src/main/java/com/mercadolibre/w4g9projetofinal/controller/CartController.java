@@ -3,7 +3,7 @@ package com.mercadolibre.w4g9projetofinal.controller;
 import com.mercadolibre.w4g9projetofinal.dtos.converter.SellOrderConverter;
 import com.mercadolibre.w4g9projetofinal.entity.SellOrder;
 import com.mercadolibre.w4g9projetofinal.exceptions.CartManagementException;
-import com.mercadolibre.w4g9projetofinal.service.CartService;
+import com.mercadolibre.w4g9projetofinal.controller.service.CartService;
 import com.mercadolibre.w4g9projetofinal.dtos.response.SellOrderResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
