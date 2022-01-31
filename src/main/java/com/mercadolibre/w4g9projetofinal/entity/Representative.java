@@ -15,12 +15,11 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Inheritance(strategy= InheritanceType.SINGLE_TABLE)
 public class Representative extends User{
     private RepresentativeJob job;
 
-    public Representative(Long id, String name, String email, RepresentativeJob job) {
-        super(id, name, email);
+    public Representative(Long id, String name, String email, String role, RepresentativeJob job) {
+        super(id, name, email, role);
         this.job = job;
     }
 

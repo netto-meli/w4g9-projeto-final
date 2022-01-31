@@ -12,7 +12,6 @@ import java.util.Objects;
 @ToString
 @NoArgsConstructor
 @Entity
-@Inheritance(strategy= InheritanceType.SINGLE_TABLE)
 public class Seller extends User{
     @ToString.Exclude
     @OneToMany(
@@ -21,8 +20,8 @@ public class Seller extends User{
             cascade = CascadeType.ALL)
     private List<Advertise> advertiseList;
 
-    public Seller(Long id, String name, String email, List<Advertise> advertiseList, List<Batch> batchList) {
-        super(id, name, email);
+    public Seller(Long id, String name, String email, String role, List<Advertise> advertiseList, List<Batch> batchList) {
+        super(id, name, email, role);
         this.advertiseList = advertiseList;
     }
 
