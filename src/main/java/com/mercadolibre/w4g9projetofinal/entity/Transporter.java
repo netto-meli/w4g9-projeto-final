@@ -7,7 +7,9 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
-@Data
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -16,15 +18,12 @@ public class Transporter {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-
     @OneToMany
     @ToString.Exclude
     private List<Fresh> freshList;
-
     @OneToMany
     @ToString.Exclude
     private List<Cold> coldList;
-
     @OneToMany
     @ToString.Exclude
     private List<Frozen> frozenList;

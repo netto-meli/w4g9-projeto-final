@@ -4,7 +4,6 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,27 +13,28 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class InboundOrder {
+public class Sector {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDate orderDate;
-    @OneToOne
-    private Seller seller;
-
-    @OneToOne
-    private Representative representative;
-
+    private String name;
+    private String type;
+    @ManyToOne
+    private Warehouse warehouse;
     @OneToMany
     @ToString.Exclude
-    private List<Batch> batchList;
+    private List<InboundOrder> inboundOrderList;
+    private int stockLimit;
+    private int currentStock;
+    private float minTeperature;
+    private float maxTeperature;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        InboundOrder that = (InboundOrder) o;
-        return id != null && Objects.equals(id, that.id);
+        Sector sector = (Sector) o;
+        return id != null && Objects.equals(id, sector.id);
     }
 
     @Override
