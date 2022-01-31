@@ -8,6 +8,10 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * @author fbontempo
+ * @version 0.1
+ */
 @Getter
 @Setter
 @ToString
@@ -32,10 +36,12 @@ public class Section {
             cascade = CascadeType.ALL)
     private List<InboundOrder> inboundOrderList;
 
-    public Section(Long id, String name, String refrigerationType, Warehouse warehouse, int stockLimit, int currentStock, float minTeperature, float maxTeperature) {
+    public Section(Long id, String name, RefrigerationType type, Warehouse warehouse, int stockLimit,
+                   int currentStock,
+                   float minTeperature, float maxTeperature) {
         this.id = id;
         this.name = name;
-        this.refrigerationType = refrigerationType;
+        this.refrigerationType = type;
         this.warehouse = warehouse;
         this.stockLimit = stockLimit;
         this.currentStock = currentStock;

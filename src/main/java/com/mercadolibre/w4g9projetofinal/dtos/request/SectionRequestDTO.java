@@ -2,6 +2,7 @@ package com.mercadolibre.w4g9projetofinal.dtos.request;
 
 import com.mercadolibre.w4g9projetofinal.entity.Section;
 import com.mercadolibre.w4g9projetofinal.entity.Warehouse;
+import com.mercadolibre.w4g9projetofinal.entity.enums.RefrigerationType;
 import com.mercadolibre.w4g9projetofinal.repository.SectionRepository;
 import com.mercadolibre.w4g9projetofinal.repository.WarehouseRepository;
 import lombok.AllArgsConstructor;
@@ -13,7 +14,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 /**
  * @author fbontempo
- * @version 0.1
+ * @version 0.2
  * @see {@link Section}
  * @see {@link com.mercadolibre.w4g9projetofinal.dtos.response.SectionResponseDTO}
  * */
@@ -23,7 +24,7 @@ import java.util.stream.Collectors;
 public class SectionRequestDTO {
     private Long id;
     private String name;
-    private String type;
+    private RefrigerationType type;
     private Warehouse warehouseCode;
     private int stockLimit;
     private int currentStock;
