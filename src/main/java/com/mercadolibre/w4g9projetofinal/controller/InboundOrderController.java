@@ -23,7 +23,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/v1/fresh-products/inboundorder/")
+@RequestMapping(value = "/api/v1/fresh-products/inboundorder")
 public class InboundOrderController {
 
     @Autowired
