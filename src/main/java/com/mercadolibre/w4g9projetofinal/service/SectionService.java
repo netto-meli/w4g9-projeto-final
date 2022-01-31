@@ -9,7 +9,6 @@ import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.exceptions.SectionManagementException;
 import com.mercadolibre.w4g9projetofinal.repository.SectionRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -70,12 +69,12 @@ public class SectionService {
         return currentStock;
     }
 
-    public ResponseEntity<SectionResponseDTO> searchDetailSection(Long id){
+    public Optional<Section> searchDetailSection(Long id){
         Optional<Section> section = sectionRepository.findById(id);
         if (section.isPresent()) {
-            return ResponseEntity.ok(SectionConverter.convertEntityToDto(section.get()));
+            return section;
         }
-        return ResponseEntity.notFound().build();
+        return null;
     }
 
     public Section registerSectionDtoRequest(SectionRequestDTO sectionRequestDTO){
@@ -84,22 +83,22 @@ public class SectionService {
         return section;
     }
 
-    public ResponseEntity<SectionResponseDTO> updateSection(Long id, SectionRequestDTO sectionDTO){
+    public Section updateSection(Long id, SectionRequestDTO sectionDTO){
         Optional<Section> optional = sectionRepository.findById(id);
         if (optional.isPresent()) {
             Section section = sectionDTO.atualizar(id, sectionRepository);
-            return ResponseEntity.ok(SectionConverter.convertEntityToDto(section));
+            return section;
         }
-        return ResponseEntity.notFound().build();
+        return null;
     }
 
-    public ResponseEntity<?> deleteSectionById(Long id){
-        Optional<Section> optional = sectionRepository.findById(id);
-        if (optional.isPresent()) {
+    public Section deleteSectionById(Long id){
+        Optional<Section> section = sectionRepository.findById(id);
+        if (section.isPresent()) {
             sectionRepository.deleteById(id);
-            return ResponseEntity.ok().build();
+            return section.get();
         }
-        return ResponseEntity.notFound().build();
+        return section.get();
     }
 
     public List<SectionResponseDTO> sectionListAvailable(){

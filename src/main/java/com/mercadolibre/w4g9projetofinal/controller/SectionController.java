@@ -13,7 +13,13 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.transaction.Transactional;
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
+/**
+ * @author fbontempo
+ * @version 0.2
+ *
+ */
 @RestController
 @RequestMapping("/section")
 public class SectionController {
@@ -21,12 +27,23 @@ public class SectionController {
     @Autowired
     private SectionService sectionService;
 
+    /**
+     * Retorna uma lista de sections registradas
+     *
+     * @return Retorna uma lista de SectionResponseDTO
+     */
     @GetMapping
     @ResponseBody
     public List<SectionResponseDTO> lista(){
         return sectionService.sectionListAvailable();
     }
 
+    /**
+     *
+     * @param sectionRequestDTO
+     * @param uriBuilder
+     * @return Retorna o payload de SectionResponseDTO em um ResponseEntity com o status 201
+     */
     @PostMapping
     public ResponseEntity<SectionResponseDTO> cadastrar(@RequestBody SectionRequestDTO sectionRequestDTO,
                                                         UriComponentsBuilder uriBuilder){
@@ -35,20 +52,48 @@ public class SectionController {
         return ResponseEntity.created(uri).body(SectionConverter.convertEntityToDto(section));
     }
 
+    /**
+     *
+     * @param id
+     * @return O Section pesquisado caso OK.
+     */
     @GetMapping("/{id}")
     public ResponseEntity<SectionResponseDTO> detalhar(@PathVariable Long id){
-        return sectionService.searchDetailSection(id);
+        Optional<Section> section = sectionService.searchDetailSection(id);
+        if (section.isPresent()) {
+            return ResponseEntity.ok(SectionConverter.convertEntityToDto(section.get()));
+        }
+        return ResponseEntity.notFound().build();
     }
 
+    /**
+     *
+     * @param id
+     * @param sectionDTO
+     * @return Retorna o payload de SectionResponseDTO em um ResponseEntity com o status 200
+     */
     @PutMapping("/{id}")
     @Transactional
     public ResponseEntity<SectionResponseDTO> atualizar(@PathVariable Long id, @RequestBody SectionRequestDTO sectionDTO){
-        return sectionService.updateSection(id, sectionDTO);
+        Section section = sectionService.updateSection(id, sectionDTO);
+        if (section != null) {
+            return ResponseEntity.ok(SectionConverter.convertEntityToDto(section));
+        }
+        return ResponseEntity.notFound().build();
     }
 
+    /**
+     *
+     * @param id
+     * @return Retorna o payload de SectionResponseDTO em um ResponseEntity com o status 200
+     */
     @DeleteMapping("/{id}")
     @Transactional
-    public ResponseEntity<?> remover(@PathVariable Long id){
-        return sectionService.deleteSectionById(id);
+    public ResponseEntity<SectionResponseDTO> remover(@PathVariable Long id){
+        Section section = sectionService.deleteSectionById(id);
+        if (section != null) {
+            return ResponseEntity.ok(SectionConverter.convertEntityToDto(section));
+        }
+        return ResponseEntity.notFound().build();
     }
 }
