@@ -5,4 +5,4 @@
 - [JSONs Utilizados](guide/JSON/)
 - [Explanation](specs/)
 - [Tutorial](fury_install/)
-- [How-to Guides](guide/)
+- [How-to Guides](docsify/)
