@@ -27,9 +27,7 @@ public class SectionController {
     @Autowired
     private SectionService sectionService;
 
-    /**
-     * Retorna uma lista de sections registradas
-     *
+    /*** Retorna uma lista de Sections registradas
      * @return Retorna uma lista de SectionResponseDTO
      */
     @GetMapping
@@ -38,8 +36,7 @@ public class SectionController {
         return sectionService.sectionListAvailable();
     }
 
-    /**
-     *
+    /*** Cadastra uma Section
      * @param sectionRequestDTO
      * @param uriBuilder
      * @return Retorna o payload de SectionResponseDTO em um ResponseEntity com o status 201
@@ -52,8 +49,7 @@ public class SectionController {
         return ResponseEntity.created(uri).body(SectionConverter.convertEntityToDto(section));
     }
 
-    /**
-     *
+    /** Retorna uma Section pesquisa pelo ID.
      * @param id
      * @return O Section pesquisado caso OK.
      */
@@ -66,8 +62,7 @@ public class SectionController {
         return ResponseEntity.notFound().build();
     }
 
-    /**
-     *
+    /*** Atualiza uma Section com base no ID
      * @param id
      * @param sectionDTO
      * @return Retorna o payload de SectionResponseDTO em um ResponseEntity com o status 200
@@ -82,8 +77,7 @@ public class SectionController {
         return ResponseEntity.notFound().build();
     }
 
-    /**
-     *
+    /*** Deleta uma Section com base no ID
      * @param id
      * @return Retorna o payload de SectionResponseDTO em um ResponseEntity com o status 200
      */
