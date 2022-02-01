@@ -49,7 +49,7 @@ public class Instantiation implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
+/*
         Product p1 = new Product(null, "kk", "kk", 0F, 8F, RefrigerationType.COLD);
         Product p2 = new Product(null, "kk", "kk", 0F, 8F, RefrigerationType.COLD);
         Product p3 = new Product(null, "kk", "kk", 0F, 8F, RefrigerationType.COLD);
@@ -116,6 +116,6 @@ public class Instantiation implements CommandLineRunner {
         i1.setInboundOrderToBatchList();
         i2.setInboundOrderToBatchList();
         i3.setInboundOrderToBatchList();
-        inboundOrderRepository.saveAll(Arrays.asList(i1, i2, i3));
+        inboundOrderRepository.saveAll(Arrays.asList(i1, i2, i3));*/
     }
 }
