@@ -54,4 +54,8 @@ public class BatchService {
         }
         repository.saveAll(batchIterable);
     }
+
+    public List<Batch> findByProductId(Long idProduct) {
+        return repository.findByProduct_Id(idProduct);
+    }
 }

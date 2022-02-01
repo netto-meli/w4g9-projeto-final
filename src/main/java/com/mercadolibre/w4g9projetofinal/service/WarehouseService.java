@@ -1,20 +1,25 @@
 package com.mercadolibre.w4g9projetofinal.service;
 
 
+import com.mercadolibre.w4g9projetofinal.entity.Batch;
+import com.mercadolibre.w4g9projetofinal.entity.InboundOrder;
+import com.mercadolibre.w4g9projetofinal.entity.Section;
 import com.mercadolibre.w4g9projetofinal.entity.Warehouse;
+import com.mercadolibre.w4g9projetofinal.repository.BatchRepository;
 import com.mercadolibre.w4g9projetofinal.repository.WarehouseRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
 public class WarehouseService {
 
     private WarehouseRepository warehouseRepository;
+    private BatchService batchService;
+    private SectionService sectionService;
 
     public List<Warehouse> findAll()
     {
@@ -35,6 +40,18 @@ public class WarehouseService {
     {
         Warehouse wh = findById(id);
         warehouseRepository.delete(wh);
+    }
+
+    public Map<Long, Integer> findWarehousesByProductId(Long idProduct) {
+        List<Batch> batchList = batchService.findByProductId(idProduct);
+        Map<Long,Integer> warehouses = new HashMap<>();
+        for (Batch b: batchList) {
+            Section s = sectionService.findByInboundOrderId(b.getInboundOrder().getId());
+            Long id = s.getWarehouse().getId();
+            Integer qtd = warehouses.get(id);
+            warehouses.put(id, ( qtd + b.getCurrentQuantity() ));
+        }
+        return warehouses;
     }
 }
 

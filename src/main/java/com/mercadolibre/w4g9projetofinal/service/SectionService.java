@@ -4,6 +4,7 @@ import com.mercadolibre.w4g9projetofinal.dtos.converter.SectionConverter;
 import com.mercadolibre.w4g9projetofinal.dtos.request.SectionRequestDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.SectionResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Batch;
+import com.mercadolibre.w4g9projetofinal.entity.InboundOrder;
 import com.mercadolibre.w4g9projetofinal.entity.Section;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.exceptions.SectionManagementException;
@@ -108,6 +109,11 @@ public class SectionService {
 
     public Section save(Section section){
         return sectionRepository.save(section);
+    }
+
+    public Section findByInboundOrderId(Long id) {
+        return sectionRepository.findByInboundOrder_Id(id)
+                .orElseThrow( () -> new ObjectNotFoundException("Setor nao encontrado através do ID da Inbound Order"));
     }
 }
 

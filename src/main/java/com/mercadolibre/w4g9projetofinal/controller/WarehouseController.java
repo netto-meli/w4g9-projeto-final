@@ -3,6 +3,7 @@ package com.mercadolibre.w4g9projetofinal.controller;
 
 import com.mercadolibre.w4g9projetofinal.dtos.converter.WarehouseConverter;
 import com.mercadolibre.w4g9projetofinal.dtos.request.WarehouseRequestDTO;
+import com.mercadolibre.w4g9projetofinal.dtos.response.ProductByWarehouseResponseDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.WarehouseResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Warehouse;
 import com.mercadolibre.w4g9projetofinal.service.WarehouseService;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/api/v1/fresh-products/warehouse")
@@ -20,6 +22,13 @@ public class WarehouseController {
 
     @Autowired
     WarehouseService warehouseService;
+
+    @GetMapping("byProduct/{id}")
+    public ResponseEntity<ProductByWarehouseResponseDTO> findWarehousesByProductId(@PathVariable Long id) {
+        Map<Long,Integer> warehouses = warehouseService.findWarehousesByProductId(id);
+        ProductByWarehouseResponseDTO response = WarehouseConverter.convertEntityToDtoByProduct(id, warehouses);
+        return ResponseEntity.ok().body(response);
+    }
 
     @GetMapping
     public ResponseEntity<List<WarehouseResponseDTO>> findAll()
