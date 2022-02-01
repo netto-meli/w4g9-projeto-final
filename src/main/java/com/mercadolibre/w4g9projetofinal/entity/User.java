@@ -27,6 +27,9 @@ public abstract class User{
     @Column(unique = true)
     private String email;
 
+    @Column(unique = true)
+    private String username;
+
     @JsonIgnore
     private String password;
 
@@ -35,10 +38,11 @@ public abstract class User{
     @JsonIgnore
     private Set<Integer> profiles = new HashSet<>();
 
-    public User(Long id, String name, String email, String password) {
+    public User(Long id, String name, String email, String username, String password) {
         this.id = id;
         this.name = name;
         this.email = email;
+        this.username = username;
         this.password = password;
     }
 

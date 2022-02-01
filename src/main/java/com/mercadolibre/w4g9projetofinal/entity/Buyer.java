@@ -18,8 +18,8 @@ import java.util.Objects;
 public class Buyer extends User{
     private String address;
 
-    public Buyer(Long id, String name, String email, String password, String address) {
-        super(id, name, email, password);
+    public Buyer(Long id, String name, String email, String username, String password, String address) {
+        super(id, name, email, username, password);
         this.address = address;
         addProfile(Profile.BUYER);
     }

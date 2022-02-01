@@ -12,4 +12,5 @@ public class BuyerResponseDTO {
     private String address;
     private String name;
     private String email;
+    private String username;
 }

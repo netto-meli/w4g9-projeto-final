@@ -12,5 +12,6 @@ public class RepresentativeResponseDTO {
     private Long id;
     private String name;
     private String email;
+    private String username;
     private RepresentativeJob job;
 }

@@ -25,13 +25,13 @@ public class Seller extends User{
             cascade = CascadeType.ALL)
     private List<Advertise> advertiseList;
 
-    public Seller(Long id, String name, String email, String password) {
-        super(id, name, email, password);
+    public Seller(Long id, String name, String email, String username, String password) {
+        super(id, name, email, username, password);
         addProfile(Profile.SELLER);
     }
 
-    public Seller(Long id, String name, String email, String password, List<Advertise> advertiseList, List<Batch> batchList) {
-        super(id, name, email, password);
+    public Seller(Long id, String name, String email, String username, String password, List<Advertise> advertiseList, List<Batch> batchList) {
+        super(id, name, email, username, password);
         this.advertiseList = advertiseList;
         addProfile(Profile.SELLER);
     }

@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotEmpty;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -11,4 +13,8 @@ public class BuyerRequestDTO {
     private String name;
     public String address;
     private String email;
+    private String username;
+
+    @NotEmpty(message = "Campo obrigatório")
+    private String password;
 }

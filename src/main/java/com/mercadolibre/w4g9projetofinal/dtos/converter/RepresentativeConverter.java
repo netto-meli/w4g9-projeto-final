@@ -10,11 +10,11 @@ import java.util.List;
 public class RepresentativeConverter {
 
     public static Representative convertDtoToEntity (RepresentativeRequestDTO objDTO){
-        return new Representative(null, objDTO.getName(), objDTO.getEmail(), objDTO.getJob(), objDTO.getPassword());
+        return new Representative(null, objDTO.getName(), objDTO.getEmail(), objDTO.getJob(), objDTO.getUsername(), objDTO.getPassword());
     }
 
     public static RepresentativeResponseDTO convertEntityToDto (Representative obj){
-        return new RepresentativeResponseDTO(obj.getId(), obj.getName(), obj.getEmail(), obj.getJob());
+        return new RepresentativeResponseDTO(obj.getId(), obj.getName(), obj.getEmail(), obj.getUsername(), obj.getJob());
     }
 
     public static List<RepresentativeResponseDTO> convertEntityListToDtoList(List<Representative> list) {

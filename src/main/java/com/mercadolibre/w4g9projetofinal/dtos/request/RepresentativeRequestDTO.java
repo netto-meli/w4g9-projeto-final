@@ -14,6 +14,7 @@ public class RepresentativeRequestDTO {
     private String name;
     private RepresentativeJob job;
     private String email;
+    private String username;
 
     @NotEmpty(message = "Campo obrigatório")
     private String password;
