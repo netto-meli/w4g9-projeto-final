@@ -6,6 +6,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class WarehouseRequestDTO {
+
     private String name;
     private String location;
 }

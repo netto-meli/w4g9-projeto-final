@@ -5,14 +5,11 @@ import com.mercadolibre.w4g9projetofinal.dtos.converter.WarehouseConverter;
 import com.mercadolibre.w4g9projetofinal.dtos.request.WarehouseRequestDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.WarehouseResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Warehouse;
-//import com.mercadolibre.w4g9projetofinal.entity.dtos.converter.WarehouseConverter;
-//import com.mercadolibre.w4g9projetofinal.entity.dtos.request.WarehouseRequestDTO;
 import com.mercadolibre.w4g9projetofinal.service.WarehouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import java.net.URI;
 import java.util.List;
 
