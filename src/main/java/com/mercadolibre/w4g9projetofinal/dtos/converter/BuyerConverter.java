@@ -19,7 +19,7 @@ public class BuyerConverter {
      * @return Buyer
      */
     public static Buyer convertDtoToEntity(BuyerRequestDTO buyer) {
-        return new Buyer(null, buyer.getName(), buyer.getEmail(), null, buyer.getAddress());
+        return new Buyer(null, buyer.getUsername(), buyer.getName(), buyer.getEmail(), buyer.getPass(), buyer.getAddress());
     }
 
     /***
@@ -28,7 +28,7 @@ public class BuyerConverter {
      * @return BuyerResponseDTO
      */
     public static BuyerResponseDTO convertEntityToDto(Buyer newBuyer) {
-        return new BuyerResponseDTO(newBuyer.getId(), newBuyer.getName(), newBuyer.getEmail(), newBuyer.getAddress());
+        return new BuyerResponseDTO(newBuyer.getId(), newBuyer.getUsername(), newBuyer.getName(), newBuyer.getEmail(), newBuyer.getAddress());
     }
 
     /***

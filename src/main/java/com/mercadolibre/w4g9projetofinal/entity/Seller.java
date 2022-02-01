@@ -8,6 +8,7 @@ import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,11 +25,11 @@ public class Seller extends User{
             cascade = CascadeType.ALL)
     private List<Advertise> advertiseList;
 
-    public Seller(Long id, String name, String email, String password, List<Advertise> advertiseList) {
-        super(id, name, email, password);
+    public Seller(Long id, String username, String name, String email, String password, List<Advertise> advertiseList) {
+        super(id, username, name, email, password, new HashSet<>());
         this.advertiseList = advertiseList;
 
-        addProfile(Profile.USUARIO);
+        addProfile(Profile.SELLER);
     }
 
     @Override

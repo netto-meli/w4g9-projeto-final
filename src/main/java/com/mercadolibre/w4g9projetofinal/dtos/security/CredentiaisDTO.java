@@ -12,6 +12,6 @@ import java.io.Serializable;
 public class CredentiaisDTO implements Serializable {
     private static final long serialVersionUID = 889984971963283064L;
 
-    private String email;
+    private String username;
     private String pass;
 }

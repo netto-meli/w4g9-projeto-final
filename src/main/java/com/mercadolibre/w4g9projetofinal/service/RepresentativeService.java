@@ -1,11 +1,12 @@
 package com.mercadolibre.w4g9projetofinal.service;
 
 import com.mercadolibre.w4g9projetofinal.entity.Representative;
-import com.mercadolibre.w4g9projetofinal.entity.Seller;
+import com.mercadolibre.w4g9projetofinal.entity.User;
+import com.mercadolibre.w4g9projetofinal.exceptions.ExistingUserException;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.RepresentativeRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,12 +25,14 @@ public class RepresentativeService {
 
     /*** Instancia de BCryptPasswordEncoder: <b>BCryptPasswordEncoder</b>.
      */
-    @Autowired
     private BCryptPasswordEncoder pe;
+
+    /*** Instancia de repositório: <b>UserRepository</b>.
+     */
+    private UserService userService;
 
     /*** Instancia de repositório: <b>RepresentativeRepository</b>.
      */
-    @Autowired
     private RepresentativeRepository repository;
 
 
@@ -47,24 +50,16 @@ public class RepresentativeService {
         return obj.orElseThrow(() -> new ObjectNotFoundException("Representante não encontrado! Por favor verifique o id."));
     }
 
-    /*** Método que busca Representative por Email
-     * @param email email do Representative a ser retornado
-     */
-    public Representative findByEmail(String email) {
-        Representative obj = repository.findByEmail(email);
-        if (obj == null) {
-            throw new ObjectNotFoundException(
-                    "Usuário não encontrado");
-        }
-        return obj;
-    }
-
     /*** Método que insere um Representative
      * @param obj objeto Representative a ser inserido
      */
     public Representative insert(Representative obj) {
         obj.setPassword(pe.encode(obj.getPassword()));
-        return repository.save(obj);
+        try {
+            return repository.save(obj);
+        } catch (DataIntegrityViolationException e) {
+            throw new ExistingUserException("Username ou Email existente na base de dados");
+        }
     }
 
     /*** Método que atualiza um Representative já existente
@@ -92,6 +87,4 @@ public class RepresentativeService {
         newObj.setJob(obj.getJob());
         newObj.setEmail(obj.getEmail());
     }
-
-
 }

@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class RepresentativeResponseDTO {
     private Long id;
+    private String username;
     private String name;
     private String email;
     private RepresentativeJob job;

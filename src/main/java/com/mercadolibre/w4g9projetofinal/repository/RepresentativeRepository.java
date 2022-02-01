@@ -7,7 +7,4 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface RepresentativeRepository extends JpaRepository<Representative, Long> {
-
-    @Transactional(readOnly = true)
-    Representative findByEmail(String email);
 }

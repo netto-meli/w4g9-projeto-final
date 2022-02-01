@@ -6,6 +6,7 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.Entity;
+import java.util.HashSet;
 import java.util.Objects;
 
 @Getter
@@ -17,10 +18,10 @@ import java.util.Objects;
 public class Representative extends User{
     private RepresentativeJob job;
 
-    public Representative(Long id, String name, String email, String password, RepresentativeJob job) {
-        super(id, name, email, password);
+    public Representative(Long id, String username, String name, String email, String password, RepresentativeJob job) {
+        super(id, username, name, email, password, new HashSet<>());
         this.job = job;
-        addProfile(Profile.USUARIO);
+        addProfile(Profile.REPRESENTATIVE);
     }
 
     @Override

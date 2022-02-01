@@ -57,12 +57,6 @@ public class BuyerController {
         return ResponseEntity.ok(buyer);
     }
 
-    @GetMapping(value = "/email")
-    public ResponseEntity<Buyer> findByEmail(@RequestParam(value = "value") String email) {
-         Buyer obj = service.findByEmail(email);
-        return ResponseEntity.ok(obj);
-    }
-
     /*** Método para adicionar novo Comprador<br>
      * POST - /api/v1/fresh-products/buyer
      * @return Retorna payload de Comprador em um ResponseEntity com status <b>CREATED</b>

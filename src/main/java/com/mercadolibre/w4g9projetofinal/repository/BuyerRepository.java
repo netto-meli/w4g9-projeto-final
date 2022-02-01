@@ -8,7 +8,4 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface BuyerRepository extends JpaRepository <Buyer, Long> {
-
-    @Transactional(readOnly = true)
-    Buyer findByEmail(String email);
 }

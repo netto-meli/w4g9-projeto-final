@@ -16,9 +16,11 @@ import javax.validation.constraints.NotEmpty;
  * @autor Leonardo
  */
 public class BuyerRequestDTO {
+    @NotEmpty(message = "Campo Obrigatório")
+    private String username;
     private String name;
-    public String address;
     private String email;
     @NotEmpty(message = "Campo Obrigatório")
     private String pass;
+    private String address;
 }

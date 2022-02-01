@@ -21,20 +21,16 @@ public abstract class User{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique=true)
+    private String username;
     private String name;
+    @Column(unique=true)
     private String email;
     private String password;
 
     @ElementCollection(fetch=FetchType.EAGER)
     @CollectionTable(name="PROFILES")
-    private Set<Integer> profiles = new HashSet<>();
-
-    public User(Long id, String name, String email, String password) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.password = password;
-    }
+    private Set<Integer> profiles;
 
     // Métodos para Profile
     public Set<Profile> getProfile() {

@@ -2,13 +2,15 @@ package com.mercadolibre.w4g9projetofinal.entity.enums;
 
 public enum Profile {
 
-    USUARIO(1, "Usuário"),
-    ADMIN(2, "Admin");
+    ADMIN(1, "ROLE_ADMIN"),
+    REPRESENTATIVE(2, "ROLE_REPRESENTATIVE"),
+    SELLER(3, "ROLE_SELLER"),
+    BUYER(4, "ROLE_BUYER");
 
-    private int cod;
-    private String descricao;
+    private final int cod;
+    private final String descricao;
 
-    private Profile(int cod, String descricao) {
+    Profile(int cod, String descricao) {
         this.cod = cod;
         this.descricao = descricao;
     }

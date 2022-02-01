@@ -1,5 +1,7 @@
 package com.mercadolibre.w4g9projetofinal.controller;
 
+import com.mercadolibre.w4g9projetofinal.dtos.converter.UserConverter;
+import com.mercadolibre.w4g9projetofinal.dtos.response.UserResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.User;
 import com.mercadolibre.w4g9projetofinal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +20,9 @@ public class UserController {
     private UserService service;
 
     @GetMapping
-    public ResponseEntity<List<User>> findAll() {
+    public ResponseEntity<List<UserResponseDTO>> findAll() {
         List<User> list = service.findAll();
-        return ResponseEntity.ok(list);
+        List<UserResponseDTO> listDTO = UserConverter.convertEntityListToDtoList(list);
+        return ResponseEntity.ok(listDTO);
     }
 }

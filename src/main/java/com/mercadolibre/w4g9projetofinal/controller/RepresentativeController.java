@@ -7,6 +7,7 @@ import com.mercadolibre.w4g9projetofinal.entity.Representative;
 import com.mercadolibre.w4g9projetofinal.service.RepresentativeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -42,20 +43,10 @@ public class RepresentativeController {
      * @param id id do Representative a ser encontrado
      * @return PayLoad com Representative encontrado e ResponseEntity com status <b>OK</b>
      */
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping(value = "/{id}")
     public ResponseEntity<Representative> findById(@PathVariable Long id) {
         Representative obj = service.findById(id);
-        return ResponseEntity.ok(obj);
-    }
-
-    /*** Método para buscar Representative por email<br>
-     * GET - /representative/email
-     * @param email email do Representative a ser encontrado
-     * @return PayLoad com Representative encontrado e ResponseEntity com status <b>OK</b>
-     */
-    @GetMapping(value = "/email")
-    public ResponseEntity<Representative> findByEmail(@RequestParam(value = "value") String email) {
-        Representative obj = service.findByEmail(email);
         return ResponseEntity.ok(obj);
     }
 
@@ -92,6 +83,7 @@ public class RepresentativeController {
      * @param id Id do Representative a ser deletado
      * @return ResponseEntity com status <b>OK</b>
      */
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);

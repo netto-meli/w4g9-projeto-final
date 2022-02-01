@@ -1,11 +1,11 @@
 package com.mercadolibre.w4g9projetofinal.service;
 
 import com.mercadolibre.w4g9projetofinal.entity.Seller;
+import com.mercadolibre.w4g9projetofinal.exceptions.ExistingUserException;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.SellerRepository;
-import com.mercadolibre.w4g9projetofinal.security.UserSS;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,13 +24,10 @@ public class SellerService {
 
     /*** Instancia de BCryptPasswordEncoder: <b>BCryptPasswordEncoder</b>.
      */
-    @Autowired
     private BCryptPasswordEncoder pe;
-
 
     /*** Instancia de repositório: <b>SellerRepository</b>.
      */
-    @Autowired
     private SellerRepository repository;
 
     /*** Método que retorna lista de Sellers */
@@ -43,19 +40,7 @@ public class SellerService {
      */
     public Seller findById(Long id) {
         Optional<Seller> obj = repository.findById(id);
-        return obj.orElseThrow( () -> new ObjectNotFoundException("Vendedor não encontrado! Por favor verifique o id."));
-    }
-
-    /*** Método que busca Seller por Email
-     * @param email email do Seller a ser retornado
-     */
-    public Seller findByEmail(String email) {
-        Seller obj = repository.findByEmail(email);
-        if (obj == null) {
-            throw new ObjectNotFoundException(
-                    "Usuário não encontrado");
-        }
-        return obj;
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Vendedor não encontrado! Por favor verifique o id."));
     }
 
     /*** Método que insere um Seller
@@ -63,7 +48,11 @@ public class SellerService {
      */
     public Seller insert(Seller obj) {
         obj.setPassword(pe.encode(obj.getPassword()));
-        return repository.save(obj);
+        try {
+            return repository.save(obj);
+        } catch (DataIntegrityViolationException e) {
+            throw new ExistingUserException("Username ou Email existente na base de dados");
+        }
     }
 
     /*** Método que atualiza um Seller já existente
@@ -75,7 +64,6 @@ public class SellerService {
         updateSeller(newObj, obj);
         return repository.save(obj);
     }
-
 
     /*** Método deleta um Seller do Bando de dados
      *

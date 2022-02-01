@@ -10,6 +10,8 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SellerRequestDTO {
+    @NotEmpty(message = "Campo Obrigatório")
+    private String username;
     private String name;
     private String email;
     @NotEmpty(message = "Campo obrigatório")
