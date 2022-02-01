@@ -25,3 +25,7 @@ app:
   title: fernando-netto-projeto-final
   description: '@project.description@'
   version: @project.version@
+
+jwt:
+  secret: SequenciaDeCaracteresParaAssinarToken
+  expiration: 60000

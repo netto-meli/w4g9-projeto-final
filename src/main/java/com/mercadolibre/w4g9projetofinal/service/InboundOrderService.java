@@ -1,4 +1,4 @@
-package com.mercadolibre.w4g9projetofinal.controller.service;
+package com.mercadolibre.w4g9projetofinal.service;
 
 import com.mercadolibre.w4g9projetofinal.entity.Advertise;
 import com.mercadolibre.w4g9projetofinal.entity.InboundOrder;

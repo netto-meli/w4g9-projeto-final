@@ -1,4 +1,4 @@
-package com.mercadolibre.w4g9projetofinal.controller.service;
+package com.mercadolibre.w4g9projetofinal.service;
 
 import com.mercadolibre.w4g9projetofinal.entity.Buyer;
 import com.mercadolibre.w4g9projetofinal.entity.Seller;
@@ -17,7 +17,6 @@ import java.util.Optional;
 @AllArgsConstructor
 public class BuyerService {
 
-    @Autowired
     private BCryptPasswordEncoder pe;
 
     private BuyerRepository repository;

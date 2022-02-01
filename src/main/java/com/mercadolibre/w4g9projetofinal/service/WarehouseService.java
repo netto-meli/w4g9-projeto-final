@@ -1,4 +1,4 @@
-package com.mercadolibre.w4g9projetofinal.controller.service;
+package com.mercadolibre.w4g9projetofinal.service;
 
 
 import com.mercadolibre.w4g9projetofinal.entity.Warehouse;
@@ -35,10 +35,6 @@ public class WarehouseService {
     {
         Warehouse wh = findById(id);
         warehouseRepository.delete(wh);
-    }
-
-    public Warehouse update(Warehouse wh) {
-        return null;
     }
 }
 

@@ -4,7 +4,7 @@ import com.mercadolibre.w4g9projetofinal.dtos.converter.SellerConverter;
 import com.mercadolibre.w4g9projetofinal.dtos.request.SellerRequestDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.SellerResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Seller;
-import com.mercadolibre.w4g9projetofinal.controller.service.SellerService;
+import com.mercadolibre.w4g9projetofinal.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -24,30 +24,47 @@ import java.util.List;
 @RequestMapping(value = "/api/v1/fresh-products/seller")
 public class SellerController {
 
-    @Autowired
-    private BCryptPasswordEncoder pe;
-
+    /*** Instancia de serviço: <b>RepresentativeService</b> com notação <i>{@literal @}Autowired</i> do lombok */
     @Autowired
     private SellerService service;
 
+    /*** Método para buscar todos os Sellers do banco de dados<br>
+     * GET - /sellers
+     * @return Payload com Lista de Sellers e ResponseEntity com status <b>OK</b>
+     */
     @GetMapping
     public ResponseEntity<List<SellerResponseDTO>> findAll(){
         List<SellerResponseDTO> list = SellerConverter.convertEntityListToDtoList(service.findAll());
         return ResponseEntity.ok(list);
     }
 
+    /*** Método para buscar Sellers por Id<br>
+     * GET - /sellers/{id}
+     * @param id id do Seller a ser encontrado
+     * @return PayLoad com Seller encontrado e ResponseEntity com status <b>OK</b>
+     */
     @GetMapping(value = "/{id}")
     public ResponseEntity<Seller> findById(@PathVariable Long id) {
         Seller obj = service.findById(id);
         return ResponseEntity.ok(obj);
     }
 
+    /*** Método para buscar Sellers por email<br>
+     * GET - /sellers/email
+     * @param email email do Seller a ser encontrado
+     * @return PayLoad com Seller encontrado e ResponseEntity com status <b>OK</b>
+     */
     @GetMapping(value = "/email")
     public ResponseEntity<Seller> findByEmail(@RequestParam(value = "value") String email) {
         Seller obj = service.findByEmail(email);
         return ResponseEntity.ok(obj);
     }
 
+    /*** Método para inserção de Seller <br>
+     * POST - /sellers
+     * @param obj Objeto seller a ser inserido
+     * @return ResponseEntity com status <b>CREATED</b>
+     */
     @PostMapping
     public ResponseEntity<Void> insert(@RequestBody SellerRequestDTO obj) {
         Seller newObj = SellerConverter.convertDtoToEntity(obj);
@@ -57,6 +74,12 @@ public class SellerController {
         return ResponseEntity.created(uri).build();
     }
 
+    /*** Método para atualização de Seller existente<br>
+     * PUT - /sellers/{id}
+     * @param newObj Objeto seller com informações para atualização
+     * @param id id do Seller a ser atualizado
+     * @return ResponseEntity com status <b>NO CONTENT</b>
+     */
     @PutMapping(value = "/{id}")
     public ResponseEntity<Void> update(@RequestBody SellerRequestDTO newObj, @PathVariable long id) {
         Seller obj = SellerConverter.convertDtoToEntity(newObj);
@@ -65,6 +88,11 @@ public class SellerController {
         return ResponseEntity.noContent().build();
     }
 
+    /*** Método para atualização de Seller existente<br>
+     * DELETE - /sellers/{id}
+     * @param id Id do Seller a ser deletado
+     * @return ResponseEntity com status <b>OK</b>
+     */
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);

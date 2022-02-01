@@ -1,4 +1,4 @@
-package com.mercadolibre.w4g9projetofinal.controller.service;
+package com.mercadolibre.w4g9projetofinal.service;
 
 import com.mercadolibre.w4g9projetofinal.entity.Batch;
 import com.mercadolibre.w4g9projetofinal.entity.OrderItem;

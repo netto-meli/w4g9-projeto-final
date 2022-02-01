@@ -5,7 +5,7 @@ import com.mercadolibre.w4g9projetofinal.dtos.converter.WarehouseConverter;
 import com.mercadolibre.w4g9projetofinal.dtos.request.WarehouseRequestDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.WarehouseResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Warehouse;
-import com.mercadolibre.w4g9projetofinal.controller.service.WarehouseService;
+import com.mercadolibre.w4g9projetofinal.service.WarehouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,10 +21,11 @@ public class WarehouseController {
     @Autowired
     WarehouseService warehouseService;
 
+    @GetMapping
     public ResponseEntity<List<WarehouseResponseDTO>> findAll()
     {
-        List<WarehouseResponseDTO> lista = WarehouseConverter.convertEntityListToDtoList(warehouseService.findAll());
-        return ResponseEntity.ok(lista);
+        List<WarehouseResponseDTO> list = WarehouseConverter.convertEntityListToDtoList(warehouseService.findAll());
+        return ResponseEntity.ok(list);
     }
 
     @GetMapping(value = "/{id}")
@@ -46,11 +47,12 @@ public class WarehouseController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Void> update(@RequestBody WarehouseRequestDTO nWarehouse1, @PathVariable Long id)
+    public ResponseEntity<Void> update(@RequestBody WarehouseRequestDTO nWarehouse1, @PathVariable long id)
     {
         Warehouse wh = WarehouseConverter.convertDtoToEntity(nWarehouse1);
         wh.setId(id);
-        wh = warehouseService.update(wh);
+        // todo arrumar
+        wh = null;//warehouseService.update(wh);
         return ResponseEntity.noContent().build();
     }
 

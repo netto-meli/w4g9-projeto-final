@@ -1,20 +1,17 @@
-package com.mercadolibre.w4g9projetofinal.dtos.request;
+package com.mercadolibre.w4g9projetofinal.dtos.response;
 
 import com.mercadolibre.w4g9projetofinal.entity.enums.RefrigerationType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-/*** DTO para serialização de Produto
- *
- * @author Felipe
- * @author Fernando Netto
- */
 @Data
 @AllArgsConstructor
-public class ProductRequestDTO {
+@NoArgsConstructor
+public class ProductResponseDTO {
+    private Long id;
     private String name;
     private String description;
-    private float minTemperature;
-    private float maxTemperature;
     private RefrigerationType categoryRefrigeration;
+
 }
