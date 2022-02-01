@@ -41,13 +41,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     };
 
     private static final String[] PUBLIC_MATCHERS_GET = {
-            "/sellers",
-            "/representatives"
+            "/api/v1/fresh-products/sellers",
+            "/api/v1/fresh-products/representatives"
     };
 
     private static final String[] PUBLIC_MATCHERS_POST = {
-            "/sellers",
-            "/representatives"
+            "/api/v1/fresh-products/sellers",
+            "/api/v1/fresh-products/representatives"
     };
 
     @Override

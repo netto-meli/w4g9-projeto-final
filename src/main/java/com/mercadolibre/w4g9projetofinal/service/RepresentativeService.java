@@ -70,12 +70,11 @@ public class RepresentativeService {
      * @param obj objeto Representative a ser inserido
      */
     public Representative insert(Representative obj) {
-        String email = findByEmailDB(obj.getEmail());
-        if(email == null) {
+        try{
             obj.setPassword(pe.encode(obj.getPassword()));
             return repository.save(obj);
         }
-        else {
+        catch (Exception e) {
             throw new ExistingUserException("Usuário existente na base de dados");
         }
     }
@@ -105,15 +104,4 @@ public class RepresentativeService {
         newObj.setJob(obj.getJob());
         newObj.setEmail(obj.getEmail());
     }
-
-    //Método para verificar se existe o email informado no banco de dados
-    private String findByEmailDB(String email) {
-        User user = userRepository.findByEmail(email);
-        if(user == null) {
-            return null;
-        }
-        return user.getEmail();
-    }
-
-
 }

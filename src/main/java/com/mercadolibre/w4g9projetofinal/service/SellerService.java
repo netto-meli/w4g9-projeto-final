@@ -69,12 +69,11 @@ public class SellerService {
      * @param obj objeto Seller a ser inserido
      */
     public Seller insert(Seller obj) {
-        String email = findByEmailDB(obj.getEmail());
-        if (email == null) {
+        try {
             obj.setPassword(pe.encode(obj.getPassword()));
             return repository.save(obj);
         }
-        else {
+        catch (Exception e) {
             throw new ExistingUserException("Usuário existente na base de dados");
         }
     }
@@ -104,14 +103,5 @@ public class SellerService {
         newObj.setId(obj.getId());
         newObj.setName(obj.getName());
         newObj.setEmail(obj.getEmail());
-    }
-
-    //Método para verificar se existe o email informado no banco de dados
-    private String findByEmailDB(String email) {
-        User user = userRepository.findByEmail(email);
-        if(user == null) {
-            return null;
-        }
-        return user.getEmail();
     }
 }

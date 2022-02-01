@@ -8,7 +8,7 @@ public enum Profile {
     BUYER(4, "ROLE_BUYER");
 
     private int cod;
-    private String descricao;
+    private final String descricao;
 
     private Profile(int cod, String descricao) {
         this.cod = cod;
