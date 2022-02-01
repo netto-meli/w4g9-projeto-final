@@ -13,7 +13,7 @@ public class BatchConverter {
     public static List<BatchResponseDTO> convertEntityListToDtoList(List<Batch> batchList) {
         List<BatchResponseDTO> batchResponseDTOList = new ArrayList<>();
         for (Batch b : batchList) {
-            batchResponseDTOList.add( convertEntityToDto(b) );
+            batchResponseDTOList.add(convertEntityToDto(b));
         }
         return batchResponseDTOList;
     }

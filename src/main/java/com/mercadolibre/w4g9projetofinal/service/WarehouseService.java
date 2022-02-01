@@ -2,11 +2,9 @@ package com.mercadolibre.w4g9projetofinal.service;
 
 
 import com.mercadolibre.w4g9projetofinal.entity.Batch;
-import com.mercadolibre.w4g9projetofinal.entity.InboundOrder;
 import com.mercadolibre.w4g9projetofinal.entity.Section;
 import com.mercadolibre.w4g9projetofinal.entity.Warehouse;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
-import com.mercadolibre.w4g9projetofinal.repository.BatchRepository;
 import com.mercadolibre.w4g9projetofinal.repository.WarehouseRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,7 +22,8 @@ public class WarehouseService {
 
     public List<Warehouse> findAll()
     {
-        return warehouseRepository.findAll();
+        List<Warehouse> list = warehouseRepository.findAll();
+        return list;
     }
 
     public Warehouse findById(Long id)
@@ -35,6 +34,20 @@ public class WarehouseService {
 
     public Warehouse insert (Warehouse wh) {
         return warehouseRepository.save(wh);
+    }
+
+    public Warehouse update(Warehouse nWarehouse)
+    {
+        Warehouse wh = findById(nWarehouse.getId());
+        updateWarehouse(nWarehouse, wh);
+        return warehouseRepository.save(wh);
+    }
+
+    private static void updateWarehouse(Warehouse wh, Warehouse nWarehouse)
+    {
+        nWarehouse.setId(wh.getId());
+        nWarehouse.setNome(wh.getNome());
+        nWarehouse.setLocation(wh.getLocation());
     }
 
     public void delete (Long id)

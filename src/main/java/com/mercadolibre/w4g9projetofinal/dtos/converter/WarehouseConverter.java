@@ -14,13 +14,12 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class WarehouseConverter {
-    public static Warehouse convertDtoToEntity (WarehouseRequestDTO wD){
-        //todo convert
-        return new Warehouse();
+    public static Warehouse convertDtoToEntity (WarehouseRequestDTO whDTO){
+        return new Warehouse( null, whDTO.getName(), whDTO.getLocation());
     }
-    public static WarehouseResponseDTO convertEntityToDto (Warehouse w){
-        //todo convert
-        return new WarehouseResponseDTO();
+
+    public static WarehouseResponseDTO convertEntityToDto (Warehouse wh){
+        return new WarehouseResponseDTO(wh.getId(), wh.getNome(), wh.getLocation());
     }
 
     public static List<WarehouseResponseDTO> convertEntityListToDtoList(List<Warehouse> all) {

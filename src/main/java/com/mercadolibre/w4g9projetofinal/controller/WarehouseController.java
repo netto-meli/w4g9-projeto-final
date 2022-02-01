@@ -60,8 +60,7 @@ public class WarehouseController {
     {
         Warehouse wh = WarehouseConverter.convertDtoToEntity(nWarehouse1);
         wh.setId(id);
-        // todo arrumar
-        wh = null;//warehouseService.update(wh);
+        wh = warehouseService.update(wh);
         return ResponseEntity.noContent().build();
     }
 
