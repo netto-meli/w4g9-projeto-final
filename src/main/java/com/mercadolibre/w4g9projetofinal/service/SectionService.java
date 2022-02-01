@@ -83,10 +83,17 @@ public class SectionService {
         return section;
     }
 
-    public Section updateSection(Long id, SectionRequestDTO sectionDTO){
-        Optional<Section> optional = sectionRepository.findById(id);
-        if (optional.isPresent()) {
-            Section section = sectionDTO.atualizar(id, sectionRepository);
+    public Section updateSection(Long id, SectionRequestDTO s){
+        Optional<Section> SectionOptional = sectionRepository.findById(id);
+        if (SectionOptional.isPresent()) {
+            Section section = SectionOptional.get();
+            section.setName(s.getName());
+            section.setRefrigerationType(s.getType());
+            section.setWarehouse(s.getWarehouse());
+            section.setStockLimit(s.getStockLimit());
+            section.setCurrentStock(s.getCurrentStock());
+            section.setMinTeperature(s.getMinTeperature());
+            section.setMaxTeperature(s.getMaxTeperature());
             return section;
         }
         return null;
