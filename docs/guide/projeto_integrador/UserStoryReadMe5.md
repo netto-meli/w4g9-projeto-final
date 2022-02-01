@@ -14,8 +14,6 @@ serviços são expostos a partir do armazém de atendimento. Os contratos refere
 
 Sinônimos do Representante: supervisor, líder.
 
---
-
 ## Verifique a localização de um produto no armazém
 
 ### User Story

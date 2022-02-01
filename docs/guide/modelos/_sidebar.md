@@ -1,1 +1,3 @@
-- [Git Commit Guidelines](/git/)
+- [Modelagem de Classe e ER](/modelos/)
+- [Modelo Relacional](modelo-er)
+- [Modelo de Classes inicial](modelo-uml)

@@ -1,7 +1,6 @@
 #### Modelagem de Classe e ER
-
 ## Versão Final
-
+#### Diagrama de Classes UML
 ```mermaid
 classDiagram
 User <|-- Buyer

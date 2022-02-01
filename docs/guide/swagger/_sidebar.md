@@ -1,1 +1,1 @@
-- [Git Commit Guidelines](/git/)
+- [Swagger](/swagger/)
