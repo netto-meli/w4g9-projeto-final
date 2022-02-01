@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -42,7 +43,7 @@ public class SectionController {
      * @return Retorna o payload de SectionResponseDTO em um ResponseEntity com o status 201
      */
     @PostMapping
-    public ResponseEntity<SectionResponseDTO> cadastrar(@RequestBody SectionRequestDTO sectionRequestDTO,
+    public ResponseEntity<SectionResponseDTO> cadastrar(@RequestBody @Valid SectionRequestDTO sectionRequestDTO,
                                                         UriComponentsBuilder uriBuilder){
         Section section = sectionService.registerSectionDtoRequest(sectionRequestDTO);
         URI uri = uriBuilder.path("/section/{id}").buildAndExpand(section.getId()).toUri();
@@ -69,7 +70,8 @@ public class SectionController {
      */
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<SectionResponseDTO> atualizar(@PathVariable Long id, @RequestBody SectionRequestDTO sectionDTO){
+    public ResponseEntity<SectionResponseDTO> atualizar(@PathVariable Long id,
+                                                        @RequestBody @Valid SectionRequestDTO sectionDTO){
         Section section = sectionService.updateSection(id, sectionDTO);
         if (section != null) {
             return ResponseEntity.ok(SectionConverter.convertEntityToDto(section));
