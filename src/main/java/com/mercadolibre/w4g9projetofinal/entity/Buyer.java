@@ -8,8 +8,6 @@ import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import java.util.Objects;
 
 @Getter

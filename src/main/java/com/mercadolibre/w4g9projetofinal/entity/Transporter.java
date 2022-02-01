@@ -20,13 +20,13 @@ public class Transporter {
     private String name;
     @OneToMany
     @ToString.Exclude
-    private List<Fresh> freshList;
+    private List<Product> freshList;
     @OneToMany
     @ToString.Exclude
-    private List<Cold> coldList;
+    private List<Product> coldList;
     @OneToMany
     @ToString.Exclude
-    private List<Frozen> frozenList;
+    private List<Product> frozenList;
 
     @Override
     public boolean equals(Object o) {

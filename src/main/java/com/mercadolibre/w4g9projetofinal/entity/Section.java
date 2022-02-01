@@ -8,6 +8,10 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * @author fbontempo
+ * @version 0.1
+ */
 @Getter
 @Setter
 @ToString

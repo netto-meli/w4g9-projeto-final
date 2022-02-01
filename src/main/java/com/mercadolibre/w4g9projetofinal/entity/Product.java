@@ -1,5 +1,6 @@
 package com.mercadolibre.w4g9projetofinal.entity;
 
+import com.mercadolibre.w4g9projetofinal.entity.enums.RefrigerationType;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -12,9 +13,7 @@ import java.util.Objects;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@DiscriminatorColumn(name="product_type",
-        discriminatorType = DiscriminatorType.STRING)
-public abstract class Product {
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,6 +21,7 @@ public abstract class Product {
     private String description;
     private float minTemperature;
     private float maxTemperature;
+    private RefrigerationType categoryRefrigeration;
 
     @Override
     public boolean equals(Object o) {

@@ -11,10 +11,7 @@ import java.util.Optional;
 
 @Repository
 public interface SellOrderRepository extends JpaRepository<SellOrder, Long> {
-
-    @Query("select s from SellOrder s where s.buyer.id = ?1 and s.cart = true")
     Optional<SellOrder> findSellOrderByBuyer_IdAndCartTrue(Long buyer_id);
     @Modifying
-    @Query("delete from SellOrder s where s.buyer.id = ?1 and s.cart = true")
     void deleteByBuyer_IdAndCartTrue(Long buyer_id);
 }

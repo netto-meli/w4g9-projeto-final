@@ -16,7 +16,6 @@ public class WarehouseService {
 
     private WarehouseRepository warehouseRepository;
 
-    /*
     public List<Warehouse> findAll()
     {
         return warehouseRepository.findAll();
@@ -37,12 +36,6 @@ public class WarehouseService {
         Warehouse wh = findById(id);
         warehouseRepository.delete(wh);
     }
-
-    public Warehouse update(Warehouse wh) {
-        return null;
-    }
-
-     */
 }
 
 
