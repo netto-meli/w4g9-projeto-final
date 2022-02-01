@@ -1,4 +1,4 @@
-* [How-to guides](/how-to/)
+* [How-to guides](/docsify/how-to/)
 * [How-to write how-to](how-to)
 * [How-to write in global english](global-english)
 * [How-to use active voice](active-voice)

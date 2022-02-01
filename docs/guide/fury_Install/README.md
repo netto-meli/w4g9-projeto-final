@@ -1,4 +1,4 @@
-# w4g9-projeto-final
+# Fury Project
 
 # Spring Boot App model for Java 11
 

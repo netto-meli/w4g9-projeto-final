@@ -3,8 +3,8 @@
 ***
 ## Links Úteis
 #### -> Documentação [Docsify](https://netto-meli.github.io/w4g9-projeto-final/guide/#/) do projeto
-#### -> [JavaDoc](https://netto-meli.github.io/w4g9-projeto-final/JavaDoc/) do pacote
-#### -> [Swagger](https://netto-meli.github.io/w4g9-projeto-final/guide/swagger) para testar Endpoints
+#### -> Link para o [JavaDoc](https://netto-meli.github.io/w4g9-projeto-final/JavaDoc/) do pacote
+#### -> Yaml/Json do [Swagger](https://netto-meli.github.io/w4g9-projeto-final/guide/swagger) para testar Endpoints
 ## Repositórios da Equipe 9
 [GitHub](https://github.com/fpbontempo) - <b>Felipe Pereira Bontempo</b>
 
