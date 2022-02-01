@@ -24,7 +24,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping(value = "/sellers")
+@RequestMapping(value = "/api/v1/fresh-products/sellers")
 public class SellerController {
 
     /*** Instancia de serviço: <b>RepresentativeService</b> com notação <i>{@literal @}Autowired</i> do lombok */
