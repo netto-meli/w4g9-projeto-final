@@ -1,8 +1,5 @@
 package com.mercadolibre.w4g9projetofinal.service;
 
-import com.mercadolibre.w4g9projetofinal.dtos.converter.SectionConverter;
-import com.mercadolibre.w4g9projetofinal.dtos.request.SectionRequestDTO;
-import com.mercadolibre.w4g9projetofinal.dtos.response.SectionResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Batch;
 import com.mercadolibre.w4g9projetofinal.entity.Section;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
@@ -77,24 +74,23 @@ public class SectionService {
         return null;
     }
 
-    public Section registerSectionDtoRequest(SectionRequestDTO sectionRequestDTO){
-        Section section = SectionConverter.convertDtoToEntity(sectionRequestDTO);
+    public Section registerSectionDtoRequest(Section section){
         sectionRepository.save(section);
         return section;
     }
 
-    public Section updateSection(Long id, SectionRequestDTO s){
+    public Section updateSection(Long id, Section section){
         Optional<Section> SectionOptional = sectionRepository.findById(id);
         if (SectionOptional.isPresent()) {
-            Section section = SectionOptional.get();
-            section.setName(s.getName());
-            section.setRefrigerationType(s.getType());
-            section.setWarehouse(s.getWarehouse());
-            section.setStockLimit(s.getStockLimit());
-            section.setCurrentStock(s.getCurrentStock());
-            section.setMinTeperature(s.getMinTeperature());
-            section.setMaxTeperature(s.getMaxTeperature());
-            return section;
+            Section sUp = SectionOptional.get();
+            sUp.setName(section.getName());
+            sUp.setRefrigerationType(section.getRefrigerationType());
+            sUp.setWarehouse(section.getWarehouse());
+            sUp.setStockLimit(section.getStockLimit());
+            sUp.setCurrentStock(section.getCurrentStock());
+            sUp.setMinTeperature(section.getMinTeperature());
+            sUp.setMaxTeperature(section.getMaxTeperature());
+            return sUp;
         }
         return null;
     }
@@ -108,9 +104,9 @@ public class SectionService {
         return section.get();
     }
 
-    public List<SectionResponseDTO> sectionListAvailable(){
+    public List<Section> sectionListAvailable(){
         List<Section> sections = sectionRepository.findAll();
-        return SectionConverter.convertEntityListToDtoList(sections);
+        return sections;
     }
 
     public Section save(Section section){

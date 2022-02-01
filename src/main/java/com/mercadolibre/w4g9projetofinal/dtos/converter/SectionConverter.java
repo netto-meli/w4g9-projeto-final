@@ -11,6 +11,7 @@ import com.mercadolibre.w4g9projetofinal.entity.Warehouse;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class SectionConverter {
     public static Section convertDtoFIOToEntity (SectionRequestDTOForInboundOrder sectionRequestDTO) {
@@ -55,5 +56,17 @@ public class SectionConverter {
             sectionResponseDTOList.add( convertEntityToDto(s) );
         }
         return sectionResponseDTOList;
+    }
+
+    public static Section convertDtoRequestForEntity(SectionRequestDTO s){
+        Section section = new Section();
+        section.setName(s.getName());
+        section.setRefrigerationType(s.getType());
+        section.setWarehouse(s.getWarehouse());
+        section.setStockLimit(s.getStockLimit());
+        section.setCurrentStock(s.getCurrentStock());
+        section.setMinTeperature(s.getMinTeperature());
+        section.setMaxTeperature(s.getMaxTeperature());
+        return section;
     }
 }

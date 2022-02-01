@@ -16,6 +16,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
+import static com.mercadolibre.w4g9projetofinal.dtos.converter.SectionConverter.convertDtoRequestForEntity;
+
 /**
  * @author fbontempo
  * @version 0.2
@@ -34,7 +36,8 @@ public class SectionController {
     @GetMapping
     @ResponseBody
     public List<SectionResponseDTO> lista(){
-        return sectionService.sectionListAvailable();
+        List<Section> sections = sectionService.sectionListAvailable();
+        return SectionConverter.convertEntityListToDtoList(sections);
     }
 
     /*** Cadastra uma Section
@@ -45,7 +48,8 @@ public class SectionController {
     @PostMapping
     public ResponseEntity<SectionResponseDTO> cadastrar(@RequestBody @Valid SectionRequestDTO sectionRequestDTO,
                                                         UriComponentsBuilder uriBuilder){
-        Section section = sectionService.registerSectionDtoRequest(sectionRequestDTO);
+        Section sectionRequest = convertDtoRequestForEntity(sectionRequestDTO);
+        Section section = sectionService.registerSectionDtoRequest(sectionRequest);
         URI uri = uriBuilder.path("/section/{id}").buildAndExpand(section.getId()).toUri();
         return ResponseEntity.created(uri).body(SectionConverter.convertEntityToDto(section));
     }
@@ -72,7 +76,8 @@ public class SectionController {
     @Transactional
     public ResponseEntity<SectionResponseDTO> atualizar(@PathVariable Long id,
                                                         @RequestBody @Valid SectionRequestDTO sectionDTO){
-        Section section = sectionService.updateSection(id, sectionDTO);
+        Section sectionRequest = convertDtoRequestForEntity(sectionDTO);
+        Section section = sectionService.updateSection(id, sectionRequest);
         if (section != null) {
             return ResponseEntity.ok(SectionConverter.convertEntityToDto(section));
         }
