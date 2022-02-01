@@ -42,4 +42,68 @@ public class SectionRequestDTO {
         section.setMaxTeperature(this.maxTeperature);
         return section;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public RefrigerationType getType() {
+        return type;
+    }
+
+    public void setType(RefrigerationType type) {
+        this.type = type;
+    }
+
+    public Warehouse getWarehouse() {
+        return warehouse;
+    }
+
+    public void setWarehouse(Warehouse warehouse) {
+        this.warehouse = warehouse;
+    }
+
+    public int getStockLimit() {
+        return stockLimit;
+    }
+
+    public void setStockLimit(int stockLimit) {
+        this.stockLimit = stockLimit;
+    }
+
+    public int getCurrentStock() {
+        return currentStock;
+    }
+
+    public void setCurrentStock(int currentStock) {
+        this.currentStock = currentStock;
+    }
+
+    public float getMinTeperature() {
+        return minTeperature;
+    }
+
+    public void setMinTeperature(float minTeperature) {
+        this.minTeperature = minTeperature;
+    }
+
+    public float getMaxTeperature() {
+        return maxTeperature;
+    }
+
+    public void setMaxTeperature(float maxTeperature) {
+        this.maxTeperature = maxTeperature;
+    }
 }
