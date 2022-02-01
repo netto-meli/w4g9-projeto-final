@@ -1,10 +1,11 @@
 package com.mercadolibre.w4g9projetofinal.service;
 
 import com.mercadolibre.w4g9projetofinal.entity.Representative;
-import com.mercadolibre.w4g9projetofinal.entity.Seller;
+import com.mercadolibre.w4g9projetofinal.entity.User;
+import com.mercadolibre.w4g9projetofinal.exceptions.ExistingUserException;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.RepresentativeRepository;
-import com.mercadolibre.w4g9projetofinal.repository.SellerRepository;
+import com.mercadolibre.w4g9projetofinal.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -27,6 +28,11 @@ public class RepresentativeService {
      */
     @Autowired
     private BCryptPasswordEncoder pe;
+
+    /*** Instancia de repositório: <b>UserRepository</b>.
+     */
+    @Autowired
+    private UserRepository userRepository;
 
     /*** Instancia de repositório: <b>RepresentativeRepository</b>.
      */
@@ -64,8 +70,14 @@ public class RepresentativeService {
      * @param obj objeto Representative a ser inserido
      */
     public Representative insert(Representative obj) {
-        obj.setPassword(pe.encode(obj.getPassword()));
-        return repository.save(obj);
+        String email = findByEmailDB(obj.getEmail());
+        if(email == null) {
+            obj.setPassword(pe.encode(obj.getPassword()));
+            return repository.save(obj);
+        }
+        else {
+            throw new ExistingUserException("Usuário existente na base de dados");
+        }
     }
 
     /*** Método que atualiza um Representative já existente
@@ -92,6 +104,15 @@ public class RepresentativeService {
         newObj.setName(obj.getName());
         newObj.setJob(obj.getJob());
         newObj.setEmail(obj.getEmail());
+    }
+
+    //Método para verificar se existe o email informado no banco de dados
+    private String findByEmailDB(String email) {
+        User user = userRepository.findByEmail(email);
+        if(user == null) {
+            return null;
+        }
+        return user.getEmail();
     }
 
 

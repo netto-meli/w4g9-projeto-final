@@ -9,6 +9,7 @@ import com.mercadolibre.w4g9projetofinal.service.RepresentativeService;
 import com.mercadolibre.w4g9projetofinal.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -45,6 +46,7 @@ public class SellerController {
      * @param id id do Seller a ser encontrado
      * @return PayLoad com Seller encontrado e ResponseEntity com status <b>OK</b>
      */
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping(value = "/{id}")
     public ResponseEntity<Seller> findById(@PathVariable Long id) {
         Seller obj = service.findById(id);
@@ -56,6 +58,7 @@ public class SellerController {
      * @param email email do Seller a ser encontrado
      * @return PayLoad com Seller encontrado e ResponseEntity com status <b>OK</b>
      */
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping(value = "/email")
     public ResponseEntity<Seller> findByEmail(@RequestParam(value = "value") String email) {
         Seller obj = service.findByEmail(email);
@@ -95,6 +98,7 @@ public class SellerController {
      * @param id Id do Seller a ser deletado
      * @return ResponseEntity com status <b>OK</b>
      */
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);

@@ -6,6 +6,7 @@ import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.BuyerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +15,11 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class BuyerService {
+
+    /*** Instancia de BCryptPasswordEncoder: <b>BCryptPasswordEncoder</b>.
+     */
+    @Autowired
+    private BCryptPasswordEncoder pe;
 
     private BuyerRepository repository;
 
@@ -27,6 +33,7 @@ public class BuyerService {
     }
 
     public Buyer insert(Buyer buyer) {
+        buyer.setPassword(pe.encode(buyer.getPassword()));
         return repository.save(buyer);
     }
 

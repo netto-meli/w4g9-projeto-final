@@ -5,8 +5,6 @@ import com.mercadolibre.w4g9projetofinal.dtos.converter.WarehouseConverter;
 import com.mercadolibre.w4g9projetofinal.dtos.request.WarehouseRequestDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.WarehouseResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Warehouse;
-import com.mercadolibre.w4g9projetofinal.dtos.converter.WarehouseConverter;
-import com.mercadolibre.w4g9projetofinal.dtos.request.WarehouseRequestDTO;
 import com.mercadolibre.w4g9projetofinal.service.WarehouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -52,7 +50,7 @@ public class WarehouseController {
     {
         Warehouse wh = WarehouseConverter.convertDtoToEntity(nWarehouse1);
         wh.setId(id);
-        wh = warehouseService.update(wh);
+        wh =  null; //warehouseService.update(wh);
         return ResponseEntity.noContent().build();
     }
 

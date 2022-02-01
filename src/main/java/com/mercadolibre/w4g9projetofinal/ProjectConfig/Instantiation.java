@@ -3,6 +3,7 @@ package com.mercadolibre.w4g9projetofinal.ProjectConfig;
 import com.mercadolibre.w4g9projetofinal.entity.Buyer;
 import com.mercadolibre.w4g9projetofinal.entity.Representative;
 import com.mercadolibre.w4g9projetofinal.entity.Seller;
+import com.mercadolibre.w4g9projetofinal.entity.enums.Profile;
 import com.mercadolibre.w4g9projetofinal.entity.enums.RepresentativeJob;
 import com.mercadolibre.w4g9projetofinal.repository.BuyerRepository;
 import com.mercadolibre.w4g9projetofinal.repository.RepresentativeRepository;
@@ -47,6 +48,7 @@ public class Instantiation implements CommandLineRunner {
         Representative r3 = new Representative(null, "Marcos Sá", "email3@gmail.com", RepresentativeJob.LIDER, pe.encode("151515"));
         Representative r4 = new Representative(null, "Marcos Sá", "email4@gmail.com", RepresentativeJob.SUPERVISOR, pe.encode("151515"));
         Representative r5 = new Representative(null, "Marcos Sá", "email5@gmail.com", RepresentativeJob.LIDER, pe.encode("151515"));
+        r1.addProfile(Profile.ADMIN);
         representativeRepository.saveAll(Arrays.asList(r1, r2, r3, r4, r5));
 
         Buyer b1 = new Buyer(null, "Ricardo oo", "email1@yahoo.com", pe.encode("123"), "qnp28conjuntoU");

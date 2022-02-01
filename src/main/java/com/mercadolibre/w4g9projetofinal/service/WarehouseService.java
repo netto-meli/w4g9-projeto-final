@@ -18,7 +18,7 @@ public class WarehouseService {
 
     public List<Warehouse> findAll()
     {
-        return warehouseRepository.findAll();
+        return (List<Warehouse>) warehouseRepository.findAll();
     }
 
     public Warehouse findById(Long id)
@@ -37,5 +37,3 @@ public class WarehouseService {
         warehouseRepository.delete(wh);
     }
 }
-
-

@@ -16,7 +16,6 @@ import java.util.Objects;
 @ToString
 @NoArgsConstructor
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Seller extends User{
 
     @ToString.Exclude
@@ -28,13 +27,13 @@ public class Seller extends User{
 
     public Seller(Long id, String name, String email, String password) {
         super(id, name, email, password);
-        addProfile(Profile.USUARIO);
+        addProfile(Profile.SELLER);
     }
 
     public Seller(Long id, String name, String email, String password, List<Advertise> advertiseList, List<Batch> batchList) {
         super(id, name, email, password);
         this.advertiseList = advertiseList;
-        addProfile(Profile.USUARIO);
+        addProfile(Profile.SELLER);
     }
 
     @Override

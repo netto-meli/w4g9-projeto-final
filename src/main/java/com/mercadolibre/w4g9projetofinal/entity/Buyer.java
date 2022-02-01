@@ -21,7 +21,7 @@ public class Buyer extends User{
     public Buyer(Long id, String name, String email, String password, String address) {
         super(id, name, email, password);
         this.address = address;
-        addProfile(Profile.USUARIO);
+        addProfile(Profile.BUYER);
     }
 
     @Override

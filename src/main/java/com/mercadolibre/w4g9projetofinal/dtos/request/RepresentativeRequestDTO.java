@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotEmpty;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,4 +14,7 @@ public class RepresentativeRequestDTO {
     private String name;
     private RepresentativeJob job;
     private String email;
+
+    @NotEmpty(message = "Campo obrigatório")
+    private String password;
 }

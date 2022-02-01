@@ -1,8 +1,11 @@
 package com.mercadolibre.w4g9projetofinal.service;
 
 import com.mercadolibre.w4g9projetofinal.entity.Seller;
+import com.mercadolibre.w4g9projetofinal.entity.User;
+import com.mercadolibre.w4g9projetofinal.exceptions.ExistingUserException;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.SellerRepository;
+import com.mercadolibre.w4g9projetofinal.repository.UserRepository;
 import com.mercadolibre.w4g9projetofinal.security.UserSS;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +30,10 @@ public class SellerService {
     @Autowired
     private BCryptPasswordEncoder pe;
 
+    /*** Instancia de repositório: <b>UserRepository</b>.
+     */
+    @Autowired
+    private UserRepository userRepository;
 
     /*** Instancia de repositório: <b>SellerRepository</b>.
      */
@@ -62,8 +69,14 @@ public class SellerService {
      * @param obj objeto Seller a ser inserido
      */
     public Seller insert(Seller obj) {
-        obj.setPassword(pe.encode(obj.getPassword()));
-        return repository.save(obj);
+        String email = findByEmailDB(obj.getEmail());
+        if (email == null) {
+            obj.setPassword(pe.encode(obj.getPassword()));
+            return repository.save(obj);
+        }
+        else {
+            throw new ExistingUserException("Usuário existente na base de dados");
+        }
     }
 
     /*** Método que atualiza um Seller já existente
@@ -91,5 +104,14 @@ public class SellerService {
         newObj.setId(obj.getId());
         newObj.setName(obj.getName());
         newObj.setEmail(obj.getEmail());
+    }
+
+    //Método para verificar se existe o email informado no banco de dados
+    private String findByEmailDB(String email) {
+        User user = userRepository.findByEmail(email);
+        if(user == null) {
+            return null;
+        }
+        return user.getEmail();
     }
 }

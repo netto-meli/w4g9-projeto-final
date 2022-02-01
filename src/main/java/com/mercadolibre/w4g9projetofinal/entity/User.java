@@ -1,5 +1,6 @@
 package com.mercadolibre.w4g9projetofinal.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mercadolibre.w4g9projetofinal.entity.enums.Profile;
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -23,10 +24,13 @@ public abstract class User{
     private Long id;
     private String name;
     private String email;
+
+    @JsonIgnore
     private String password;
 
     @ElementCollection(fetch=FetchType.EAGER)
     @CollectionTable(name="PROFILES")
+    @JsonIgnore
     private Set<Integer> profiles = new HashSet<>();
 
     public User(Long id, String name, String email, String password) {

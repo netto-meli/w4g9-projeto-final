@@ -1,12 +1,11 @@
 package com.mercadolibre.w4g9projetofinal.entity;
 
+import com.mercadolibre.w4g9projetofinal.entity.enums.Profile;
 import com.mercadolibre.w4g9projetofinal.entity.enums.RepresentativeJob;
 import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import java.util.Objects;
 
 @Getter
@@ -18,9 +17,10 @@ import java.util.Objects;
 public class Representative extends User{
     private RepresentativeJob job;
 
-    public Representative(Long id, String name, String email, String role, String password, RepresentativeJob job) {
-        super(id, name, email, role, password);
+    public Representative(Long id, String name, String email,RepresentativeJob job, String password) {
+        super(id, name, email, password);
         this.job = job;
+        addProfile(Profile.REPRESENTATIVE);
     }
 
     @Override

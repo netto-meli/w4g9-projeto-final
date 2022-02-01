@@ -10,7 +10,7 @@ import java.util.List;
 public class RepresentativeConverter {
 
     public static Representative convertDtoToEntity (RepresentativeRequestDTO objDTO){
-        return new Representative(null, objDTO.getName(), objDTO.getEmail(), objDTO.getJob(), objDTO.getPass());
+        return new Representative(null, objDTO.getName(), objDTO.getEmail(), objDTO.getJob(), objDTO.getPassword());
     }
 
     public static RepresentativeResponseDTO convertEntityToDto (Representative obj){

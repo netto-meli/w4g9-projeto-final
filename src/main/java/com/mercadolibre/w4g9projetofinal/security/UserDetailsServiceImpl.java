@@ -1,8 +1,6 @@
 package com.mercadolibre.w4g9projetofinal.security;
 
-import com.mercadolibre.w4g9projetofinal.entity.Seller;
 import com.mercadolibre.w4g9projetofinal.entity.User;
-import com.mercadolibre.w4g9projetofinal.repository.SellerRepository;
 import com.mercadolibre.w4g9projetofinal.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
