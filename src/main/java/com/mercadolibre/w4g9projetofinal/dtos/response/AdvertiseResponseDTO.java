@@ -12,6 +12,11 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+/***
+ * DTO para Deserialização do Advertise
+ * contem id(Long), description(String), product(Product), Seller(seller), price(BigDecimal), status(AdvertiseStatus), freeShipping (boolean)
+ * @autor Leonardo
+ */
 public class AdvertiseResponseDTO {
     private Long id;
     private String description;

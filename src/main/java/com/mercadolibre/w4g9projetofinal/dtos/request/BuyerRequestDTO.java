@@ -9,6 +9,12 @@ import javax.validation.constraints.NotEmpty;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+/***
+ * DTO para serialização
+ * Classe de Request
+ * contem: name(String), endereco(String), email(String)
+ * @autor Leonardo
+ */
 public class BuyerRequestDTO {
     private String name;
     public String address;

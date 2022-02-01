@@ -1,5 +1,8 @@
 package com.mercadolibre.w4g9projetofinal.entity.enums;
 
+/***
+ * Classe Enum para status do anuncio
+ */
 public enum AdvertiseStatus {
 
     ATIVO(0, "Ativo"),
