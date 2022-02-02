@@ -79,4 +79,16 @@ public class ResourceExceptionHandler {
 		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.UNAUTHORIZED.value(), "Usúario já existente na base de dados", ex.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(err);
 	}
+
+	/*** Handler de erro
+	 *
+	 * @param ex exceção lançada
+	 * @param request webRequest
+	 * @return Response Entity status code de erro e mensagem.
+	 */
+	@ExceptionHandler(AuthorizationException.class)
+	public ResponseEntity<StandardError> authorizationException(AuthorizationException ex, HttpServletRequest request) {
+		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.FORBIDDEN.value(), "Not Authorized", ex.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
+	}
 }

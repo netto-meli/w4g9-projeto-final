@@ -45,10 +45,6 @@ public class RepresentativeService {
      * @param id ID do Representative a ser retornado
      */
     public Representative findById(Long id) {
-        UserSS user = UserService.authenticated();
-        if(user == null || !user.hasRole(Profile.ADMIN) && !id.equals(user.getId())) {
-            throw new AuthorizationException("Acesso negado");
-        }
         Optional<Representative> obj = repository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Representante não encontrado! Por favor verifique o id."));
     }

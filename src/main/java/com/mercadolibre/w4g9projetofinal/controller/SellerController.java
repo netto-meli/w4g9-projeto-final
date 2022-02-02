@@ -4,7 +4,11 @@ import com.mercadolibre.w4g9projetofinal.dtos.converter.SellerConverter;
 import com.mercadolibre.w4g9projetofinal.dtos.request.SellerRequestDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.SellerResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Seller;
+import com.mercadolibre.w4g9projetofinal.entity.enums.Profile;
+import com.mercadolibre.w4g9projetofinal.exceptions.AuthorizationException;
+import com.mercadolibre.w4g9projetofinal.security.UserSS;
 import com.mercadolibre.w4g9projetofinal.service.SellerService;
+import com.mercadolibre.w4g9projetofinal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -44,9 +48,12 @@ public class SellerController {
      * @param id id do Seller a ser encontrado
      * @return PayLoad com Seller encontrado e ResponseEntity com status <b>OK</b>
      */
-    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping(value = "/{id}")
     public ResponseEntity<Seller> findById(@PathVariable Long id) {
+        UserSS user = UserService.authenticated();
+        if(user == null || !user.hasRole(Profile.ADMIN) && !id.equals(user.getId())) {
+            throw new AuthorizationException("Acesso negado");
+        }
         Seller obj = service.findById(id);
         return ResponseEntity.ok(obj);
     }

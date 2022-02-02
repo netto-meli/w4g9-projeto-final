@@ -42,10 +42,6 @@ public class SellerService {
      * @param id ID do Seller a ser retornado
      */
     public Seller findById(Long id) {
-        UserSS user = UserService.authenticated();
-        if(user == null || !user.hasRole(Profile.ADMIN) && !id.equals(user.getId())) {
-            throw new AuthorizationException("Acesso negado");
-        }
         Optional<Seller> obj = repository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Vendedor não encontrado! Por favor verifique o id."));
     }

@@ -1,4 +1,4 @@
-package com.mercadolibre.w4g9projetofinal.ProjectConfig;
+package com.mercadolibre.w4g9projetofinal.util;
 
 import com.mercadolibre.w4g9projetofinal.entity.*;
 import com.mercadolibre.w4g9projetofinal.entity.enums.AdvertiseStatus;
