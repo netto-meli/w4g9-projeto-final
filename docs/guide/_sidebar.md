@@ -1,8 +1,12 @@
-- [Enunciado Base - Wave 4](guide/projeto_integrador/)
-- [Modelos de Classe](guide/modelo_classes/)
-- [Modelos Relacionais](guide/modelo_ER/)
-- [User Stories](User_story/)
-- [JSONs Utilizados](guide/JSON/)
-- [Explanation](specs/)
-- [Tutorial](fury_install/)
-- [How-to Guides](guide/)
+- Projeto Integrador
+    - [Enunciado Base - Wave 4](projeto_integrador/)
+    - [Modelos de Classe e Relacionais](modelos/)
+- 
+- Endpoints API
+    - [Swagger Information](swagger/)
+    - [Postman](postman/)
+
+- About
+    - [Fury Project](fury_install/)
+    - [Git Commit Guidelines](git/)
+    - [Documentation Service](docsify/)

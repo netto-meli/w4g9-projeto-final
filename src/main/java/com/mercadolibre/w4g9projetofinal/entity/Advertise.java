@@ -19,8 +19,7 @@ public class Advertise {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String description;
-    @OneToOne(fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL)
+    @ManyToOne
     private Product product;
     @ManyToOne
     private Seller seller;

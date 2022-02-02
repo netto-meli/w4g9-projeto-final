@@ -1,11 +1,14 @@
 package com.mercadolibre.w4g9projetofinal.entity;
 
-import lombok.*;
+import com.mercadolibre.w4g9projetofinal.entity.enums.Profile;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import java.util.HashSet;
 import java.util.Objects;
 
 @Getter
@@ -16,9 +19,10 @@ import java.util.Objects;
 public class Buyer extends User{
     private String address;
 
-    public Buyer(Long id, String name, String email, String role, String password, String address) {
-        super(id, name, email, role, password);
+    public Buyer(Long id, String username, String name, String email, String password, String address) {
+        super(id, username, name, email, password, new HashSet<>());
         this.address = address;
+        addProfile(Profile.BUYER);
     }
 
     @Override

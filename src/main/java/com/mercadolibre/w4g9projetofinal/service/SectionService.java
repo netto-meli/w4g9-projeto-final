@@ -22,7 +22,6 @@ public class SectionService {
     private SectionRepository sectionRepository;
 
     public Section validateSectionBatches(Section section, List<Batch> batchStock) {
-
         Section dbSection = this.findById(section.getId());
         if (!section.getWarehouse().getId()
                 .equals(dbSection.getWarehouse().getId())) {

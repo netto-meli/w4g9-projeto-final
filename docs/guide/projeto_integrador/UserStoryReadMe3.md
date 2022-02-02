@@ -14,20 +14,15 @@ serviços são expostos a partir do armazém de atendimento. Os contratos refere
 
 Sinônimos do Representante: supervisor, líder.
 
---
-
 ## Verifique a localização de um produto no armazém
 
 ### User Story
 
-|                                                                                      User Story Code: ml-check-product-location-in-warehouse-01                                                                                       | Horas estimadas |
-|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:---------------:|
-|                                                                                 **User Story Name: Verifique a
 
-localização de um produto no armazém**                                                                                 |
-| | **COMO** Representante **QUERO** adicionar produtos ao carrinho de compras do Marketplace **
-PARA** poder consultar um produto em stock no armazém **
-PARA** saber a sua localização num setor e os diferentes lotes onde se encontra. ||
+|                                                                                      User Story Code: ml-check-product-location-in-warehouse-01                                                                                      | Horas estimadas |
+|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:---------------:|
+|                                                                                **User Story Name: Verifique a localização de um produto no armazém**                                                                                 ||
+| **COMO** Representante **QUERO** adicionar produtos ao carrinho de compras do Marketplace **PARA** poder consultar um produto em stock no armazém **PARA** saber a sua localização num setor e os diferentes lotes onde se encontra. ||
 
 | **CENÁRIO 1:** um produto do vendedor é registrado.                                             |
 |:------------------------------------------------------------------------------------------------|
@@ -45,11 +40,11 @@ PARA** saber a sua localização num setor e os diferentes lotes onde se encontr
 | **E** que o produto é filtrado (ordenado) pela quantidade atual do lote (menor para maior)      |
 | **E** E que o produto é filtrado (ordenado) por data de validade (mais antigo para o mais novo) |
 
-| VALIDAÇÃO                                            |
-|------------------------------------------------------|
-| * Autentique-se como representante e acesse os terminais. | 
-| * Autentique-se como representante e acesse os terminais.                                   |
-| * O produto não deve estar vencido ou prestes a expirar (mínimo 3 semanas)   |
+| VALIDAÇÃO                                                                  |
+|----------------------------------------------------------------------------|
+| * Autentique-se como representante e acesse os terminais.                  | 
+| * Autentique-se como representante e acesse os terminais.                  |
+| * O produto não deve estar vencido ou prestes a expirar (mínimo 3 semanas) |
 
 ##### Representação JSON:
 

@@ -5,19 +5,6 @@ O objetivo deste projeto final é implementar uma API REST no âmbito do slogan 
 os conteúdos trabalhados durante o BOOTCAMP MELI. (Git, Java, Spring, Armazenamento,
 Qualidade e Segurança).
 
-``` plantuml
-        @startuml
-            node node1
-            node node2
-            node node3
-            node node4
-            node node5
-            node1 -- node2 : label1
-            node1 .. node3 : label2
-            node1 ~~ node4 : label3
-            node1 == node5
-        @enduml
-```
 _Kickoff do projeto:_ ***26/01/2022***
 
 #### Enunciado

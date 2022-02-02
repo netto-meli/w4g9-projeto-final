@@ -1,15 +1,19 @@
 package com.mercadolibre.w4g9projetofinal.entity.enums;
 
+/***
+ * Classe Enum para tipo de refrigeracao
+ * @author Leonardo
+ */
 public enum RefrigerationType {
 
     FROZEN("FF", "Congelado"),
     COLD("RF", "Resfriado"),
     FRESH("FS", "Fresco");
 
-    private String cod;
-    private String descricao;
+    private final String cod;
+    private final String descricao;
 
-    private RefrigerationType(String cod, String descricao) {
+    RefrigerationType(String cod, String descricao) {
         this.cod = cod;
         this.descricao = descricao;
     }
@@ -25,7 +29,7 @@ public enum RefrigerationType {
 
     public static RefrigerationType toEnum(String cod) {
         if (cod == null) {
-            return null;
+            throw new IllegalArgumentException("Id Inválido: " + cod);
         }
 
         for (RefrigerationType x : RefrigerationType.values()) {

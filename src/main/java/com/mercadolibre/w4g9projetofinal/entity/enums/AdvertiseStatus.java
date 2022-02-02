@@ -1,5 +1,9 @@
 package com.mercadolibre.w4g9projetofinal.entity.enums;
 
+/***
+ * Classe Enum para status do anuncio
+ * @author Leonardo
+ */
 public enum AdvertiseStatus {
 
     ATIVO(0, "Ativo"),
@@ -9,10 +13,10 @@ public enum AdvertiseStatus {
     PENDENTE(4, "Pendente"),
     FINALIZADO(5, "Finalizado");
 
-    private int cod;
-    private String descricao;
+    private final int cod;
+    private final String descricao;
 
-    private AdvertiseStatus(int cod, String descricao) {
+    AdvertiseStatus(int cod, String descricao) {
         this.cod = cod;
         this.descricao = descricao;
     }

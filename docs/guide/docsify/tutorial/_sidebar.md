@@ -1,4 +1,4 @@
-- [Tutorial](/tutorial/)
+- [Tutorial](/docsify/tutorial/)
 - Plan
     - [Gather information](gather-information)
     - [Discover the commons use cases](discover-commons-use-cases)

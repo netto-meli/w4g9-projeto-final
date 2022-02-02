@@ -1,5 +1,6 @@
 package com.mercadolibre.w4g9projetofinal.dtos.request;
 
+import com.mercadolibre.w4g9projetofinal.entity.enums.RefrigerationType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -15,4 +16,5 @@ public class ProductRequestDTO {
     private String description;
     private float minTemperature;
     private float maxTemperature;
+    private RefrigerationType categoryRefrigeration;
 }
