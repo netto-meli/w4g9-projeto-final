@@ -1,11 +1,11 @@
 package com.mercadolibre.w4g9projetofinal.service;
 
 import com.mercadolibre.w4g9projetofinal.entity.Buyer;
-import com.mercadolibre.w4g9projetofinal.exceptions.CartManagementException;
+import com.mercadolibre.w4g9projetofinal.exceptions.ExistingUserException;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.BuyerRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,23 +18,27 @@ public class BuyerService {
 
     /*** Instancia de BCryptPasswordEncoder: <b>BCryptPasswordEncoder</b>.
      */
-    @Autowired
     private BCryptPasswordEncoder pe;
 
     private BuyerRepository repository;
 
     public List<Buyer> findAll() {
-        return  repository.findAll();
+        return repository.findAll();
     }
 
     public Buyer findById(Long id) {
         Optional<Buyer> buyer = repository.findById(id);
-        return buyer.orElseThrow(() -> new ObjectNotFoundException("Comprador não encontrado! Por favor verifique dados informados."));
+        return buyer.orElseThrow(() ->
+                new ObjectNotFoundException("Comprador não encontrado! Por favor verifique dados informados."));
     }
 
     public Buyer insert(Buyer buyer) {
         buyer.setPassword(pe.encode(buyer.getPassword()));
-        return repository.save(buyer);
+        try {
+            return repository.save(buyer);
+        } catch (DataIntegrityViolationException e) {
+            throw new ExistingUserException("Username ou Email existente na base de dados");
+        }
     }
 
     public Buyer update(Buyer buyer) {

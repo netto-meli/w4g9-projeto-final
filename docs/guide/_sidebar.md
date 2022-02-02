@@ -3,7 +3,7 @@
     - [Modelos de Classe e Relacionais](modelos/)
 - 
 - Endpoints API
-    - [Swagger Information](specs/)
+    - [Swagger Information](swagger/)
     - [Postman](postman/)
 
 - About

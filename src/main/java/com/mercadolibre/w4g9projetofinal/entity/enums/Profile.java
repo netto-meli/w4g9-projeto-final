@@ -7,10 +7,10 @@ public enum Profile {
     SELLER(3, "ROLE_SELLER"),
     BUYER(4, "ROLE_BUYER");
 
-    private int cod;
+    private final int cod;
     private final String descricao;
 
-    private Profile(int cod, String descricao) {
+    Profile(int cod, String descricao) {
         this.cod = cod;
         this.descricao = descricao;
     }

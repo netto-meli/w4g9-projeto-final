@@ -11,11 +11,11 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RepresentativeRequestDTO {
-    private String name;
-    private RepresentativeJob job;
-    private String email;
+    @NotEmpty(message = "Campo Obrigatório")
     private String username;
-
-    @NotEmpty(message = "Campo obrigatório")
-    private String password;
+    private String name;
+    private String email;
+    @NotEmpty(message = "Campo Obrigatório")
+    private String pass;
+    private RepresentativeJob job;
 }

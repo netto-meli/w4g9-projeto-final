@@ -10,7 +10,6 @@ As histórias de usuários são narradas do ponto de vista do comprador com base
 suas necessidades. Os serviços são expostos a partir do Marketplace para serem
 consumidos pelo comprador que os solicita. Os contratos referem-se à História do Usuário.
 
---
 ## Registrar Venda: Adicione o produto ao carrinho de comprasRegistrar Venda: Adicione o produto ao carrinho de compras
 ### User Story
 

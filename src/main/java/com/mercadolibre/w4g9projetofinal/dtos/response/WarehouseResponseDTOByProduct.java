@@ -7,10 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SellerResponseDTO {
-    private Long id;
-    private String username;
-    private String name;
-    private String email;
-    private String username;
+public class WarehouseResponseDTOByProduct {
+    private Long warehouseCode;
+    private int totalQuantity;
 }

@@ -8,6 +8,7 @@ import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,7 +18,6 @@ import java.util.Objects;
 @NoArgsConstructor
 @Entity
 public class Seller extends User{
-
     @ToString.Exclude
     @OneToMany(
             mappedBy = "seller",
@@ -25,14 +25,10 @@ public class Seller extends User{
             cascade = CascadeType.ALL)
     private List<Advertise> advertiseList;
 
-    public Seller(Long id, String name, String email, String username, String password) {
-        super(id, name, email, username, password);
-        addProfile(Profile.SELLER);
-    }
-
-    public Seller(Long id, String name, String email, String username, String password, List<Advertise> advertiseList, List<Batch> batchList) {
-        super(id, name, email, username, password);
+    public Seller(Long id, String username, String name, String email, String password, List<Advertise> advertiseList) {
+        super(id, username, name, email, password, new HashSet<>());
         this.advertiseList = advertiseList;
+
         addProfile(Profile.SELLER);
     }
 

@@ -38,22 +38,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String[] PUBLIC_MATCHERS = {
             "/h2-console/**",
+            "/api/**"
     };
 
     private static final String[] PUBLIC_MATCHERS_GET = {
-            "/api/v1/fresh-products/sellers",
-            "/api/v1/fresh-products/representatives"
+            "/sellers",
+            "/representatives"
     };
 
     private static final String[] PUBLIC_MATCHERS_POST = {
-            "/api/v1/fresh-products/sellers",
-            "/api/v1/fresh-products/representatives"
+            "/sellers",
+            "/representatives"
     };
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        if (Arrays.asList(env.getActiveProfiles()).contains("test")) {
+        if (Arrays.asList(env.getActiveProfiles()).contains("local")) {
             http.headers().frameOptions().disable();
         }
 

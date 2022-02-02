@@ -12,7 +12,6 @@ referem-se à História do Usuário.
 
 Sinônimos do Representante: supervisor, líder.
 
---
 ## Insira o lote no armazém de atendimento
 ### User Story
 

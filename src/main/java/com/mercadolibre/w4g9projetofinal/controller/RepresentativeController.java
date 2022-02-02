@@ -4,7 +4,6 @@ import com.mercadolibre.w4g9projetofinal.dtos.converter.RepresentativeConverter;
 import com.mercadolibre.w4g9projetofinal.dtos.request.RepresentativeRequestDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.RepresentativeResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Representative;
-import com.mercadolibre.w4g9projetofinal.entity.Seller;
 import com.mercadolibre.w4g9projetofinal.service.RepresentativeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +21,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping(value = "//api/v1/fresh-products/representatives")
+@RequestMapping(value = "/api/v1/fresh-products/representative")
 public class RepresentativeController {
 
     /*** Instancia de serviço: <b>RepresentativeService</b> com notação <i>{@literal @}Autowired</i> do lombok */
@@ -48,18 +47,6 @@ public class RepresentativeController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<Representative> findById(@PathVariable Long id) {
         Representative obj = service.findById(id);
-        return ResponseEntity.ok(obj);
-    }
-
-    /*** Método para buscar Representative por email<br>
-     * GET - /representative/email
-     * @param email email do Representative a ser encontrado
-     * @return PayLoad com Representative encontrado e ResponseEntity com status <b>OK</b>
-     */
-    @PreAuthorize("hasAnyRole('ADMIN')")
-    @GetMapping(value = "/email")
-    public ResponseEntity<Representative> findByEmail(@RequestParam(value = "value") String email) {
-        Representative obj = service.findByEmail(email);
         return ResponseEntity.ok(obj);
     }
 

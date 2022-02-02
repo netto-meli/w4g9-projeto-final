@@ -1,20 +1,24 @@
 package com.mercadolibre.w4g9projetofinal.controller;
 
 import com.mercadolibre.w4g9projetofinal.dtos.converter.ProductConverter;
+import com.mercadolibre.w4g9projetofinal.dtos.response.ProductByBatchResponseDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.ProductResponseDTO;
-import com.mercadolibre.w4g9projetofinal.entity.Product;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 /*** Controller dos métodos do Produt:<br>
- * <b>Lista todos anuncios</b><br>
- * <b>lista anuncio por categoria</b><br>
- *
+ * <b>Lista todos produtos</b><br>
+ * <b>lista produto por categoria</b><br>
+ * <b>listar produtos por lote</b>
+ * <b>listar produtos por Ordenacao.</b>
  * @author Leonardo
  */
 @RestController
@@ -43,13 +47,43 @@ public class ProductController {
      * Motodo GET para listar produtos por categoria.
      * @return retorna a lista por categora e status 200
      */
-    @GetMapping(value = "/list")
-    public ResponseEntity<List<Product>> FindListCategory(@RequestParam String queryType) {
-        if(queryType == null || queryType.isEmpty()){
+    @GetMapping(value = "/listCategorylistCategory")
+    public ResponseEntity<List<ProductResponseDTO>> FindListCategory(@RequestParam String categoryProd) {
+        if(categoryProd == null || categoryProd.isEmpty()){
             throw new ObjectNotFoundException("Ainda nao consta dados cadastrados");
         }
-        List<Product> product = service.findByCategoryProduct(queryType);
+        List<ProductResponseDTO> product = ProductConverter.convertEntityListToDtoList(
+                service.findByCategoryProduct(categoryProd));
         return ResponseEntity.ok(product);
+    }
+
+    /***
+     * Motodo GET para listar produtos por lote.
+     * @return retorna lote dos produtos status 200
+     */
+    @GetMapping("/listBatch")
+    public ResponseEntity<ProductByBatchResponseDTO> findBatchByProductId(@RequestParam Long id) {
+        if(id == null){
+            throw new ObjectNotFoundException("Ainda nao consta dados cadastrados");
+        }
+        ProductByBatchResponseDTO response = ProductConverter.convertEntityToDtoByProduct(service.findByBatchInProduct(id));
+        return ResponseEntity.ok().body(response);
+    }
+
+    /***
+     * Motodo GET para listar produtos por Ordenacao.
+     * @return retorna lote dos produtos de acordo com a ordenacao status 200
+     * L = ordenado por lote
+     * C = ordenado por quantidade atual
+     * F = ordenado por data de vencimento
+     */
+    @GetMapping("/listOrderBy")
+    public ResponseEntity<ProductByBatchResponseDTO> OrderByProductId(@RequestParam Long id, @RequestParam String order) {
+        if(id == null){
+            throw new ObjectNotFoundException("Ainda nao consta dados cadastrados");
+        }
+        ProductByBatchResponseDTO response = ProductConverter.convertEntityToDtoByProduct(service.OrderByBatchInProduct(id, order));
+        return ResponseEntity.ok().body(response);
     }
 
 }
