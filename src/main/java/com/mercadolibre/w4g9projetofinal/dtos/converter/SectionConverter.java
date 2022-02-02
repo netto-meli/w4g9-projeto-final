@@ -2,10 +2,8 @@ package com.mercadolibre.w4g9projetofinal.dtos.converter;
 
 import com.mercadolibre.w4g9projetofinal.dtos.request.SectionRequestDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.request.SectionRequestDTOForInboundOrder;
-import com.mercadolibre.w4g9projetofinal.dtos.response.InboundOrderResponseDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.SectionResponseDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.SectionResponseDTOForInboundOrder;
-import com.mercadolibre.w4g9projetofinal.entity.InboundOrder;
 import com.mercadolibre.w4g9projetofinal.entity.Section;
 import com.mercadolibre.w4g9projetofinal.entity.Warehouse;
 

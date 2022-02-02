@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -32,8 +33,9 @@ public class SectionController {
      */
     @GetMapping
     @ResponseBody
-    public List<SectionResponseDTO> lista(){
-        return sectionService.sectionListAvailable();
+    public List<SectionResponseDTO> findAll(){
+        List<Section> sections = sectionService.findAll();
+        return SectionConverter.convertEntityListToDtoList(sections);
     }
 
     /*** Cadastra uma Section
@@ -42,9 +44,10 @@ public class SectionController {
      * @return Retorna o payload de SectionResponseDTO em um ResponseEntity com o status 201
      */
     @PostMapping
-    public ResponseEntity<SectionResponseDTO> cadastrar(@RequestBody SectionRequestDTO sectionRequestDTO,
+    public ResponseEntity<SectionResponseDTO> insert(@RequestBody @Valid SectionRequestDTO sectionRequestDTO,
                                                         UriComponentsBuilder uriBuilder){
-        Section section = sectionService.registerSectionDtoRequest(sectionRequestDTO);
+        Section sectionRequest = SectionConverter.convertDtoToEntity(sectionRequestDTO);
+        Section section = sectionService.save(sectionRequest);
         URI uri = uriBuilder.path("/section/{id}").buildAndExpand(section.getId()).toUri();
         return ResponseEntity.created(uri).body(SectionConverter.convertEntityToDto(section));
     }
@@ -54,12 +57,9 @@ public class SectionController {
      * @return O Section pesquisado caso OK.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<SectionResponseDTO> detalhar(@PathVariable Long id){
-        Optional<Section> section = sectionService.searchDetailSection(id);
-        if (section.isPresent()) {
-            return ResponseEntity.ok(SectionConverter.convertEntityToDto(section.get()));
-        }
-        return ResponseEntity.notFound().build();
+    public ResponseEntity<SectionResponseDTO> findById(@PathVariable Long id){
+        Section section = sectionService.findById(id);
+        return ResponseEntity.ok(SectionConverter.convertEntityToDto(section));
     }
 
     /*** Atualiza uma Section com base no ID
@@ -69,8 +69,10 @@ public class SectionController {
      */
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<SectionResponseDTO> atualizar(@PathVariable Long id, @RequestBody SectionRequestDTO sectionDTO){
-        Section section = sectionService.updateSection(id, sectionDTO);
+    public ResponseEntity<SectionResponseDTO> update(@PathVariable Long id,
+                                                        @RequestBody @Valid SectionRequestDTO sectionDTO){
+        Section sectionRequest = SectionConverter.convertDtoToEntity(sectionDTO);
+        Section section = sectionService.update(id, sectionRequest);
         if (section != null) {
             return ResponseEntity.ok(SectionConverter.convertEntityToDto(section));
         }
@@ -83,8 +85,8 @@ public class SectionController {
      */
     @DeleteMapping("/{id}")
     @Transactional
-    public ResponseEntity<SectionResponseDTO> remover(@PathVariable Long id){
-        Section section = sectionService.deleteSectionById(id);
+    public ResponseEntity<SectionResponseDTO> delete(@PathVariable Long id){
+        Section section = sectionService.delete(id);
         if (section != null) {
             return ResponseEntity.ok(SectionConverter.convertEntityToDto(section));
         }

@@ -8,8 +8,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 /***
- * DTO para Deserialização do Advertise
- * contem id (Long), address (String), name(String), email(String)
+ * DTO para Deserialização do Buyer
+ * contem id (Long),
+ * address (String),
+ * name(String),
+ * email(String)
  * @autor LEonardo
  */
 public class BuyerResponseDTO {

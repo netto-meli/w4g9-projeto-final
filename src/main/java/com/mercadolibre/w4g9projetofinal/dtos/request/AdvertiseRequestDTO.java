@@ -14,9 +14,14 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 /***
  * DTO para serialização
- * Classe que request
+ * Classe de request
  * contem:
- * descricao(String), produto(Product), vendedor(Seller), preco(BigDecimal), status de anuncio(AdvertiseStatus) e frete gratuito(boolean)
+ * descricao(String),
+ * produto(Product),
+ * vendedor(Seller),
+ * preco(BigDecimal),
+ * status de anuncio(AdvertiseStatus)
+ * frete gratuito(boolean)
  * @autor Leonardo
  ***/
 public class AdvertiseRequestDTO {

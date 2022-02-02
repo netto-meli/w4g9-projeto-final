@@ -12,7 +12,9 @@ import javax.validation.constraints.NotEmpty;
 /***
  * DTO para serialização
  * Classe de Request
- * contem: name(String), endereco(String), email(String)
+ * contem: name(String),
+ * endereco(String),
+ * email(String)
  * @autor Leonardo
  */
 public class BuyerRequestDTO {
