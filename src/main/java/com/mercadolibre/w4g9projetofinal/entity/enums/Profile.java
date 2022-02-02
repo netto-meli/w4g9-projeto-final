@@ -1,7 +1,6 @@
 package com.mercadolibre.w4g9projetofinal.entity.enums;
 
 public enum Profile {
-
     ADMIN(1, "ROLE_ADMIN"),
     REPRESENTATIVE(2, "ROLE_REPRESENTATIVE"),
     SELLER(3, "ROLE_SELLER"),

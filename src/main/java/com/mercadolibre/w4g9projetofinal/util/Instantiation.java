@@ -50,26 +50,24 @@ public class Instantiation implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 /*
-        Product p1 = new Product(null, "kk", "kk", 0F, 8F, RefrigerationType.COLD);
+        Product p1 = new Product(null, "kk", "kk", 0F, 8F, RefrigerationType.FRESH);
         Product p2 = new Product(null, "kk", "kk", 0F, 8F, RefrigerationType.COLD);
-        Product p3 = new Product(null, "kk", "kk", 0F, 8F, RefrigerationType.COLD);
+        Product p3 = new Product(null, "kk", "kk", 0F, 8F, RefrigerationType.FROZEN);
         p1 = productRepository.save(p1);
         p2 = productRepository.save(p2);
         p3 = productRepository.save(p3);
 
 
-        Seller s1 = new Seller(null, "Marcos Sá", "email1@hotmail.com", pe.encode("123456"), null);
+        Seller s1 = new Seller(null, "khjfud", "Marcos Sá", "email1@hotmail.com", pe.encode("123456"), null);
         s1 = sellerRepository.save(s1);
 
 
-        Representative r1 = new Representative(null, "Marcos Sá", "email1@gmail.com", pe.encode("151515"), RepresentativeJob.LIDER);
+        Representative r1 = new Representative(null, "kkk", "Marcos Sá", "em1@gmail.com", pe.encode("151515"), RepresentativeJob.LIDER);
         r1 = representativeRepository.save(r1);
 
         p1 = productRepository.findById(1L).orElse(null);
         p2 = productRepository.findById(2L).orElse(null);
         p3 = productRepository.findById(3L).orElse(null);
-        p2 = new Product(2L, "kk", "kk", 0F, 8F, RefrigerationType.COLD);
-        p3 = new Product(3L, "kk", "kk", 0F, 8F, RefrigerationType.COLD);
         Advertise a1 = new Advertise(null, "k", p1, s1, BigDecimal.TEN, AdvertiseStatus.ATIVO,false );
         Advertise a2 = new Advertise(null, "k", p2, s1, BigDecimal.TEN, AdvertiseStatus.ATIVO,false );
         Advertise a3 = new Advertise(null, "k", p1, s1, BigDecimal.TEN, AdvertiseStatus.ATIVO,false );
@@ -88,9 +86,9 @@ public class Instantiation implements CommandLineRunner {
         w2 = warehouseRepository.save(w2);
         w3 = warehouseRepository.save(w3);
 
-        Section c1 = new Section(null, w1, "l", RefrigerationType.COLD, 4, 1, 1F, 1F, null );
+        Section c1 = new Section(null, w1, "l", RefrigerationType.FRESH, 4, 1, 1F, 1F, null );
         Section c2 = new Section(null, w2, "l", RefrigerationType.COLD, 4, 1, 1F, 1F, null );
-        Section c3 = new Section(null, w1, "l", RefrigerationType.COLD, 4, 1, 1F, 1F, null );
+        Section c3 = new Section(null, w1, "l", RefrigerationType.FROZEN, 4, 1, 1F, 1F, null );
         c1 = sectionRepository.save(c1);
         c2 = sectionRepository.save(c2);
         c3 = sectionRepository.save(c3);
@@ -101,14 +99,24 @@ public class Instantiation implements CommandLineRunner {
         List<Batch> l2 = new ArrayList<>();
         List<Batch> l3 = new ArrayList<>();
         Batch t1 = new Batch(1L, 1, 1, 1F, 1F, lc, lc, lt, a1, null);
-        Batch t2 = new Batch(2L, 1, 10, 1F, 1F, lc, lc, lt, a2, null);
-        Batch t3 = new Batch(3L, 1, 100, 1F, 1F, lc, lc, lt, a3, null);
-        Batch t4 = new Batch(4L, 1, 2, 1F, 1F, lc, lc, lt, a4, null);
-        Batch t5 = new Batch(5L, 1, 20, 1F, 1F, lc, lc, lt, a5, null);
+        Batch t2 = new Batch(2L, 1, 10, 1F, 1F, lc.plusDays(5), lc, lt, a2, null);
+        Batch t3 = new Batch(3L, 1, 100, 1F, 1F, lc.plusDays(15), lc, lt, a3, null);
+        Batch t4 = new Batch(4L, 1, 2, 1F, 1F, lc.plusDays(25), lc, lt, a4, null);
+        Batch t5 = new Batch(5L, 1, 20, 1F, 1F, lc.plusDays(35), lc, lt, a5, null);
+        Batch t6 = new Batch(6L, 1, 1, 1F, 1F, lc.plusDays(45), lc, lt, a1, null);
+        Batch t7 = new Batch(7L, 1, 10, 1F, 1F, lc.plusDays(55), lc, lt, a2, null);
+        Batch t8 = new Batch(8L, 1, 100, 1F, 1F, lc.plusDays(65), lc, lt, a3, null);
+        Batch t9 = new Batch(9L, 1, 2, 1F, 1F, lc.plusDays(75), lc, lt, a4, null);
+        Batch t10 = new Batch(10L, 1, 20, 1F, 1F, lc.plusDays(85), lc, lt, a5, null);
         l1.add(t1);
         l1.add(t2);
         l2.add(t3);
+        l1.add(t7);
+        l2.add(t8);
         l3.add(t4);
+        l2.add(t10);
+        l3.add(t9);
+        l3.add(t6);
         l3.add(t5);
         InboundOrder i1 = new InboundOrder(1L, lc, s1, r1, l1, c1);
         InboundOrder i2 = new InboundOrder(2L, lc, s1, r1, l2, c2);

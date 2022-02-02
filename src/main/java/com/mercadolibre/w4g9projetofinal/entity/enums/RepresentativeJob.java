@@ -8,7 +8,7 @@ public enum RepresentativeJob {
     private int cod;
     private String descricao;
 
-    private RepresentativeJob(int cod, String descricao) {
+    RepresentativeJob(int cod, String descricao) {
         this.cod = cod;
         this.descricao = descricao;
     }
