@@ -11,16 +11,15 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * @author fbontempo
+ * @version 0.3
+ */
 @Service
 @AllArgsConstructor
 public class SectionService {
 
     private SectionRepository sectionRepository;
-
-    public Section findById(Long id) {
-        return sectionRepository.findById(id)
-                .orElseThrow(() -> new ObjectNotFoundException("Section not found! Please check the id."));
-    }
 
     public Section validateSectionBatches(Section section, List<Batch> batchStock) {
 
@@ -66,51 +65,48 @@ public class SectionService {
         return currentStock;
     }
 
-    public Optional<Section> searchDetailSection(Long id){
-        Optional<Section> section = sectionRepository.findById(id);
-        if (section.isPresent()) {
-            return section;
-        }
-        return null;
-    }
-
-    public Section registerSectionDtoRequest(Section section){
-        sectionRepository.save(section);
-        return section;
-    }
-
-    public Section updateSection(Long id, Section section){
-        Optional<Section> SectionOptional = sectionRepository.findById(id);
-        if (SectionOptional.isPresent()) {
-            Section sUp = SectionOptional.get();
-            sUp.setName(section.getName());
-            sUp.setRefrigerationType(section.getRefrigerationType());
-            sUp.setWarehouse(section.getWarehouse());
-            sUp.setStockLimit(section.getStockLimit());
-            sUp.setCurrentStock(section.getCurrentStock());
-            sUp.setMinTeperature(section.getMinTeperature());
-            sUp.setMaxTeperature(section.getMaxTeperature());
-            return sUp;
-        }
-        return null;
-    }
-
-    public Section deleteSectionById(Long id){
-        Optional<Section> section = sectionRepository.findById(id);
-        if (section.isPresent()) {
-            sectionRepository.deleteById(id);
-            return section.get();
-        }
-        return section.get();
-    }
-
-    public List<Section> sectionListAvailable(){
-        List<Section> sections = sectionRepository.findAll();
-        return sections;
-    }
-
     public Section save(Section section){
         return sectionRepository.save(section);
+    }
+
+    public Section update(Section section) {
+        Section newSection = findById(section.getId());
+        updateSection(section, newSection);
+        return sectionRepository.save(newSection);
+    }
+
+    public void delete(Long id){
+        Optional<Section> section = sectionRepository.findById(id);
+        section.orElseThrow(() -> new ObjectNotFoundException("Setor não encontrado"));
+        sectionRepository.deleteById(id);
+    }
+
+    public List<Section> findAll(){
+        return sectionRepository.findAll();
+    }
+
+    public Section findById(Long id) {
+        return sectionRepository.findById(id)
+                .orElseThrow(() -> new ObjectNotFoundException("Section not found! Please check the id."));
+    }
+
+    public Section findByInboundOrderId(Long id) {
+        return sectionRepository.findByInboundOrder_Id(id)
+                .orElseThrow( () -> new ObjectNotFoundException("Setor nao encontrado através do ID da Inbound Order"));
+    }
+
+    //Método para update de Section
+    private static Section updateSection(Section obj, Section newObj) {
+        newObj.setCurrentStock(obj.getCurrentStock());
+        newObj.setId(obj.getId());
+        newObj.setMaxTeperature(obj.getMaxTeperature());
+        newObj.setMinTeperature(obj.getMinTeperature());
+        newObj.setName(obj.getName());
+        newObj.setInboundOrderList(obj.getInboundOrderList());
+        newObj.setRefrigerationType(obj.getRefrigerationType());
+        newObj.setStockLimit(obj.getStockLimit());
+        newObj.setWarehouse(obj.getWarehouse());
+        return newObj;
     }
 }
 
