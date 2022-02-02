@@ -12,9 +12,9 @@ import javax.validation.constraints.NotEmpty;
 public class SellerRequestDTO {
     @NotEmpty(message = "Campo Obrigatório")
     private String username;
+
     private String name;
     private String email;
-    private String username;
 
     @NotEmpty(message = "Campo obrigatório")
     private String password;

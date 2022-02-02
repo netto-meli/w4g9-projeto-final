@@ -43,7 +43,6 @@ public class RepresentativeController {
      * @param id id do Representative a ser encontrado
      * @return PayLoad com Representative encontrado e ResponseEntity com status <b>OK</b>
      */
-    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping(value = "/{id}")
     public ResponseEntity<Representative> findById(@PathVariable Long id) {
         Representative obj = service.findById(id);

@@ -13,6 +13,5 @@ public class RepresentativeResponseDTO {
     private String username;
     private String name;
     private String email;
-    private String username;
     private RepresentativeJob job;
 }
