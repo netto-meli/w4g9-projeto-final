@@ -22,7 +22,7 @@ import java.util.List;
  * @author Leonardo
  */
 @RestController
-@RequestMapping(value = "/api/v1/fresh-products")
+@RequestMapping(value = "/api/v1/fresh-products/product")
 public class ProductController {
 
     /*** Instancia de serviço: <b>ProdutoService</b> com notação <i>{@literal @}Autowired</i> do lombok

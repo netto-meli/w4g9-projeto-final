@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -58,7 +59,7 @@ public class AdvertiseController {
      */
 
     @PostMapping
-    public ResponseEntity<Void> insert(@RequestBody AdvertiseRequestDTO advertise) {
+    public ResponseEntity<Void> insert(@RequestBody @Valid AdvertiseRequestDTO advertise) {
         Advertise newAdvertise = AdvertiseConverter.convertDtoToEntity(advertise);
         newAdvertise = service.insert(newAdvertise);
         AdvertiseResponseDTO newAdvertisedto = AdvertiseConverter.convertEntityToDto(newAdvertise);
@@ -72,7 +73,8 @@ public class AdvertiseController {
      */
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Void> update(@RequestBody AdvertiseRequestDTO advertiseDto, @PathVariable Long id) {
+    public ResponseEntity<Void> update(@RequestBody @Valid AdvertiseRequestDTO advertiseDto,
+                                       @PathVariable Long id) {
         Advertise advertise = AdvertiseConverter.convertDtoToEntity(advertiseDto);
         advertise.setId(id);
         service.update(advertise);
@@ -88,5 +90,4 @@ public class AdvertiseController {
         service.delete(id);
         return ResponseEntity.ok().build();
     }
-
 }

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class InboundOrderController {
 
     @PostMapping
     public ResponseEntity<List<BatchResponseDTO>> createInboundOrder(
-            @RequestBody InboundOrderRequestDTO inboundOrderRequestDTO,
+            @RequestBody @Valid InboundOrderRequestDTO inboundOrderRequestDTO,
             UriComponentsBuilder uriBuilder) {
         // todo autentication
         Representative representative = new Representative(1L,null, null, null, null, null);
@@ -47,7 +48,7 @@ public class InboundOrderController {
 
     @PutMapping
     public ResponseEntity<List<BatchResponseDTO>> updateInboundOrder(
-            @RequestBody InboundOrderRequestDTO request,
+            @RequestBody @Valid InboundOrderRequestDTO request,
             UriComponentsBuilder uriBuilder) {
         InboundOrder io = InboundOrderConverter.convertDtoToEntity(request);
         io = inboundOrderService.save(io);

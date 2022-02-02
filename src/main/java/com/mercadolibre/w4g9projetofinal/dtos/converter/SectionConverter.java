@@ -27,7 +27,7 @@ public class SectionConverter {
                 section.getId(),
                 section.getName(),
                 section.getRefrigerationType(),
-                section.getWarehouse(),
+                section.getWarehouse().getId(),
                 section.getStockLimit(),
                 section.getCurrentStock(),
                 section.getMinTeperature(),

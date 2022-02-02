@@ -20,7 +20,7 @@ import java.util.List;
  *
  */
 @RestController
-@RequestMapping("/section")
+@RequestMapping("/api/v1/fresh-products/section")
 public class SectionController {
 
     @Autowired
@@ -67,7 +67,7 @@ public class SectionController {
      */
     @PutMapping("/{id}")
     public ResponseEntity<SectionResponseDTO> update(@PathVariable Long id,
-                                                        @RequestBody @Valid SectionRequestDTO sectionDTO){
+                                                     @RequestBody @Valid SectionRequestDTO sectionDTO){
         Section sectionRequest = SectionConverter.convertDtoToEntity(sectionDTO);
         sectionRequest.setId(id);
         Section section = sectionService.update(sectionRequest);

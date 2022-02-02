@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.Map;
@@ -46,7 +47,7 @@ public class WarehouseController {
 
 
     @PostMapping
-    public ResponseEntity<Void> insert(@RequestBody WarehouseRequestDTO wh)
+    public ResponseEntity<Void> insert(@RequestBody @Valid WarehouseRequestDTO wh)
     {
         Warehouse nWarehouse = WarehouseConverter.convertDtoToEntity(wh);
         nWarehouse = warehouseService.insert(nWarehouse);
@@ -56,7 +57,7 @@ public class WarehouseController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Void> update(@RequestBody WarehouseRequestDTO nWarehouse1, @PathVariable long id)
+    public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody @Valid WarehouseRequestDTO nWarehouse1)
     {
         Warehouse wh = WarehouseConverter.convertDtoToEntity(nWarehouse1);
         wh.setId(id);

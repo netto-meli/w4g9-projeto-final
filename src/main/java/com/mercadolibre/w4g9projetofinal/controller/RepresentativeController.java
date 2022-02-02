@@ -15,6 +15,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -63,7 +64,7 @@ public class RepresentativeController {
      * @return ResponseEntity com status <b>CREATED</b>
      */
     @PostMapping
-    public ResponseEntity<Void> insert(@RequestBody RepresentativeRequestDTO obj) {
+    public ResponseEntity<Void> insert(@RequestBody @Valid RepresentativeRequestDTO obj) {
        Representative newObj = RepresentativeConverter.convertDtoToEntity(obj);
        newObj = service.insert(newObj);
        RepresentativeResponseDTO newObj2 = RepresentativeConverter.convertEntityToDto(newObj);
@@ -78,7 +79,8 @@ public class RepresentativeController {
      * @return ResponseEntity com status <b>NO CONTENT</b>
      */
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Void> update(@RequestBody RepresentativeRequestDTO newObj, @PathVariable Long id) {
+    public ResponseEntity<Void> update(@RequestBody @Valid RepresentativeRequestDTO newObj,
+                                       @PathVariable Long id) {
         Representative obj = RepresentativeConverter.convertDtoToEntity(newObj);
         obj.setId(id);
         obj = service.update(obj);

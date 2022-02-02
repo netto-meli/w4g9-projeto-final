@@ -23,8 +23,8 @@ public class AdvertiseConverter {
         return new Advertise(
                 null,
                 advertisedto.getDescription(),
-                advertisedto.getProduct(),
-                advertisedto.getSeller(),
+                ProductConverter.convertDtoToEntity(advertisedto.getProduct()),
+                SellerConverter.convertDtoToEntity(advertisedto.getSeller()),
                 advertisedto.getPrice(),
                 advertisedto.getStatus(),
                 advertisedto.isFreeShipping());
@@ -39,8 +39,8 @@ public class AdvertiseConverter {
         return new AdvertiseResponseDTO(
                 newAdvertise.getId(),
                 newAdvertise.getDescription(),
-                newAdvertise.getProduct(),
-                newAdvertise.getSeller(),
+                ProductConverter.convertEntityToDto(newAdvertise.getProduct()),
+                SellerConverter.convertEntityToDto(newAdvertise.getSeller()),
                 newAdvertise.getPrice(),
                 newAdvertise.getStatus(),
                 newAdvertise.isFreeShipping());
