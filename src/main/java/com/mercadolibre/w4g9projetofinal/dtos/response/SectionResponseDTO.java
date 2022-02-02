@@ -22,7 +22,7 @@ public class SectionResponseDTO {
     private Long id;
     private String name;
     private RefrigerationType refrigerationType;
-    private Warehouse warehouseCode;
+    private Long warehouseCode;
     private int stockLimit;
     private int currentStock;
     private float minTeperature;

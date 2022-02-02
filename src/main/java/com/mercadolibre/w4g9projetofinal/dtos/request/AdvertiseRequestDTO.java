@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
 
 @Data
@@ -25,9 +26,13 @@ import java.math.BigDecimal;
  * @autor Leonardo
  ***/
 public class AdvertiseRequestDTO {
+    @NotEmpty
+    //todo fazer mais validacoes
     private String description;
-    private Product product;
-    private Seller seller;
+    //todo este produto aqui tem q ser DTO
+    private ProductRequestDTO product;
+    //todo este seler temque ser DTO
+    private SellerRequestDTO seller;
     private BigDecimal price;
     private AdvertiseStatus status;
     private boolean freeShipping;

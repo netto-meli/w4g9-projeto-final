@@ -11,6 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -56,7 +57,7 @@ public class SellerController {
      * @return ResponseEntity com status <b>CREATED</b>
      */
     @PostMapping
-    public ResponseEntity<Void> insert(@RequestBody SellerRequestDTO obj) {
+    public ResponseEntity<Void> insert(@RequestBody @Valid SellerRequestDTO obj) {
         Seller newObj = SellerConverter.convertDtoToEntity(obj);
         newObj = service.insert(newObj);
         SellerResponseDTO newObj2 = SellerConverter.convertEntityToDto(newObj);
@@ -71,7 +72,8 @@ public class SellerController {
      * @return ResponseEntity com status <b>NO CONTENT</b>
      */
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Void> update(@RequestBody SellerRequestDTO newObj, @PathVariable long id) {
+    public ResponseEntity<Void> update(@PathVariable Long id,
+                                       @RequestBody @Valid SellerRequestDTO newObj) {
         Seller obj = SellerConverter.convertDtoToEntity(newObj);
         obj.setId(id);
         obj = service.update(obj);
