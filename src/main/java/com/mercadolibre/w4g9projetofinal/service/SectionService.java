@@ -1,12 +1,7 @@
 package com.mercadolibre.w4g9projetofinal.service;
 
-import com.mercadolibre.w4g9projetofinal.dtos.converter.SectionConverter;
-import com.mercadolibre.w4g9projetofinal.dtos.request.SectionRequestDTO;
-import com.mercadolibre.w4g9projetofinal.dtos.response.SectionResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Batch;
-import com.mercadolibre.w4g9projetofinal.entity.InboundOrder;
 import com.mercadolibre.w4g9projetofinal.entity.Section;
-import com.mercadolibre.w4g9projetofinal.entity.Seller;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.exceptions.SectionManagementException;
 import com.mercadolibre.w4g9projetofinal.repository.SectionRepository;

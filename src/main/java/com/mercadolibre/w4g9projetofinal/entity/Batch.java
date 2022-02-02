@@ -6,6 +6,7 @@ import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Getter
@@ -17,14 +18,17 @@ import java.util.Objects;
 public class Batch {
     @Id
     private Long id;
-    private String quantity;
-    private String currentTemperature;
+    private int initialQuantity;
+    private int currentQuantity;
+    private float currentTemperature;
+    private float minTemperature;
     private LocalDate dueDate;
-    private LocalDate manufactureDate;
-    private  Integer currentQuantity;
-
+    private LocalDate manufacturingDate;
+    private LocalDateTime manufacturingTime;
     @OneToOne
     private Advertise advertise;
+    @ManyToOne
+    private InboundOrder inboundOrder;
 
     /*** Realiza verificação do estoque da quantidade de itens de um produto para o carrinho
      *
@@ -62,8 +66,5 @@ public class Batch {
     @Override
     public int hashCode() {
         return getClass().hashCode();
-    }
-
-    public void setInboundOrder(InboundOrder inboundOrder) {
     }
 }

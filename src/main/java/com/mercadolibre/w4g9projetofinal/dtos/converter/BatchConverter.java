@@ -10,7 +10,6 @@ import java.util.List;
 
 public class BatchConverter {
 
-    /*
     public static List<BatchResponseDTO> convertEntityListToDtoList(List<Batch> batchList) {
         List<BatchResponseDTO> batchResponseDTOList = new ArrayList<>();
         for (Batch b : batchList) {
@@ -19,9 +18,6 @@ public class BatchConverter {
         return batchResponseDTOList;
     }
 
-     */
-
-    /*
     public static List<Batch> convertDtoListToEntityList(List<BatchRequestDTO> batchRequestDTOList) {
         List<Batch> batchList = new ArrayList<>();
         for (BatchRequestDTO b : batchRequestDTOList) {
@@ -30,9 +26,6 @@ public class BatchConverter {
         return batchList;
     }
 
-     */
-
-    /*
     public static Batch convertDtoToEntity (BatchRequestDTO b){
         return new Batch(
                 (long) b.getBatchNumber(),
@@ -53,9 +46,6 @@ public class BatchConverter {
                 null
         );
     }
-
-     */
-    /*
     public static BatchResponseDTO convertEntityToDto (Batch b){
         return new BatchResponseDTO(
                 b.getId().intValue(),
@@ -69,6 +59,4 @@ public class BatchConverter {
                 b.getDueDate()
         );
     }
-
-     */
 }
