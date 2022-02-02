@@ -1,12 +1,15 @@
 package com.mercadolibre.w4g9projetofinal.dtos.converter;
 
 import com.mercadolibre.w4g9projetofinal.dtos.request.BatchRequestDTO;
+import com.mercadolibre.w4g9projetofinal.dtos.response.BatchByDueDateRequestDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.BatchResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Advertise;
 import com.mercadolibre.w4g9projetofinal.entity.Batch;
+import com.mercadolibre.w4g9projetofinal.entity.enums.RefrigerationType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class BatchConverter {
 
@@ -58,5 +61,23 @@ public class BatchConverter {
                 b.getManufacturingTime(),
                 b.getDueDate()
         );
+    }
+
+    public static BatchByDueDateRequestDTO convertEntityToDtoByDueDate(Batch batch, RefrigerationType productType) {
+        return new BatchByDueDateRequestDTO(
+                batch.getId(),
+                batch.getAdvertise().getId(),
+                productType.getDescricao(),
+                batch.getDueDate(),
+                batch.getCurrentQuantity());
+    }
+
+    public static List<BatchByDueDateRequestDTO> convertEntityMapToDtoByDueDateList(Map<Batch, RefrigerationType> batchMap) {
+        List<BatchByDueDateRequestDTO> list2 = new ArrayList<>();
+        for (Map.Entry<Batch, RefrigerationType> entry : batchMap.entrySet()) {
+            BatchByDueDateRequestDTO wh = BatchConverter.convertEntityToDtoByDueDate(entry.getKey(), entry.getValue());
+            list2.add(wh);
+        }
+        return list2;
     }
 }

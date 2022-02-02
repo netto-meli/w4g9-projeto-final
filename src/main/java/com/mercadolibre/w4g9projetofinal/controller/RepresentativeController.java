@@ -4,7 +4,11 @@ import com.mercadolibre.w4g9projetofinal.dtos.converter.RepresentativeConverter;
 import com.mercadolibre.w4g9projetofinal.dtos.request.RepresentativeRequestDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.RepresentativeResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Representative;
+import com.mercadolibre.w4g9projetofinal.entity.enums.Profile;
+import com.mercadolibre.w4g9projetofinal.exceptions.AuthorizationException;
+import com.mercadolibre.w4g9projetofinal.security.UserSS;
 import com.mercadolibre.w4g9projetofinal.service.RepresentativeService;
+import com.mercadolibre.w4g9projetofinal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -45,6 +49,10 @@ public class RepresentativeController {
      */
     @GetMapping(value = "/{id}")
     public ResponseEntity<Representative> findById(@PathVariable Long id) {
+        UserSS user = UserService.authenticated();
+        if(user == null || !user.hasRole(Profile.ADMIN) && !id.equals(user.getId())) {
+            throw new AuthorizationException("Acesso negado");
+        }
         Representative obj = service.findById(id);
         return ResponseEntity.ok(obj);
     }

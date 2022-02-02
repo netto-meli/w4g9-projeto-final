@@ -29,7 +29,7 @@ public enum RefrigerationType {
 
     public static RefrigerationType toEnum(String cod) {
         if (cod == null) {
-            return null;
+            throw new IllegalArgumentException("Id Inválido: " + cod);
         }
 
         for (RefrigerationType x : RefrigerationType.values()) {

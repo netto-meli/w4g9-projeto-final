@@ -16,7 +16,7 @@ public enum AdvertiseStatus {
     private final int cod;
     private final String descricao;
 
-    private AdvertiseStatus(int cod, String descricao) {
+    AdvertiseStatus(int cod, String descricao) {
         this.cod = cod;
         this.descricao = descricao;
     }

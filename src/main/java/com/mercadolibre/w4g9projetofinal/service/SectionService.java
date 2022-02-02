@@ -11,6 +11,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * @author fbontempo
+ * @version 0.3
+ */
 @Service
 @AllArgsConstructor
 public class SectionService {
@@ -64,23 +68,16 @@ public class SectionService {
         return sectionRepository.save(section);
     }
 
-    public Section update(Long id, Section section){
-        Optional<Section> sectionOptional = sectionRepository.findById(id);
-        if (sectionOptional.isPresent()) {
-            Section sUp = sectionOptional.get();
-            sUp = updateSection(sUp, section);
-            return sectionRepository.save(sUp);
-        }
-        return null;
+    public Section update(Section section) {
+        Section newSection = findById(section.getId());
+        updateSection(section, newSection);
+        return sectionRepository.save(newSection);
     }
 
-    public Section delete(Long id){
+    public void delete(Long id){
         Optional<Section> section = sectionRepository.findById(id);
-        if (section.isPresent()) {
-            sectionRepository.deleteById(id);
-            return section.get();
-        }
-        return section.get();
+        section.orElseThrow(() -> new ObjectNotFoundException("Setor não encontrado"));
+        sectionRepository.deleteById(id);
     }
 
     public List<Section> findAll(){
