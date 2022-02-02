@@ -10,15 +10,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author fbontempo
- * @version 0.2
+ * @version 0.4
  *
  */
 @RestController
@@ -68,11 +66,11 @@ public class SectionController {
      * @return Retorna o payload de SectionResponseDTO em um ResponseEntity com o status 200
      */
     @PutMapping("/{id}")
-    @Transactional
     public ResponseEntity<SectionResponseDTO> update(@PathVariable Long id,
                                                         @RequestBody @Valid SectionRequestDTO sectionDTO){
         Section sectionRequest = SectionConverter.convertDtoToEntity(sectionDTO);
-        Section section = sectionService.update(id, sectionRequest);
+        sectionRequest.setId(id);
+        Section section = sectionService.update(sectionRequest);
         if (section != null) {
             return ResponseEntity.ok(SectionConverter.convertEntityToDto(section));
         }
@@ -81,15 +79,11 @@ public class SectionController {
 
     /*** Deleta uma Section com base no ID
      * @param id
-     * @return Retorna o payload de SectionResponseDTO em um ResponseEntity com o status 200
+     * @return Retorna o status 200
      */
     @DeleteMapping("/{id}")
-    @Transactional
-    public ResponseEntity<SectionResponseDTO> delete(@PathVariable Long id){
-        Section section = sectionService.delete(id);
-        if (section != null) {
-            return ResponseEntity.ok(SectionConverter.convertEntityToDto(section));
-        }
-        return ResponseEntity.notFound().build();
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        sectionService.delete(id);
+        return ResponseEntity.ok().build();
     }
 }

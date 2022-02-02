@@ -16,14 +16,16 @@ import java.util.stream.Collectors;
 public class UserSS implements UserDetails {
     private static final long serialVersionUID = 7179078869364575101L;
 
+    private final Long id;
     private final String username;
     private final String password;
     private final Collection <?extends GrantedAuthority> authorities;
 
-    public UserSS(String username, String pass, Set<Profile> perfis) {
+    public UserSS(Long id, String username, String password, Set<Profile> perfis) {
         super();
+        this.id = id;
         this.username = username;
-        this.password = pass;
+        this.password = password;
         this.authorities = perfis.stream()
                 .map(x -> new SimpleGrantedAuthority(x.getDescricao()))
                 .collect(Collectors.toList());
@@ -47,5 +49,9 @@ public class UserSS implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public boolean hasRole(Profile profile) {
+        return getAuthorities().contains(new SimpleGrantedAuthority(profile.getDescricao()));
     }
 }
