@@ -27,10 +27,6 @@ public class RepresentativeService {
      */
     private BCryptPasswordEncoder pe;
 
-    /*** Instancia de repositório: <b>UserRepository</b>.
-     */
-    private UserService userService;
-
     /*** Instancia de repositório: <b>RepresentativeRepository</b>.
      */
     private RepresentativeRepository repository;
