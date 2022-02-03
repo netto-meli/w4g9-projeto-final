@@ -51,7 +51,7 @@ public class InboundOrderController {
             @RequestBody @Valid InboundOrderRequestDTO request,
             UriComponentsBuilder uriBuilder) {
         InboundOrder io = InboundOrderConverter.convertDtoToEntity(request);
-        io = inboundOrderService.save(io);
+        io = inboundOrderService.update(io);
         List<BatchResponseDTO> response = BatchConverter.convertEntityListToDtoList(io.getBatchList());
         URI uri = uriBuilder
                 .path("/{id}")

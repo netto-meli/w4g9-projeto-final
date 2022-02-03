@@ -43,6 +43,9 @@ public class Instantiation implements CommandLineRunner {
     private SectionRepository sectionRepository;
 
     @Autowired
+    private BuyerRepository buyerRepository;
+
+    @Autowired
     private InboundOrderRepository inboundOrderRepository;
 
 // TODO DELETAR ESSA CLASSE NO FINAL
@@ -61,9 +64,11 @@ public class Instantiation implements CommandLineRunner {
         Seller s1 = new Seller(null, "khjfud", "Marcos Sá", "email1@hotmail.com", pe.encode("123456"), null);
         s1 = sellerRepository.save(s1);
 
-
         Representative r1 = new Representative(null, "kkk", "Marcos Sá", "em1@gmail.com", pe.encode("151515"), RepresentativeJob.LIDER);
         r1 = representativeRepository.save(r1);
+
+        Buyer u1 = new Buyer(null, "kh88jfud", "Marjhghhjcos Sá", "email1@hotkkmail.com", pe.encode("123776456"), "jhghhjghgh");
+        u1 = buyerRepository.save(u1);
 
         p1 = productRepository.findById(1L).orElse(null);
         p2 = productRepository.findById(2L).orElse(null);
@@ -103,9 +108,9 @@ public class Instantiation implements CommandLineRunner {
         Batch t3 = new Batch(3L, 1, 100, 1F, 1F, lc.plusDays(15), lc, lt, a3, null);
         Batch t4 = new Batch(4L, 1, 2, 1F, 1F, lc.plusDays(25), lc, lt, a4, null);
         Batch t5 = new Batch(5L, 1, 20, 1F, 1F, lc.plusDays(35), lc, lt, a5, null);
-        Batch t6 = new Batch(6L, 1, 1, 1F, 1F, lc.plusDays(45), lc, lt, a1, null);
-        Batch t7 = new Batch(7L, 1, 10, 1F, 1F, lc.plusDays(55), lc, lt, a2, null);
-        Batch t8 = new Batch(8L, 1, 100, 1F, 1F, lc.plusDays(65), lc, lt, a3, null);
+        Batch t6 = new Batch(6L, 1, 1, 1F, 1F, lc.plusDays(45), lc, lt, a5, null);
+        Batch t7 = new Batch(7L, 1, 10, 1F, 1F, lc.plusDays(55), lc, lt, a4, null);
+        Batch t8 = new Batch(8L, 1, 100, 1F, 1F, lc.plusDays(65), lc, lt, a5, null);
         Batch t9 = new Batch(9L, 1, 2, 1F, 1F, lc.plusDays(75), lc, lt, a4, null);
         Batch t10 = new Batch(10L, 1, 20, 1F, 1F, lc.plusDays(85), lc, lt, a5, null);
         l1.add(t1);
