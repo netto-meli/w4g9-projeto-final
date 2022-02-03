@@ -8,10 +8,7 @@ import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -45,11 +42,21 @@ public class ProductController {
     }
 
     /***
+     * Motodo GET para listar produto por id.
+     * @param id do produto
+     * @return retorna a lista de produto do id enviado
+     */
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<ProductResponseDTO> findById(@PathVariable Long id) {
+        return ResponseEntity.ok(ProductConverter.convertEntityToDto(service.findById(id)));
+    }
+
+    /***
      * Motodo GET para listar produtos por categoria.
      * @return retorna a lista por categora e status 200
      */
-    @GetMapping(value = "/listCategorylistCategory")
-    public ResponseEntity<List<ProductResponseDTO>> FindListCategory(@RequestParam String categoryProd) {
+    @GetMapping(value = "/listCategory/{categoryProd}")
+    public ResponseEntity<List<ProductResponseDTO>> findListCategory(@PathVariable String categoryProd) {
         if(categoryProd == null || categoryProd.isEmpty()){
             throw new ObjectNotFoundException("Ainda nao consta dados cadastrados");
         }
@@ -62,7 +69,7 @@ public class ProductController {
      * Motodo GET para listar produtos por lote.
      * @return retorna lote dos produtos status 200
      */
-    @GetMapping("/listBatch")
+    @GetMapping("/listBatch/")
     public ResponseEntity<List<BatchResponseDTO>> findBatchByProductId(@RequestParam Long id) {
         if(id == null){
             throw new ObjectNotFoundException("Ainda nao consta dados cadastrados");
@@ -78,13 +85,12 @@ public class ProductController {
      * C = ordenado por quantidade atual
      * F = ordenado por data de vencimento
      */
-    @GetMapping("/listOrderBy")
-    public ResponseEntity<List<BatchResponseDTO>> OrderByProductId(@RequestParam Long id, @RequestParam String order) {
+    @GetMapping("/listBatch/{order}")
+    public ResponseEntity<List<BatchResponseDTO>> orderByProductId(@RequestParam Long id, @PathVariable String order) {
         if(id == null){
             throw new ObjectNotFoundException("Ainda nao consta dados cadastrados");
         }
         List<BatchResponseDTO> response = BatchConverter.convertEntityListToDtoList(service.OrderByBatchInProduct(id, order));
         return ResponseEntity.ok().body(response);
     }
-
 }

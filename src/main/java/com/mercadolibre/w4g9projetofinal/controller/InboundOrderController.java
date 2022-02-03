@@ -30,7 +30,6 @@ public class InboundOrderController {
     @Autowired
     InboundOrderService inboundOrderService;
 
-    /*
     @PostMapping
     public ResponseEntity<List<BatchResponseDTO>> createInboundOrder(
             @RequestBody @Valid InboundOrderRequestDTO inboundOrderRequestDTO,
@@ -47,9 +46,6 @@ public class InboundOrderController {
         return ResponseEntity.created(uri).body(response);
     }
 
-     */
-
-    /*
     @PutMapping
     public ResponseEntity<List<BatchResponseDTO>> updateInboundOrder(
             @RequestBody @Valid InboundOrderRequestDTO request,
@@ -64,19 +60,6 @@ public class InboundOrderController {
         return ResponseEntity.created(uri).body(response);
     }
 
-     */
-
-    /*
-    @GetMapping("/{id}")
-    public ResponseEntity<InboundOrderResponseDTO> findInboundOrderById(@PathVariable Long id) {
-        InboundOrder io = inboundOrderService.findById(id);
-        InboundOrderResponseDTO response = InboundOrderConverter.convertEntityToDto(io);
-        return ResponseEntity.ok().body(response);
-    }
-
-     */
-
-    /*
     @GetMapping
     public ResponseEntity<List<InboundOrderResponseDTO>> findAllInboundOrders() {
         List<InboundOrder> inboundOrderList = inboundOrderService.findAll();
@@ -84,5 +67,10 @@ public class InboundOrderController {
         return ResponseEntity.ok().body(response);
     }
 
-     */
+    @GetMapping("/{id}")
+    public ResponseEntity<InboundOrderResponseDTO> findInboundOrderById(@PathVariable Long id) {
+        InboundOrder io = inboundOrderService.findById(id);
+        InboundOrderResponseDTO response = InboundOrderConverter.convertEntityToDto(io);
+        return ResponseEntity.ok().body(response);
+    }
 }

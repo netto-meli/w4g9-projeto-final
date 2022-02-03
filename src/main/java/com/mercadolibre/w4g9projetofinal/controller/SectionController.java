@@ -36,6 +36,16 @@ public class SectionController {
         return SectionConverter.convertEntityListToDtoList(sections);
     }
 
+    /** Retorna uma Section pesquisa pelo ID.
+     * @param id
+     * @return O Section pesquisado caso OK.
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<SectionResponseDTO> findById(@PathVariable Long id){
+        Section section = sectionService.findById(id);
+        return ResponseEntity.ok(SectionConverter.convertEntityToDto(section));
+    }
+
     /*** Cadastra uma Section
      * @param sectionRequestDTO
      * @param uriBuilder
@@ -48,16 +58,6 @@ public class SectionController {
         Section section = sectionService.save(sectionRequest);
         URI uri = uriBuilder.path("/section/{id}").buildAndExpand(section.getId()).toUri();
         return ResponseEntity.created(uri).body(SectionConverter.convertEntityToDto(section));
-    }
-
-    /** Retorna uma Section pesquisa pelo ID.
-     * @param id
-     * @return O Section pesquisado caso OK.
-     */
-    @GetMapping("/{id}")
-    public ResponseEntity<SectionResponseDTO> findById(@PathVariable Long id){
-        Section section = sectionService.findById(id);
-        return ResponseEntity.ok(SectionConverter.convertEntityToDto(section));
     }
 
     /*** Atualiza uma Section com base no ID
