@@ -5,12 +5,14 @@ import com.mercadolibre.w4g9projetofinal.entity.SellOrder;
 import com.mercadolibre.w4g9projetofinal.exceptions.CartManagementException;
 import com.mercadolibre.w4g9projetofinal.service.CartService;
 import com.mercadolibre.w4g9projetofinal.dtos.response.SellOrderResponseDTO;
+import com.sun.xml.bind.v2.TODO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.function.ToDoubleBiFunction;
 
 /*** Controller dos métodos do carrinho:<br>
  * <b>Adiciona Produtos no Carrinho</b><br>
@@ -119,6 +121,7 @@ public class CartController {
 	 * @return Retorna payload de PedidoDTO em um ResponseEntity com status <b>CREATED</b> e
 	 * <i>GET</i>: "/loja/pedidos/{id}" implementado no Controller:
 	 */
+	//TODO retirar comentario se n for usar o metodo
 	/*
 	@PostMapping("/createSellOrder/{idBuyer}")
 	public ResponseEntity<SellOrderResponseDTO> createSellOrder(@PathVariable Long idBuyer,
