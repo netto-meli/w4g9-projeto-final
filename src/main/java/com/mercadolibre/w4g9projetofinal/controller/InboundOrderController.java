@@ -60,17 +60,17 @@ public class InboundOrderController {
         return ResponseEntity.created(uri).body(response);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<InboundOrderResponseDTO> findInboundOrderById(@PathVariable Long id) {
-        InboundOrder io = inboundOrderService.findById(id);
-        InboundOrderResponseDTO response = InboundOrderConverter.convertEntityToDto(io);
-        return ResponseEntity.ok().body(response);
-    }
-
     @GetMapping
     public ResponseEntity<List<InboundOrderResponseDTO>> findAllInboundOrders() {
         List<InboundOrder> inboundOrderList = inboundOrderService.findAll();
         List<InboundOrderResponseDTO> response = InboundOrderConverter.convertEntityListToDtoList(inboundOrderList);
+        return ResponseEntity.ok().body(response);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<InboundOrderResponseDTO> findInboundOrderById(@PathVariable Long id) {
+        InboundOrder io = inboundOrderService.findById(id);
+        InboundOrderResponseDTO response = InboundOrderConverter.convertEntityToDto(io);
         return ResponseEntity.ok().body(response);
     }
 }

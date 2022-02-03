@@ -3,6 +3,7 @@ package com.mercadolibre.w4g9projetofinal.service;
 import com.mercadolibre.w4g9projetofinal.entity.Batch;
 import com.mercadolibre.w4g9projetofinal.entity.Product;
 import com.mercadolibre.w4g9projetofinal.entity.enums.OrderByProductInBatch;
+import com.mercadolibre.w4g9projetofinal.exceptions.BusinessException;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.ProductRepository;
 import lombok.AllArgsConstructor;
@@ -35,6 +36,7 @@ public class ProductService {
         if (!(category == null)) {
             return repository.findAll().stream().filter(p -> p.getCategoryRefrigeration().getCod().equals(category)).collect(Collectors.toList());
         }
+        //todo e este comentario?
 /*
         if(category.equals(RefrigerationType.FROZEN.getCod())){
             return repository.findAll().stream().filter(p-> p.getCategoryRefrigeration().getCod().equals(category)).collect(Collectors.toList());
@@ -55,14 +57,13 @@ public class ProductService {
         List<Batch> batch = findByBatchInProduct(idProduct);
         if (OrderByProductInBatch.ORDER_BY_BATCH.getCod().equals(orderBy)) {
             return batch.stream().sorted(Comparator.comparing(Batch::getId)).collect(Collectors.toList());
-        }
-        if(OrderByProductInBatch.ORDER_BY_QUANTITY.getCod().equals(orderBy)){
+        } else if(OrderByProductInBatch.ORDER_BY_QUANTITY.getCod().equals(orderBy)){
             return batch.stream().sorted(Comparator.comparing(Batch::getCurrentQuantity)).collect(Collectors.toList());
-        }
-        if(OrderByProductInBatch.ORDER_BY_DUEDATE.getCod().equals(orderBy)){
+        } else if(OrderByProductInBatch.ORDER_BY_DUEDATE.getCod().equals(orderBy)){
             return batch.stream().sorted(Comparator.comparing(Batch::getDueDate)).collect(Collectors.toList());
+        } else {
+            throw new BusinessException("Metodo de Ordenação informado está errado");
         }
-        return null;
     }
 
 }

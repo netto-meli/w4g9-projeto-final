@@ -49,13 +49,13 @@ public class BuyerController {
 
     /***
      * Motodo GET para listar comprador por id.
-     * @pathVariable id do comprador
+     * @param id do comprador
      * @return retorna a lista de comprador do id enviado
      */
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Buyer> findById(@PathVariable Long id) {
+    public ResponseEntity<BuyerResponseDTO> findById(@PathVariable Long id) {
         Buyer buyer = service.findById(id);
-        return ResponseEntity.ok(buyer);
+        return ResponseEntity.ok(BuyerConverter.convertEntityToDto(buyer));
     }
 
     /*** Método para adicionar novo Comprador<br>
