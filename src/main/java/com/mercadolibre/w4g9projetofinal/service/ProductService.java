@@ -14,45 +14,75 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * Classe de servico do produto
+ *
+ * @autor Leonardo
+ */
 @Service
 @AllArgsConstructor
 public class ProductService {
 
-    private ProductRepository repository;
+    /*** Instancia de ProductRepository*/
+    private final ProductRepository repository;
 
-    private BatchService batchService;
+    /*** Instancia de BatchService*/
+    private final BatchService batchService;
 
+    /**
+     * Metodo que busca todos os produtos
+     * @return lista de produtos adastrados
+     */
     public List<Product> findAll() {
         return repository.findAll();
     }
 
+    /**
+     * Metodo pra buscar o produto por meio do id
+     * @param id
+     * @return produto do id da busca
+     */
     public Product findById(Long id) {
         Optional<Product> product = repository.findById(id);
         return product.orElseThrow(() ->
                 new ObjectNotFoundException("Produto não encontrado! Por favor verifique dados informados."));
     }
 
+    /**
+     * Metodo que busca produto por categoria
+     * @param category
+     * Categoria:
+     * FF = FROZEN
+     * RF = COLD
+     * FS = FRESH
+     * @return retorna o produto da categoria buscada
+     */
     public List<Product> findByCategoryProduct(String category) {
         if (!(category == null)) {
             return repository.findAll().stream().filter(p -> p.getCategoryRefrigeration().getCod().equals(category)).collect(Collectors.toList());
         }
-        //todo e este comentario?
-/*
-        if(category.equals(RefrigerationType.FROZEN.getCod())){
-            return repository.findAll().stream().filter(p-> p.getCategoryRefrigeration().getCod().equals(category)).collect(Collectors.toList());
-        }
-
-        if(category.equals(RefrigerationType.FRESH.getCod())){
-            return repository.findAll().stream().filter(p-> p.getCategoryRefrigeration().getCod().equals(category)).collect(Collectors.toList());
-        }*/
-
         return null;
     }
 
+    /**
+     * Metodo para buscar o lote em que o produto esta cadastrado
+     * @param idProduct
+     * @return lotes em que o produto foi cadastrado
+     */
     public List<Batch> findByBatchInProduct(Long idProduct) {
         return batchService.findByProductId(idProduct);
     }
 
+    /**
+     * Metodo para ordenar lote em que o produto esta cadastrado
+     * @param idProduct
+     * @param orderBy
+     * Ordenacao:
+     * L = Lote
+     * C = qtd atual
+     * F = data vencimento
+     * @return lista de lotes em que o produto esta cadastrado
+     */
     public List<Batch> OrderByBatchInProduct(Long idProduct, String orderBy) {
         List<Batch> batch = findByBatchInProduct(idProduct);
         if (OrderByProductInBatch.ORDER_BY_BATCH.getCod().equals(orderBy)) {

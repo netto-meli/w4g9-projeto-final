@@ -12,26 +12,53 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Classe de servico de comprador
+ * lista todos os anuncios
+ * lista comprador por id
+ * inserir um novo comprador
+ * alterar informacoes de comprador
+ * deletar comprador
+ * para alterar Representante pelo comprador
+ * @autor Leonardo
+ */
 @Service
 @AllArgsConstructor
 public class BuyerService {
 
     /*** Instancia de BCryptPasswordEncoder: <b>BCryptPasswordEncoder</b>.
      */
-    private BCryptPasswordEncoder pe;
+    private final BCryptPasswordEncoder pe;
 
-    private BuyerRepository repository;
+    /**
+     * Instancia para Buyer Repository
+     */
+    private final BuyerRepository repository;
 
+    /**
+     * Metodo que lista todos os compradores
+     * @return todos os compradores
+     */
     public List<Buyer> findAll() {
         return repository.findAll();
     }
 
+    /**
+     * Metodo de busca de comprador por id
+     * @param id
+     * @return comprador do id da procura
+     */
     public Buyer findById(Long id) {
         Optional<Buyer> buyer = repository.findById(id);
         return buyer.orElseThrow(() ->
                 new ObjectNotFoundException("Comprador não encontrado! Por favor verifique dados informados."));
     }
 
+    /**
+     * Metodo para inserir um novo comprador
+     * @param buyer
+     * @return status 200
+     */
     public Buyer insert(Buyer buyer) {
         buyer.setPassword(pe.encode(buyer.getPassword()));
         try {
@@ -41,17 +68,31 @@ public class BuyerService {
         }
     }
 
+    /**
+     * Metodo para alterar informacoes de comprador
+     * @param buyer
+     * @return comprador alterado
+     */
     public Buyer update(Buyer buyer) {
         Buyer newBuyer = findById(buyer.getId());
         updateRepresentation(newBuyer, buyer);
         return repository.save(buyer);
     }
 
+    /**
+     * Metodo para deletar comprador por id
+     * @param id
+     */
     public void delete(Long id) {
         Buyer buyer = findById(id);
         repository.delete(buyer);
     }
 
+    /**
+     * Metodo para alterar Representante pelo comprador
+     * @param buyer
+     * @param newBuyer
+     */
     private static void updateRepresentation(Buyer buyer, Buyer newBuyer) {
         newBuyer.setAddress(buyer.getAddress());
         newBuyer.setEmail(buyer.getEmail());

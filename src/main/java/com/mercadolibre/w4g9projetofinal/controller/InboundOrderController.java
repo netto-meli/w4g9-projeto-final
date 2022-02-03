@@ -30,7 +30,7 @@ public class InboundOrderController {
     @Autowired
     InboundOrderService inboundOrderService;
 
-    @PostMapping
+    /*@PostMapping
     public ResponseEntity<List<BatchResponseDTO>> createInboundOrder(
             @RequestBody @Valid InboundOrderRequestDTO inboundOrderRequestDTO,
             UriComponentsBuilder uriBuilder) {
@@ -72,5 +72,5 @@ public class InboundOrderController {
         InboundOrder io = inboundOrderService.findById(id);
         InboundOrderResponseDTO response = InboundOrderConverter.convertEntityToDto(io);
         return ResponseEntity.ok().body(response);
-    }
+    }*/
 }
