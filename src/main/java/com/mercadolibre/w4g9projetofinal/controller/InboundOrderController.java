@@ -35,7 +35,7 @@ public class InboundOrderController {
             @RequestBody @Valid InboundOrderRequestDTO inboundOrderRequestDTO,
             UriComponentsBuilder uriBuilder) {
         // todo autentication
-        Representative representative = new Representative(1L,null, null, null, null, null);
+        Representative representative = new Representative(2L,null, null, null, null, null);
         InboundOrder inboundOrder = InboundOrderConverter.convertDtoToEntity(inboundOrderRequestDTO);
         inboundOrder = inboundOrderService.createInboundOrder(representative, inboundOrder);
         List<BatchResponseDTO> response = BatchConverter.convertEntityListToDtoList(inboundOrder.getBatchList());

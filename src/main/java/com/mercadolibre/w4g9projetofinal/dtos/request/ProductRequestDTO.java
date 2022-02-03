@@ -3,6 +3,7 @@ package com.mercadolibre.w4g9projetofinal.dtos.request;
 import com.mercadolibre.w4g9projetofinal.entity.enums.RefrigerationType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -15,6 +16,7 @@ import javax.validation.constraints.Size;
  * @author Fernando Netto
  */
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class ProductRequestDTO {
 

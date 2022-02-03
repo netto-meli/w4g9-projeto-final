@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SectionResponseDTOForInboundOrder {
-    private String sectionCode;
-    private String warehouseCode;
+    private Long sectionCode;
+    private Long warehouseCode;
 }

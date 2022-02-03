@@ -30,12 +30,11 @@ public class AdvertiseRequestDTO {
     @NotEmpty(message = "Campo Obrigatório")
     @Size(min=4,max=20,message="Descrição deve ter no máximo 20 caracteres e no minimo 4 caracteres. ")
     private String description;
-    private ProductRequestDTO product;
-    private SellerRequestDTO seller;
+    private Long productId;
+    private Long sellerId;
     @NotNull
     @Positive
     private BigDecimal price;
-    @NotEmpty
     @NotNull
     private AdvertiseStatus status;
     private boolean freeShipping;

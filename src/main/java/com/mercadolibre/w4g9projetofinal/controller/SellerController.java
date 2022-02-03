@@ -50,13 +50,9 @@ public class SellerController {
      * @return PayLoad com Seller encontrado e ResponseEntity com status <b>OK</b>
      */
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Seller> findById(@PathVariable Long id) {
-        UserSS user = UserService.authenticated();
-        if(user == null || !user.hasRole(Profile.ADMIN) && !id.equals(user.getId())) {
-            throw new AuthorizationException("Acesso negado");
-        }
+    public ResponseEntity<SellerResponseDTO> findById(@PathVariable Long id) {
         Seller obj = service.findById(id);
-        return ResponseEntity.ok(obj);
+        return ResponseEntity.ok(SellerConverter.convertEntityToDto(obj));
     }
 
     /*** Método para inserção de Seller <br>

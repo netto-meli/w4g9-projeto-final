@@ -18,6 +18,6 @@ public class UserConverter {
     }
 
     private static UserResponseDTO convertEntityToDto(User s) {
-        return new UserResponseDTO(s.getUsername(), s.getName(), s.getEmail());
+        return new UserResponseDTO(s.getId(), s.getUsername(), s.getName(), s.getEmail());
     }
 }
