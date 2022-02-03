@@ -2,7 +2,9 @@ package com.mercadolibre.w4g9projetofinal.dtos.converter;
 
 import com.mercadolibre.w4g9projetofinal.dtos.request.ProductRequestDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.*;
+import com.mercadolibre.w4g9projetofinal.entity.Batch;
 import com.mercadolibre.w4g9projetofinal.entity.Product;
+import com.mercadolibre.w4g9projetofinal.entity.Seller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +57,7 @@ public class ProductConverter {
                 .collect(Collectors.toList());
     }
 
-    public static BatchByProductResponseDTO convertEntityToDtoByProduct(Long id, Map<Long,Integer> batch){
+  /*  public static BatchByProductResponseDTO convertEntityToDtoByProduct(Long id, Map<Long,Integer> batch){
         List<ProductByBatch> batchByProductResponseDTO =
                 ProductConverter.convertEntityListToDtoListByProduct(batch);
         return new BatchByProductResponseDTO(id, batchByProductResponseDTO);
@@ -66,6 +68,30 @@ public class ProductConverter {
         for (Map.Entry<Long, Integer> entry : batch.entrySet()) {
             ProductByBatch bt = new ProductByBatch(entry.getKey(), entry.getValue());
             list2.add(bt);
+        }
+        return list2;
+    }*/
+
+//    public static ProductByWarehouseResponseDTO convertEntityToDtoByProduct(List<Batch> byBatchInProduct) {
+//        List<ProductByWarehouseResponseDTO> list2 = new ArrayList<>();
+//        for (Batch b : byBatchInProduct) {
+//            list2.add(convertEntityToDtoBath(b));
+//        }
+//        return list2;
+//    }
+
+    private static BatchByProductResponseDTO convertEntityToDtoBath(Batch b) {
+        return new BatchByProductResponseDTO(
+                b.getId(),
+                b.getCurrentQuantity()
+        );
+
+    }
+
+    public static List<BatchByProductResponseDTO> convertEntityToDtoByProduct(List<Batch> byBatchInProduct) {
+        List<BatchByProductResponseDTO> list2 = new ArrayList<>();
+        for (Batch b : byBatchInProduct) {
+            list2.add(convertEntityToDtoBath(b));
         }
         return list2;
     }

@@ -1,6 +1,7 @@
 package com.mercadolibre.w4g9projetofinal.controller;
 
 import com.mercadolibre.w4g9projetofinal.dtos.converter.ProductConverter;
+import com.mercadolibre.w4g9projetofinal.dtos.response.BatchByProductResponseDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.ProductByBatchResponseDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.ProductResponseDTO;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
@@ -62,11 +63,11 @@ public class ProductController {
      * @return retorna lote dos produtos status 200
      */
     @GetMapping("/listBatch")
-    public ResponseEntity<ProductByBatchResponseDTO> findBatchByProductId(@RequestParam Long id) {
+    public ResponseEntity<List<BatchByProductResponseDTO>> findBatchByProductId(@RequestParam Long id) {
         if(id == null){
             throw new ObjectNotFoundException("Ainda nao consta dados cadastrados");
         }
-        ProductByBatchResponseDTO response = ProductConverter.convertEntityToDtoByProduct(service.findByBatchInProduct(id));
+        List<BatchByProductResponseDTO> response = ProductConverter.convertEntityToDtoByProduct(service.findByBatchInProduct(id));
         return ResponseEntity.ok().body(response);
     }
 

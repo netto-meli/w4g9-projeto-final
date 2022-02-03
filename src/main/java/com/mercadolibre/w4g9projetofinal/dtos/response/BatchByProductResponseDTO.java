@@ -10,6 +10,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BatchByProductResponseDTO {
-    private Long idProduct;
+    private String name;
     private List<ProductByBatch> listBatch;
 }
