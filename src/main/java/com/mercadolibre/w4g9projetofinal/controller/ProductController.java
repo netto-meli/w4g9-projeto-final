@@ -1,7 +1,8 @@
 package com.mercadolibre.w4g9projetofinal.controller;
 
+import com.mercadolibre.w4g9projetofinal.dtos.converter.BatchConverter;
 import com.mercadolibre.w4g9projetofinal.dtos.converter.ProductConverter;
-import com.mercadolibre.w4g9projetofinal.dtos.response.ProductByBatchResponseDTO;
+import com.mercadolibre.w4g9projetofinal.dtos.response.BatchResponseDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.ProductResponseDTO;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.service.ProductService;
@@ -62,11 +63,11 @@ public class ProductController {
      * @return retorna lote dos produtos status 200
      */
     @GetMapping("/listBatch")
-    public ResponseEntity<ProductByBatchResponseDTO> findBatchByProductId(@RequestParam Long id) {
+    public ResponseEntity<List<BatchResponseDTO>> findBatchByProductId(@RequestParam Long id) {
         if(id == null){
             throw new ObjectNotFoundException("Ainda nao consta dados cadastrados");
         }
-        ProductByBatchResponseDTO response = ProductConverter.convertEntityToDtoByProduct(service.findByBatchInProduct(id));
+        List<BatchResponseDTO> response = BatchConverter.convertEntityListToDtoList(service.findByBatchInProduct(id));
         return ResponseEntity.ok().body(response);
     }
 
@@ -78,11 +79,11 @@ public class ProductController {
      * F = ordenado por data de vencimento
      */
     @GetMapping("/listOrderBy")
-    public ResponseEntity<ProductByBatchResponseDTO> OrderByProductId(@RequestParam Long id, @RequestParam String order) {
+    public ResponseEntity<List<BatchResponseDTO>> OrderByProductId(@RequestParam Long id, @RequestParam String order) {
         if(id == null){
             throw new ObjectNotFoundException("Ainda nao consta dados cadastrados");
         }
-        ProductByBatchResponseDTO response = ProductConverter.convertEntityToDtoByProduct(service.OrderByBatchInProduct(id, order));
+        List<BatchResponseDTO> response = BatchConverter.convertEntityListToDtoList(service.OrderByBatchInProduct(id, order));
         return ResponseEntity.ok().body(response);
     }
 

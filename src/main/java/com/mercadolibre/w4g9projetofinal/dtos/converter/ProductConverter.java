@@ -1,9 +1,7 @@
 package com.mercadolibre.w4g9projetofinal.dtos.converter;
 
 import com.mercadolibre.w4g9projetofinal.dtos.request.ProductRequestDTO;
-import com.mercadolibre.w4g9projetofinal.dtos.response.ProductByBatchResponseDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.ProductResponseDTO;
-import com.mercadolibre.w4g9projetofinal.entity.Batch;
 import com.mercadolibre.w4g9projetofinal.entity.Product;
 
 import java.util.List;
@@ -53,14 +51,5 @@ public class ProductConverter {
         return listProduct.stream()
                 .map(ProductConverter::convertEntityToDto)
                 .collect(Collectors.toList());
-    }
-
-    /***
-     * Metodo que recebe um ProductByBatchResponseDTO e converte em um new BatchResponseDTO
-     * @param byBatchInProduct
-     * @return ProductByBatchResponseDTO
-     */
-    public static ProductByBatchResponseDTO convertEntityToDtoByProduct(List<Batch> byBatchInProduct) {
-        return (ProductByBatchResponseDTO) byBatchInProduct.stream().map(BatchConverter::convertEntityToDto).collect(Collectors.toList());
     }
 }
