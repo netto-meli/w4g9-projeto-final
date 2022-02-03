@@ -1,7 +1,7 @@
 # Postman
 ### Facilitadores Postman:
 
-#### -> [Link para importar Collection](https://www.getpostman.com/collections/55ea0513a0f8d98b085d) para o Postman (copiar e colar)
+#### -> [Link para importar Collection](https://www.getpostman.com/collections/a6ce42b0e323dfcbb5ed) para o Postman (copiar e colar)
 #### -> Download do [JSON](JSONs/Postman_endpoint.json) salvo.
 
 JSON para utilização dos endPoint no Postman
@@ -13,6 +13,31 @@ JSON para utilização dos endPoint no Postman
     "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
   },
   "item": [
+    {
+      "name": "0. Login",
+      "item": [
+        {
+          "name": "Login",
+          "id": "ef66a596-5717-4f8a-828b-9ec9d658add5",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"kkk\",\n  \"pass\": \"151515\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:8080/login"
+          },
+          "response": []
+        }
+      ],
+      "id": "da40a0d5-71a8-4413-8cae-4fe26c20ba7f"
+    },
     {
       "name": "1. Usuarios",
       "item": [
@@ -378,7 +403,7 @@ JSON para utilização dos endPoint no Postman
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"id\": 0,\n  \"name\": \"\",\n  \"type\": [\n    \"FROZEN\",\n    \"COLD\",\n    \"FRESH\"\n  ],\n  \"warehouse\": {\n    \"id\": 0,\n    \"nome\": \"\",\n    \"location\": \"\"\n  },\n  \"stockLimit\": 0,\n  \"currentStock\": 0,\n  \"minTeperature\": 0.0,\n  \"maxTeperature\": 0.0\n}",
+              "raw": "{\n  \"name\": \"\",\n  \"type\": [\n    \"FROZEN\",\n    \"COLD\",\n    \"FRESH\"\n  ],\n  \"idWarehouse\": 0,\n  \"stockLimit\": 0,\n  \"currentStock\": 0,\n  \"minTeperature\": 0.0,\n  \"maxTeperature\": 0.0\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -397,7 +422,7 @@ JSON para utilização dos endPoint no Postman
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"id\": 0,\n  \"name\": \"\",\n  \"type\": [\n    \"FROZEN\",\n    \"COLD\",\n    \"FRESH\"\n  ],\n  \"warehouse\": {\n    \"id\": 0,\n    \"nome\": \"\",\n    \"location\": \"\"\n  },\n  \"stockLimit\": 0,\n  \"currentStock\": 0,\n  \"minTeperature\": 0.0,\n  \"maxTeperature\": 0.0\n}",
+              "raw": "{\n  \"name\": \"\",\n  \"type\": [\n    \"FROZEN\",\n    \"COLD\",\n    \"FRESH\"\n  ],\n  \"idWarehouse\": 0,\n  \"stockLimit\": 0,\n  \"currentStock\": 0,\n  \"minTeperature\": 0.0,\n  \"maxTeperature\": 0.0\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -524,27 +549,7 @@ JSON para utilização dos endPoint no Postman
           "request": {
             "method": "GET",
             "header": [],
-            "url": {
-              "raw": "http://localhost:8080/api/v1/fresh-products/product/listCategory?categoryProd",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8080",
-              "path": [
-                "api",
-                "v1",
-                "fresh-products",
-                "product",
-                "listCategory"
-              ],
-              "query": [
-                {
-                  "key": "categoryProd",
-                  "value": null
-                }
-              ]
-            }
+            "url": "http://localhost:8080/api/v1/fresh-products/product/listCategory/{{categoryProd}}"
           },
           "response": []
         },
@@ -607,6 +612,54 @@ JSON para utilização dos endPoint no Postman
                 }
               ]
             }
+          },
+          "response": []
+        },
+        {
+          "name": "Cria Produto base para anuncio",
+          "id": "61ed84b7-234a-435b-9e4f-b80929dfb48b",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"\",\n  \"description\": \"\",\n  \"min_temperature\": 0.0,\n  \"max_temperature\": 0.0,\n  \"category_refrigeration\": [\n    \"FROZEN\",\n    \"COLD\",\n    \"FRESH\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:8080/api/v1/fresh-products/product"
+          },
+          "response": []
+        },
+        {
+          "name": "Atualiza Produto",
+          "id": "c8159a1f-3a4f-44fa-8687-febb2ecdced3",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"\",\n  \"description\": \"\",\n  \"min_temperature\": 0.0,\n  \"max_temperature\": 0.0,\n  \"category_refrigeration\": [\n    \"FROZEN\",\n    \"COLD\",\n    \"FRESH\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:8080/api/v1/fresh-products/product/{{id}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Deleta Produto",
+          "id": "143fd3be-9932-48d2-ac3d-40614c048a48",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "http://localhost:8080/api/v1/fresh-products/product/{{id}}"
           },
           "response": []
         }
