@@ -27,18 +27,17 @@ public abstract class User{
     @Column(unique=true)
     private String email;
     private String password;
-
     @ElementCollection(fetch=FetchType.EAGER)
-    @CollectionTable(name="PROFILES")
-    private Set<Integer> profiles;
+    @CollectionTable(name="USER_PROFILES")
+    private Set<Profile> profiles;
 
     // Métodos para Profile
     public Set<Profile> getProfile() {
-        return profiles.stream().map(x -> Profile.toEnum(x)).collect(Collectors.toSet());
+        return this.profiles;
     }
 
     public void addProfile(Profile profile) {
-        profiles.add(profile.getCod());
+        profiles.add(profile);
     }
 
     //-------------------------
