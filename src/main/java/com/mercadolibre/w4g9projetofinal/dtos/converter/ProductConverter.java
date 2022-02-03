@@ -1,12 +1,12 @@
 package com.mercadolibre.w4g9projetofinal.dtos.converter;
 
 import com.mercadolibre.w4g9projetofinal.dtos.request.ProductRequestDTO;
-import com.mercadolibre.w4g9projetofinal.dtos.response.ProductByBatchResponseDTO;
-import com.mercadolibre.w4g9projetofinal.dtos.response.ProductResponseDTO;
-import com.mercadolibre.w4g9projetofinal.entity.Batch;
+import com.mercadolibre.w4g9projetofinal.dtos.response.*;
 import com.mercadolibre.w4g9projetofinal.entity.Product;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /***
@@ -55,12 +55,25 @@ public class ProductConverter {
                 .collect(Collectors.toList());
     }
 
+    public static BatchByProductResponseDTO convertEntityToDtoByProduct(Long id, Map<Long,Integer> batch){
+        List<ProductByBatch> batchByProductResponseDTO =
+                ProductConverter.convertEntityListToDtoListByProduct(batch);
+        return new BatchByProductResponseDTO(id, batchByProductResponseDTO);
+    }
+
+    private static List<ProductByBatch> convertEntityListToDtoListByProduct(Map<Long,Integer> batch) {
+        List<ProductByBatch> list2 = new ArrayList<>();
+        for (Map.Entry<Long, Integer> entry : batch.entrySet()) {
+            ProductByBatch bt = new ProductByBatch(entry.getKey(), entry.getValue());
+            list2.add(bt);
+        }
+        return list2;
+    }
+
     /***
      * Metodo que recebe um ProductByBatchResponseDTO e converte em um new BatchResponseDTO
      * @param byBatchInProduct
      * @return ProductByBatchResponseDTO
      */
-    public static ProductByBatchResponseDTO convertEntityToDtoByProduct(List<Batch> byBatchInProduct) {
-        return (ProductByBatchResponseDTO) byBatchInProduct.stream().map(BatchConverter::convertEntityToDto).collect(Collectors.toList());
-    }
+
 }

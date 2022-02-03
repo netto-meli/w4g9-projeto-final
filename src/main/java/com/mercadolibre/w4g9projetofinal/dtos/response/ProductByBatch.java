@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /***
@@ -15,7 +16,8 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductByBatchResponseDTO {
-    private List<BatchResponseDTO> batchList;
+public class ProductByBatch {
+    private Long id;
+    private int currentQuantity;
 }
 
