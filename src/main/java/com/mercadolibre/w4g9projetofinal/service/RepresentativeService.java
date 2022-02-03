@@ -1,7 +1,6 @@
 package com.mercadolibre.w4g9projetofinal.service;
 
 import com.mercadolibre.w4g9projetofinal.entity.Representative;
-import com.mercadolibre.w4g9projetofinal.entity.User;
 import com.mercadolibre.w4g9projetofinal.exceptions.ExistingUserException;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.RepresentativeRepository;
@@ -25,11 +24,7 @@ public class RepresentativeService {
 
     /*** Instancia de BCryptPasswordEncoder: <b>BCryptPasswordEncoder</b>.
      */
-    private BCryptPasswordEncoder pe;
-
-    /*** Instancia de repositório: <b>UserRepository</b>.
-     */
-    private UserService userService;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     /*** Instancia de repositório: <b>RepresentativeRepository</b>.
      */
@@ -54,7 +49,7 @@ public class RepresentativeService {
      * @param obj objeto Representative a ser inserido
      */
     public Representative insert(Representative obj) {
-        obj.setPassword(pe.encode(obj.getPassword()));
+        obj.setPassword(bCryptPasswordEncoder.encode(obj.getPassword()));
         try {
             return repository.save(obj);
         } catch (DataIntegrityViolationException e) {

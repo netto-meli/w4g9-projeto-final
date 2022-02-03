@@ -1,17 +1,17 @@
 package com.mercadolibre.w4g9projetofinal.test.unit;
 
 import com.mercadolibre.w4g9projetofinal.entity.Seller;
+import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.SellerRepository;
 import com.mercadolibre.w4g9projetofinal.service.SellerService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SellerServiceTest {
 
@@ -44,19 +44,22 @@ public class SellerServiceTest {
     public void verificaBuscaPorId() {
 
         //arrange
-        Seller s1 = new Seller(1l, "vrs_marcos", "Marcos Sá", "email1@hotmail.com","123456", null);
+        Seller s1 = new Seller(3L, "felipe3", "Fe Bontempo", "email2@hotmail.com", "123456", null);
         Seller s2 = new Seller(2L, "felipe.133", "Felipe Bontempo", "email2@hotmail.com", "123456", null);
 
         SellerRepository mockSellerRepository = Mockito.mock(SellerRepository.class);
-        Mockito.when(mockSellerRepository.findById(2l)).thenReturn(java.util.Optional.of(new Seller(2L, "felipe.133", "Felipe Bontempo", "email2@hotmail.com", "123456", null)));
+        Mockito.when(mockSellerRepository.findById(2L)).thenReturn(java.util.Optional.of(new Seller(2L, "felipe.133", "Felipe Bontempo", "email2@hotmail.com", "123456", null)));
 
         SellerService sellerService = new SellerService(null, mockSellerRepository);
 
         //Action
         Seller seller = sellerService.findById(2L);
 
+        ObjectNotFoundException excesaoEsperada = assertThrows(ObjectNotFoundException.class,() -> sellerService.findById(1L));
+
         //Assertation
         assertEquals(s2, seller);
-
+        assertTrue(excesaoEsperada.getMessage().equals("Vendedor não encontrado! Por favor verifique o id."));
     }
+
 }
