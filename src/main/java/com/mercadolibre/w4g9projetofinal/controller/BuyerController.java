@@ -4,8 +4,12 @@ import com.mercadolibre.w4g9projetofinal.dtos.converter.BuyerConverter;
 import com.mercadolibre.w4g9projetofinal.dtos.request.BuyerRequestDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.BuyerResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Buyer;
+import com.mercadolibre.w4g9projetofinal.entity.enums.Profile;
+import com.mercadolibre.w4g9projetofinal.exceptions.AuthorizationException;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
+import com.mercadolibre.w4g9projetofinal.security.UserSS;
 import com.mercadolibre.w4g9projetofinal.service.BuyerService;
+import com.mercadolibre.w4g9projetofinal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -54,6 +58,10 @@ public class BuyerController {
      */
     @GetMapping(value = "/{id}")
     public ResponseEntity<Buyer> findById(@PathVariable Long id) {
+        UserSS user = UserService.authenticated();
+        if(user == null || !user.hasRole(Profile.ADMIN) && !id.equals(user.getId())) {
+            throw new AuthorizationException("Acesso negado");
+        }
         Buyer buyer = service.findById(id);
         return ResponseEntity.ok(buyer);
     }

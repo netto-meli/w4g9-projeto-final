@@ -2,9 +2,12 @@ package com.mercadolibre.w4g9projetofinal.service;
 
 import com.mercadolibre.w4g9projetofinal.entity.Representative;
 import com.mercadolibre.w4g9projetofinal.entity.User;
+import com.mercadolibre.w4g9projetofinal.entity.enums.Profile;
+import com.mercadolibre.w4g9projetofinal.exceptions.AuthorizationException;
 import com.mercadolibre.w4g9projetofinal.exceptions.ExistingUserException;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.RepresentativeRepository;
+import com.mercadolibre.w4g9projetofinal.security.UserSS;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -26,10 +29,6 @@ public class RepresentativeService {
     /*** Instancia de BCryptPasswordEncoder: <b>BCryptPasswordEncoder</b>.
      */
     private BCryptPasswordEncoder pe;
-
-    /*** Instancia de repositório: <b>UserRepository</b>.
-     */
-    private UserService userService;
 
     /*** Instancia de repositório: <b>RepresentativeRepository</b>.
      */

@@ -111,6 +111,7 @@ public class CartService {
      * @param buyerId ID do Cliente que deseja ver o estado atual do carrinho de compras
      * @return Retorna um <b>SellOrder</b>, com <i>ID nula</i>, pois é um pedido ainda não finalizado (carrinho aberto).
      */
+    /*
     @Transactional(propagation= Propagation.REQUIRED, isolation= Isolation.SERIALIZABLE)
     public SellOrder createSellOrder(Long buyerId) {
         SellOrder cart = this.getCart(buyerId);
@@ -122,4 +123,6 @@ public class CartService {
         batchServce.updateStock(orderItemList);
         return sellOrderRepository.save(cart);
     }
+
+     */
 }

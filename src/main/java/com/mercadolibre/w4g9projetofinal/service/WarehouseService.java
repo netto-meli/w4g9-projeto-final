@@ -7,6 +7,7 @@ import com.mercadolibre.w4g9projetofinal.entity.Warehouse;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.WarehouseRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
@@ -16,8 +17,13 @@ import java.util.*;
 @AllArgsConstructor
 public class WarehouseService {
 
+    @Autowired
     private WarehouseRepository warehouseRepository;
+
+    @Autowired
     private BatchService batchService;
+
+    @Autowired
     private SectionService sectionService;
 
     public List<Warehouse> findAll()
@@ -46,7 +52,7 @@ public class WarehouseService {
     private static void updateWarehouse(Warehouse wh, Warehouse nWarehouse)
     {
         nWarehouse.setId(wh.getId());
-        nWarehouse.setNome(wh.getNome());
+        nWarehouse.setName(wh.getName());
         nWarehouse.setLocation(wh.getLocation());
     }
 
@@ -70,5 +76,3 @@ public class WarehouseService {
         return warehouses;
     }
 }
-
-

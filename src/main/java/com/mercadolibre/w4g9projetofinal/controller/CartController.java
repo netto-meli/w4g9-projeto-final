@@ -124,6 +124,7 @@ public class CartController {
 	 * @return Retorna payload de PedidoDTO em um ResponseEntity com status <b>CREATED</b> e
 	 * <i>GET</i>: "/loja/pedidos/{id}" implementado no Controller:
 	 */
+	/*
 	@PostMapping("/createSellOrder/{idBuyer}")
 	public ResponseEntity<SellOrderResponseDTO> createSellOrder(@PathVariable Long idBuyer,
 															 UriComponentsBuilder uriBuilder) {
@@ -134,4 +135,6 @@ public class CartController {
 					.toUri();
 			return ResponseEntity.created(uri).body(SellOrderConverter.convertEntityToDto(sellOrder));
 	}
+
+	 */
 }

@@ -30,13 +30,12 @@ public class InboundOrder {
     private LocalDate orderDate;
     @OneToOne
     private Seller seller;
+
     @OneToOne
     private Representative representative;
+
+    @OneToMany
     @ToString.Exclude
-    @OneToMany(
-            mappedBy = "inboundOrder",
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
     private List<Batch> batchList;
     @ManyToOne
     private Section section;

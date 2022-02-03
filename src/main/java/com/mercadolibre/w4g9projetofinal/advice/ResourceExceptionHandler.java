@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.servlet.http.HttpServletRequest;
-import java.nio.file.AccessDeniedException;
 
 /***
  * Classe ResourceHandler que manipula as exceções
@@ -49,31 +48,6 @@ public class ResourceExceptionHandler {
 	 *
 	 * @param ex exceção lançada
 	 * @param request webRequest
-	 * @return Response Entity com status code de erro e mensagem.
-	 */
-	@ExceptionHandler(IllegalArgumentException.class)
-	public ResponseEntity<StandardError> illegalArgumentException(IllegalArgumentException ex, HttpServletRequest request) {
-		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.UNPROCESSABLE_ENTITY.value(), "Não encontrado", ex.getMessage(), request.getRequestURI());
-		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(err);
-	}
-
-
-	/*** Handler de erro
-	 *
-	 * @param ex exceção lançada
-	 * @param request webRequest
-	 * @return Response Entity com status code de erro e mensagem.
-	 */
-	@ExceptionHandler(BusinessException.class)
-	public ResponseEntity<StandardError> businessException(BusinessException ex, HttpServletRequest request) {
-		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.UNPROCESSABLE_ENTITY.value(), "Não encontrado", ex.getMessage(), request.getRequestURI());
-		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(err);
-	}
-
-	/*** Handler de erro
-	 *
-	 * @param ex exceção lançada
-	 * @param request webRequest
 	 * @return Response Entity status code de erro e mensagem.
 	 */
 	@ExceptionHandler(ObjectNotFoundException.class)
@@ -101,7 +75,7 @@ public class ResourceExceptionHandler {
 	 * @return Response Entity status code de erro e mensagem.
 	 */
 	@ExceptionHandler(ExistingUserException.class)
-	public ResponseEntity<StandardError> existingUserException(ExistingUserException ex, HttpServletRequest request) {
+	public ResponseEntity<StandardError> ExistingUserException(ExistingUserException ex, HttpServletRequest request) {
 		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.UNAUTHORIZED.value(), "Usúario já existente na base de dados", ex.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(err);
 	}

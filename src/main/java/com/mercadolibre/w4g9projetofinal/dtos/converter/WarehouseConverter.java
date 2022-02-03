@@ -19,7 +19,7 @@ public class WarehouseConverter {
     }
 
     public static WarehouseResponseDTO convertEntityToDto (Warehouse wh){
-        return new WarehouseResponseDTO(wh.getId(), wh.getNome(), wh.getLocation());
+        return new WarehouseResponseDTO(wh.getId(), wh.getName(), wh.getLocation());
     }
 
     public static List<WarehouseResponseDTO> convertEntityListToDtoList(List<Warehouse> all) {

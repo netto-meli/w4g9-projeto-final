@@ -21,11 +21,11 @@ public class UserSS implements UserDetails {
     private final String password;
     private final Collection <?extends GrantedAuthority> authorities;
 
-    public UserSS(Long id, String username, String password, Set<Profile> perfis) {
+    public UserSS(Long id, String username, String pass, Set<Profile> perfis) {
         super();
         this.id = id;
         this.username = username;
-        this.password = password;
+        this.password = pass;
         this.authorities = perfis.stream()
                 .map(x -> new SimpleGrantedAuthority(x.getDescricao()))
                 .collect(Collectors.toList());

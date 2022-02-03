@@ -28,4 +28,5 @@ public class UserService {
             throw new AuthorizationException("Acesso negado");
         }
     }
+
 }

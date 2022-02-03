@@ -12,6 +12,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ProductRequestDTO {
+
     private String name;
     private String description;
     private float minTemperature;
