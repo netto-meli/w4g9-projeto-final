@@ -92,7 +92,6 @@ public class SellerController {
      * @param id Id do Seller a ser deletado
      * @return ResponseEntity com status <b>OK</b>
      */
-    @PreAuthorize("hasAnyRole('ADMIN')")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);

@@ -1,5 +1,7 @@
 package com.mercadolibre.w4g9projetofinal.dtos.request;
 
+import com.mercadolibre.w4g9projetofinal.entity.Product;
+import com.mercadolibre.w4g9projetofinal.entity.Seller;
 import com.mercadolibre.w4g9projetofinal.entity.enums.AdvertiseStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
