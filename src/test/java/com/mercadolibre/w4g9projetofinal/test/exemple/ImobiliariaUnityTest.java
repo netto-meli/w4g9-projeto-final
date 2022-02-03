@@ -1,4 +1,4 @@
-package com.mercadolibre.w4g9projetofinal.test;
+package com.mercadolibre.w4g9projetofinal.test.exemple;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;

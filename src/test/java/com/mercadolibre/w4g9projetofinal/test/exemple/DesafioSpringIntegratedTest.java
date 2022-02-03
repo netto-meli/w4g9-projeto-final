@@ -1,4 +1,4 @@
-package com.mercadolibre.w4g9projetofinal.test;
+package com.mercadolibre.w4g9projetofinal.test.exemple;
 
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.TestMethodOrder;
