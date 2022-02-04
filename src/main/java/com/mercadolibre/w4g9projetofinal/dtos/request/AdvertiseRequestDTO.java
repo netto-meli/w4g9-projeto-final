@@ -1,13 +1,14 @@
 package com.mercadolibre.w4g9projetofinal.dtos.request;
 
-import com.mercadolibre.w4g9projetofinal.entity.Product;
-import com.mercadolibre.w4g9projetofinal.entity.Seller;
 import com.mercadolibre.w4g9projetofinal.entity.enums.AdvertiseStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
 @Data
@@ -26,14 +27,15 @@ import java.math.BigDecimal;
  * @autor Leonardo
  ***/
 public class AdvertiseRequestDTO {
-    @NotEmpty
-    //todo fazer mais validacoes
+    @NotEmpty(message = "Campo Obrigatório")
+    @Size(min=4,max=20,message="Descrição deve ter no máximo 20 caracteres e no minimo 4 caracteres. ")
     private String description;
-    //todo este produto aqui tem q ser DTO
-    private ProductRequestDTO product;
-    //todo este seler temque ser DTO
-    private SellerRequestDTO seller;
+    private Long productId;
+    private Long sellerId;
+    @NotNull
+    @Positive
     private BigDecimal price;
+    @NotNull
     private AdvertiseStatus status;
     private boolean freeShipping;
 }

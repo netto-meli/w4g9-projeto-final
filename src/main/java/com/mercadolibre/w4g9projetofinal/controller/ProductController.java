@@ -1,17 +1,21 @@
 package com.mercadolibre.w4g9projetofinal.controller;
 
+import com.mercadolibre.w4g9projetofinal.dtos.converter.BatchConverter;
 import com.mercadolibre.w4g9projetofinal.dtos.converter.ProductConverter;
-import com.mercadolibre.w4g9projetofinal.dtos.response.ProductByBatchResponseDTO;
+import com.mercadolibre.w4g9projetofinal.dtos.request.ProductRequestDTO;
+import com.mercadolibre.w4g9projetofinal.dtos.response.BatchResponseDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.ProductResponseDTO;
+import com.mercadolibre.w4g9projetofinal.entity.Product;
+import com.mercadolibre.w4g9projetofinal.entity.enums.RefrigerationType;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 /*** Controller dos métodos do Produt:<br>
@@ -44,12 +48,60 @@ public class ProductController {
     }
 
     /***
+     * Motodo GET para listar produto por id.
+     * @param id do produto
+     * @return retorna a lista de produto do id enviado
+     */
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<ProductResponseDTO> findById(@PathVariable Long id) {
+        return ResponseEntity.ok(ProductConverter.convertEntityToDto(service.findById(id)));
+    }
+
+    /*** Método para inserção de Produto <br>
+     * @param obj Objeto product a ser inserido
+     * @return ResponseEntity com status <b>CREATED</b>
+     */
+    @PostMapping
+    public ResponseEntity<Void> insert(@RequestBody @Valid ProductRequestDTO obj) {
+        Product newObj = ProductConverter.convertDtoToEntity(obj);
+        newObj = service.insert(newObj);
+        ProductResponseDTO newObj2 = ProductConverter.convertEntityToDto(newObj);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj2.getId()).toUri();
+        return ResponseEntity.created(uri).build();
+    }
+
+    /*** Método para atualização de product existente<br>
+     * @param newObj Objeto product com informações para atualização
+     * @param id id do product a ser atualizado
+     * @return ResponseEntity com status <b>NO CONTENT</b>
+     */
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Void> update(@PathVariable Long id,
+                                       @RequestBody @Valid ProductRequestDTO newObj) {
+        Product obj = ProductConverter.convertDtoToEntity(newObj);
+        obj.setId(id);
+        obj = service.update(obj);
+        return ResponseEntity.noContent().build();
+    }
+
+    /*** Método para atualização de Seller existente<br>
+     * DELETE - /sellers/{id}
+     * @param id Id do Seller a ser deletado
+     * @return ResponseEntity com status <b>OK</b>
+     */
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.ok().build();
+    }
+
+    /***
      * Motodo GET para listar produtos por categoria.
      * @return retorna a lista por categora e status 200
      */
-    @GetMapping(value = "/listCategorylistCategory")
-    public ResponseEntity<List<ProductResponseDTO>> FindListCategory(@RequestParam String categoryProd) {
-        if(categoryProd == null || categoryProd.isEmpty()){
+    @GetMapping(value = "/listCategory/{categoryProd}")
+    public ResponseEntity<List<ProductResponseDTO>> findListCategory(@PathVariable RefrigerationType categoryProd) {
+        if(categoryProd == null ){
             throw new ObjectNotFoundException("Ainda nao consta dados cadastrados");
         }
         List<ProductResponseDTO> product = ProductConverter.convertEntityListToDtoList(
@@ -61,12 +113,12 @@ public class ProductController {
      * Motodo GET para listar produtos por lote.
      * @return retorna lote dos produtos status 200
      */
-    @GetMapping("/listBatch")
-    public ResponseEntity<ProductByBatchResponseDTO> findBatchByProductId(@RequestParam Long id) {
+    @GetMapping("/listBatch/")
+    public ResponseEntity<List<BatchResponseDTO>> findBatchByProductId(@RequestParam Long id) {
         if(id == null){
             throw new ObjectNotFoundException("Ainda nao consta dados cadastrados");
         }
-        ProductByBatchResponseDTO response = ProductConverter.convertEntityToDtoByProduct(service.findByBatchInProduct(id));
+        List<BatchResponseDTO> response = BatchConverter.convertEntityListToDtoList(service.findByBatchInProduct(id));
         return ResponseEntity.ok().body(response);
     }
 
@@ -77,13 +129,12 @@ public class ProductController {
      * C = ordenado por quantidade atual
      * F = ordenado por data de vencimento
      */
-    @GetMapping("/listOrderBy")
-    public ResponseEntity<ProductByBatchResponseDTO> OrderByProductId(@RequestParam Long id, @RequestParam String order) {
+    @GetMapping("/listBatch/{order}")
+    public ResponseEntity<List<BatchResponseDTO>> orderByProductId(@RequestParam Long id, @PathVariable String order) {
         if(id == null){
             throw new ObjectNotFoundException("Ainda nao consta dados cadastrados");
         }
-        ProductByBatchResponseDTO response = ProductConverter.convertEntityToDtoByProduct(service.OrderByBatchInProduct(id, order));
+        List<BatchResponseDTO> response = BatchConverter.convertEntityListToDtoList(service.OrderByBatchInProduct(id, order));
         return ResponseEntity.ok().body(response);
     }
-
 }

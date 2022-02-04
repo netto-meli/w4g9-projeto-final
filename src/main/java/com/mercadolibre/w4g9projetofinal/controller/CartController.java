@@ -7,12 +7,7 @@ import com.mercadolibre.w4g9projetofinal.service.CartService;
 import com.mercadolibre.w4g9projetofinal.dtos.response.SellOrderResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
@@ -71,7 +66,7 @@ public class CartController {
 	 * <i>GET</i>: "/loja/cart/{idBuyer}"
 	 * @throws CartManagementException excecao
 	 */
-	@PostMapping("/removeProduct/{idBuyer}")
+	@DeleteMapping("/removeProduct/{idBuyer}")
 	public ResponseEntity<SellOrderResponseDTO>  removeAdvertiseItemsFromCart(
 			@PathVariable Long idBuyer,
 			@RequestParam(value = "idAdvertise", defaultValue = "0") Long idAdvertise,
@@ -93,7 +88,7 @@ public class CartController {
 	 * @return Retorna mensagem informando que o carrinho está vazio em um ResponseEntity com status <b>CREATED</b> e
 	 * 	 * <i>GET</i>: "/loja/cart/{idBuyer}"
 	 */
-	@PostMapping("/emptyCart/{idBuyer}")
+	@DeleteMapping("/emptyCart/{idBuyer}")
 	public ResponseEntity<String> emptyCart(@PathVariable Long idBuyer,
 								UriComponentsBuilder uriBuilder){
 		cartService.emptyCart(idBuyer);

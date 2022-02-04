@@ -24,7 +24,7 @@ public class SellerService {
 
     /*** Instancia de BCryptPasswordEncoder: <b>BCryptPasswordEncoder</b>.
      */
-    private BCryptPasswordEncoder pe;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     /*** Instancia de repositório: <b>SellerRepository</b>.
      */
@@ -47,7 +47,7 @@ public class SellerService {
      * @param obj objeto Seller a ser inserido
      */
     public Seller insert(Seller obj) {
-        obj.setPassword(pe.encode(obj.getPassword()));
+        obj.setPassword(bCryptPasswordEncoder.encode(obj.getPassword()));
         try {
             return repository.save(obj);
         } catch (DataIntegrityViolationException e) {

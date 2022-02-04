@@ -19,7 +19,7 @@ public class DueDateController {
     @Autowired
     BatchService batchService;
 
-    @GetMapping("/{numberOfDays}")
+    @GetMapping("/bySection/{numberOfDays}")
     public ResponseEntity<List<BatchByDueDateRequestDTO>> findByDueDateBeforeAndSectionId(
             @PathVariable int numberOfDays,
             @RequestParam Long sectionId) {
@@ -28,7 +28,7 @@ public class DueDateController {
         return ResponseEntity.ok().body(response);
     }
 
-    @GetMapping("/list/{numberOfDays}")
+    @GetMapping("/byRefrigeration/{numberOfDays}")
     public ResponseEntity<List<BatchByDueDateRequestDTO>> findByDueDateBeforeAndRefrigerationType(
             @PathVariable int numberOfDays,
             @RequestParam String refrigerationType,

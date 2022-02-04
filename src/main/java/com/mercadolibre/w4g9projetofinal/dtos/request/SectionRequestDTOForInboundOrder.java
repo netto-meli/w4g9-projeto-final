@@ -12,6 +12,6 @@ import javax.validation.constraints.NotEmpty;
 public class SectionRequestDTOForInboundOrder {
     @NotEmpty
     //todo fazer mais validacoes
-    private String sectionCode;
-    private String warehouseCode;
+    private Long sectionCode;
+    private Long warehouseCode;
 }

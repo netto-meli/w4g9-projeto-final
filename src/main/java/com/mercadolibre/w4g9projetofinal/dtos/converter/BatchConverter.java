@@ -51,7 +51,7 @@ public class BatchConverter {
     }
     public static BatchResponseDTO convertEntityToDto (Batch b){
         return new BatchResponseDTO(
-                b.getId().intValue(),
+                b.getId(),
                 b.getAdvertise().getId(),
                 b.getCurrentTemperature(),
                 b.getMinTemperature(),
