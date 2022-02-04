@@ -27,11 +27,11 @@ public class RepresentativeServiceTest {
     public void verificaListaDeRepresentativesCadastrados() {
 
         //arrrange
-        Representative r1 = new Representative(null, "felipe.13sd3", "Marcos Sá", "email1@gmail.com", "151515", RepresentativeJob.LIDER);
-        Representative r2 = new Representative(null, "felipe.13dsd3", "Marcos Sá", "email2@gmail.com", "151515", RepresentativeJob.SUPERVISOR);
-        Representative r3 = new Representative(null, "felipe.1efe33", "Marcos Sá", "email3@gmail.com", "151515", RepresentativeJob.LIDER);
-        Representative r4 = new Representative(null, "felipe.1ww33", "Marcos Sá", "email4@gmail.com", "151515", RepresentativeJob.SUPERVISOR);
-        Representative r5 = new Representative(null, "felipe.13fdf3", "Marcos Sá", "email5@gmail.com", "151515", RepresentativeJob.LIDER);
+        Representative r1 = new Representative(null, "felipe.13sd3", "Marcos Sá", "email1@gmail.com", "151515", RepresentativeJob.LIDER, null);
+        Representative r2 = new Representative(null, "felipe.13dsd3", "Marcos Sá", "email2@gmail.com", "151515", RepresentativeJob.SUPERVISOR, null);
+        Representative r3 = new Representative(null, "felipe.1efe33", "Marcos Sá", "email3@gmail.com", "151515", RepresentativeJob.LIDER, null );
+        Representative r4 = new Representative(null, "felipe.1ww33", "Marcos Sá", "email4@gmail.com", "151515", RepresentativeJob.SUPERVISOR, null );
+        Representative r5 = new Representative(null, "felipe.13fdf3", "Marcos Sá", "email5@gmail.com", "151515", RepresentativeJob.LIDER, null );
         List<Representative> list = new ArrayList<>(Arrays.asList(r1, r2, r3, r4, r5));
 
         RepresentativeRepository mockRepresentativeRepository = Mockito.mock(RepresentativeRepository.class);
@@ -59,11 +59,11 @@ public class RepresentativeServiceTest {
     public void verificaBuscaPorId() {
 
         //arrange
-        Representative r1 = new Representative(1L, "felipe.13sd3", "Marcos Sá", "email1@gmail.com", "151515", RepresentativeJob.LIDER);
-        Representative r2 = new Representative(2L, "felipe.13dsd3", "Marcos Sá", "email2@gmail.com", "151515", RepresentativeJob.SUPERVISOR);
+        Representative r1 = new Representative(1L, "felipe.13sd3", "Marcos Sá", "email1@gmail.com", "151515", RepresentativeJob.LIDER, null);
+        Representative r2 = new Representative(2L, "felipe.13dsd3", "Marcos Sá", "email2@gmail.com", "151515", RepresentativeJob.SUPERVISOR, null);
 
         RepresentativeRepository mockRepresentativeRepository = Mockito.mock(RepresentativeRepository.class);
-        Mockito.when(mockRepresentativeRepository.findById(2L)).thenReturn(java.util.Optional.of(new Representative(2L, "felipe.13dsd3", "Marcos Sá", "email2@gmail.com", "151515", RepresentativeJob.SUPERVISOR)));
+        Mockito.when(mockRepresentativeRepository.findById(2L)).thenReturn(java.util.Optional.of(new Representative(2L, "felipe.13dsd3", "Marcos Sá", "email2@gmail.com", "151515", RepresentativeJob.SUPERVISOR, null  )));
 
         RepresentativeService representativeService = new RepresentativeService(null, mockRepresentativeRepository);
 
@@ -87,8 +87,8 @@ public class RepresentativeServiceTest {
     @Test
     public void verificaInsertRepresentative() {
         //arrange
-        Representative r1 = new Representative(1L, "felipe.13sd3", "Marcos Sá", "email1@gmail.com", "151515", RepresentativeJob.LIDER);
-        Representative r2 = new Representative(2L, "felipe.13dsd3", "Marcos Sá", "email2@gmail.com", "151515", RepresentativeJob.SUPERVISOR);
+        Representative r1 = new Representative(1L, "felipe.13sd3", "Marcos Sá", "email1@gmail.com", "151515", RepresentativeJob.LIDER, null );
+        Representative r2 = new Representative(2L, "felipe.13dsd3", "Marcos Sá", "email2@gmail.com", "151515", RepresentativeJob.SUPERVISOR, null );
 
         RepresentativeRepository mockRepresentativeRepository = Mockito.mock(RepresentativeRepository.class);
         Mockito.when(mockRepresentativeRepository.save(r2)).thenReturn(r2);
@@ -117,10 +117,10 @@ public class RepresentativeServiceTest {
     public void verificaUpdateRepresentative() {
 
         //Arrange
-        Representative r1 = new Representative(1L, "felipe.13sd3", "Marcos Sá", "email1@gmail.com", "151515", RepresentativeJob.LIDER);
-        Representative r2 = new Representative(2L, "felipe.13dsd3", "Marcos Sá", "email2@gmail.com", "151515", RepresentativeJob.SUPERVISOR);
+        Representative r1 = new Representative(1L, "felipe.13sd3", "Marcos Sá", "email1@gmail.com", "151515", RepresentativeJob.LIDER, null );
+        Representative r2 = new Representative(2L, "felipe.13dsd3", "Marcos Sá", "email2@gmail.com", "151515", RepresentativeJob.SUPERVISOR, null );
 
-        Representative representativeUpdate = new Representative(r2.getId(), r2.getUsername(), "Marcos de Sá", r2.getEmail(), r2.getPassword(), r2.getJob());
+        Representative representativeUpdate = new Representative(r2.getId(), r2.getUsername(), "Marcos de Sá", r2.getEmail(), r2.getPassword(), r2.getJob(), null );
 
         RepresentativeService mockRepresentativeService = Mockito.mock(RepresentativeService.class);
         Mockito.when(mockRepresentativeService.update(representativeUpdate)).thenReturn(representativeUpdate);
@@ -152,7 +152,7 @@ public class RepresentativeServiceTest {
     @Test
     public void verificaDeleteSeller() {
         //Arrange
-        Representative r1 = new Representative(1L, "felipe.13sd3", "Marcos Sá", "email1@gmail.com", "151515", RepresentativeJob.LIDER);
+        Representative r1 = new Representative(1L, "felipe.13sd3", "Marcos Sá", "email1@gmail.com", "151515", RepresentativeJob.LIDER, null );
 
         RepresentativeRepository mockRepresentativeRepository = Mockito.mock(RepresentativeRepository.class);
         Mockito.when(mockRepresentativeRepository.findById(2L)).thenReturn(Optional.empty());
