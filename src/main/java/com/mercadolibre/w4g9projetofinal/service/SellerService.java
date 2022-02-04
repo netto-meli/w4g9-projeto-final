@@ -1,10 +1,14 @@
 package com.mercadolibre.w4g9projetofinal.service;
 
+import com.mercadolibre.w4g9projetofinal.entity.Advertise;
+import com.mercadolibre.w4g9projetofinal.entity.Batch;
 import com.mercadolibre.w4g9projetofinal.entity.Seller;
 import com.mercadolibre.w4g9projetofinal.exceptions.ExistingUserException;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
+import com.mercadolibre.w4g9projetofinal.exceptions.SectionManagementException;
 import com.mercadolibre.w4g9projetofinal.repository.SellerRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -29,6 +33,11 @@ public class SellerService {
     /*** Instancia de repositório: <b>SellerRepository</b>.
      */
     private SellerRepository repository;
+
+    /*** Instancia de service: <b>AdvertiseService</b>.
+     */
+    @Autowired
+    private AdvertiseService advertiseService;
 
     /*** Método que retorna lista de Sellers */
     public List<Seller> findAll() {
@@ -79,5 +88,18 @@ public class SellerService {
         newObj.setId(obj.getId());
         newObj.setName(obj.getName());
         newObj.setEmail(obj.getEmail());
+    }
+
+    public void verifySellerInInboundOrder(List<Batch> batchList) {
+        Long sellerId = null;
+        for (Batch b :batchList) {
+            Long batchSellerId = repository.findSellerByAdvertiseId(b.getAdvertise().getId())
+                    .orElseThrow( () -> new ObjectNotFoundException("Seller not found."));
+            if (sellerId == null) {
+                Advertise ad = advertiseService.findById(b.getAdvertise().getId());
+                sellerId = ad.getSeller().getId();
+            }
+            if(!sellerId.equals(batchSellerId)) throw new SectionManagementException("Different Sellers in Batch List");
+        }
     }
 }

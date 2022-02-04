@@ -7,7 +7,11 @@ import com.mercadolibre.w4g9projetofinal.dtos.response.BatchResponseDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.InboundOrderResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.InboundOrder;
 import com.mercadolibre.w4g9projetofinal.entity.Representative;
+import com.mercadolibre.w4g9projetofinal.entity.enums.Profile;
+import com.mercadolibre.w4g9projetofinal.exceptions.AuthorizationException;
+import com.mercadolibre.w4g9projetofinal.security.UserSS;
 import com.mercadolibre.w4g9projetofinal.service.InboundOrderService;
+import com.mercadolibre.w4g9projetofinal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +25,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/api/v1/fresh-products/inboundorder")
@@ -34,10 +41,13 @@ public class InboundOrderController {
     public ResponseEntity<List<BatchResponseDTO>> createInboundOrder(
             @RequestBody @Valid InboundOrderRequestDTO inboundOrderRequestDTO,
             UriComponentsBuilder uriBuilder) {
-        // todo autentication
-        Representative representative = new Representative(2L,null, null, null, null, null, null);
+/*        UserSS user = UserService.authenticated();
+        if(user == null) {
+            throw new AuthorizationException("Acesso negado");
+        }*/
+        UserSS user = new UserSS(2L, "", "", new HashSet<>());
         InboundOrder inboundOrder = InboundOrderConverter.convertDtoToEntity(inboundOrderRequestDTO);
-        inboundOrder = inboundOrderService.createInboundOrder(representative, inboundOrder);
+        inboundOrder = inboundOrderService.createInboundOrder(user, inboundOrder);
         List<BatchResponseDTO> response = BatchConverter.convertEntityListToDtoList(inboundOrder.getBatchList());
         URI uri = uriBuilder
                 .path("/{id}")
@@ -50,8 +60,13 @@ public class InboundOrderController {
     public ResponseEntity<List<BatchResponseDTO>> updateInboundOrder(
             @RequestBody @Valid InboundOrderRequestDTO request,
             UriComponentsBuilder uriBuilder) {
+/*        UserSS user = UserService.authenticated();
+        if(user == null) {
+            throw new AuthorizationException("Acesso negado");
+        }*/
+        UserSS user = new UserSS(2L, "", "", new HashSet<>());
         InboundOrder io = InboundOrderConverter.convertDtoToEntity(request);
-        io = inboundOrderService.update(io);
+        io = inboundOrderService.update(user, io);
         List<BatchResponseDTO> response = BatchConverter.convertEntityListToDtoList(io.getBatchList());
         URI uri = uriBuilder
                 .path("/{id}")
