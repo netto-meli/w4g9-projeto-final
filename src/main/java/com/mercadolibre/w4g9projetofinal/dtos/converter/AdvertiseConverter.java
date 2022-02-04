@@ -3,6 +3,8 @@ package com.mercadolibre.w4g9projetofinal.dtos.converter;
 import com.mercadolibre.w4g9projetofinal.dtos.request.AdvertiseRequestDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.AdvertiseResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Advertise;
+import com.mercadolibre.w4g9projetofinal.entity.Product;
+import com.mercadolibre.w4g9projetofinal.entity.Seller;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,8 +25,10 @@ public class AdvertiseConverter {
         return new Advertise(
                 null,
                 advertisedto.getDescription(),
-                advertisedto.getProduct(),
-                advertisedto.getSeller(),
+                new Product(advertisedto.getProductId(),
+                        null, null, 0F, 0F, null),
+                new Seller(advertisedto.getSellerId(),
+                        null, null, null, null, null),
                 advertisedto.getPrice(),
                 advertisedto.getStatus(),
                 advertisedto.isFreeShipping());
@@ -39,8 +43,8 @@ public class AdvertiseConverter {
         return new AdvertiseResponseDTO(
                 newAdvertise.getId(),
                 newAdvertise.getDescription(),
-                newAdvertise.getProduct(),
-                newAdvertise.getSeller(),
+                ProductConverter.convertEntityToDto(newAdvertise.getProduct()),
+                SellerConverter.convertEntityToDto(newAdvertise.getSeller()),
                 newAdvertise.getPrice(),
                 newAdvertise.getStatus(),
                 newAdvertise.isFreeShipping());

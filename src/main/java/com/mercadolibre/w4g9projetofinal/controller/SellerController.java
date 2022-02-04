@@ -16,6 +16,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -49,13 +50,9 @@ public class SellerController {
      * @return PayLoad com Seller encontrado e ResponseEntity com status <b>OK</b>
      */
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Seller> findById(@PathVariable Long id) {
-        UserSS user = UserService.authenticated();
-        if(user == null || !user.hasRole(Profile.ADMIN) && !id.equals(user.getId())) {
-            throw new AuthorizationException("Acesso negado");
-        }
+    public ResponseEntity<SellerResponseDTO> findById(@PathVariable Long id) {
         Seller obj = service.findById(id);
-        return ResponseEntity.ok(obj);
+        return ResponseEntity.ok(SellerConverter.convertEntityToDto(obj));
     }
 
     /*** Método para inserção de Seller <br>
@@ -64,7 +61,7 @@ public class SellerController {
      * @return ResponseEntity com status <b>CREATED</b>
      */
     @PostMapping
-    public ResponseEntity<Void> insert(@RequestBody SellerRequestDTO obj) {
+    public ResponseEntity<Void> insert(@RequestBody @Valid SellerRequestDTO obj) {
         Seller newObj = SellerConverter.convertDtoToEntity(obj);
         newObj = service.insert(newObj);
         SellerResponseDTO newObj2 = SellerConverter.convertEntityToDto(newObj);
@@ -79,7 +76,8 @@ public class SellerController {
      * @return ResponseEntity com status <b>NO CONTENT</b>
      */
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Void> update(@RequestBody SellerRequestDTO newObj, @PathVariable long id) {
+    public ResponseEntity<Void> update(@PathVariable Long id,
+                                       @RequestBody @Valid SellerRequestDTO newObj) {
         Seller obj = SellerConverter.convertDtoToEntity(newObj);
         obj.setId(id);
         obj = service.update(obj);
@@ -91,7 +89,6 @@ public class SellerController {
      * @param id Id do Seller a ser deletado
      * @return ResponseEntity com status <b>OK</b>
      */
-    @PreAuthorize("hasAnyRole('ADMIN')")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);

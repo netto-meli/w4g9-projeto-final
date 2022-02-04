@@ -6,6 +6,7 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import java.util.HashSet;
 import java.util.Objects;
 
@@ -17,10 +18,14 @@ import java.util.Objects;
 @Entity
 public class Representative extends User{
     private RepresentativeJob job;
+    @ManyToOne
+    private Warehouse warehouse;
 
-    public Representative(Long id, String username, String name, String email, String password, RepresentativeJob job) {
+    public Representative(Long id, String username, String name, String email,
+                          String password, RepresentativeJob job, Warehouse warehouse) {
         super(id, username, name, email, password, new HashSet<>());
         this.job = job;
+        this.warehouse = warehouse;
         addProfile(Profile.REPRESENTATIVE);
     }
 

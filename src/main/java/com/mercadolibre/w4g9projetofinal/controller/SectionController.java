@@ -20,7 +20,7 @@ import java.util.List;
  *
  */
 @RestController
-@RequestMapping("/section")
+@RequestMapping("/api/v1/fresh-products/section")
 public class SectionController {
 
     @Autowired
@@ -34,6 +34,16 @@ public class SectionController {
     public List<SectionResponseDTO> findAll(){
         List<Section> sections = sectionService.findAll();
         return SectionConverter.convertEntityListToDtoList(sections);
+    }
+
+    /** Retorna uma Section pesquisa pelo ID.
+     * @param id
+     * @return O Section pesquisado caso OK.
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<SectionResponseDTO> findById(@PathVariable Long id){
+        Section section = sectionService.findById(id);
+        return ResponseEntity.ok(SectionConverter.convertEntityToDto(section));
     }
 
     /*** Cadastra uma Section
@@ -50,16 +60,6 @@ public class SectionController {
         return ResponseEntity.created(uri).body(SectionConverter.convertEntityToDto(section));
     }
 
-    /** Retorna uma Section pesquisa pelo ID.
-     * @param id
-     * @return O Section pesquisado caso OK.
-     */
-    @GetMapping("/{id}")
-    public ResponseEntity<SectionResponseDTO> findById(@PathVariable Long id){
-        Section section = sectionService.findById(id);
-        return ResponseEntity.ok(SectionConverter.convertEntityToDto(section));
-    }
-
     /*** Atualiza uma Section com base no ID
      * @param id
      * @param sectionDTO
@@ -67,7 +67,7 @@ public class SectionController {
      */
     @PutMapping("/{id}")
     public ResponseEntity<SectionResponseDTO> update(@PathVariable Long id,
-                                                        @RequestBody @Valid SectionRequestDTO sectionDTO){
+                                                     @RequestBody @Valid SectionRequestDTO sectionDTO){
         Section sectionRequest = SectionConverter.convertDtoToEntity(sectionDTO);
         sectionRequest.setId(id);
         Section section = sectionService.update(sectionRequest);

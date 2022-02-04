@@ -15,6 +15,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -48,13 +49,9 @@ public class RepresentativeController {
      * @return PayLoad com Representative encontrado e ResponseEntity com status <b>OK</b>
      */
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Representative> findById(@PathVariable Long id) {
-        UserSS user = UserService.authenticated();
-        if(user == null || !user.hasRole(Profile.ADMIN) && !id.equals(user.getId())) {
-            throw new AuthorizationException("Acesso negado");
-        }
+    public ResponseEntity<RepresentativeResponseDTO> findById(@PathVariable Long id) {
         Representative obj = service.findById(id);
-        return ResponseEntity.ok(obj);
+        return ResponseEntity.ok(RepresentativeConverter.convertEntityToDto(obj));
     }
 
     /*** Método para inserção de Representative <br>
@@ -63,7 +60,7 @@ public class RepresentativeController {
      * @return ResponseEntity com status <b>CREATED</b>
      */
     @PostMapping
-    public ResponseEntity<Void> insert(@RequestBody RepresentativeRequestDTO obj) {
+    public ResponseEntity<Void> insert(@RequestBody @Valid RepresentativeRequestDTO obj) {
        Representative newObj = RepresentativeConverter.convertDtoToEntity(obj);
        newObj = service.insert(newObj);
        RepresentativeResponseDTO newObj2 = RepresentativeConverter.convertEntityToDto(newObj);
@@ -78,7 +75,8 @@ public class RepresentativeController {
      * @return ResponseEntity com status <b>NO CONTENT</b>
      */
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Void> update(@RequestBody RepresentativeRequestDTO newObj, @PathVariable Long id) {
+    public ResponseEntity<Void> update(@RequestBody @Valid RepresentativeRequestDTO newObj,
+                                       @PathVariable Long id) {
         Representative obj = RepresentativeConverter.convertDtoToEntity(newObj);
         obj.setId(id);
         obj = service.update(obj);
@@ -90,7 +88,6 @@ public class RepresentativeController {
      * @param id Id do Representative a ser deletado
      * @return ResponseEntity com status <b>OK</b>
      */
-    @PreAuthorize("hasAnyRole('ADMIN')")
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);

@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -48,13 +49,13 @@ public class BuyerController {
 
     /***
      * Motodo GET para listar comprador por id.
-     * @pathVariable id do comprador
+     * @param id do comprador
      * @return retorna a lista de comprador do id enviado
      */
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Buyer> findById(@PathVariable Long id) {
+    public ResponseEntity<BuyerResponseDTO> findById(@PathVariable Long id) {
         Buyer buyer = service.findById(id);
-        return ResponseEntity.ok(buyer);
+        return ResponseEntity.ok(BuyerConverter.convertEntityToDto(buyer));
     }
 
     /*** Método para adicionar novo Comprador<br>
@@ -62,7 +63,7 @@ public class BuyerController {
      * @return Retorna payload de Comprador em um ResponseEntity com status <b>CREATED</b>
      */
     @PostMapping
-    public ResponseEntity<Void> insert(@RequestBody BuyerRequestDTO buyer) {
+    public ResponseEntity<Void> insert(@RequestBody @Valid BuyerRequestDTO buyer) {
         Buyer newBuyer = BuyerConverter.convertDtoToEntity(buyer);
         newBuyer = service.insert(newBuyer);
         BuyerResponseDTO buyerFinal = BuyerConverter.convertEntityToDto(newBuyer);
@@ -75,7 +76,8 @@ public class BuyerController {
      * @return Retorna payload de CompradorDto em um ResponseEntity com status <b>CREATED</b>
      */
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Void> update(@RequestBody BuyerRequestDTO newBuyer, @PathVariable Long id) {
+    public ResponseEntity<Void> update(@RequestBody @Valid BuyerRequestDTO newBuyer,
+                                       @PathVariable Long id) {
         Buyer buyer = BuyerConverter.convertDtoToEntity(newBuyer);
         buyer.setId(id);
         service.update(buyer);
@@ -91,5 +93,4 @@ public class BuyerController {
         service.delete(id);
         return ResponseEntity.ok().build();
     }
-
 }

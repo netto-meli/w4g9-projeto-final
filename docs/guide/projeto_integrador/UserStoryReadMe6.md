@@ -1,82 +1,57 @@
 # Programação Java
-## Requisito 2
+## Requisito 6
 ### // Especificações de Requisitos
 
-#### Requerimientos US:
-#### ml-add-products-to-cart-01
+### Enunciado
 
-**Importante:**
-As histórias de usuários são narradas do ponto de vista do comprador com base em
-suas necessidades. Os serviços são expostos a partir do Marketplace para serem
-consumidos pelo comprador que os solicita. Os contratos referem-se à História do Usuário.
+Este requisito é feito **individualmente** e é **obrigatório**.
 
-## Registrar Venda: Adicione o produto ao carrinho de comprasRegistrar Venda: Adicione o produto ao carrinho de compras
-### User Story
+A instrução consiste em criar/adicionar uma nova **User Story** ao Projeto Final, 
+mas desta vez sem especificar o problema a ser resolvido pelo **Product Owner (PO)**, 
+ou seja, de natureza **GRATUITA**. O participante terá a possibilidade de explorar 
+criativamente diferentes alternativas de possíveis problemas enquanto estes se 
+inserem no universo e na lógica de negócio proposta pela cadeira no Projecto Final, 
+para depois desenvolver e implementar a solução que considere mais adequada.
 
+Por sua vez, o requisito terá dois níveis de dificuldade para sua resolução:
 
-|                                      User Story Code: ml-add-products-to-cart-01                                       | Horas estimadas |
-|:----------------------------------------------------------------------------------------------------------------------:|:---------------:|
-|                             **User Story Name: Adicionar produto ao carrinho de compras**                              |                 |
-| **COMO** _comprador **QUERO** adicionar produtos ao carrinho de compras do Marketplace **PARA** comprá-los, se desejar ||
+|   Nível 1   | Base, que inclui o desenvolvimento de entregas que serão a base para o próximo nível. |
+|:-----------:|:--------------------------------------------------------------------------------------|
+| **Nível 2** | **Bônus, que inclui o desenvolvimento de produtos com especificações avançadas.**     |
 
-| **CENÁRIO 1:** O produto de um vendedor é registrado.                  |
-|:-----------------------------------------------------------------------|
-| **DESDE** o produto de um Vendedor é registrado                        |
-| **E** que o comprador esteja cadastrado                                |
-| **E** que o produto tem estoque                                        |
-| **E** que o prazo de validade do produto não seja inferior a 3 semanas |
-| **QUANDO** o comprador adiciona o produto com a quantidade ao carrinho |
-| **ENTÃO** um produto é adicionado ao carrinho de compras               |
-| **E** atualiza o estoque atual do produto                              |
+### Especificações Gerais
+A história do usuário proposta para o requisito 6 deve:
 
-| VALIDAÇÃO                                             |
-|-------------------------------------------------------|
-| * Autentique-se como comprador e acesse os terminais. | 
-| * Consultar produto                                   |
-| * Adicione um produto ao carrinho do comprador.       |
+* Seja consistente com a lógica de negócio que propõe o problema a ser resolvido pelo slogan do Projeto Final.
+* Agregar valor à implementação proposta nos requisitos anteriores.
+* Levantar e resolver um problema que corresponda a uma possível situação do negócio proposto.
+* Considere a possibilidade de a proposta ser apresentada (ou “vendida”) ao Product Owner, 
+que deverá ter interesse em adquiri-la e aprovar o projeto.
 
-> Observação:
-Os pedidos de compra (purchaseOrder) feitos pelo comprador terão apenas o status de Order (OrderStatus) Cart
+### Entregáveis
+O Requisito 6 deve ser entregue na forma especificada na declaração inicial do Projeto Final, 
+ou seja, por meio da criação e implantação de uma nova API na plataforma Fury, que deve contemplar
+todos os requisitos do Projeto Final. (Req. 1 a Req. 6)
 
-##### Representação JSON:
-<details><summary>Request</summary><p>
+Os resultados a seguir serão adicionados de acordo com cada nível.
+#### Nível 1: Base
+1. Readme.txt descritivo.
+2. Documentação em PDF com formato de histórico do usuário fornecido pela cadeira [(Template)](assets/template.pdf)
+3. Histórico do usuário com até 4 endpoints.
+4. Coleção de casos de teste do Postman para cada endpoint.
+5. Cobertura de teste entre 50% e 80%.
+#### Nível 2: Bônus
+1. Todos os resultados do Nível 1 concluídos.
+2. Diagrama de classes completo (UML) do projeto final.
+3. Diagrama de Entidade-Relacionamento (DER) completo do Projeto Final.
+4. Histórico do usuário com mais de 4 endpoints (requisito 6).
+5. Cobertura de teste superior a 80% (cobertura de teste> 80%)
+6. Documentação por meio do Swagger.
 
-```JSON
-{
-  "purchase_order": {
-    "date": "LocalDate",
-    "buyer_id": "String",
-    "order_status": {
-      "status_code": "String"
-    },
-    "products": [{
-      "product_id": "String",
-      "quantity": "int"
-    }]
-  }
-}
-```
-</details></p>
+### Método de avaliação
+A avaliação do Requisito 6 é realizada **individualmente** e desagregada dos demais requisitos. Cada participante deste requisito terá a oportunidade de agregar um valor extra à sua avaliação final do Mercado Livre IT Bootcamp.
+Levando em consideração os níveis 1 e 2, propõe-se que:
+* Os participantes que atenderem a **pelo menos uma** das entregas do Nível 1 serão avaliados de acordo com os requisitos desse nível.
+* Os participantes que concluírem o Nível 1 e concluírem pelo menos uma entrega correspondente ao Nível 2 serão avaliados de acordo com os requisitos do 2o nível.
 
-<details><summary>Response</summary><p>
-
-```JSON
-{
-  "total_price": "double"
-}
-```
-</details></p>
-
-### Contratos relativos a User Story
-| HTTP | Modelo de URI                                             | Descrição                                                                                                                                                                                                                                                                           | US-code |
-|------|-----------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---|
-| GET  | /api/v1/fresh-products/                                   | Veja uma lista completa de produtos. <br>Se a lista não existir, ela deve retornar um "404 Not Found".                                                                                                                                                                              | ml-add-products-to-cart-01 |
-| GET  | /api/v1/fresh-products/list?querytype=[categoría producto] | Veja uma lista de produtos por categoria. <br>category:<br> FS = Fresco <br>RF = Refrigerado <br>FF = Congelado<br> Se a lista não existir, ela deve retornar um "404 Not Found".                                                                                                   | ml-add-products-to-cart-01                                                                                                                                                                                                                                                   |
-| POST | /api/v1/fresh-products/orders/                            | Registre um sellOrder com a lista de produtos que compõem o PurchaseOrder. <br>Calcule o preço final e devolva-o juntamente com o código de status "201 CREATED". <br>Se não houver estoque de um produto, notifique a situação retornando um erro por produto, não no nível do sellOrder. | ml-add-products-to-cart-01 |
-| GET  | /api/v1/fresh-products/orders/querytype=[idOrder]|| Mostrar produtos no sellOrder. ml-add-products-to-cart-01 |
-| PUT | /api/v1/fresh-products/orders/query param=[idOrder] |Modifique o sellOrder existente. torná-lo do tipo de carrinho para modificar | ml-add-products-to-cart-01 |
-
-> Observação:
-Contemple outros tipos de erros.
-Use o script de carregamento
-Trabalhe com o token de acesso para o sellOrder como um cliente autenticado.
+Em ambos os níveis, tanto a quantidade de entregas que são cumpridas no nível correspondente quanto a qualidade com que são apresentados são considerados.

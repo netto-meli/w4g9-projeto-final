@@ -14,13 +14,14 @@ import java.util.Optional;
 public class SectionConverter {
     public static Section convertDtoFIOToEntity (SectionRequestDTOForInboundOrder sectionRequestDTO) {
         return new Section(
-                Long.valueOf( sectionRequestDTO.getSectionCode() ),
-                new Warehouse( Long.valueOf( sectionRequestDTO.getWarehouseCode() ), null, null),
-                null, null, 0, 0, 0L, 0L, null);
+                sectionRequestDTO.getSectionCode(),
+                new Warehouse( sectionRequestDTO.getWarehouseCode(), null, null),
+                null, null, 0, 0,
+                0L, 0L, null);
     }
 
     public static SectionResponseDTOForInboundOrder convertEntityToDtoFIO(Section s) {
-        return new SectionResponseDTOForInboundOrder(s.getId().toString(), s.getWarehouse().getId().toString());
+        return new SectionResponseDTOForInboundOrder(s.getId(), s.getWarehouse().getId());
     }
 
     public static SectionResponseDTO convertEntityToDto (Section section) {
@@ -28,7 +29,7 @@ public class SectionConverter {
                 section.getId(),
                 section.getName(),
                 section.getRefrigerationType(),
-                section.getWarehouse(),
+                section.getWarehouse().getId(),
                 section.getStockLimit(),
                 section.getCurrentStock(),
                 section.getMinTeperature(),
@@ -36,9 +37,8 @@ public class SectionConverter {
     }
 
     public static Section convertDtoToEntity (SectionRequestDTO section) {
-        return new Section(
-                section.getId(),
-                section.getWarehouse(),
+        return new Section(null,
+                new Warehouse(section.getIdWarehouse(), null, null),
                 section.getName(),
                 null,
                 section.getCurrentStock(),

@@ -26,8 +26,8 @@ import java.math.BigDecimal;
 public class AdvertiseResponseDTO {
     private Long id;
     private String description;
-    private Product product;
-    private Seller seller;
+    private ProductResponseDTO product;
+    private SellerResponseDTO seller;
     private BigDecimal price;
     private AdvertiseStatus status;
     private boolean freeShipping;
