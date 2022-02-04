@@ -44,10 +44,13 @@ public class InboundOrderService {
                 .orElseThrow( () -> new ObjectNotFoundException("Inbound Order not found! Please check the id.") );
     }
 
+    @Transactional
     public InboundOrder createInboundOrder(UserSS user, InboundOrder inboundOrder) {
         Section section = sectionService.findById(inboundOrder.getSection().getId());
         validateWarehouse(user, inboundOrder, section);
+        inboundOrder.setSection(section);
         sellerService.verifySellerInInboundOrder(inboundOrder.getBatchList());
+        sectionService.updateOldSectionStock(inboundOrder, inboundOrder.getBatchList());
         section = sectionService.validateBatchSection(inboundOrder.getBatchList(), section, false);
         inboundOrder.setSection(section);
         Advertise advertise = advertiseService.findById(

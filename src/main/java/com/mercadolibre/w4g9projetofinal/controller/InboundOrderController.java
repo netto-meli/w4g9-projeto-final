@@ -41,11 +41,10 @@ public class InboundOrderController {
     public ResponseEntity<List<BatchResponseDTO>> createInboundOrder(
             @RequestBody @Valid InboundOrderRequestDTO inboundOrderRequestDTO,
             UriComponentsBuilder uriBuilder) {
-/*        UserSS user = UserService.authenticated();
+        UserSS user = UserService.authenticated();
         if(user == null) {
             throw new AuthorizationException("Acesso negado");
-        }*/
-        UserSS user = new UserSS(2L, "", "", new HashSet<>());
+        }
         InboundOrder inboundOrder = InboundOrderConverter.convertDtoToEntity(inboundOrderRequestDTO);
         inboundOrder = inboundOrderService.createInboundOrder(user, inboundOrder);
         List<BatchResponseDTO> response = BatchConverter.convertEntityListToDtoList(inboundOrder.getBatchList());
@@ -60,11 +59,10 @@ public class InboundOrderController {
     public ResponseEntity<List<BatchResponseDTO>> updateInboundOrder(
             @RequestBody @Valid InboundOrderRequestDTO request,
             UriComponentsBuilder uriBuilder) {
-/*        UserSS user = UserService.authenticated();
+        UserSS user = UserService.authenticated();
         if(user == null) {
             throw new AuthorizationException("Acesso negado");
-        }*/
-        UserSS user = new UserSS(2L, "", "", new HashSet<>());
+        }
         InboundOrder io = InboundOrderConverter.convertDtoToEntity(request);
         io = inboundOrderService.update(user, io);
         List<BatchResponseDTO> response = BatchConverter.convertEntityListToDtoList(io.getBatchList());
