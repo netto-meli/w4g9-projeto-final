@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BatchResponseDTO {
-    private int batchNumber;
+    private Long batchNumber;
     private Long advertiseId;
     private float currentTemperature;
     private float minimumTemperature;

@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class WarehouseResponseDTO {
-    private long id;
+    private Long id;
     private String name;
     private String location;
 }

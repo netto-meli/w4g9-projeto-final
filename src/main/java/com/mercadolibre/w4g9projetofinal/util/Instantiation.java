@@ -46,6 +46,9 @@ public class Instantiation implements CommandLineRunner {
     private SectionRepository sectionRepository;
 
     @Autowired
+    private BuyerRepository buyerRepository;
+
+    @Autowired
     private InboundOrderRepository inboundOrderRepository;
 
     @Autowired

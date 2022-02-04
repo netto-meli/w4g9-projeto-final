@@ -3,6 +3,7 @@ package com.mercadolibre.w4g9projetofinal.service;
 import com.mercadolibre.w4g9projetofinal.entity.Batch;
 import com.mercadolibre.w4g9projetofinal.entity.Product;
 import com.mercadolibre.w4g9projetofinal.entity.enums.OrderByProductInBatch;
+import com.mercadolibre.w4g9projetofinal.entity.enums.RefrigerationType;
 import com.mercadolibre.w4g9projetofinal.exceptions.BusinessException;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.ProductRepository;
@@ -31,6 +32,7 @@ public class ProductService {
 
     /**
      * Metodo que busca todos os produtos
+     *
      * @return lista de produtos adastrados
      */
     public List<Product> findAll() {
@@ -39,6 +41,7 @@ public class ProductService {
 
     /**
      * Metodo pra buscar o produto por meio do id
+     *
      * @param id
      * @return produto do id da busca
      */
@@ -50,22 +53,20 @@ public class ProductService {
 
     /**
      * Metodo que busca produto por categoria
-     * @param category
-     * Categoria:
-     * FF = FROZEN
-     * RF = COLD
-     * FS = FRESH
+     *
+     * @param category Categoria:
+     *                 FF = FROZEN
+     *                 RF = COLD
+     *                 FS = FRESH
      * @return retorna o produto da categoria buscada
      */
-    public List<Product> findByCategoryProduct(String category) {
-        if (!(category == null)) {
-            return repository.findAll().stream().filter(p -> p.getCategoryRefrigeration().getCod().equals(category)).collect(Collectors.toList());
-        }
-        return null;
+    public List<Product> findByCategoryProduct(RefrigerationType category) {
+        return repository.findByCategoryRefrigeration(category);
     }
 
     /**
      * Metodo para buscar o lote em que o produto esta cadastrado
+     *
      * @param idProduct
      * @return lotes em que o produto foi cadastrado
      */
@@ -75,25 +76,60 @@ public class ProductService {
 
     /**
      * Metodo para ordenar lote em que o produto esta cadastrado
+     *
      * @param idProduct
-     * @param orderBy
-     * Ordenacao:
-     * L = Lote
-     * C = qtd atual
-     * F = data vencimento
+     * @param orderBy   Ordenacao:
+     *                  L = Lote
+     *                  C = qtd atual
+     *                  F = data vencimento
      * @return lista de lotes em que o produto esta cadastrado
      */
     public List<Batch> OrderByBatchInProduct(Long idProduct, String orderBy) {
         List<Batch> batch = findByBatchInProduct(idProduct);
         if (OrderByProductInBatch.ORDER_BY_BATCH.getCod().equals(orderBy)) {
             return batch.stream().sorted(Comparator.comparing(Batch::getId)).collect(Collectors.toList());
-        } else if(OrderByProductInBatch.ORDER_BY_QUANTITY.getCod().equals(orderBy)){
+        } else if (OrderByProductInBatch.ORDER_BY_QUANTITY.getCod().equals(orderBy)) {
             return batch.stream().sorted(Comparator.comparing(Batch::getCurrentQuantity)).collect(Collectors.toList());
-        } else if(OrderByProductInBatch.ORDER_BY_DUEDATE.getCod().equals(orderBy)){
+        } else if (OrderByProductInBatch.ORDER_BY_DUEDATE.getCod().equals(orderBy)) {
             return batch.stream().sorted(Comparator.comparing(Batch::getDueDate)).collect(Collectors.toList());
         } else {
             throw new BusinessException("Metodo de Ordenação informado está errado");
         }
     }
 
+    /*** Método que insere um Product
+     * @param obj objeto Product a ser inserido
+     */
+    public Product insert(Product obj) {
+        return repository.save(obj);
+    }
+
+    /*** Método que atualiza um Seller já existente
+     *
+     * @param newObj Objeto com informações para atualização de um seller existente
+     */
+    public Product update(Product newObj) {
+        Product obj = findById(newObj.getId());
+        updateProduct(newObj, obj);
+        return repository.save(obj);
+    }
+
+    /*** Método deleta um Seller do Bando de dados
+     *
+     * @param id ID do Seller a ser deletado
+     */
+    public void delete(Long id) {
+        Product obj = findById(id);
+        repository.delete(obj);
+    }
+
+    //Método para update de Seller
+    private static void updateProduct(Product obj, Product newObj) {
+        newObj.setId(obj.getId());
+        newObj.setName(obj.getName());
+        newObj.setDescription(obj.getDescription());
+        newObj.setMaxTemperature(obj.getMaxTemperature());
+        newObj.setMinTemperature(obj.getMinTemperature());
+        newObj.setCategoryRefrigeration(obj.getCategoryRefrigeration());
+    }
 }

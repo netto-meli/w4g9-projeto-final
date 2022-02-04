@@ -18,9 +18,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BatchRequestDTO {
-    @NotEmpty
     //todo fazer mais validacoes
-    private int batchNumber;
+    private Long batchNumber;
     private Long advertiseId;
     private float currentTemperature;
     private float minimumTemperature;
