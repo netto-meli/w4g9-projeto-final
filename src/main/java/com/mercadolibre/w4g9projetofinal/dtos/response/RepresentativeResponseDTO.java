@@ -14,4 +14,5 @@ public class RepresentativeResponseDTO {
     private String name;
     private String email;
     private RepresentativeJob job;
+    private Long warehouseId;
 }

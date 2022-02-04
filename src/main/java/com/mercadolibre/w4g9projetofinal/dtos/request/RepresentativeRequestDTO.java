@@ -18,4 +18,5 @@ public class RepresentativeRequestDTO {
     @NotEmpty(message = "Campo Obrigatório")
     private String pass;
     private RepresentativeJob job;
+    private Long warehouseId;
 }

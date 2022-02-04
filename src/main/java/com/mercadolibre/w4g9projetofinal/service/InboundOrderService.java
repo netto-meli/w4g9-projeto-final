@@ -25,7 +25,7 @@ public class InboundOrderService {
     private SectionService sectionService;
 
     public InboundOrder createInboundOrder(Representative representative, InboundOrder inboundOrder) {
-        Section section = sectionService.validateSectionBatches(
+        Section section = sectionService.validateSectionBatches(null, null,
                 inboundOrder.getSection(),
                 inboundOrder.getBatchList());
         inboundOrder.setSection(section);
@@ -35,7 +35,6 @@ public class InboundOrderService {
                                 .orElseThrow(() -> new ObjectNotFoundException("Anuncio não encontrado.")))
                         .getAdvertise().getId());
         inboundOrder.setSeller(advertise.getSeller());
-        inboundOrder.setRepresentative(representative);
         inboundOrder.setInboundOrderToBatchList();
         return inboundOrderRepository.save(inboundOrder);
     }
@@ -44,6 +43,8 @@ public class InboundOrderService {
         InboundOrder oldInboundOrder = inboundOrderRepository.findById(io.getId())
                 .orElseThrow( () -> new ObjectNotFoundException("Ordem de Entrada não encontrada.") );
         Section section = sectionService.validateSectionBatches(
+                oldInboundOrder.getSection(),
+                oldInboundOrder.getBatchList(),
                 io.getSection(),
                 io.getBatchList());
         io.setSection(section);
