@@ -21,7 +21,8 @@ public class SectionService {
 
     private SectionRepository sectionRepository;
 
-    public Section validateSectionBatches(Section section, List<Batch> batchStock) {
+    public Section validateSectionBatches(Section newSection, List<Batch> newBatchStock,
+                                          Section section, List<Batch> batchStock) {
         Section dbSection = this.findById(section.getId());
         if (!section.getWarehouse().getId()
                 .equals(dbSection.getWarehouse().getId())) {
@@ -95,7 +96,7 @@ public class SectionService {
     }
 
     //Método para update de Section
-    private static Section updateSection(Section obj, Section newObj) {
+    private static void updateSection(Section obj, Section newObj) {
         newObj.setCurrentStock(obj.getCurrentStock());
         newObj.setId(obj.getId());
         newObj.setMaxTeperature(obj.getMaxTeperature());
@@ -105,7 +106,6 @@ public class SectionService {
         newObj.setRefrigerationType(obj.getRefrigerationType());
         newObj.setStockLimit(obj.getStockLimit());
         newObj.setWarehouse(obj.getWarehouse());
-        return newObj;
     }
 }
 
