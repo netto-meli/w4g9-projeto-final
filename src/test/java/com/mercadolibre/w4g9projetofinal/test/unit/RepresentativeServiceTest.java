@@ -1,21 +1,14 @@
 package com.mercadolibre.w4g9projetofinal.test.unit;
 
 import com.mercadolibre.w4g9projetofinal.entity.Representative;
-import com.mercadolibre.w4g9projetofinal.entity.Seller;
 import com.mercadolibre.w4g9projetofinal.entity.enums.RepresentativeJob;
 import com.mercadolibre.w4g9projetofinal.exceptions.ExistingUserException;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.RepresentativeRepository;
-import com.mercadolibre.w4g9projetofinal.repository.SellerRepository;
 import com.mercadolibre.w4g9projetofinal.service.RepresentativeService;
-import com.mercadolibre.w4g9projetofinal.service.SellerService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.ArrayList;
@@ -27,6 +20,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class RepresentativeServiceTest {
 
+    /*** <b>US-0001</b>
+     * Verifica a lista de Representatives
+     */
     @Test
     public void verificaListaDeRepresentativesCadastrados() {
 
@@ -52,6 +48,13 @@ public class RepresentativeServiceTest {
 
     }
 
+    /*** <b>US-0002</b>
+     * Verifica Representative por Id
+     * <i>Se cumprir:</i><br>
+     * Permite continuar normalmente. <br>
+     * <i>Se não cumprir:</i>
+     * Retorna excessão ObjectNotFoundException
+     */
     @Test
     public void verificaBuscaPorId() {
 
@@ -74,6 +77,13 @@ public class RepresentativeServiceTest {
         assertTrue(excesaoEsperada.getMessage().equals("Representante não encontrado! Por favor verifique o id."));
     }
 
+    /*** <b>US-0003</b>
+     * Verifica a Insert de Representative
+     * <i>Se cumprir:</i><br>
+     * Permite continuar normalmente. <br>
+     * <i>Se não cumprir:</i>
+     * Retorna excessão ExistingUserException
+     */
     @Test
     public void verificaInsertRepresentative() {
         //arrange
@@ -96,6 +106,13 @@ public class RepresentativeServiceTest {
         assertTrue(expectedException.getMessage().equals("Username ou Email existente na base de dados"));
     }
 
+    /*** <b>US-0004</b>
+     * Verifica a Update de Representative
+     * <i>Se cumprir:</i><br>
+     * Permite continuar normalmente. <br>
+     * <i>Se não cumprir:</i>
+     * Retorna excessão ObjectNotFoundException
+     */
     @Test
     public void verificaUpdateRepresentative() {
 
@@ -123,6 +140,34 @@ public class RepresentativeServiceTest {
 
         assertEquals(representativeUpdate, representative);
         assertTrue(excesaoEsperada.getMessage().equals("Representante não encontrado! Por favor verifique o id."));
+    }
+
+    /*** <b>US-0004</b>
+     * Verifica a Delete de Representative
+     * <i>Se cumprir:</i><br>
+     * Permite continuar normalmente. <br>
+     * <i>Se não cumprir:</i>
+     * Retorna excessão ObjectNotFoundException
+     */
+    @Test
+    public void verificaDeleteSeller() {
+        //Arrange
+        Representative r1 = new Representative(1L, "felipe.13sd3", "Marcos Sá", "email1@gmail.com", "151515", RepresentativeJob.LIDER);
+
+        RepresentativeRepository mockRepresentativeRepository = Mockito.mock(RepresentativeRepository.class);
+        Mockito.when(mockRepresentativeRepository.findById(2L)).thenReturn(Optional.empty());
+        Mockito.when(mockRepresentativeRepository.findById(1L)).thenReturn(Optional.of(r1));
+        Mockito.doNothing().when(mockRepresentativeRepository).delete(r1);
+
+        RepresentativeService representativeService = new RepresentativeService(new BCryptPasswordEncoder(), mockRepresentativeRepository);
+
+        //Action
+        representativeService.delete(1L);
+        ObjectNotFoundException excesaoEsperada = assertThrows(ObjectNotFoundException.class,() -> representativeService.delete(2L));
+
+        //Assertation
+        Mockito.verify(mockRepresentativeRepository, Mockito.times(1)).delete(r1);
+        assertTrue(excesaoEsperada.getMessage().contains("Representante não encontrado! Por favor verifique o id."));
     }
 
 

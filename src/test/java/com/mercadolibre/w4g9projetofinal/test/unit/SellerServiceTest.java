@@ -6,7 +6,6 @@ import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.SellerRepository;
 import com.mercadolibre.w4g9projetofinal.service.SellerService;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,6 +19,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class SellerServiceTest {
 
+    /*** <b>US-0001</b>
+     * Verifica a lista de Sellers
+     */
     @Test
     public void verificaListaDeSellersCadastrados() {
 
@@ -41,10 +43,15 @@ public class SellerServiceTest {
 
         //Assertion
         assertEquals(list, listSeller);
-
-
     }
 
+    /*** <b>US-0002</b>
+     * Verifica a Seller por Id
+     * <i>Se cumprir:</i><br>
+     * Permite continuar normalmente. <br>
+     * <i>Se não cumprir:</i>
+     * Retorna excessão ObjectNotFoundException
+     */
     @Test
     public void verificaBuscaPorId() {
 
@@ -64,9 +71,16 @@ public class SellerServiceTest {
 
         //Assertation
         assertEquals(s2, seller);
-        assertTrue(excesaoEsperada.getMessage().equals("Vendedor não encontrado! Por favor verifique o id."));
+        assertTrue(excesaoEsperada.getMessage().contains("Vendedor não encontrado! Por favor verifique o id."));
     }
 
+    /*** <b>US-0003</b>
+     * Verifica a Insert de Seller
+     * <i>Se cumprir:</i><br>
+     * Permite continuar normalmente. <br>
+     * <i>Se não cumprir:</i>
+     * Retorna excessão ExistingUserException
+     */
     @Test
     public void verificaInsertSeller() {
         //arrange
@@ -86,9 +100,16 @@ public class SellerServiceTest {
 
         //Assertation
         assertEquals(s2, seller);
-        assertTrue(expectedException.getMessage().equals("Username ou Email existente na base de dados"));
+        assertTrue(expectedException.getMessage().contains("Username ou Email existente na base de dados"));
     }
 
+    /*** <b>US-0004</b>
+     * Verifica a Update de Seller
+     * <i>Se cumprir:</i><br>
+     * Permite continuar normalmente. <br>
+     * <i>Se não cumprir:</i>
+     * Retorna excessão ObjectNotFoundException
+     */
     @Test
     public void verificaUpdateSeller() {
 
@@ -113,8 +134,34 @@ public class SellerServiceTest {
 
         //Action
         assertEquals(sellerUpdate, seller);
-        assertTrue(excesaoEsperada.getMessage().equals("Vendedor não encontrado! Por favor verifique o id."));
+        assertTrue(excesaoEsperada.getMessage().contains("Vendedor não encontrado! Por favor verifique o id."));
     }
 
+    /*** <b>US-0004</b>
+     * Verifica a Delete de Seller
+     * <i>Se cumprir:</i><br>
+     * Permite continuar normalmente. <br>
+     * <i>Se não cumprir:</i>
+     * Retorna excessão ObjectNotFoundException
+     */
+    @Test
+    public void verificaDeleteSeller() {
+        //Arrange
+        Seller s1 = new Seller(3L, "felipe3", "Fe Bontempo", "email2@hotmail.com", "123456", null);
 
+        SellerRepository mockSellerRepository = Mockito.mock(SellerRepository.class);
+        Mockito.when(mockSellerRepository.findById(1L)).thenReturn(Optional.empty());
+        Mockito.when(mockSellerRepository.findById(3L)).thenReturn(Optional.of(s1));
+        Mockito.doNothing().when(mockSellerRepository).delete(s1);
+
+        SellerService sellerService = new SellerService(new BCryptPasswordEncoder(), mockSellerRepository);
+
+        //Action
+        sellerService.delete(3L);
+        ObjectNotFoundException excesaoEsperada = assertThrows(ObjectNotFoundException.class,() -> sellerService.delete(1L));
+
+        //Assertation
+        Mockito.verify(mockSellerRepository, Mockito.times(1)).delete(s1);
+        assertTrue(excesaoEsperada.getMessage().contains("Vendedor não encontrado! Por favor verifique o id."));
+    }
 }
