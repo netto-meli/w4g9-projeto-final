@@ -4,4 +4,11 @@
 - [User Story - US 3](UserStoryReadMe3)
 - [User Story - US 4](UserStoryReadMe4)
 - [User Story - US 5](UserStoryReadMe5)
-- [User Story - US 6](UserStoryReadMe6-Rafael)
+- [User Story - US 6](UserStoryReadMe6)
+
+- User Story - Individua
+  - [User Story - US Felipe](UserStoryReadMe6-Felipe)
+  - [User Story - US Fernando](UserStoryReadMe6-Fernando)
+  - [User Story - US Leonardo](UserStoryReadMe6-Leonardo)
+  - [User Story - US Marcos](UserStoryReadMe6-Marcos)
+  - [User Story - US Rafael](UserStoryReadMe6-Rafael)
