@@ -1,9 +1,12 @@
 package com.mercadolibre.w4g9projetofinal.service;
 
 import com.mercadolibre.w4g9projetofinal.entity.Seller;
+import com.mercadolibre.w4g9projetofinal.entity.enums.Profile;
+import com.mercadolibre.w4g9projetofinal.exceptions.AuthorizationException;
 import com.mercadolibre.w4g9projetofinal.exceptions.ExistingUserException;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.SellerRepository;
+import com.mercadolibre.w4g9projetofinal.security.UserSS;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -39,6 +42,10 @@ public class SellerService {
      * @param id ID do Seller a ser retornado
      */
     public Seller findById(Long id) {
+        UserSS user = UserService.authenticated();
+        if (user == null || !user.hasRole(Profile.ADMIN) && !id.equals(user.getId())) {
+            throw new AuthorizationException("Acesso Negado");
+        }
         Optional<Seller> obj = repository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Vendedor não encontrado! Por favor verifique o id."));
     }
