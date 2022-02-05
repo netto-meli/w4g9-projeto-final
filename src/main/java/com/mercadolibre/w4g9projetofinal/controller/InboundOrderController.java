@@ -46,7 +46,7 @@ public class InboundOrderController {
             throw new AuthorizationException("Acesso negado");
         }
         InboundOrder inboundOrder = InboundOrderConverter.convertDtoToEntity(inboundOrderRequestDTO);
-        inboundOrder = inboundOrderService.createInboundOrder(user, inboundOrder);
+        inboundOrder = inboundOrderService.inboundOrderManager(user, inboundOrder, false);
         List<BatchResponseDTO> response = BatchConverter.convertEntityListToDtoList(inboundOrder.getBatchList());
         URI uri = uriBuilder
                 .path("/{id}")
@@ -64,7 +64,7 @@ public class InboundOrderController {
             throw new AuthorizationException("Acesso negado");
         }
         InboundOrder io = InboundOrderConverter.convertDtoToEntity(request);
-        io = inboundOrderService.update(user, io);
+        io = inboundOrderService.inboundOrderManager(user, io, true);
         List<BatchResponseDTO> response = BatchConverter.convertEntityListToDtoList(io.getBatchList());
         URI uri = uriBuilder
                 .path("/{id}")

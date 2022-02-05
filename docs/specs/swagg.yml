@@ -1,1065 +1,2048 @@
----
-openapi: 3.0.1
+swagger: '2.0'
 info:
-  title: finalProject
-  description: bootcamp-br-gp9-project
-  contact:
-    name: finalProject
-    email: ext_dambetan@mercadolibre.com
-  version: last
-servers:
-  - url: https://null_finalProject.furyapps.io
-    description: Scope null
+  description: Api Documentation
+  version: '1.0'
+  title: Api Documentation
+  termsOfService: urn:tos
+  contact: {}
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0
+host: localhost:8080
+basePath: /
+tags:
+  - name: advertise-controller
+    description: Advertise Controller
+  - name: buyer-controller
+    description: Buyer Controller
+  - name: cart-controller
+    description: Cart Controller
+  - name: due-date-controller
+    description: Due Date Controller
+  - name: inbound-order-controller
+    description: Inbound Order Controller
+  - name: ping-controller
+    description: Ping Controller
+  - name: product-controller
+    description: Product Controller
+  - name: representative-controller
+    description: Representative Controller
+  - name: section-controller
+    description: Section Controller
+  - name: seller-controller
+    description: Seller Controller
+  - name: user-controller
+    description: User Controller
+  - name: warehouse-controller
+    description: Warehouse Controller
 paths:
-  "/api/v1/fresh-products/inboundorder":
+  /api/v1/fresh-products/advertise:
+    get:
+      tags:
+        - advertise-controller
+      summary: findAll
+      operationId: findAllUsingGET
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/AdvertiseResponseDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    post:
+      tags:
+        - advertise-controller
+      summary: insert
+      operationId: insertUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: advertise
+          description: advertise
+          required: true
+          schema:
+            $ref: '#/definitions/AdvertiseRequestDTO'
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/fresh-products/advertise/{id}:
+    get:
+      tags:
+        - advertise-controller
+      summary: findById
+      operationId: findByIdUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Advertise'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    put:
+      tags:
+        - advertise-controller
+      summary: update
+      operationId: updateUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: advertiseDto
+          description: advertiseDto
+          required: true
+          schema:
+            $ref: '#/definitions/AdvertiseRequestDTO'
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    delete:
+      tags:
+        - advertise-controller
+      summary: delete
+      operationId: deleteUsingDELETE
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /api/v1/fresh-products/buyer:
+    get:
+      tags:
+        - buyer-controller
+      summary: findAll
+      operationId: findAllUsingGET_1
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/BuyerResponseDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    post:
+      tags:
+        - buyer-controller
+      summary: insert
+      operationId: insertUsingPOST_1
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: buyer
+          description: buyer
+          required: true
+          schema:
+            $ref: '#/definitions/BuyerRequestDTO'
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/fresh-products/buyer/{id}:
+    get:
+      tags:
+        - buyer-controller
+      summary: findById
+      operationId: findByIdUsingGET_1
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BuyerResponseDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    put:
+      tags:
+        - buyer-controller
+      summary: update
+      operationId: updateUsingPUT_1
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+        - in: body
+          name: newBuyer
+          description: newBuyer
+          required: true
+          schema:
+            $ref: '#/definitions/BuyerRequestDTO'
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    delete:
+      tags:
+        - buyer-controller
+      summary: delete
+      operationId: deleteUsingDELETE_1
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /api/v1/fresh-products/cart/addProduct/{idBuyer}:
+    post:
+      tags:
+        - cart-controller
+      summary: addAdvertiseItemsToCart
+      operationId: addAdvertiseItemsToCartUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: idAdvertise
+          in: query
+          description: idAdvertise
+          required: false
+          type: integer
+          default: 0
+          format: int64
+        - name: idBuyer
+          in: path
+          description: idBuyer
+          required: true
+          type: integer
+          format: int64
+        - name: qtdProduct
+          in: query
+          description: qtdProduct
+          required: false
+          type: integer
+          default: 0
+          format: int32
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/SellOrderResponseDTO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/fresh-products/cart/createSellOrder/{idBuyer}:
+    post:
+      tags:
+        - cart-controller
+      summary: createSellOrder
+      operationId: createSellOrderUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: idBuyer
+          in: path
+          description: idBuyer
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/SellOrderResponseDTO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/fresh-products/cart/emptyCart/{idBuyer}:
+    delete:
+      tags:
+        - cart-controller
+      summary: emptyCart
+      operationId: emptyCartUsingDELETE
+      produces:
+        - '*/*'
+      parameters:
+        - name: idBuyer
+          in: path
+          description: idBuyer
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /api/v1/fresh-products/cart/removeProduct/{idBuyer}:
+    delete:
+      tags:
+        - cart-controller
+      summary: removeAdvertiseItemsFromCart
+      operationId: removeAdvertiseItemsFromCartUsingDELETE
+      produces:
+        - '*/*'
+      parameters:
+        - name: idAdvertise
+          in: query
+          description: idAdvertise
+          required: false
+          type: integer
+          default: 0
+          format: int64
+        - name: idBuyer
+          in: path
+          description: idBuyer
+          required: true
+          type: integer
+          format: int64
+        - name: qtdRemove
+          in: query
+          description: qtdRemove
+          required: false
+          type: integer
+          default: 0
+          format: int32
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/SellOrderResponseDTO'
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /api/v1/fresh-products/cart/{idBuyer}:
+    get:
+      tags:
+        - cart-controller
+      summary: showCart
+      operationId: showCartUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: idBuyer
+          in: path
+          description: idBuyer
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/SellOrderResponseDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/fresh-products/due-date/byRefrigeration/{numberOfDays}:
+    get:
+      tags:
+        - due-date-controller
+      summary: findByDueDateBeforeAndRefrigerationType
+      operationId: findByDueDateBeforeAndRefrigerationTypeUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: numberOfDays
+          in: path
+          description: numberOfDays
+          required: true
+          type: integer
+          format: int32
+        - name: orderBy
+          in: query
+          description: orderBy
+          required: true
+          type: string
+        - name: refrigerationType
+          in: query
+          description: refrigerationType
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/BatchByDueDateRequestDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/fresh-products/due-date/bySection/{numberOfDays}:
+    get:
+      tags:
+        - due-date-controller
+      summary: findByDueDateBeforeAndSectionId
+      operationId: findByDueDateBeforeAndSectionIdUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: numberOfDays
+          in: path
+          description: numberOfDays
+          required: true
+          type: integer
+          format: int32
+        - name: sectionId
+          in: query
+          description: sectionId
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/BatchByDueDateRequestDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/fresh-products/inboundorder:
+    get:
+      tags:
+        - inbound-order-controller
+      summary: findAllInboundOrders
+      operationId: findAllInboundOrdersUsingGET
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/InboundOrderResponseDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    post:
+      tags:
+        - inbound-order-controller
+      summary: createInboundOrder
+      operationId: createInboundOrderUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: inboundOrderRequestDTO
+          description: inboundOrderRequestDTO
+          required: true
+          schema:
+            $ref: '#/definitions/InboundOrderRequestDTO'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/BatchResponseDTO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
     put:
       tags:
         - inbound-order-controller
-      operationId: update
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/InboundOrderUpdateRequestDTO"
-        required: true
+      summary: updateInboundOrder
+      operationId: updateInboundOrderUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: request
+          description: request
+          required: true
+          schema:
+            $ref: '#/definitions/InboundOrderRequestDTO'
       responses:
         '200':
           description: OK
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/InboundOrderResponseDTO"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                oneOf:
-                  - type: array
-                    items:
-                      "$ref": "#/components/schemas/ValidationError"
-                  - "$ref": "#/components/schemas/ApiError"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/BatchResponseDTO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
         '404':
           description: Not Found
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiError"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiError"
-    post:
+  /api/v1/fresh-products/inboundorder/{id}:
+    get:
       tags:
         - inbound-order-controller
-      operationId: create_1
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/InboundOrderCreateRequestDTO"
-        required: true
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/InboundOrderResponseDTO"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                oneOf:
-                  - type: array
-                    items:
-                      "$ref": "#/components/schemas/ValidationError"
-                  - "$ref": "#/components/schemas/ApiError"
-        '404':
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiError"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiError"
-  "/api/v1/sign-in":
-    post:
-      tags:
-        - session-controller
-      operationId: login
+      summary: findInboundOrderById
+      operationId: findInboundOrderByIdUsingGET
+      produces:
+        - '*/*'
       parameters:
-        - name: username
-          in: query
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/InboundOrderResponseDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/fresh-products/product:
+    get:
+      tags:
+        - product-controller
+      summary: findAll
+      operationId: findAllUsingGET_2
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ProductResponseDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    post:
+      tags:
+        - product-controller
+      summary: insert
+      operationId: insertUsingPOST_2
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: obj
+          description: obj
           required: true
           schema:
-            type: string
-        - name: password
+            $ref: '#/definitions/ProductRequestDTO'
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/fresh-products/product/listBatch/:
+    get:
+      tags:
+        - product-controller
+      summary: findBatchByProductId
+      operationId: findBatchByProductIdUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
           in: query
+          description: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/BatchResponseDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/fresh-products/product/listBatch/{order}:
+    get:
+      tags:
+        - product-controller
+      summary: orderByProductId
+      operationId: orderByProductIdUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: query
+          description: id
+          required: true
+          type: integer
+          format: int64
+        - name: order
+          in: path
+          description: order
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/BatchResponseDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/fresh-products/product/listCategory/{categoryProd}:
+    get:
+      tags:
+        - product-controller
+      summary: findListCategory
+      operationId: findListCategoryUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: categoryProd
+          in: path
+          description: categoryProd
+          required: true
+          type: string
+          enum:
+            - COLD
+            - FRESH
+            - FROZEN
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ProductResponseDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/fresh-products/product/{id}:
+    get:
+      tags:
+        - product-controller
+      summary: findById
+      operationId: findByIdUsingGET_2
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ProductResponseDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    put:
+      tags:
+        - product-controller
+      summary: update
+      operationId: updateUsingPUT_2
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+        - in: body
+          name: newObj
+          description: newObj
           required: true
           schema:
-            type: string
+            $ref: '#/definitions/ProductRequestDTO'
       responses:
         '200':
           description: OK
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/AccountResponseDTO"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                oneOf:
-                  - type: array
-                    items:
-                      "$ref": "#/components/schemas/ValidationError"
-                  - "$ref": "#/components/schemas/ApiError"
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
         '404':
           description: Not Found
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiError"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiError"
-  "/api/v1/fresh-products/purchase-order/update":
+    delete:
+      tags:
+        - product-controller
+      summary: delete
+      operationId: deleteUsingDELETE_2
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /api/v1/fresh-products/representative:
+    get:
+      tags:
+        - representative-controller
+      summary: findAll
+      operationId: findAllUsingGET_3
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/RepresentativeResponseDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
     post:
       tags:
-        - purchase-order-controller
-      operationId: update_1
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/PurchaseOrderUpdateRequestDTO"
-        required: true
+        - representative-controller
+      summary: insert
+      operationId: insertUsingPOST_3
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: obj
+          description: obj
+          required: true
+          schema:
+            $ref: '#/definitions/RepresentativeRequestDTO'
       responses:
         '200':
           description: OK
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/PurchaseOrderResponseDTO"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                oneOf:
-                  - type: array
-                    items:
-                      "$ref": "#/components/schemas/ValidationError"
-                  - "$ref": "#/components/schemas/ApiError"
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
         '404':
           description: Not Found
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiError"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiError"
-  "/api/v1/fresh-products/purchase-order/create":
+  /api/v1/fresh-products/representative/{id}:
+    get:
+      tags:
+        - representative-controller
+      summary: findById
+      operationId: findByIdUsingGET_3
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RepresentativeResponseDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    put:
+      tags:
+        - representative-controller
+      summary: update
+      operationId: updateUsingPUT_3
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+        - in: body
+          name: newObj
+          description: newObj
+          required: true
+          schema:
+            $ref: '#/definitions/RepresentativeRequestDTO'
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    delete:
+      tags:
+        - representative-controller
+      summary: delete
+      operationId: deleteUsingDELETE_3
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /api/v1/fresh-products/section:
+    get:
+      tags:
+        - section-controller
+      summary: findAll
+      operationId: findAllUsingGET_4
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/SectionResponseDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
     post:
       tags:
-        - purchase-order-controller
-      operationId: create
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/PurchaseOrderRequestDTO"
-        required: true
+        - section-controller
+      summary: insert
+      operationId: insertUsingPOST_4
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: sectionRequestDTO
+          description: sectionRequestDTO
+          required: true
+          schema:
+            $ref: '#/definitions/SectionRequestDTO'
       responses:
         '200':
           description: OK
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/PurchaseOrderResponseDTO"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                oneOf:
-                  - type: array
-                    items:
-                      "$ref": "#/components/schemas/ValidationError"
-                  - "$ref": "#/components/schemas/ApiError"
+          schema:
+            $ref: '#/definitions/SectionResponseDTO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
         '404':
           description: Not Found
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiError"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiError"
-  "/api/v1/countries":
+  /api/v1/fresh-products/section/{id}:
+    get:
+      tags:
+        - section-controller
+      summary: findById
+      operationId: findByIdUsingGET_4
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/SectionResponseDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    put:
+      tags:
+        - section-controller
+      summary: update
+      operationId: updateUsingPUT_4
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+        - in: body
+          name: sectionDTO
+          description: sectionDTO
+          required: true
+          schema:
+            $ref: '#/definitions/SectionRequestDTO'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/SectionResponseDTO'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    delete:
+      tags:
+        - section-controller
+      summary: delete
+      operationId: deleteUsingDELETE_4
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /api/v1/fresh-products/seller:
+    get:
+      tags:
+        - seller-controller
+      summary: findAll
+      operationId: findAllUsingGET_5
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/SellerResponseDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
     post:
       tags:
-        - country-controller
-      operationId: create_2
-      requestBody:
-        content:
-          application/json:
-            schema:
-              "$ref": "#/components/schemas/CountryRequestDTO"
-        required: true
+        - seller-controller
+      summary: insert
+      operationId: insertUsingPOST_5
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: obj
+          description: obj
+          required: true
+          schema:
+            $ref: '#/definitions/SellerRequestDTO'
       responses:
         '200':
           description: OK
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/CountryResponseDTO"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                oneOf:
-                  - type: array
-                    items:
-                      "$ref": "#/components/schemas/ValidationError"
-                  - "$ref": "#/components/schemas/ApiError"
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
         '404':
           description: Not Found
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiError"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiError"
-  "/ping":
+  /api/v1/fresh-products/seller/{id}:
+    get:
+      tags:
+        - seller-controller
+      summary: findById
+      operationId: findByIdUsingGET_5
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/SellerResponseDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    put:
+      tags:
+        - seller-controller
+      summary: update
+      operationId: updateUsingPUT_5
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+        - in: body
+          name: newObj
+          description: newObj
+          required: true
+          schema:
+            $ref: '#/definitions/SellerRequestDTO'
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    delete:
+      tags:
+        - seller-controller
+      summary: delete
+      operationId: deleteUsingDELETE_5
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /api/v1/fresh-products/users:
+    get:
+      tags:
+        - user-controller
+      summary: findAll
+      operationId: findAllUsingGET_6
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/UserResponseDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/fresh-products/warehouse:
+    get:
+      tags:
+        - warehouse-controller
+      summary: findAll
+      operationId: findAllUsingGET_7
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/WarehouseResponseDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    post:
+      tags:
+        - warehouse-controller
+      summary: insert
+      operationId: insertUsingPOST_6
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: wh
+          description: wh
+          required: true
+          schema:
+            $ref: '#/definitions/WarehouseRequestDTO'
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/fresh-products/warehouse/byProduct/{id}:
+    get:
+      tags:
+        - warehouse-controller
+      summary: findWarehousesByProductId
+      operationId: findWarehousesByProductIdUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ProductByWarehouseResponseDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /api/v1/fresh-products/warehouse/{id}:
+    get:
+      tags:
+        - warehouse-controller
+      summary: findById
+      operationId: findByIdUsingGET_6
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Warehouse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    put:
+      tags:
+        - warehouse-controller
+      summary: update
+      operationId: updateUsingPUT_6
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+        - in: body
+          name: nWarehouse1
+          description: nWarehouse1
+          required: true
+          schema:
+            $ref: '#/definitions/WarehouseRequestDTO'
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    delete:
+      tags:
+        - warehouse-controller
+      summary: delete
+      operationId: deleteUsingDELETE_6
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /ping:
     get:
       tags:
         - ping-controller
-      operationId: ping
+      summary: ping
+      operationId: pingUsingGET
+      produces:
+        - '*/*'
       responses:
         '200':
           description: OK
-          content:
-            "*/*":
-              schema:
-                type: string
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                oneOf:
-                  - type: array
-                    items:
-                      "$ref": "#/components/schemas/ValidationError"
-                  - "$ref": "#/components/schemas/ApiError"
-        '404':
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiError"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiError"
-  "/api/v1/fresh-products":
-    get:
-      tags:
-        - product-controller
-      operationId: getProductsByCountry
-      parameters:
-        - name: productType
-          in: query
-          required: false
-          schema:
-            type: integer
-            format: int32
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/ProductResponseDTO"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                oneOf:
-                  - type: array
-                    items:
-                      "$ref": "#/components/schemas/ValidationError"
-                  - "$ref": "#/components/schemas/ApiError"
-        '404':
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiError"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiError"
-  "/api/v1/fresh-products/warehouse":
-    get:
-      tags:
-        - product-controller
-      operationId: getSumOfProductInAllWarehouses
-      parameters:
-        - name: productId
-          in: query
-          required: true
-          schema:
-            type: integer
-            format: int64
-        - name: countryId
-          in: query
-          required: false
-          schema:
-            type: integer
-            format: int64
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/SumOfProductStockDTO"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                oneOf:
-                  - type: array
-                    items:
-                      "$ref": "#/components/schemas/ValidationError"
-                  - "$ref": "#/components/schemas/ApiError"
-        '404':
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiError"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiError"
-  "/api/v1/fresh-products/purchase-order":
-    get:
-      tags:
-        - purchase-order-controller
-      operationId: getById
-      parameters:
-        - name: purchaseOrderId
-          in: query
-          required: true
-          schema:
-            type: integer
-            format: int64
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/PurchaseOrderResponseDTO"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                oneOf:
-                  - type: array
-                    items:
-                      "$ref": "#/components/schemas/ValidationError"
-                  - "$ref": "#/components/schemas/ApiError"
-        '404':
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiError"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiError"
-  "/api/v1/fresh-products/purchase-order/all":
-    get:
-      tags:
-        - purchase-order-controller
-      operationId: getAll
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/PurchaseOrderResponseDTO"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                oneOf:
-                  - type: array
-                    items:
-                      "$ref": "#/components/schemas/ValidationError"
-                  - "$ref": "#/components/schemas/ApiError"
-        '404':
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiError"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiError"
-  "/api/v1/fresh-products/list":
-    get:
-      tags:
-        - product-controller
-      operationId: getSectorBatchesByProductId
-      parameters:
-        - name: productId
-          in: query
-          required: true
-          schema:
-            type: integer
-            format: int64
-        - name: ordered
-          in: query
-          required: false
           schema:
             type: string
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/SectorBatchResponseDTO"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                oneOf:
-                  - type: array
-                    items:
-                      "$ref": "#/components/schemas/ValidationError"
-                  - "$ref": "#/components/schemas/ApiError"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
         '404':
           description: Not Found
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiError"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiError"
-  "/api/v1/fresh-products/inventory":
-    get:
-      tags:
-        - product-controller
-      operationId: getProductInventory
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/ProductInventoryResponseDTO"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                oneOf:
-                  - type: array
-                    items:
-                      "$ref": "#/components/schemas/ValidationError"
-                  - "$ref": "#/components/schemas/ApiError"
-        '404':
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiError"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiError"
-  "/api/v1/fresh-products/due-date":
-    get:
-      tags:
-        - batch-controller
-      operationId: getBatchesBySector
-      parameters:
-        - name: sectorId
-          in: query
-          required: true
-          schema:
-            type: integer
-            format: int64
-        - name: daysQuantity
-          in: query
-          required: true
-          schema:
-            type: integer
-            format: int32
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/BatchValidateDateResponseDTO"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                oneOf:
-                  - type: array
-                    items:
-                      "$ref": "#/components/schemas/ValidationError"
-                  - "$ref": "#/components/schemas/ApiError"
-        '404':
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiError"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiError"
-  "/api/v1/fresh-products/due-date/list":
-    get:
-      tags:
-        - batch-controller
-      operationId: getBatchesByProductType
-      parameters:
-        - name: daysQuantity
-          in: query
-          required: true
-          schema:
-            type: integer
-            format: int32
-        - name: category
-          in: query
-          required: true
-          schema:
-            type: string
-        - name: direction
-          in: query
-          required: false
-          schema:
-            type: string
-      responses:
-        '200':
-          description: OK
-          content:
-            "*/*":
-              schema:
-                type: array
-                items:
-                  "$ref": "#/components/schemas/BatchValidateDateResponseDTO"
-        '400':
-          description: Bad Request
-          content:
-            "*/*":
-              schema:
-                oneOf:
-                  - type: array
-                    items:
-                      "$ref": "#/components/schemas/ValidationError"
-                  - "$ref": "#/components/schemas/ApiError"
-        '404':
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiError"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/ApiError"
-components:
-  schemas:
-    ApiError:
-      type: object
-      properties:
-        error:
+definitions:
+  Advertise:
+    type: object
+    properties:
+      description:
+        type: string
+      free_shipping:
+        type: boolean
+      id:
+        type: integer
+        format: int64
+      price:
+        type: number
+      product:
+        $ref: '#/definitions/Product'
+      seller:
+        $ref: '#/definitions/Seller'
+      status:
+        type: string
+        enum:
+          - ATIVO
+          - FINALIZADO
+          - INATIVO
+          - PAUSADO
+          - PENDENTE
+          - REMOVIDO
+    title: Advertise
+  AdvertiseRequestDTO:
+    type: object
+    required:
+      - price
+      - status
+    properties:
+      description:
+        type: string
+        minLength: 4
+        maxLength: 20
+      free_shipping:
+        type: boolean
+      price:
+        type: number
+      product_id:
+        type: integer
+        format: int64
+      seller_id:
+        type: integer
+        format: int64
+      status:
+        type: string
+        enum:
+          - ATIVO
+          - FINALIZADO
+          - INATIVO
+          - PAUSADO
+          - PENDENTE
+          - REMOVIDO
+    title: AdvertiseRequestDTO
+  AdvertiseResponseDTO:
+    type: object
+    properties:
+      description:
+        type: string
+      free_shipping:
+        type: boolean
+      id:
+        type: integer
+        format: int64
+      price:
+        type: number
+      product:
+        $ref: '#/definitions/ProductResponseDTO'
+      seller:
+        $ref: '#/definitions/SellerResponseDTO'
+      status:
+        type: string
+        enum:
+          - ATIVO
+          - FINALIZADO
+          - INATIVO
+          - PAUSADO
+          - PENDENTE
+          - REMOVIDO
+    title: AdvertiseResponseDTO
+  BatchByDueDateRequestDTO:
+    type: object
+    properties:
+      advertise_id:
+        type: integer
+        format: int64
+      batch_number:
+        type: integer
+        format: int64
+      due_date:
+        type: string
+        format: date
+      product_type:
+        type: string
+      quantity:
+        type: integer
+        format: int32
+    title: BatchByDueDateRequestDTO
+  BatchRequestDTO:
+    type: object
+    properties:
+      advertise_id:
+        type: integer
+        format: int64
+      batch_number:
+        type: integer
+        format: int64
+      current_quantity:
+        type: integer
+        format: int32
+      current_temperature:
+        type: number
+        format: float
+      due_date:
+        type: string
+        format: date
+      initial_quantity:
+        type: integer
+        format: int32
+      manufacturing_date:
+        type: string
+        format: date
+      manufacturing_time:
+        type: string
+        format: date-time
+      minimum_temperature:
+        type: number
+        format: float
+    title: BatchRequestDTO
+  BatchResponseDTO:
+    type: object
+    properties:
+      advertise_id:
+        type: integer
+        format: int64
+      batch_number:
+        type: integer
+        format: int64
+      current_quantity:
+        type: integer
+        format: int32
+      current_temperature:
+        type: number
+        format: float
+      due_date:
+        type: string
+        format: date
+      initial_quantity:
+        type: integer
+        format: int32
+      manufacturing_date:
+        type: string
+        format: date
+      manufacturing_time:
+        type: string
+        format: date-time
+      minimum_temperature:
+        type: number
+        format: float
+    title: BatchResponseDTO
+  BuyerRequestDTO:
+    type: object
+    properties:
+      address:
+        type: string
+      email:
+        type: string
+      name:
+        type: string
+        minLength: 2
+        maxLength: 20
+      pass:
+        type: string
+      username:
+        type: string
+    title: BuyerRequestDTO
+  BuyerResponseDTO:
+    type: object
+    properties:
+      address:
+        type: string
+      email:
+        type: string
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      username:
+        type: string
+    title: BuyerResponseDTO
+  InboundOrderRequestDTO:
+    type: object
+    required:
+      - batch_stock
+    properties:
+      batch_stock:
+        type: array
+        items:
+          $ref: '#/definitions/BatchRequestDTO'
+      order_date:
+        type: string
+        format: date
+      order_number:
+        type: integer
+        format: int32
+      section:
+        $ref: '#/definitions/SectionRequestDTOForInboundOrder'
+    title: InboundOrderRequestDTO
+  InboundOrderResponseDTO:
+    type: object
+    properties:
+      batch_stock:
+        type: array
+        items:
+          $ref: '#/definitions/BatchResponseDTO'
+      order_date:
+        type: string
+        format: date
+      order_number:
+        type: integer
+        format: int32
+      section:
+        $ref: '#/definitions/SectionResponseDTOForInboundOrder'
+    title: InboundOrderResponseDTO
+  OrderItemResponseDTO:
+    type: object
+    properties:
+      id_advertise:
+        type: integer
+        format: int64
+      quantity:
+        type: integer
+        format: int32
+    title: OrderItemResponseDTO
+  Product:
+    type: object
+    properties:
+      category_refrigeration:
+        type: string
+        enum:
+          - COLD
+          - FRESH
+          - FROZEN
+      description:
+        type: string
+      id:
+        type: integer
+        format: int64
+      max_temperature:
+        type: number
+        format: float
+      min_temperature:
+        type: number
+        format: float
+      name:
+        type: string
+    title: Product
+  ProductByWarehouseResponseDTO:
+    type: object
+    properties:
+      product_id:
+        type: integer
+        format: int64
+      warehouses:
+        type: array
+        items:
+          $ref: '#/definitions/WarehouseResponseDTOByProduct'
+    title: ProductByWarehouseResponseDTO
+  ProductRequestDTO:
+    type: object
+    required:
+      - category_refrigeration
+      - max_temperature
+      - min_temperature
+      - name
+    properties:
+      category_refrigeration:
+        type: string
+        enum:
+          - COLD
+          - FRESH
+          - FROZEN
+      description:
+        type: string
+        minLength: 4
+        maxLength: 20
+      max_temperature:
+        type: number
+        format: float
+      min_temperature:
+        type: number
+        format: float
+      name:
+        type: string
+        minLength: 4
+        maxLength: 20
+    title: ProductRequestDTO
+  ProductResponseDTO:
+    type: object
+    properties:
+      category_refrigeration:
+        type: string
+        enum:
+          - COLD
+          - FRESH
+          - FROZEN
+      description:
+        type: string
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+    title: ProductResponseDTO
+  RepresentativeRequestDTO:
+    type: object
+    properties:
+      email:
+        type: string
+      job:
+        type: string
+        enum:
+          - LIDER
+          - SUPERVISOR
+      name:
+        type: string
+      pass:
+        type: string
+      username:
+        type: string
+      warehouse_id:
+        type: integer
+        format: int64
+    title: RepresentativeRequestDTO
+  RepresentativeResponseDTO:
+    type: object
+    properties:
+      email:
+        type: string
+      id:
+        type: integer
+        format: int64
+      job:
+        type: string
+        enum:
+          - LIDER
+          - SUPERVISOR
+      name:
+        type: string
+      username:
+        type: string
+      warehouse_id:
+        type: integer
+        format: int64
+    title: RepresentativeResponseDTO
+  SectionRequestDTO:
+    type: object
+    required:
+      - name
+    properties:
+      current_stock:
+        type: integer
+        format: int32
+        minimum: 1
+        maximum: 100
+        exclusiveMinimum: false
+        exclusiveMaximum: false
+      id_warehouse:
+        type: integer
+        format: int64
+      max_teperature:
+        type: number
+        format: float
+        minimum: -20
+        maximum: 15
+        exclusiveMinimum: false
+        exclusiveMaximum: false
+      min_teperature:
+        type: number
+        format: float
+        minimum: -20
+        maximum: 15
+        exclusiveMinimum: false
+        exclusiveMaximum: false
+      name:
+        type: string
+        minLength: 5
+        maxLength: 15
+      stock_limit:
+        type: integer
+        format: int32
+        minimum: 1
+        maximum: 100
+        exclusiveMinimum: false
+        exclusiveMaximum: false
+      type:
+        type: string
+        enum:
+          - COLD
+          - FRESH
+          - FROZEN
+    title: SectionRequestDTO
+  SectionRequestDTOForInboundOrder:
+    type: object
+    properties:
+      section_code:
+        type: integer
+        format: int64
+      warehouse_code:
+        type: integer
+        format: int64
+    title: SectionRequestDTOForInboundOrder
+  SectionResponseDTO:
+    type: object
+    properties:
+      current_stock:
+        type: integer
+        format: int32
+      id:
+        type: integer
+        format: int64
+      max_teperature:
+        type: number
+        format: float
+      min_teperature:
+        type: number
+        format: float
+      name:
+        type: string
+      refrigeration_type:
+        type: string
+        enum:
+          - COLD
+          - FRESH
+          - FROZEN
+      stock_limit:
+        type: integer
+        format: int32
+      warehouse_code:
+        type: integer
+        format: int64
+    title: SectionResponseDTO
+  SectionResponseDTOForInboundOrder:
+    type: object
+    properties:
+      section_code:
+        type: integer
+        format: int64
+      warehouse_code:
+        type: integer
+        format: int64
+    title: SectionResponseDTOForInboundOrder
+  SellOrderResponseDTO:
+    type: object
+    properties:
+      buyer_id:
+        type: integer
+        format: int64
+      id:
+        type: integer
+        format: int64
+      order_item_response_dtolist:
+        type: array
+        items:
+          $ref: '#/definitions/OrderItemResponseDTO'
+      shipping_rate:
+        type: number
+      total_value:
+        type: number
+    title: SellOrderResponseDTO
+  Seller:
+    type: object
+    properties:
+      advertise_list:
+        type: array
+        items:
+          $ref: '#/definitions/Advertise'
+      email:
+        type: string
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      password:
+        type: string
+      profile:
+        type: array
+        uniqueItems: true
+        items:
           type: string
-        message:
+          enum:
+            - ADMIN
+            - BUYER
+            - REPRESENTATIVE
+            - SELLER
+      profiles:
+        type: array
+        uniqueItems: true
+        items:
           type: string
-        status:
-          type: integer
-          format: int32
-        errors:
-          type: array
-          items:
-            "$ref": "#/components/schemas/SubError"
-    SubError:
-      type: object
-      properties:
-        message:
-          type: string
-    ValidationError:
-      type: object
-      properties:
-        field:
-          type: string
-        message:
-          type: string
-    BatchRequestUpdateDTO:
-      required:
-        - batchNumber
-        - currentQuantity
-        - currentTemperature
-        - dueDate
-        - initialQuantity
-        - manufacturingDate
-        - manufacturingTime
-        - minimumTemperature
-        - productId
-      type: object
-      properties:
-        productId:
-          type: integer
-          format: int64
-        currentTemperature:
-          type: number
-          format: float
-        minimumTemperature:
-          type: number
-          format: float
-        initialQuantity:
-          type: integer
-          format: int32
-        currentQuantity:
-          type: integer
-          format: int32
-        manufacturingDate:
-          type: string
-          format: date
-        manufacturingTime:
-          type: string
-          format: date-time
-        dueDate:
-          type: string
-          format: date
-        batchNumber:
-          type: integer
-          format: int64
-    InboundOrderUpdateRequestDTO:
-      required:
-        - batchStock
-        - orderDate
-        - orderNumber
-        - section
-      type: object
-      properties:
-        orderNumber:
-          type: integer
-          format: int64
-        orderDate:
-          type: string
-          format: date
-        section:
-          "$ref": "#/components/schemas/SectorRequestDTO"
-        batchStock:
-          type: array
-          items:
-            "$ref": "#/components/schemas/BatchRequestUpdateDTO"
-        username:
-          type: string
-    SectorRequestDTO:
-      required:
-        - sectionCode
-        - warehouseCode
-      type: object
-      properties:
-        warehouseCode:
-          type: integer
-          format: int64
-        sectionCode:
-          type: integer
-          format: int64
-    BatchDTO:
-      type: object
-      properties:
-        productId:
-          type: integer
-          format: int64
-        currentTemperature:
-          type: number
-          format: float
-        minimumTemperature:
-          type: number
-          format: float
-        initialQuantity:
-          type: integer
-          format: int32
-        currentQuantity:
-          type: integer
-          format: int32
-        manufacturingDate:
-          type: string
-          format: date
-        manufacturingTime:
-          type: string
-          format: date-time
-        dueDate:
-          type: string
-          format: date
-        batchNumber:
-          type: integer
-          format: int64
-    InboundOrderResponseDTO:
-      type: object
-      properties:
-        orderId:
-          type: integer
-          format: int64
-        batchStock:
-          type: array
-          items:
-            "$ref": "#/components/schemas/BatchDTO"
-    AccountResponseDTO:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        username:
-          type: string
-        password:
-          type: string
-        token:
-          type: string
-        country:
-          "$ref": "#/components/schemas/CountryResponseDTO"
-    CountryResponseDTO:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-    PurchaseOrderUpdateRequestDTO:
-      type: object
-      properties:
-        purchaseOrderId:
-          type: integer
-          format: int64
-        productId:
-          type: integer
-          format: int64
-        newQuantity:
-          type: integer
-          format: int32
-    BatchPurchaseOrderResponseDTO:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        batchId:
-          type: integer
-          format: int64
-        quantity:
-          type: integer
-          format: int32
-        manufacturingDate:
-          type: string
-          format: date
-        manufacturingTime:
-          type: string
-          format: date-time
-        dueDate:
-          type: string
-          format: date
-    ProductBatchesPurchaseOrderResponseDTO:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        productId:
-          type: integer
-          format: int64
-        productName:
-          type: string
-        quantity:
-          type: integer
-          format: int32
-        price:
-          type: number
-          format: double
-        batches:
-          type: array
-          items:
-            "$ref": "#/components/schemas/BatchPurchaseOrderResponseDTO"
-    PurchaseOrderResponseDTO:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        date:
-          type: string
-          format: date
-        totalPrice:
-          type: number
-          format: double
-        products:
-          type: array
-          items:
-            "$ref": "#/components/schemas/ProductBatchesPurchaseOrderResponseDTO"
-    ProductPurchaseOrderRequestDTO:
-      type: object
-      properties:
-        productId:
-          type: integer
-          format: int64
-        quantity:
-          type: integer
-          format: int32
-    PurchaseOrderRequestDTO:
-      type: object
-      properties:
-        date:
-          type: string
-          format: date
-        buyerId:
-          type: integer
-          format: int64
-        orderStatus:
-          type: integer
-          format: int32
-        products:
-          type: array
-          items:
-            "$ref": "#/components/schemas/ProductPurchaseOrderRequestDTO"
-    BatchRequestCreateDTO:
-      required:
-        - currentQuantity
-        - currentTemperature
-        - dueDate
-        - initialQuantity
-        - manufacturingDate
-        - manufacturingTime
-        - minimumTemperature
-        - productId
-      type: object
-      properties:
-        productId:
-          type: integer
-          format: int64
-        currentTemperature:
-          type: number
-          format: float
-        minimumTemperature:
-          type: number
-          format: float
-        initialQuantity:
-          type: integer
-          format: int32
-        currentQuantity:
-          type: integer
-          format: int32
-        manufacturingDate:
-          type: string
-          format: date
-        manufacturingTime:
-          type: string
-          format: date-time
-        dueDate:
-          type: string
-          format: date
-    InboundOrderCreateRequestDTO:
-      required:
-        - batchStock
-        - orderDate
-        - section
-      type: object
-      properties:
-        orderDate:
-          type: string
-          format: date
-        section:
-          "$ref": "#/components/schemas/SectorRequestDTO"
-        batchStock:
-          type: array
-          items:
-            "$ref": "#/components/schemas/BatchRequestCreateDTO"
-        username:
-          type: string
-    CountryRequestDTO:
-      required:
-        - name
-      type: object
-      properties:
-        name:
-          maxLength: 2147483647
-          minLength: 3
-          type: string
-    ProductResponseDTO:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-        description:
-          type: string
-        price:
-          type: number
-          format: double
-        type:
-          type: integer
-          format: int32
-        typeDescription:
-          type: string
-    SumOfProductStockDTO:
-      type: object
-      properties:
-        productId:
-          type: integer
-          format: int64
-        warehouses:
-          type: array
-          items:
-            "$ref": "#/components/schemas/WarehouseProductSumDTO"
-    WarehouseProductSumDTO:
-      type: object
-      properties:
-        warehouseCode:
-          type: integer
-          format: int64
-        totalQuantity:
-          type: integer
-          format: int32
-    BatchIdentificationResponseDTO:
-      type: object
-      properties:
-        sectorCode:
-          type: integer
-          format: int64
-        warehouseCode:
-          type: integer
-          format: int64
-    BatchStockResponseDTO:
-      type: object
-      properties:
-        batchNumber:
-          type: integer
-          format: int64
-        currentQuantity:
-          type: integer
-          format: int32
-        dueDate:
-          type: string
-          format: date
-    SectorBatchResponseDTO:
-      type: object
-      properties:
-        sector:
-          "$ref": "#/components/schemas/BatchIdentificationResponseDTO"
-        productId:
-          type: integer
-          format: int64
-        batchStock:
-          type: array
-          items:
-            "$ref": "#/components/schemas/BatchStockResponseDTO"
-    ProductInventoryResponseDTO:
-      type: object
-      properties:
-        productName:
-          type: string
-        warehouseName:
-          type: string
-        quantityInStock:
-          type: string
-        unitaryPrice:
-          type: string
-        totalAssetsValue:
-          type: string
-    BatchValidateDateResponseDTO:
-      type: object
-      properties:
-        batchNumber:
-          type: integer
-          format: int64
-        productId:
-          type: integer
-          format: int64
-        productTypeId:
-          type: integer
-          format: int32
-        dueDate:
-          type: string
-          format: date
-        quantity:
-          type: integer
-          format: int32
+          enum:
+            - ADMIN
+            - BUYER
+            - REPRESENTATIVE
+            - SELLER
+      username:
+        type: string
+    title: Seller
+  SellerRequestDTO:
+    type: object
+    properties:
+      email:
+        type: string
+      name:
+        type: string
+      pass:
+        type: string
+      username:
+        type: string
+    title: SellerRequestDTO
+  SellerResponseDTO:
+    type: object
+    properties:
+      email:
+        type: string
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      username:
+        type: string
+    title: SellerResponseDTO
+  UserResponseDTO:
+    type: object
+    properties:
+      email:
+        type: string
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      username:
+        type: string
+    title: UserResponseDTO
+  Warehouse:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      location:
+        type: string
+      nome:
+        type: string
+    title: Warehouse
+  WarehouseRequestDTO:
+    type: object
+    properties:
+      location:
+        type: string
+      name:
+        type: string
+    title: WarehouseRequestDTO
+  WarehouseResponseDTO:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      location:
+        type: string
+      name:
+        type: string
+    title: WarehouseResponseDTO
+  WarehouseResponseDTOByProduct:
+    type: object
+    properties:
+      total_quantity:
+        type: integer
+        format: int32
+      warehouse_code:
+        type: integer
+        format: int64
+    title: WarehouseResponseDTOByProduct
