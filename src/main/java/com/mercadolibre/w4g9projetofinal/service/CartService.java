@@ -2,6 +2,7 @@ package com.mercadolibre.w4g9projetofinal.service;
 
 
 import com.mercadolibre.w4g9projetofinal.entity.*;
+import com.mercadolibre.w4g9projetofinal.entity.enums.SellOrderStatus;
 import com.mercadolibre.w4g9projetofinal.exceptions.CartManagementException;
 import com.mercadolibre.w4g9projetofinal.repository.*;
 import lombok.AllArgsConstructor;
@@ -49,7 +50,7 @@ public class CartService {
         SellOrder sellOrder = sellOrderRepository.findSellOrderByBuyer_IdAndCartTrue(idBuyer).orElse(null);
         if (sellOrder == null) {
             Buyer buyer = buyerService.findById(idBuyer);
-            sellOrder = new SellOrder(null, buyer, true, new ArrayList<>(), BigDecimal.ZERO, BigDecimal.ZERO);
+            sellOrder = new SellOrder(null, buyer, SellOrderStatus.CART, new ArrayList<>(), BigDecimal.ZERO, BigDecimal.ZERO);
             sellOrderRepository.save(sellOrder);
         }
         return sellOrder;
@@ -118,7 +119,7 @@ public class CartService {
         if (orderItemList.size() == 0)
             throw new CartManagementException("Impossível gerar pedido utilizando um carrinho vazio.");
         cart.calcTotalValueOrder();
-        cart.setCart(false);
+        cart.setOrderStatus(SellOrderStatus.CREATED);
         batchServce.updateStock(orderItemList);
         return sellOrderRepository.save(cart);
     }
