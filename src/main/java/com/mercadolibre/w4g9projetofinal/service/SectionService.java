@@ -3,6 +3,7 @@ package com.mercadolibre.w4g9projetofinal.service;
 import com.mercadolibre.w4g9projetofinal.entity.Batch;
 import com.mercadolibre.w4g9projetofinal.entity.InboundOrder;
 import com.mercadolibre.w4g9projetofinal.entity.Section;
+import com.mercadolibre.w4g9projetofinal.exceptions.BusinessException;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.exceptions.SectionManagementException;
 import com.mercadolibre.w4g9projetofinal.repository.SectionRepository;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,8 +41,7 @@ public class SectionService {
                     msg1 = new StringBuilder("Batch number(s): ");
                 }
                 msg1.append(b.getId()).append(", ");
-            }
-            else{
+            } else {
                 int qtd = 0;
                 if (isUpdate) qtd = b.getCurrentQuantity();
                 else qtd = b.getInitialQuantity();
@@ -62,24 +63,35 @@ public class SectionService {
         if ( maxStock < currentStock )
             throw new SectionManagementException("Setor "
                     + name
-                    + " não comporta todos produtos do lote "
-                    + id );
+                    + " doesn't have available stock for this update");
         return currentStock;
     }
 
-    public void updateOldSectionStock(InboundOrder oldInboundOrder, List<Batch> newBatch) {
-        Section oldSectionToUpdate = oldInboundOrder.getSection();
-        int qtd = oldSectionToUpdate.getCurrentStock();
-        for (Batch b: newBatch) {
-            for (Batch ob:oldInboundOrder.getBatchList()) {
-                if(b.getId().equals(ob.getId())) qtd -= ob.getCurrentQuantity();
+    public List<Batch> updateOldSectionStock(InboundOrder oldInboundOrder, List<Batch> newBatch) {
+        Section sectionToUpdate = oldInboundOrder.getSection();
+        int qtd = sectionToUpdate.getCurrentStock();
+        List<Batch> completeListBatch = new ArrayList<>();
+        for (Batch ob:oldInboundOrder.getBatchList()) {
+            completeListBatch.add(ob);
+            qtd -= ob.getCurrentQuantity();
+        }
+        sectionToUpdate.setCurrentStock(qtd);
+        for (Batch b : newBatch) {
+            if (!completeListBatch.contains(b)) completeListBatch.add(b);
+            for (Batch ob : oldInboundOrder.getBatchList()) {
+                if (b.getId().equals(ob.getId())) {
+                    if (!b.getAdvertise().getId().equals(ob.getAdvertise().getId()))
+                        throw new BusinessException("Cannot change Advertise of a Batch");
+                    int i = completeListBatch.indexOf(ob);
+                    completeListBatch.set(i,b);
+                }
             }
         }
-        oldSectionToUpdate.setCurrentStock(qtd);
-        this.save(oldSectionToUpdate);
+        oldInboundOrder.setSection(sectionToUpdate);
+        return completeListBatch;
     }
 
-    public Section save(Section section){
+    public Section save(Section section) {
         return sectionRepository.save(section);
     }
 
@@ -89,13 +101,13 @@ public class SectionService {
         return sectionRepository.save(newSection);
     }
 
-    public void delete(Long id){
+    public void delete(Long id) {
         Optional<Section> section = sectionRepository.findById(id);
         section.orElseThrow(() -> new ObjectNotFoundException("Setor não encontrado"));
         sectionRepository.deleteById(id);
     }
 
-    public List<Section> findAll(){
+    public List<Section> findAll() {
         return sectionRepository.findAll();
     }
 
@@ -106,7 +118,7 @@ public class SectionService {
 
     public Section findByInboundOrderId(Long id) {
         return sectionRepository.findByInboundOrder_Id(id)
-                .orElseThrow( () -> new ObjectNotFoundException("Setor nao encontrado através do ID da Inbound Order"));
+                .orElseThrow(() -> new ObjectNotFoundException("Setor nao encontrado através do ID da Inbound Order"));
     }
 
     //Método para update de Section

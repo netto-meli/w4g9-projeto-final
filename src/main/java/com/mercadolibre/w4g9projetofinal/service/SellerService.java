@@ -90,16 +90,18 @@ public class SellerService {
         newObj.setEmail(obj.getEmail());
     }
 
-    public void verifySellerInInboundOrder(List<Batch> batchList) {
+    public Seller verifySellerInInboundOrder(List<Batch> batchList) {
         Long sellerId = null;
+        Advertise ad = new Advertise();
         for (Batch b :batchList) {
             Long batchSellerId = repository.findSellerByAdvertiseId(b.getAdvertise().getId())
                     .orElseThrow( () -> new ObjectNotFoundException("Seller not found."));
             if (sellerId == null) {
-                Advertise ad = advertiseService.findById(b.getAdvertise().getId());
+                ad = advertiseService.findById(b.getAdvertise().getId());
                 sellerId = ad.getSeller().getId();
             }
             if(!sellerId.equals(batchSellerId)) throw new SectionManagementException("Different Sellers in Batch List");
         }
+        return ad.getSeller();
     }
 }
