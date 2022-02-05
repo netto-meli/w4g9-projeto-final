@@ -2,6 +2,7 @@ package com.mercadolibre.w4g9projetofinal.security;
 
 import com.mercadolibre.w4g9projetofinal.entity.User;
 import com.mercadolibre.w4g9projetofinal.repository.UserRepository;
+import com.mercadolibre.w4g9projetofinal.security.entity.UserSS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

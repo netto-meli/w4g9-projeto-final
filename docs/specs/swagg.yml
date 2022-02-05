@@ -1801,7 +1801,6 @@ paths:
         404:
           description: Not Found
           content: {}
-
 components:
   schemas:
     Advertise:

@@ -1,10 +1,10 @@
 package com.mercadolibre.w4g9projetofinal.service;
 
 import com.mercadolibre.w4g9projetofinal.entity.User;
-import com.mercadolibre.w4g9projetofinal.exceptions.AuthorizationException;
 import com.mercadolibre.w4g9projetofinal.repository.UserRepository;
-import com.mercadolibre.w4g9projetofinal.security.UserSS;
+import com.mercadolibre.w4g9projetofinal.security.entity.UserSS;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +25,7 @@ public class UserService {
             return (UserSS) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         }
         catch (Exception e) {
-            throw new AuthorizationException("Acesso negado");
+            throw new AccessDeniedException("Acesso negado");
         }
     }
 }

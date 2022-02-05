@@ -28,7 +28,6 @@ public class Seller extends User{
     public Seller(Long id, String username, String name, String email, String password, List<Advertise> advertiseList) {
         super(id, username, name, email, password, new HashSet<>());
         this.advertiseList = advertiseList;
-
         addProfile(Profile.SELLER);
     }
 

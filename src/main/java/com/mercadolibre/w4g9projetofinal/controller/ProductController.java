@@ -11,6 +11,7 @@ import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -27,6 +28,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(value = "/api/v1/fresh-products/product")
+@PreAuthorize("hasRole('ADMIN') OR hasRole('REPRESENTATIVE') OR hasRole('SELLER')")
 public class ProductController {
 
     /*** Instancia de serviço: <b>ProdutoService</b> com notação <i>{@literal @}Autowired</i> do lombok

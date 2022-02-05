@@ -1,15 +1,19 @@
 package com.mercadolibre.w4g9projetofinal.advice;
 
-import com.mercadolibre.w4g9projetofinal.exceptions.*;
+import com.mercadolibre.w4g9projetofinal.exceptions.BusinessException;
+import com.mercadolibre.w4g9projetofinal.exceptions.CartManagementException;
+import com.mercadolibre.w4g9projetofinal.exceptions.ExistingUserException;
+import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
+import com.mercadolibre.w4g9projetofinal.exceptions.SectionManagementException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.servlet.http.HttpServletRequest;
-import java.nio.file.AccessDeniedException;
 
 /***
  * Classe ResourceHandler que manipula as exceções
@@ -112,8 +116,8 @@ public class ResourceExceptionHandler {
 	 * @param request webRequest
 	 * @return Response Entity status code de erro e mensagem.
 	 */
-	@ExceptionHandler(AuthorizationException.class)
-	public ResponseEntity<StandardError> authorizationException(AuthorizationException ex, HttpServletRequest request) {
+	@ExceptionHandler(AccessDeniedException.class)
+	public ResponseEntity<StandardError> accessDeniedException(AccessDeniedException ex, HttpServletRequest request) {
 		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.FORBIDDEN.value(), "Not Authorized", ex.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
 	}

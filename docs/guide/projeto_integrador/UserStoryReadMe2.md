@@ -10,14 +10,14 @@ As histórias de usuários são narradas do ponto de vista do comprador com base
 suas necessidades. Os serviços são expostos a partir do Marketplace para serem
 consumidos pelo comprador que os solicita. Os contratos referem-se à História do Usuário.
 
-## Registrar Venda: Adicione o produto ao carrinho de comprasRegistrar Venda: Adicione o produto ao carrinho de compras
+## Registrar Venda: Adicione o produto ao carrinho de compras
 ### User Story
 
 
-|                                      User Story Code: ml-add-products-to-cart-01                                       | Horas estimadas |
-|:----------------------------------------------------------------------------------------------------------------------:|:---------------:|
-|                             **User Story Name: Adicionar produto ao carrinho de compras**                              |                 |
-| **COMO** _comprador **QUERO** adicionar produtos ao carrinho de compras do Marketplace **PARA** comprá-los, se desejar ||
+|                                       User Story Code: ml-add-products-to-cart-01                                       | Horas estimadas |
+|:-----------------------------------------------------------------------------------------------------------------------:|:---------------:|
+|                              **User Story Name: Adicionar produto ao carrinho de compras**                              |                 |
+| **COMO** _Comprador_ **QUERO** adicionar produtos ao carrinho de compras do Marketplace **PARA** comprá-los, se desejar ||
 
 | **CENÁRIO 1:** O produto de um vendedor é registrado.                  |
 |:-----------------------------------------------------------------------|
@@ -56,7 +56,7 @@ Os pedidos de compra (purchaseOrder) feitos pelo comprador terão apenas o statu
   }
 }
 ```
-</details></p>
+</p></details>
 
 <details><summary>Response</summary><p>
 
@@ -65,16 +65,16 @@ Os pedidos de compra (purchaseOrder) feitos pelo comprador terão apenas o statu
   "total_price": "double"
 }
 ```
-</details></p>
+</p></details>
 
 ### Contratos relativos a User Story
-| HTTP | Modelo de URI                                             | Descrição                                                                                                                                                                                                                                                                           | US-code |
-|------|-----------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---|
-| GET  | /api/v1/fresh-products/                                   | Veja uma lista completa de produtos. <br>Se a lista não existir, ela deve retornar um "404 Not Found".                                                                                                                                                                              | ml-add-products-to-cart-01 |
-| GET  | /api/v1/fresh-products/list?querytype=[categoría producto] | Veja uma lista de produtos por categoria. <br>category:<br> FS = Fresco <br>RF = Refrigerado <br>FF = Congelado<br> Se a lista não existir, ela deve retornar um "404 Not Found".                                                                                                   | ml-add-products-to-cart-01                                                                                                                                                                                                                                                   |
-| POST | /api/v1/fresh-products/orders/                            | Registre um sellOrder com a lista de produtos que compõem o PurchaseOrder. <br>Calcule o preço final e devolva-o juntamente com o código de status "201 CREATED". <br>Se não houver estoque de um produto, notifique a situação retornando um erro por produto, não no nível do sellOrder. | ml-add-products-to-cart-01 |
-| GET  | /api/v1/fresh-products/orders/querytype=[idOrder]|| Mostrar produtos no sellOrder. ml-add-products-to-cart-01 |
-| PUT | /api/v1/fresh-products/orders/query param=[idOrder] |Modifique o sellOrder existente. torná-lo do tipo de carrinho para modificar | ml-add-products-to-cart-01 |
+| HTTP | Modelo de URI                                              | Descrição                                                                                                                                                                                                                                                                                  | US-code                    |
+|------|------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------|
+| GET  | /api/v1/fresh-products/                                    | Veja uma lista completa de produtos. <br>Se a lista não existir, ela deve retornar um "404 Not Found".                                                                                                                                                                                     | ml-add-products-to-cart-01 |
+| GET  | /api/v1/fresh-products/list?querytype=[categoría producto] | Veja uma lista de produtos por categoria. <br>category:<br> FS = Fresco <br>RF = Refrigerado <br>FF = Congelado<br> Se a lista não existir, ela deve retornar um "404 Not Found".                                                                                                          | ml-add-products-to-cart-01 |
+| POST | /api/v1/fresh-products/orders/                             | Registre um sellOrder com a lista de produtos que compõem o PurchaseOrder. <br>Calcule o preço final e devolva-o juntamente com o código de status "201 CREATED". <br>Se não houver estoque de um produto, notifique a situação retornando um erro por produto, não no nível do sellOrder. | ml-add-products-to-cart-01 |
+| GET  | /api/v1/fresh-products/orders/querytype=[idOrder]          | Mostrar produtos no sellOrder.                                                                                                                                                                                                                                                             | ml-add-products-to-cart-01 |
+| PUT  | /api/v1/fresh-products/orders/query param=[idOrder]        | Modifique o sellOrder existente. torná-lo do tipo de carrinho para modificar                                                                                                                                                                                                               | ml-add-products-to-cart-01 |
 
 > Observação:
 Contemple outros tipos de erros.

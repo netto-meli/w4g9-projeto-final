@@ -1,4 +1,4 @@
-- [Meli Frescos - Projeto Integrador](/Projeto Integrador/)
+- [Meli Frescos - Projeto Integrador](/projeto_integrador/)
 - [User Story - US 1](UserStoryReadMe1)
 - [User Story - US 2](UserStoryReadMe2)
 - [User Story - US 3](UserStoryReadMe3)
