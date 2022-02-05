@@ -47,10 +47,12 @@ public class CartService {
      * @return Retorna um <b>SellOrder</b>, com <i>ID nula</i>, pois é um pedido ainda não finalizado (carrinho aberto).
      */
     public SellOrder getCart(Long idBuyer) {
-        SellOrder sellOrder = sellOrderRepository.findSellOrderByBuyer_IdAndCartTrue(idBuyer).orElse(null);
+        SellOrder sellOrder = sellOrderRepository
+                .findSellOrderByBuyer_IdAndOrderStatus(idBuyer, SellOrderStatus.CART).orElse(null);
         if (sellOrder == null) {
             Buyer buyer = buyerService.findById(idBuyer);
-            sellOrder = new SellOrder(null, buyer, SellOrderStatus.CART, new ArrayList<>(), BigDecimal.ZERO, BigDecimal.ZERO);
+            sellOrder = new SellOrder(null, buyer, SellOrderStatus.CART,
+                    new ArrayList<>(), BigDecimal.ZERO, BigDecimal.ZERO);
             sellOrderRepository.save(sellOrder);
         }
         return sellOrder;
@@ -72,7 +74,7 @@ public class CartService {
         Advertise advertise = advertiseService.findById(idAdvertise);
         OrderItem orderItem = cart.getOrderItem(advertise);
         int finalQuantity = cart.updateCart(qtdProduct, advertise, orderItem);
-        batchServce.verifyStock(idAdvertise,finalQuantity);
+        batchServce.verifyStock(idAdvertise, finalQuantity);
         return sellOrderRepository.save(cart);
     }
 
@@ -88,6 +90,7 @@ public class CartService {
         SellOrder cart = this.getCart(idBuyer);
         Advertise advertise = advertiseService.findById(idAdvertise);
         OrderItem item = cart.getOrderItem(advertise);
+        if (item == null) throw new CartManagementException("Impossivel retirar produto que não foi adicionado");
         if (item.getQuantity() < qtdProducts) throw new CartManagementException(
                 "Impossível retirar mais itens de um produto do que os que já estão no carrinho");
         int qtd = item.getQuantity();
@@ -95,6 +98,7 @@ public class CartService {
         if (item.getQuantity() == 0){
             cart.getOrderItemList().remove(item);
         }
+        cart.calcTotalValueOrder();
         return sellOrderRepository.save(cart);
     }
 
@@ -104,7 +108,7 @@ public class CartService {
      */
     @Transactional
     public void emptyCart(Long idBuyer) {
-        sellOrderRepository.deleteByBuyer_IdAndCartTrue(idBuyer);
+        sellOrderRepository.deleteByBuyer_IdAndOrderStatus(idBuyer, SellOrderStatus.CART);
     }
 
     /*** Método para fechar o carrinho de compras de um cliente e criar um pedido
@@ -112,7 +116,7 @@ public class CartService {
      * @param buyerId ID do Cliente que deseja ver o estado atual do carrinho de compras
      * @return Retorna um <b>SellOrder</b>, com <i>ID nula</i>, pois é um pedido ainda não finalizado (carrinho aberto).
      */
-    @Transactional(propagation= Propagation.REQUIRED, isolation= Isolation.SERIALIZABLE)
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
     public SellOrder createSellOrder(Long buyerId) {
         SellOrder cart = this.getCart(buyerId);
         List<OrderItem> orderItemList = cart.getOrderItemList();
