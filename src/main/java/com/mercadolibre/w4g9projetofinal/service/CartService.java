@@ -1,10 +1,13 @@
 package com.mercadolibre.w4g9projetofinal.service;
 
 
-import com.mercadolibre.w4g9projetofinal.entity.*;
+import com.mercadolibre.w4g9projetofinal.entity.Advertise;
+import com.mercadolibre.w4g9projetofinal.entity.Buyer;
+import com.mercadolibre.w4g9projetofinal.entity.OrderItem;
+import com.mercadolibre.w4g9projetofinal.entity.SellOrder;
 import com.mercadolibre.w4g9projetofinal.entity.enums.SellOrderStatus;
 import com.mercadolibre.w4g9projetofinal.exceptions.CartManagementException;
-import com.mercadolibre.w4g9projetofinal.repository.*;
+import com.mercadolibre.w4g9projetofinal.repository.SellOrderRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -53,7 +56,7 @@ public class CartService {
             Buyer buyer = buyerService.findById(idBuyer);
             sellOrder = new SellOrder(null, buyer, SellOrderStatus.CART,
                     new ArrayList<>(), BigDecimal.ZERO, BigDecimal.ZERO);
-            sellOrderRepository.save(sellOrder);
+            sellOrder = sellOrderRepository.save(sellOrder);
         }
         return sellOrder;
     }
@@ -95,7 +98,7 @@ public class CartService {
                 "Impossível retirar mais itens de um produto do que os que já estão no carrinho");
         int qtd = item.getQuantity();
         item.setQuantity(qtd - qtdProducts);
-        if (item.getQuantity() == 0){
+        if (item.getQuantity() == 0) {
             cart.getOrderItemList().remove(item);
         }
         cart.calcTotalValueOrder();
