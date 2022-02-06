@@ -1,5 +1,7 @@
 package com.mercadolibre.w4g9projetofinal.advice;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.mercadolibre.w4g9projetofinal.exceptions.BusinessException;
 import com.mercadolibre.w4g9projetofinal.exceptions.CartManagementException;
 import com.mercadolibre.w4g9projetofinal.exceptions.ExistingUserException;
@@ -34,6 +36,30 @@ public class ResourceExceptionHandler {
 		for (FieldError x : e.getBindingResult().getFieldErrors()) {
 			err.addError(x.getField(), x.getDefaultMessage());
 		}
+		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(err);
+	}
+
+	/*** Handler de erro
+	 *
+	 * @param ex exceção lançada
+	 * @param request webRequest
+	 * @return Response Entity com status code de erro e mensagem.
+	 */
+	@ExceptionHandler(InvalidFormatException.class)
+	public ResponseEntity<StandardError> invalidFormatException(InvalidFormatException ex, HttpServletRequest request) {
+		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.UNPROCESSABLE_ENTITY.value(), "Não encontrado", ex.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(err);
+	}
+
+	/*** Handler de erro
+	 *
+	 * @param ex exceção lançada
+	 * @param request webRequest
+	 * @return Response Entity com status code de erro e mensagem.
+	 */
+	@ExceptionHandler(JsonParseException.class)
+	public ResponseEntity<StandardError> jsonParseException(JsonParseException ex, HttpServletRequest request) {
+		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.UNPROCESSABLE_ENTITY.value(), "Não encontrado", ex.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(err);
 	}
 

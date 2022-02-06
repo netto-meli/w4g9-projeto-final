@@ -121,7 +121,7 @@ public class CartController {
 	 * @return Retorna payload de PedidoDTO em um ResponseEntity com status <b>CREATED</b> e
 	 * <i>GET</i>: "/loja/pedidos/{id}" implementado no Controller:
 	 */
-	@PostMapping("/createSellOrder/{idBuyer}")
+	@PutMapping("/createSellOrder/{idBuyer}")
 	public ResponseEntity<SellOrderResponseDTO> createSellOrder(@PathVariable Long idBuyer,
 															 UriComponentsBuilder uriBuilder) {
 			SellOrder sellOrder = cartService.createSellOrder(idBuyer);

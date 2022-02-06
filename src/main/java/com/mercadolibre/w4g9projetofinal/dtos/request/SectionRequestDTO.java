@@ -6,11 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 /**
  * @author fbontempo
@@ -22,26 +18,29 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SectionRequestDTO {
-    @NotNull
-    @NotEmpty
-    @Size(min = 5, max = 15, message = "Tamanho min de 5 e max 15")
+    @NotNull(message = "Campo Obrigatório")
+    @NotEmpty(message = "Campo Obrigatório")
+    @Size(min=4, max=16,message="Nome deve ter 4 e 16 caracteres.")
     private String name;
+    @NotNull(message = "Campo Obrigatório")
     private RefrigerationType type;
+    @NotNull(message = "Campo Obrigatório")
+    @Positive(message = "Id deve ser um valor positivo")
     private Long idWarehouse;
-
-    @Min(value = 1, message = "Tamanho minimo 1")
-    @Max(value = 100, message = "Tamanho máximo 100")
+    @NotNull(message = "Campo Obrigatório")
+    @Positive(message = "Estoque total deve ser maior que 0")
     private int stockLimit;
-
-    @Min(value = 1, message = "Tamanho minimo 1")
-    @Max(value = 100, message = "Tamanho máximo 100")
+    @NotNull(message = "Campo Obrigatório")
+    @PositiveOrZero(message = "Estoque atual não pode ser negativo.")
     private int currentStock;
-
-    @Min(value = -20, message = "Tamanho minimo -20 graus")
-    @Max(value = 15, message = "Tamanho máximo 15 graus")
+    @NotNull(message = "Campo Obrigatório")
+    @Digits(integer = 2, fraction = 2, message = "Temperatura mínima inválida. Aceito apenas 2 dígitos decimais")
+    @Max(value = 100, message = "Temperatura mínima tem que ser menor que 100")
+    @Min(value = -100, message = "Temperatura mínima tem que ser maior que -100")
     private float minTeperature;
-
-    @Min(value = -20, message = "Tamanho minimo -20 graus")
-    @Max(value = 15, message = "Tamanho máximo 15 graus")
+    @NotNull(message = "Campo Obrigatório")
+    @Digits(integer = 2, fraction = 2, message = "Temperatura máxima inválida. Aceito apenas 2 dígitos decimais")
+    @Max(value = 100 , message = "Temperatura máxima tem que ser menor que 100")
+    @Min(value = -100 , message = "Temperatura máxima tem que ser maior que -100")
     private float maxTeperature;
 }

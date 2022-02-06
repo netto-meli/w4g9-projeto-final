@@ -31,7 +31,7 @@ public class AdvertiseConverter {
                         null, null, null, null, null),
                 advertisedto.getPrice(),
                 advertisedto.getStatus(),
-                advertisedto.isFreeShipping());
+                advertisedto.getFreeShipping());
     }
 
     /***
