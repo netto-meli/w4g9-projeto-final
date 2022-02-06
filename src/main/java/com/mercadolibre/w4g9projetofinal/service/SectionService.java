@@ -123,15 +123,13 @@ public class SectionService {
 
     //Método para update de Section
     private static void updateSection(Section obj, Section newObj) {
+        newObj.setName(obj.getName());
+        newObj.setRefrigerationType(obj.getRefrigerationType());
+        newObj.setWarehouse(obj.getWarehouse());
+        newObj.setStockLimit(obj.getStockLimit());
         newObj.setCurrentStock(obj.getCurrentStock());
-        newObj.setId(obj.getId());
         newObj.setMaxTeperature(obj.getMaxTeperature());
         newObj.setMinTeperature(obj.getMinTeperature());
-        newObj.setName(obj.getName());
-        newObj.setInboundOrderList(obj.getInboundOrderList());
-        newObj.setRefrigerationType(obj.getRefrigerationType());
-        newObj.setStockLimit(obj.getStockLimit());
-        newObj.setWarehouse(obj.getWarehouse());
     }
 }
 

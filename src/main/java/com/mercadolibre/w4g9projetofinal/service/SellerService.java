@@ -85,9 +85,10 @@ public class SellerService {
 
     //Método para update de Seller
     private static void updateSeller(Seller obj, Seller newObj) {
-        newObj.setId(obj.getId());
+        newObj.setUsername(obj.getUsername());
         newObj.setName(obj.getName());
         newObj.setEmail(obj.getEmail());
+        newObj.setPassword(obj.getPassword());
     }
 
     public Seller verifySellerInInboundOrder(List<Batch> batchList) {

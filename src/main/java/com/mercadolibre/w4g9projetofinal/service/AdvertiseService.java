@@ -80,11 +80,11 @@ public class AdvertiseService {
      * @param newAdvertise
      */
     private static void updateSeller(Advertise advertise, Advertise newAdvertise) {
-        newAdvertise.setId(advertise.getId());
-        newAdvertise.setSeller(advertise.getSeller());
         newAdvertise.setDescription(advertise.getDescription());
-        newAdvertise.setPrice(advertise.getPrice());
         newAdvertise.setProduct(advertise.getProduct());
+        newAdvertise.setSeller(advertise.getSeller());
+        newAdvertise.setPrice(advertise.getPrice());
         newAdvertise.setStatus(advertise.getStatus());
+        newAdvertise.setFreeShipping(advertise.isFreeShipping());
     }
 }

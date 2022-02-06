@@ -125,7 +125,6 @@ public class ProductService {
 
     //Método para update de Seller
     private static void updateProduct(Product obj, Product newObj) {
-        newObj.setId(obj.getId());
         newObj.setName(obj.getName());
         newObj.setDescription(obj.getDescription());
         newObj.setMaxTemperature(obj.getMaxTemperature());
