@@ -3,6 +3,7 @@ package com.mercadolibre.w4g9projetofinal.service;
 import com.mercadolibre.w4g9projetofinal.entity.Batch;
 import com.mercadolibre.w4g9projetofinal.entity.OrderItem;
 import com.mercadolibre.w4g9projetofinal.entity.Section;
+import com.mercadolibre.w4g9projetofinal.entity.Seller;
 import com.mercadolibre.w4g9projetofinal.entity.enums.RefrigerationType;
 import com.mercadolibre.w4g9projetofinal.exceptions.BusinessException;
 import com.mercadolibre.w4g9projetofinal.exceptions.CartManagementException;
@@ -23,16 +24,12 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 public class BatchService {
-
-    private final String ASCENDING_ORDER = "asc";
-    private final String DESCENDING_ORDER = "desc";
-
-
     /*** Instancia de repositório: <b>BatchRepository</b>.
      */
     private BatchRepository batchRepository;
 
-
+    /*** Instancia de repositório: <b>BatchRepository</b>.
+     */
     private SectionService sectionService;
 
     /*** Método que verifica estoque
@@ -54,7 +51,7 @@ public class BatchService {
     public void updateStock(List<OrderItem> orderItemList) {
         List<Batch> batchIterable = new ArrayList<>();
         for (OrderItem cartItem : orderItemList) {
-            Batch batch = verifyStock(cartItem.getAdvertise().getId(), cartItem.getQuantity());
+            Batch batch = this.verifyStock(cartItem.getAdvertise().getId(), cartItem.getQuantity());
             Section section = batch.getInboundOrder().getSection();
             batch.updateStock(cartItem.getQuantity());
             batchIterable.add(batch);
@@ -64,10 +61,21 @@ public class BatchService {
         batchRepository.saveAll(batchIterable);
     }
 
+    /***
+     * Metodo para buscar todos llotes filtrados por prooduto
+     * @param idProduct id do produto
+     * @return lista de lotes
+     */
     public List<Batch> findByProductId(Long idProduct) {
         return batchRepository.findByProduct_Id(idProduct);
     }
 
+    /***
+     * Lista de lotes eseus tipos de refrigeracao, filtrado por setor e data de validade
+     * @param numberOfDays numero de dias para filtrar data de validae
+     * @param sectionId id do setor
+     * @return lista (Map) com lotes e seus tipos de refrigeracao
+     */
     public Map<Batch, RefrigerationType> findByDueDateBeforeAndSectionId(int numberOfDays, Long sectionId) {
         LocalDate dueDateMax = LocalDate.now().plusDays(numberOfDays);
         List<Batch> batchList = batchRepository.findByDueDateBeforeAndSectionId(sectionId, dueDateMax);
@@ -76,6 +84,13 @@ public class BatchService {
         return getBatchRefrigerationTypeMap(section.getRefrigerationType(), batchList);
     }
 
+    /***
+     * Lista de lotes e seus tipos de refrigeração, filtrado por setor e data de validade
+     * @param numberOfDays numero de dias para filtrar data de validade
+     * @param productType tipo de refrigeração
+     * @param orderBy ordenação crescente ou decrescente
+     * @return lista (Map) com lotes e seus tipos de refrigeração
+     */
     public Map<Batch, RefrigerationType> findByDueDateBeforeAndRefrigerationType(int numberOfDays,
                                                                String productType,
                                                                String orderBy) {
@@ -83,13 +98,14 @@ public class BatchService {
         LocalDate dueDateMax = LocalDate.now().plusDays(numberOfDays);
         List<Batch> batchList = batchRepository
                 .findByDueDateBeforeAndRefrigerationType(refrigerationType, dueDateMax);
+        if (batchList.size() == 0) throw new ObjectNotFoundException("There is no Batch for this Filter.");
         switch (orderBy) {
-            case ASCENDING_ORDER:
+            case "asc":
                 batchList = batchList.stream()
                         .sorted(Comparator.comparing(Batch::getDueDate))
                         .collect(Collectors.toList());
                 break;
-            case DESCENDING_ORDER:
+            case "desc":
                 batchList = batchList.stream()
                         .sorted(Comparator.comparing(Batch::getDueDate).reversed())
                         .collect(Collectors.toList());
@@ -100,6 +116,12 @@ public class BatchService {
         return getBatchRefrigerationTypeMap(refrigerationType, batchList);
     }
 
+    /***
+     * Mapeamento da lista, e tipo de refrigeração
+     * @param refrigerationType tipo de refrigeração
+     * @param batchList lista de lotes
+     * @return Mapeamento de tipos resfriamento e lotes
+     */
     private Map<Batch, RefrigerationType> getBatchRefrigerationTypeMap(
             RefrigerationType refrigerationType, List<Batch> batchList) {
         Map<Batch, RefrigerationType> batches = new HashMap<>();

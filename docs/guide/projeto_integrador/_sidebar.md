@@ -1,4 +1,4 @@
-- [Meli Frescos - Projeto Integrador](/Projeto Integrador/)
+- [Meli Frescos - Projeto Integrador](/projeto_integrador/)
 - [User Story - US 1](UserStoryReadMe1)
 - [User Story - US 2](UserStoryReadMe2)
 - [User Story - US 3](UserStoryReadMe3)
@@ -6,7 +6,7 @@
 - [User Story - US 5](UserStoryReadMe5)
 - [User Story - US 6](UserStoryReadMe6)
 
-- User Story - Individua
+- User Stories - Individuais
   - [User Story - US Felipe](UserStoryReadMe6-Felipe)
   - [User Story - US Fernando](UserStoryReadMe6-Fernando)
   - [User Story - US Leonardo](UserStoryReadMe6-Leonardo)

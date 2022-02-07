@@ -22,7 +22,7 @@ public class Buyer extends User{
     public Buyer(Long id, String username, String name, String email, String password, String address) {
         super(id, username, name, email, password, new HashSet<>());
         this.address = address;
-        addProfile(Profile.BUYER);
+        this.getProfile().add(Profile.BUYER);
     }
 
     @Override

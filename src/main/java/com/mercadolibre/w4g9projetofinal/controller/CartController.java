@@ -7,6 +7,7 @@ import com.mercadolibre.w4g9projetofinal.service.CartService;
 import com.mercadolibre.w4g9projetofinal.dtos.response.SellOrderResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -23,6 +24,7 @@ import java.net.URI;
  */
 @RestController
 @RequestMapping(value = "/api/v1/fresh-products/cart")
+@PreAuthorize("hasRole('ADMIN') OR hasRole('BUYER')")
 public class CartController {
 
 	/*** Instancia de serviço: <b>CarrinhoService</b> com notação <i>{@literal @}Autowired</i> do lombok
@@ -119,7 +121,7 @@ public class CartController {
 	 * @return Retorna payload de PedidoDTO em um ResponseEntity com status <b>CREATED</b> e
 	 * <i>GET</i>: "/loja/pedidos/{id}" implementado no Controller:
 	 */
-	@PostMapping("/createSellOrder/{idBuyer}")
+	@PutMapping("/createSellOrder/{idBuyer}")
 	public ResponseEntity<SellOrderResponseDTO> createSellOrder(@PathVariable Long idBuyer,
 															 UriComponentsBuilder uriBuilder) {
 			SellOrder sellOrder = cartService.createSellOrder(idBuyer);

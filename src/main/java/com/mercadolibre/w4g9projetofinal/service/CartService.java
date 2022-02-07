@@ -1,9 +1,13 @@
 package com.mercadolibre.w4g9projetofinal.service;
 
 
-import com.mercadolibre.w4g9projetofinal.entity.*;
+import com.mercadolibre.w4g9projetofinal.entity.Advertise;
+import com.mercadolibre.w4g9projetofinal.entity.Buyer;
+import com.mercadolibre.w4g9projetofinal.entity.OrderItem;
+import com.mercadolibre.w4g9projetofinal.entity.SellOrder;
+import com.mercadolibre.w4g9projetofinal.entity.enums.SellOrderStatus;
 import com.mercadolibre.w4g9projetofinal.exceptions.CartManagementException;
-import com.mercadolibre.w4g9projetofinal.repository.*;
+import com.mercadolibre.w4g9projetofinal.repository.SellOrderRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -46,11 +50,13 @@ public class CartService {
      * @return Retorna um <b>SellOrder</b>, com <i>ID nula</i>, pois é um pedido ainda não finalizado (carrinho aberto).
      */
     public SellOrder getCart(Long idBuyer) {
-        SellOrder sellOrder = sellOrderRepository.findSellOrderByBuyer_IdAndCartTrue(idBuyer).orElse(null);
+        SellOrder sellOrder = sellOrderRepository
+                .findSellOrderByBuyer_IdAndOrderStatus(idBuyer, SellOrderStatus.CART).orElse(null);
         if (sellOrder == null) {
             Buyer buyer = buyerService.findById(idBuyer);
-            sellOrder = new SellOrder(null, buyer, true, new ArrayList<>(), BigDecimal.ZERO, BigDecimal.ZERO);
-            sellOrderRepository.save(sellOrder);
+            sellOrder = new SellOrder(null, buyer, SellOrderStatus.CART,
+                    new ArrayList<>(), BigDecimal.ZERO, BigDecimal.ZERO);
+            sellOrder = sellOrderRepository.save(sellOrder);
         }
         return sellOrder;
     }
@@ -71,7 +77,7 @@ public class CartService {
         Advertise advertise = advertiseService.findById(idAdvertise);
         OrderItem orderItem = cart.getOrderItem(advertise);
         int finalQuantity = cart.updateCart(qtdProduct, advertise, orderItem);
-        batchServce.verifyStock(idAdvertise,finalQuantity);
+        batchServce.verifyStock(idAdvertise, finalQuantity);
         return sellOrderRepository.save(cart);
     }
 
@@ -87,13 +93,15 @@ public class CartService {
         SellOrder cart = this.getCart(idBuyer);
         Advertise advertise = advertiseService.findById(idAdvertise);
         OrderItem item = cart.getOrderItem(advertise);
+        if (item == null) throw new CartManagementException("Impossivel retirar produto que não foi adicionado");
         if (item.getQuantity() < qtdProducts) throw new CartManagementException(
                 "Impossível retirar mais itens de um produto do que os que já estão no carrinho");
         int qtd = item.getQuantity();
         item.setQuantity(qtd - qtdProducts);
-        if (item.getQuantity() == 0){
+        if (item.getQuantity() == 0) {
             cart.getOrderItemList().remove(item);
         }
+        cart.calcTotalValueOrder();
         return sellOrderRepository.save(cart);
     }
 
@@ -103,7 +111,7 @@ public class CartService {
      */
     @Transactional
     public void emptyCart(Long idBuyer) {
-        sellOrderRepository.deleteByBuyer_IdAndCartTrue(idBuyer);
+        sellOrderRepository.deleteByBuyer_IdAndOrderStatus(idBuyer, SellOrderStatus.CART);
     }
 
     /*** Método para fechar o carrinho de compras de um cliente e criar um pedido
@@ -111,14 +119,14 @@ public class CartService {
      * @param buyerId ID do Cliente que deseja ver o estado atual do carrinho de compras
      * @return Retorna um <b>SellOrder</b>, com <i>ID nula</i>, pois é um pedido ainda não finalizado (carrinho aberto).
      */
-    @Transactional(propagation= Propagation.REQUIRED, isolation= Isolation.SERIALIZABLE)
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
     public SellOrder createSellOrder(Long buyerId) {
         SellOrder cart = this.getCart(buyerId);
         List<OrderItem> orderItemList = cart.getOrderItemList();
         if (orderItemList.size() == 0)
             throw new CartManagementException("Impossível gerar pedido utilizando um carrinho vazio.");
         cart.calcTotalValueOrder();
-        cart.setCart(false);
+        cart.setOrderStatus(SellOrderStatus.CREATED);
         batchServce.updateStock(orderItemList);
         return sellOrderRepository.save(cart);
     }

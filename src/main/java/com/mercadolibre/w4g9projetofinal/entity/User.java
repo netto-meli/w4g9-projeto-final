@@ -29,18 +29,7 @@ public abstract class User{
     private String password;
     @ElementCollection(fetch=FetchType.EAGER)
     @CollectionTable(name="USER_PROFILES")
-    private Set<Profile> profiles;
-
-    // Métodos para Profile
-    public Set<Profile> getProfile() {
-        return this.profiles;
-    }
-
-    public void addProfile(Profile profile) {
-        profiles.add(profile);
-    }
-
-    //-------------------------
+    private Set<Profile> profile;
 
     @Override
     public boolean equals(Object o) {

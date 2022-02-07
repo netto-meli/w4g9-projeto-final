@@ -15,14 +15,14 @@ referem-se à História do Usuário.
 
 Sinônimos do Representante: supervisor, líder.
 
-## Consultar a data de validade por loteConsultar a data de validade por lote
+## Consultar a data de validade por lote
 
 ### User Story
 
-|                                                           User Story Code: ml-check-batch-stock-due-date-01                                                           | Horas estimadas |
-|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:---------------:|
-|                                                      **User Story Name: Consultar a data de validade por lote**                                                       ||
-| **COMO** Representante **QUERO** poder consultar os produtos em estoque que estão prestes a expirar no almoxarifado, a fim de aplicar alguma ação comercial com eles. ||
+|                                                            User Story Code: ml-check-batch-stock-due-date-01                                                            | Horas estimadas |
+|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:---------------:|
+|                                                       **User Story Name: Consultar a data de validade por lote**                                                        ||
+| **COMO** _Representante_ **QUERO** poder consultar os produtos em estoque que estão prestes a expirar no almoxarifado, a fim de aplicar alguma ação comercial com eles. ||
 
 | **CENÁRIO 1:** um produto do vendedor é registrado.                                                                                 |
 |:------------------------------------------------------------------------------------------------------------------------------------|

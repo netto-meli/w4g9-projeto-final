@@ -1,7 +1,8 @@
-package com.mercadolibre.w4g9projetofinal.security;
+package com.mercadolibre.w4g9projetofinal.security.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mercadolibre.w4g9projetofinal.dtos.security.CredentiaisDTO;
+import com.mercadolibre.w4g9projetofinal.security.dto.CredentiaisDTO;
+import com.mercadolibre.w4g9projetofinal.security.entity.UserSS;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

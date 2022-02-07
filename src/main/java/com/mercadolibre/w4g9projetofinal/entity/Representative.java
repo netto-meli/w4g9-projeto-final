@@ -26,7 +26,7 @@ public class Representative extends User{
         super(id, username, name, email, password, new HashSet<>());
         this.job = job;
         this.warehouse = warehouse;
-        addProfile(Profile.REPRESENTATIVE);
+        this.getProfile().add(Profile.REPRESENTATIVE);
     }
 
     @Override
