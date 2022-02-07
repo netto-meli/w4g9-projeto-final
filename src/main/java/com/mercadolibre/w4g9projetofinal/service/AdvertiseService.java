@@ -1,9 +1,12 @@
 package com.mercadolibre.w4g9projetofinal.service;
 
 import com.mercadolibre.w4g9projetofinal.entity.Advertise;
+import com.mercadolibre.w4g9projetofinal.exceptions.BusinessException;
+import com.mercadolibre.w4g9projetofinal.exceptions.ExistingUserException;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.AdvertiseRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -51,7 +54,11 @@ public class AdvertiseService {
      * @return status 200 quando salvo
      */
     public Advertise insert(Advertise advertise) {
-        return repository.save(advertise);
+        try {
+            return repository.save(advertise);
+        } catch (BusinessException e) {
+            throw new BusinessException("Não foi possivel incluir o anuncio.");
+        }
     }
 
     /**
