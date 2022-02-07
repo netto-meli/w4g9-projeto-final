@@ -26,7 +26,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping(value = "/api/v1/fresh-products/representative")
+@RequestMapping(value = "/api/v1/fresh-products/representatives")
 public class RepresentativeController {
 
     /*** Instancia de serviço: <b>RepresentativeService</b> com notação <i>{@literal @}Autowired</i> do lombok */
@@ -50,6 +50,10 @@ public class RepresentativeController {
      */
     @GetMapping(value = "/{id}")
     public ResponseEntity<RepresentativeResponseDTO> findById(@PathVariable Long id) {
+        UserSS user = UserService.authenticated();
+        if (user == null || !user.hasRole(Profile.ADMIN) && !id.equals(user.getId())) {
+            throw new AuthorizationException("Acesso Negado");
+        }
         Representative obj = service.findById(id);
         return ResponseEntity.ok(RepresentativeConverter.convertEntityToDto(obj));
     }
