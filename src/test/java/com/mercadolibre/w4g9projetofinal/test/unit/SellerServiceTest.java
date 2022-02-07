@@ -1,9 +1,12 @@
 package com.mercadolibre.w4g9projetofinal.test.unit;
 
+import com.mercadolibre.w4g9projetofinal.entity.Advertise;
+import com.mercadolibre.w4g9projetofinal.entity.Batch;
 import com.mercadolibre.w4g9projetofinal.entity.Seller;
 import com.mercadolibre.w4g9projetofinal.exceptions.ExistingUserException;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.SellerRepository;
+import com.mercadolibre.w4g9projetofinal.service.AdvertiseService;
 import com.mercadolibre.w4g9projetofinal.service.SellerService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -165,15 +168,49 @@ public class SellerServiceTest {
         assertTrue(excesaoEsperada.getMessage().contains("Vendedor não encontrado! Por favor verifique o id."));
     }
 
-    /*** <b>US-0002</b>
-     * Verifica vendedor no Pedido de entrada
+    /*** <b>US-0005</b>
+     * Verifica se todos os lotes tem o mesmo vendedor
      * <i>Se cumprir:</i><br>
      * Permite continuar normalmente. <br>
      * <i>Se não cumprir:</i>
      * Retorna excessão ObjectNotFoundException
      */
     @Test
-    public void verificaInboundOrderSeller() {
+    public void verificaLoteMesmoVendedor() {
+        //Arrange
+        Seller s1 = new Seller(1L, "felipe1", "Fe Bontempo", "email2@hotmail.com", "123456", null);
+        Seller s2 = new Seller(2L, "felipe2", "Fe Bontempo", "email2@hotmail.com", "123456", null);
+        Seller s3 = new Seller(15L, "felipe3", "Fe Bontempo", "email2@hotmail.com", "123456", null);
+
+        Advertise a1 = new Advertise(1L, null, null, s1, null, null, true);
+        Advertise a2 = new Advertise(1L, null, null, s3, null, null, true);
+        Advertise a3 = new Advertise(5L, null, null, null, null, null, true);
+
+        Batch b1 = new Batch(1L, 0, 15, 0, 0, null, null, null, a1, null);
+        Batch b2 = new Batch(2L, 0, 15, 0, 0, null, null, null, a3, null);
+        Batch b3 = new Batch(3L, 0, 15, 0, 0, null, null, null, a2, null);
+        List<Batch> list = new ArrayList<>(Arrays.asList(b1));
+        List<Batch> list2 = new ArrayList<>(Arrays.asList(b2));
+
+        SellerRepository mockSellerRepository = Mockito.mock(SellerRepository.class);
+        Mockito.when(mockSellerRepository.findSellerByAdvertiseId(1L)).thenReturn(Optional.of(a1.getId()));
+        Mockito.when(mockSellerRepository.findSellerByAdvertiseId(null)).thenThrow(ObjectNotFoundException.class);
+
+        AdvertiseService mockAdvertiseService = Mockito.mock(AdvertiseService.class);
+        Mockito.when(mockAdvertiseService.findById(b1.getAdvertise().getId())).thenReturn(a1);
+
+        SellerService sellerService = new SellerService(new BCryptPasswordEncoder(), mockSellerRepository, mockAdvertiseService);
+
+        //Act
+        Seller seller = sellerService.verifySellerInInboundOrder(list);
+        ObjectNotFoundException excesaoEsperada = assertThrows(ObjectNotFoundException.class,() -> sellerService.verifySellerInInboundOrder(list2));
+
+        //Assertation
+        assertEquals(s1, seller);
+        assertTrue(excesaoEsperada.getMessage().contains("Seller not found"));
+
 
     }
+
+
 }
