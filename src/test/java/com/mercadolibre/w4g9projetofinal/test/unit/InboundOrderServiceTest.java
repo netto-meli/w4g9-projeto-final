@@ -185,7 +185,7 @@ public class InboundOrderServiceTest {
         Section setor = new Section();
         Warehouse armazem = new Warehouse();
         armazem.setId(idArmazem);
-        armazem.setNome("Armazem");
+        armazem.setName("Armazem");
         setor.setId(idSetor);
         setor.setWarehouse(armazem);
         ordemDeEntrada.setId(idOrdemEntrada);

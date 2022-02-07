@@ -85,7 +85,7 @@ public class InboundOrderService {
             throw new BusinessException("Representative: "
                     + representative.getName()
                     + " not part of the Warehouse: "
-                    + section.getWarehouse().getNome() );
+                    + section.getWarehouse().getName() );
         }
         inboundOrder.setRepresentative(representative);
     }

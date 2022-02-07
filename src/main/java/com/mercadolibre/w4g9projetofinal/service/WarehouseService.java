@@ -41,7 +41,7 @@ public class WarehouseService {
     }
 
     private static void updateWarehouse(Warehouse wh, Warehouse nWarehouse) {
-        nWarehouse.setNome(wh.getNome());
+        nWarehouse.setName(wh.getName());
         nWarehouse.setLocation(wh.getLocation());
     }
 
