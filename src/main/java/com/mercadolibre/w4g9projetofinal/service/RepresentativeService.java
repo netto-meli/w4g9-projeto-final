@@ -82,8 +82,11 @@ public class RepresentativeService {
 
     //Método para update de Representation
     private static void updateRepresentation(Representative obj, Representative newObj) {
+        newObj.setUsername(obj.getUsername());
         newObj.setName(obj.getName());
-        newObj.setJob(obj.getJob());
         newObj.setEmail(obj.getEmail());
+        newObj.setPassword(obj.getPassword());
+        newObj.setJob(obj.getJob());
+        newObj.setWarehouse(obj.getWarehouse());
     }
 }

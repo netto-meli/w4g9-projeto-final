@@ -1,4 +1,4 @@
-package com.mercadolibre.w4g9projetofinal.security;
+package com.mercadolibre.w4g9projetofinal.security.entity;
 
 import com.mercadolibre.w4g9projetofinal.entity.enums.Profile;
 import lombok.AllArgsConstructor;

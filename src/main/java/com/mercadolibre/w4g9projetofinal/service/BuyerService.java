@@ -94,9 +94,11 @@ public class BuyerService {
      * @param newBuyer
      */
     private static void updateRepresentation(Buyer buyer, Buyer newBuyer) {
-        newBuyer.setAddress(buyer.getAddress());
-        newBuyer.setEmail(buyer.getEmail());
+        newBuyer.setUsername(buyer.getUsername());
         newBuyer.setName(buyer.getName());
+        newBuyer.setEmail(buyer.getEmail());
+        newBuyer.setPassword(buyer.getPassword());
+        newBuyer.setAddress(buyer.getAddress());
     }
 
 }

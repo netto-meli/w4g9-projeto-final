@@ -1,4 +1,4 @@
-package com.mercadolibre.w4g9projetofinal.dtos.security;
+package com.mercadolibre.w4g9projetofinal.security.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

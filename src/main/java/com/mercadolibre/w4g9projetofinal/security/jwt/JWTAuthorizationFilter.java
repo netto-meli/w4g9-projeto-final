@@ -1,4 +1,4 @@
-package com.mercadolibre.w4g9projetofinal.security;
+package com.mercadolibre.w4g9projetofinal.security.jwt;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

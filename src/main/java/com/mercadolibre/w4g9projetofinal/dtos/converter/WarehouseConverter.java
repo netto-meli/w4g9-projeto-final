@@ -2,10 +2,8 @@ package com.mercadolibre.w4g9projetofinal.dtos.converter;
 
 import com.mercadolibre.w4g9projetofinal.dtos.request.WarehouseRequestDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.ProductByWarehouseResponseDTO;
-import com.mercadolibre.w4g9projetofinal.dtos.response.SellerResponseDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.WarehouseResponseDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.WarehouseResponseDTOByProduct;
-import com.mercadolibre.w4g9projetofinal.entity.Seller;
 import com.mercadolibre.w4g9projetofinal.entity.Warehouse;
 
 import java.util.ArrayList;

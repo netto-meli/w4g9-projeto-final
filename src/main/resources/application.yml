@@ -27,5 +27,5 @@ app:
   version: @project.version@
 
 jwt:
-  expiration: 60000
+  expiration: 6000000
   secret: SequenciaDeCaracteresParaAssinarToken

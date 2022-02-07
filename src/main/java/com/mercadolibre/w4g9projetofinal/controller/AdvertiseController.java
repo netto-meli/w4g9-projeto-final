@@ -7,6 +7,7 @@ import com.mercadolibre.w4g9projetofinal.entity.Advertise;
 import com.mercadolibre.w4g9projetofinal.service.AdvertiseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -25,6 +26,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(value = "/api/v1/fresh-products/advertise")
+@PreAuthorize("hasRole('ADMIN') OR hasRole('SELLER')")
 public class AdvertiseController {
 
     /*** Instancia de serviço: <b>AnuncioService</b> com notação <i>{@literal @}Autowired</i> do lombok
@@ -44,7 +46,7 @@ public class AdvertiseController {
 
     /***
      * Motodo GET para listar anuncios por id.
-     * @pathVariable id do anuncio
+     * @param id do anuncio
      * @return retorna a lista de anuncio do id enviado
      */
     @GetMapping(value = "/{id}")

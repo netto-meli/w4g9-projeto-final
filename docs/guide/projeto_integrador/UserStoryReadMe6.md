@@ -40,6 +40,7 @@ Os resultados a seguir serão adicionados de acordo com cada nível.
 3. Histórico do usuário com até 4 endpoints.
 4. Coleção de casos de teste do Postman para cada endpoint.
 5. Cobertura de teste entre 50% e 80%.
+
 #### Nível 2: Bônus
 1. Todos os resultados do Nível 1 concluídos.
 2. Diagrama de classes completo (UML) do projeto final.

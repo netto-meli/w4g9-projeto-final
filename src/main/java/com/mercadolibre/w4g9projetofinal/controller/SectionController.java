@@ -7,6 +7,7 @@ import com.mercadolibre.w4g9projetofinal.entity.Section;
 import com.mercadolibre.w4g9projetofinal.service.SectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -21,6 +22,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/v1/fresh-products/section")
+@PreAuthorize("hasRole('ADMIN') OR hasRole('REPRESENTATIVE')")
 public class SectionController {
 
     @Autowired

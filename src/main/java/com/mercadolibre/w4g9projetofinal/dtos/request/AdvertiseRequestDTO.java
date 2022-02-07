@@ -30,13 +30,18 @@ public class AdvertiseRequestDTO {
     @NotEmpty(message = "Campo Obrigatório")
     @Size(min=4,max=20,message="Descrição deve ter no máximo 20 caracteres e no minimo 4 caracteres. ")
     private String description;
+    @NotNull(message = "Campo Obrigatório")
+    @Positive(message = "Id deve ser um valor positivo")
     private Long productId;
+    @NotNull(message = "Campo Obrigatório")
+    @Positive(message = "Id deve ser um valor positivo")
     private Long sellerId;
-    @NotNull
-    @Positive
+    @NotNull(message = "Campo Obrigatório")
+    @Digits(integer = 10, fraction = 2, message = "Valor inválido. Aceito entre 0,01 e 9.999.999.999,99 , com 2 dígitos decimais")
+    @DecimalMin(value = "0.01" , message = "Valor tem que ser maior que 0,01")
     private BigDecimal price;
-    @NotEmpty
-    @NotNull
+    @NotNull(message = "Campo Obrigatório")
     private AdvertiseStatus status;
-    private boolean freeShipping;
+    @NotNull(message = "Campo Obrigatório")
+    private Boolean freeShipping;
 }

@@ -271,7 +271,6 @@
       <groupId>com.newrelic.agent.java</groupId>
       <artifactId>newrelic-api</artifactId>
     </dependency>
-
     <!-- Test dependencies for all projects -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
@@ -355,6 +354,21 @@
       <groupId>javax.validation</groupId>
       <artifactId>validation-api</artifactId>
     </dependency>
+
+
+    <!-- Swagger -->
+
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-boot-starter</artifactId>
+      <version>3.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-swagger-ui</artifactId>
+      <version>3.0.0</version>
+    </dependency>
+
 
     <!-- Start Dependências Spring Security -->
     <dependency>

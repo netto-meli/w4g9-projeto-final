@@ -1,13 +1,17 @@
 package com.mercadolibre.w4g9projetofinal.service;
 
+import com.mercadolibre.w4g9projetofinal.entity.Advertise;
+import com.mercadolibre.w4g9projetofinal.entity.Batch;
 import com.mercadolibre.w4g9projetofinal.entity.Seller;
 import com.mercadolibre.w4g9projetofinal.entity.enums.Profile;
 import com.mercadolibre.w4g9projetofinal.exceptions.AuthorizationException;
 import com.mercadolibre.w4g9projetofinal.exceptions.ExistingUserException;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
+import com.mercadolibre.w4g9projetofinal.exceptions.SectionManagementException;
 import com.mercadolibre.w4g9projetofinal.repository.SellerRepository;
 import com.mercadolibre.w4g9projetofinal.security.UserSS;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -32,6 +36,11 @@ public class SellerService {
     /*** Instancia de repositório: <b>SellerRepository</b>.
      */
     private SellerRepository repository;
+
+    /*** Instancia de service: <b>AdvertiseService</b>.
+     */
+    @Autowired
+    private AdvertiseService advertiseService;
 
     /*** Método que retorna lista de Sellers */
     public List<Seller> findAll() {
@@ -79,8 +88,24 @@ public class SellerService {
 
     //Método para update de Seller
     private static void updateSeller(Seller obj, Seller newObj) {
-        newObj.setId(obj.getId());
+        newObj.setUsername(obj.getUsername());
         newObj.setName(obj.getName());
         newObj.setEmail(obj.getEmail());
+        newObj.setPassword(obj.getPassword());
+    }
+
+    public Seller verifySellerInInboundOrder(List<Batch> batchList) {
+        Long sellerId = null;
+        Advertise ad = new Advertise();
+        for (Batch b :batchList) {
+            Long batchSellerId = repository.findSellerByAdvertiseId(b.getAdvertise().getId())
+                    .orElseThrow( () -> new ObjectNotFoundException("Seller not found."));
+            if (sellerId == null) {
+                ad = advertiseService.findById(b.getAdvertise().getId());
+                sellerId = ad.getSeller().getId();
+            }
+            if(!sellerId.equals(batchSellerId)) throw new SectionManagementException("Different Sellers in Batch List");
+        }
+        return ad.getSeller();
     }
 }

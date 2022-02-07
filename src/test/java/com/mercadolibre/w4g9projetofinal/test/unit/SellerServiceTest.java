@@ -36,7 +36,7 @@ public class SellerServiceTest {
         SellerRepository mockSellerRepository = Mockito.mock(SellerRepository.class);
         Mockito.when(mockSellerRepository.findAll()).thenReturn(list);
 
-        SellerService sellerService = new SellerService(null, mockSellerRepository);
+        SellerService sellerService = new SellerService(null, mockSellerRepository, null);
 
         //Action
         List<Seller> listSeller = sellerService.findAll();
@@ -62,7 +62,7 @@ public class SellerServiceTest {
         SellerRepository mockSellerRepository = Mockito.mock(SellerRepository.class);
         Mockito.when(mockSellerRepository.findById(2L)).thenReturn(java.util.Optional.of(s2));
 
-        SellerService sellerService = new SellerService(null, mockSellerRepository);
+        SellerService sellerService = new SellerService(null, mockSellerRepository, null);
 
         //Action
         Seller seller = sellerService.findById(2L);
@@ -91,7 +91,7 @@ public class SellerServiceTest {
         Mockito.when(mockSellerRepository.save(s2)).thenReturn(s2);
         Mockito.when(mockSellerRepository.save(s1)).thenThrow(DataIntegrityViolationException.class);
 
-        SellerService sellerService = new SellerService(new BCryptPasswordEncoder(), mockSellerRepository);
+        SellerService sellerService = new SellerService(new BCryptPasswordEncoder(), mockSellerRepository, null);
 
         //Action
         Seller seller = sellerService.insert(s2);
@@ -126,7 +126,7 @@ public class SellerServiceTest {
         Mockito.when(mockSellerRepository.save(sellerUpdate)).thenReturn(sellerUpdate);
         Mockito.when(mockSellerRepository.findById(3L)).thenReturn(java.util.Optional.of(s1));
 
-        SellerService sellerService = new SellerService(new BCryptPasswordEncoder(), mockSellerRepository);
+        SellerService sellerService = new SellerService(new BCryptPasswordEncoder(), mockSellerRepository, null);
 
         //Action
         Seller seller = sellerService.update(sellerUpdate);
@@ -154,7 +154,7 @@ public class SellerServiceTest {
         Mockito.when(mockSellerRepository.findById(3L)).thenReturn(Optional.of(s1));
         Mockito.doNothing().when(mockSellerRepository).delete(s1);
 
-        SellerService sellerService = new SellerService(new BCryptPasswordEncoder(), mockSellerRepository);
+        SellerService sellerService = new SellerService(new BCryptPasswordEncoder(), mockSellerRepository, null);
 
         //Action
         sellerService.delete(3L);

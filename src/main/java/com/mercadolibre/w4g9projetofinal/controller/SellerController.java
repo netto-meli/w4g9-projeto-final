@@ -4,11 +4,7 @@ import com.mercadolibre.w4g9projetofinal.dtos.converter.SellerConverter;
 import com.mercadolibre.w4g9projetofinal.dtos.request.SellerRequestDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.SellerResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Seller;
-import com.mercadolibre.w4g9projetofinal.entity.enums.Profile;
-import com.mercadolibre.w4g9projetofinal.exceptions.AuthorizationException;
-import com.mercadolibre.w4g9projetofinal.security.UserSS;
 import com.mercadolibre.w4g9projetofinal.service.SellerService;
-import com.mercadolibre.w4g9projetofinal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -27,6 +23,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/v1/fresh-products/seller")
+@PreAuthorize("hasRole('ADMIN') OR hasRole('SELLER')")
 public class SellerController {
 
     /*** Instancia de serviço: <b>RepresentativeService</b> com notação <i>{@literal @}Autowired</i> do lombok */

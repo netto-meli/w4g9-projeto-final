@@ -4,7 +4,10 @@
 ##### [Java style Guide](https://google.github.io/styleguide/javaguide.html)
 ###### [Swagger Editor](https://editor.swagger.io/)
 
-Json/Swagger:
-```
+<details><summary>Json/Swagger:</summary><p>
+
+```swagger
 teste
 ```
+
+</p></details>

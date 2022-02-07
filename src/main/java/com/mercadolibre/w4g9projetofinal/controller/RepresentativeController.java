@@ -4,11 +4,7 @@ import com.mercadolibre.w4g9projetofinal.dtos.converter.RepresentativeConverter;
 import com.mercadolibre.w4g9projetofinal.dtos.request.RepresentativeRequestDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.RepresentativeResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Representative;
-import com.mercadolibre.w4g9projetofinal.entity.enums.Profile;
-import com.mercadolibre.w4g9projetofinal.exceptions.AuthorizationException;
-import com.mercadolibre.w4g9projetofinal.security.UserSS;
 import com.mercadolibre.w4g9projetofinal.service.RepresentativeService;
-import com.mercadolibre.w4g9projetofinal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -27,6 +23,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/v1/fresh-products/representative")
+@PreAuthorize("hasRole('ADMIN') OR hasRole('REPRESENTATIVE')")
 public class RepresentativeController {
 
     /*** Instancia de serviço: <b>RepresentativeService</b> com notação <i>{@literal @}Autowired</i> do lombok */
