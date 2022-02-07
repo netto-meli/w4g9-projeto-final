@@ -20,9 +20,32 @@ import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 
 public class InboundOrderServiceTest {
+
+    @Test
+    public void verificaBuscaTodasOrdensDeEntrada(){
+        // <-- ARRANGE -->
+        List<InboundOrder> ordensDeEntrada = new ArrayList<>();
+        // Mocks - Class
+        InboundOrderRepository inboundOrderRepository = Mockito.mock(InboundOrderRepository.class);
+        SellerService sellerService = Mockito.mock(SellerService.class);
+        SectionService sectionService = Mockito.mock(SectionService.class);
+        RepresentativeService representativeService = Mockito.mock(RepresentativeService.class);
+        // Mock - Actions
+        Mockito.when(inboundOrderRepository.findAll()).thenReturn(ordensDeEntrada);
+        // Service
+        InboundOrderService io = new InboundOrderService(inboundOrderRepository,sellerService,
+                sectionService,representativeService);
+
+        // <-- ACT -->
+        List<InboundOrder> ordensDeEntradaRetornadas = io.findAll();
+
+        // <-- ASSERTION -->
+        Assertions.assertEquals(ordensDeEntrada,ordensDeEntradaRetornadas);
+    }
 
     @Test
     public void verificaBuscaDeUmaOrdemDeEntradaQueNaoExiste(){
@@ -328,7 +351,7 @@ public class InboundOrderServiceTest {
         RepresentativeService representativeService = Mockito.mock(RepresentativeService.class);
         // Mock - Actions
         Mockito.when(sectionService.findById(Mockito.anyLong())).thenReturn(setor);
-        Mockito.when(inboundOrderRepository.findById(idOrdemEntrada)).thenReturn(Optional.empty());
+        Mockito.when(inboundOrderRepository.findById(idOrdemEntrada)).thenReturn(Optional.of(ordemDeEntrada));
         Mockito.when(representativeService.findById(Mockito.anyLong())).thenReturn(representante);
         Mockito.when(sellerService.verifySellerInInboundOrder(Mockito.any())).thenReturn(new Seller());
         Mockito.when(sectionService.updateOldSectionStock(Mockito.any(), Mockito.any())).thenReturn(new ArrayList<>());
@@ -340,7 +363,7 @@ public class InboundOrderServiceTest {
                 sectionService,representativeService);
 
         // <-- ACT -->
-        InboundOrder ordemDeEntradaRetornada = io.inboundOrderManager(usuario, ordemDeEntrada,false);
+        InboundOrder ordemDeEntradaRetornada = io.inboundOrderManager(usuario, ordemDeEntrada,true);
 
         // <-- ASSERTION -->
         Assertions.assertEquals(ordemDeEntrada,ordemDeEntradaRetornada);
