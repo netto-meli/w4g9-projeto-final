@@ -8,6 +8,7 @@ import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.service.BuyerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -27,6 +28,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/v1/fresh-products/buyer")
+@PreAuthorize("hasRole('ADMIN') OR hasRole('BUYER')")
 public class BuyerController {
 
     /*** Instancia de serviço: <b>CompradorService</b> com notação <i>{@literal @}Autowired</i> do lombok

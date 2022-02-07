@@ -7,6 +7,7 @@ import com.mercadolibre.w4g9projetofinal.entity.enums.RefrigerationType;
 import com.mercadolibre.w4g9projetofinal.service.BatchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/api/v1/fresh-products/due-date")
+@PreAuthorize("hasRole('ADMIN') OR hasRole('REPRESENTATIVE')")
 public class DueDateController {
 
     @Autowired

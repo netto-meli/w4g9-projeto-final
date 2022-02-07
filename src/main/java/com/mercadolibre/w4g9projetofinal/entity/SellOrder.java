@@ -1,5 +1,6 @@
 package com.mercadolibre.w4g9projetofinal.entity;
 
+import com.mercadolibre.w4g9projetofinal.entity.enums.SellOrderStatus;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -34,7 +35,7 @@ public class SellOrder {
     /***
      * Indicador se a ordem de compra ja foi realizada ou se ainda é um carrinho de compras
      */
-    private boolean cart;
+    private SellOrderStatus orderStatus;
     /***
      * Lista de ItemCarrinho (produto no pedido) no formato List de CartItem
      */

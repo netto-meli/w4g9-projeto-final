@@ -19,10 +19,10 @@ Sinônimos do Representante: supervisor, líder.
 ### User Story
 
 
-|                                                                                      User Story Code: ml-check-product-location-in-warehouse-01                                                                                      | Horas estimadas |
-|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:---------------:|
-|                                                                                **User Story Name: Verifique a localização de um produto no armazém**                                                                                 ||
-| **COMO** Representante **QUERO** adicionar produtos ao carrinho de compras do Marketplace **PARA** poder consultar um produto em stock no armazém **PARA** saber a sua localização num setor e os diferentes lotes onde se encontra. ||
+|                                                      User Story Code: ml-check-product-location-in-warehouse-01                                                      | Horas estimadas |
+|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:---------------:|
+|                                                **User Story Name: Verifique a localização de um produto no armazém**                                                 ||
+| **COMO** _Representante_ **QUERO** poder consultar um produto em stock no armazém **PARA** saber a sua localização num setor e os diferentes lotes onde se encontra. ||
 
 | **CENÁRIO 1:** um produto do vendedor é registrado.                                             |
 |:------------------------------------------------------------------------------------------------|

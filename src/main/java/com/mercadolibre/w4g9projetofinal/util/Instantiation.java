@@ -53,6 +53,13 @@ public class Instantiation implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 /*
+        Warehouse w1 = new Warehouse(null, "k", "l" );
+        Warehouse w2 = new Warehouse(null, "k", "l" );
+        Warehouse w3 = new Warehouse(null, "k", "l" );
+        w1 = warehouseRepository.save(w1);
+        w2 = warehouseRepository.save(w2);
+        w3 = warehouseRepository.save(w3);
+
         Product p1 = new Product(null, "kk", "kk", 0F, 8F, RefrigerationType.FRESH);
         Product p2 = new Product(null, "kk", "kk", 0F, 8F, RefrigerationType.COLD);
         Product p3 = new Product(null, "kk", "kk", 0F, 8F, RefrigerationType.FROZEN);
@@ -64,7 +71,7 @@ public class Instantiation implements CommandLineRunner {
         Seller s1 = new Seller(null, "khjfud", "Marcos Sá", "email1@hotmail.com", pe.encode("123456"), null);
         s1 = sellerRepository.save(s1);
 
-        Representative r1 = new Representative(null, "kkk", "Marcos Sá", "em1@gmail.com", pe.encode("151515"), RepresentativeJob.LIDER);
+        Representative r1 = new Representative(null, "kkk", "Marcos Sá", "em1@gmail.com", pe.encode("151515"), RepresentativeJob.LIDER, w1);
         r1 = representativeRepository.save(r1);
 
         Buyer u1 = new Buyer(null, "kh88jfud", "Marjhghhjcos Sá", "email1@hotkkmail.com", pe.encode("123776456"), "jhghhjghgh");
@@ -83,13 +90,6 @@ public class Instantiation implements CommandLineRunner {
         a3 = advertiseRepository.save(a3);
         a4 = advertiseRepository.save(a4);
         a5 = advertiseRepository.save(a5);
-
-        Warehouse w1 = new Warehouse(null, "k", "l" );
-        Warehouse w2 = new Warehouse(null, "k", "l" );
-        Warehouse w3 = new Warehouse(null, "k", "l" );
-        w1 = warehouseRepository.save(w1);
-        w2 = warehouseRepository.save(w2);
-        w3 = warehouseRepository.save(w3);
 
         Section c1 = new Section(null, w1, "l", RefrigerationType.FRESH, 4, 1, 1F, 1F, null );
         Section c2 = new Section(null, w2, "l", RefrigerationType.COLD, 4, 1, 1F, 1F, null );

@@ -1,4 +1,4 @@
-package com.mercadolibre.w4g9projetofinal.security;
+package com.mercadolibre.w4g9projetofinal.security.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
