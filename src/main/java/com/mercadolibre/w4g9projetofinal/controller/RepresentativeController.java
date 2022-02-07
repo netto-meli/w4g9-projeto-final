@@ -4,6 +4,7 @@ import com.mercadolibre.w4g9projetofinal.dtos.converter.RepresentativeConverter;
 import com.mercadolibre.w4g9projetofinal.dtos.request.RepresentativeRequestDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.RepresentativeResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Representative;
+import com.mercadolibre.w4g9projetofinal.entity.enums.Profile;
 import com.mercadolibre.w4g9projetofinal.security.entity.UserSS;
 import com.mercadolibre.w4g9projetofinal.service.RepresentativeService;
 import com.mercadolibre.w4g9projetofinal.service.UserService;
@@ -26,7 +27,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/v1/fresh-products/representative")
-@PreAuthorize("hasRole('ADMIN') OR hasRole('REPRESENTATIVE')")
 public class RepresentativeController {
 
     /*** Instancia de serviço: <b>RepresentativeService</b> com notação <i>{@literal @}Autowired</i> do lombok */
@@ -38,6 +38,7 @@ public class RepresentativeController {
      * @return Payload com Lista de Representatives e ResponseEntity com status <b>OK</b>
      */
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<RepresentativeResponseDTO>> findAll() {
         List<RepresentativeResponseDTO> list = RepresentativeConverter.convertEntityListToDtoList(service.findAll());
         return ResponseEntity.ok(list);
@@ -50,10 +51,7 @@ public class RepresentativeController {
      */
     @GetMapping(value = "/{id}")
     public ResponseEntity<RepresentativeResponseDTO> findById(@PathVariable Long id) {
-        UserSS user = UserService.authenticated();
-        if (!id.equals(user.getId())) {
-            throw new AccessDeniedException("Acesso Negado");
-        }
+        UserService.adminOrSameUser(id);
         Representative obj = service.findById(id);
         return ResponseEntity.ok(RepresentativeConverter.convertEntityToDto(obj));
     }
@@ -81,6 +79,7 @@ public class RepresentativeController {
     @PutMapping(value = "/{id}")
     public ResponseEntity<Void> update(@RequestBody @Valid RepresentativeRequestDTO newObj,
                                        @PathVariable Long id) {
+        UserService.adminOrSameUser(id);
         Representative obj = RepresentativeConverter.convertDtoToEntity(newObj);
         obj.setId(id);
         obj = service.update(obj);
@@ -94,6 +93,7 @@ public class RepresentativeController {
      */
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
+        UserService.adminOrSameUser(id);
         service.delete(id);
         return ResponseEntity.ok().build();
     }

@@ -1,6 +1,7 @@
 package com.mercadolibre.w4g9projetofinal.service;
 
 import com.mercadolibre.w4g9projetofinal.entity.User;
+import com.mercadolibre.w4g9projetofinal.entity.enums.Profile;
 import com.mercadolibre.w4g9projetofinal.repository.UserRepository;
 import com.mercadolibre.w4g9projetofinal.security.entity.UserSS;
 import lombok.AllArgsConstructor;
@@ -24,10 +25,20 @@ public class UserService {
 
     public static UserSS authenticated() {
         try{
-            return (UserSS) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            UserSS user = (UserSS) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            if(user == null) throw new AccessDeniedException("Acesso negado");
+            return user;
         }
         catch (Exception e) {
             throw new AccessDeniedException("Acesso negado");
         }
+    }
+
+    public static UserSS adminOrSameUser(Long id) {
+        UserSS user = UserService.authenticated();
+        if (!(user.hasRole(Profile.ADMIN) || id.equals(user.getId()))) {
+            throw new AccessDeniedException("Acesso Negado");
+        }
+        return user;
     }
 }
