@@ -40,11 +40,11 @@ public class InboundOrderService {
 
     public InboundOrder inboundOrderManager(UserSS user, InboundOrder inboundOrder, boolean isUpdate) {
         Section section = sectionService.findById(inboundOrder.getSection().getId());
-        inboundOrder.setSection(section);
-        InboundOrder oldInboundOrder = getOldInboundOrder(inboundOrder, isUpdate);
+        InboundOrder oldInboundOrder = this.getOldInboundOrder(inboundOrder, isUpdate);
         if(!inboundOrder.getSection().getId().equals(oldInboundOrder.getSection().getId()))
             throw new SectionManagementException("Cannot change Section from an Inbound Order");
-        validateWarehouse(user, inboundOrder, section);
+        this.validateWarehouse(user, inboundOrder, section);
+        inboundOrder.setSection(section);
         Seller seller = sellerService.verifySellerInInboundOrder(inboundOrder.getBatchList());
         inboundOrder.setSeller(seller);
         if (isUpdate) {
@@ -63,7 +63,7 @@ public class InboundOrderService {
         InboundOrder oldInboundOrder;
         Optional<InboundOrder> optionalInboundOrder = inboundOrderRepository.findById(inboundOrder.getId());
         if(isUpdate) oldInboundOrder = optionalInboundOrder
-                .orElseThrow(() -> new ObjectNotFoundException("Ordem de Entrada não encontrada."));
+                .orElseThrow(() -> new ObjectNotFoundException("Inbound Order not found! Please check the id."));
         else {
             if(optionalInboundOrder.isPresent())
                 throw new BusinessException("InboundOrder already exists, please update via PUT");
