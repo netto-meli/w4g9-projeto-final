@@ -52,10 +52,6 @@ public class SellerController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<SellerResponseDTO> findById(@PathVariable Long id) {
         UserService.adminOrSameUser(id);
-        UserSS user = UserService.authenticated();
-        if (user == null || !user.hasRole(Profile.ADMIN) && !id.equals(user.getId())) {
-            throw new AccessDeniedException("Acesso Negado");
-        }
         Seller obj = service.findById(id);
         return ResponseEntity.ok(SellerConverter.convertEntityToDto(obj));
     }

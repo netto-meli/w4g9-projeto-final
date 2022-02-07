@@ -52,10 +52,6 @@ public class RepresentativeController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<RepresentativeResponseDTO> findById(@PathVariable Long id) {
         UserService.adminOrSameUser(id);
-        UserSS user = UserService.authenticated();
-        if (user == null || !user.hasRole(Profile.ADMIN) && !id.equals(user.getId())) {
-            throw new AccessDeniedException("Acesso Negado");
-        }
         Representative obj = service.findById(id);
         return ResponseEntity.ok(RepresentativeConverter.convertEntityToDto(obj));
     }

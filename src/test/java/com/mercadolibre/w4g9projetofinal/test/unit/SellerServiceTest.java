@@ -164,4 +164,16 @@ public class SellerServiceTest {
         Mockito.verify(mockSellerRepository, Mockito.times(1)).delete(s1);
         assertTrue(excesaoEsperada.getMessage().contains("Vendedor não encontrado! Por favor verifique o id."));
     }
+
+    /*** <b>US-0002</b>
+     * Verifica vendedor no Pedido de entrada
+     * <i>Se cumprir:</i><br>
+     * Permite continuar normalmente. <br>
+     * <i>Se não cumprir:</i>
+     * Retorna excessão ObjectNotFoundException
+     */
+    @Test
+    public void verificaInboundOrderSeller() {
+
+    }
 }
