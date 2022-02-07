@@ -9,6 +9,7 @@ import com.mercadolibre.w4g9projetofinal.exceptions.ExistingUserException;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.ProductRepository;
 import lombok.AllArgsConstructor;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
@@ -86,8 +87,7 @@ public class ProductService {
      *                  F = data vencimento
      * @return lista de lotes em que o produto esta cadastrado
      */
-    public List<Batch> OrderByBatchInProduct(Long idProduct, String orderBy) throws BusinessException{
-        try {
+    public List<Batch> OrderByBatchInProduct(Long idProduct, String orderBy) {
             List<Batch> batch = findByBatchInProduct(idProduct);
             if (OrderByProductInBatch.ORDER_BY_BATCH.getCod().equals(orderBy)) {
                 return batch.stream().sorted(Comparator.comparing(Batch::getId)).collect(Collectors.toList());
@@ -96,9 +96,7 @@ public class ProductService {
             } else if (OrderByProductInBatch.ORDER_BY_DUEDATE.getCod().equals(orderBy)) {
                 return batch.stream().sorted(Comparator.comparing(Batch::getDueDate)).collect(Collectors.toList());
             }
-        }catch (BusinessException businessException){
-            throw new BusinessException("Metodo de Ordenação informado está errado");
-        }
+
         return null;
     }
 

@@ -1,11 +1,8 @@
 package com.mercadolibre.w4g9projetofinal.test.unit;
 
-import com.mercadolibre.w4g9projetofinal.entity.Advertise;
 import com.mercadolibre.w4g9projetofinal.entity.Batch;
 import com.mercadolibre.w4g9projetofinal.entity.Product;
-import com.mercadolibre.w4g9projetofinal.entity.Section;
 import com.mercadolibre.w4g9projetofinal.entity.enums.RefrigerationType;
-import com.mercadolibre.w4g9projetofinal.exceptions.BusinessException;
 import com.mercadolibre.w4g9projetofinal.exceptions.ExistingUserException;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.BatchRepository;
@@ -13,13 +10,17 @@ import com.mercadolibre.w4g9projetofinal.repository.ProductRepository;
 import com.mercadolibre.w4g9projetofinal.service.BatchService;
 import com.mercadolibre.w4g9projetofinal.service.ProductService;
 import com.mercadolibre.w4g9projetofinal.service.SectionService;
+import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -42,8 +43,8 @@ public class ProductServiceTest {
 
         Mockito.when(mockProdRepository.findAll()).thenReturn(listProduct);
 
-        BatchService batchService = new BatchService(batchRepository,sectionService);
-        ProductService prodService = new ProductService(mockProdRepository,batchService);
+        BatchService batchService = new BatchService(batchRepository, sectionService);
+        ProductService prodService = new ProductService(mockProdRepository, batchService);
 
         List<Product> prodFind = prodService.findAll();
 
@@ -61,11 +62,11 @@ public class ProductServiceTest {
 
         Mockito.when(mockProdRepository.findById(2L)).thenReturn(java.util.Optional.of(product));
 
-        BatchService batchService = new BatchService(batchRepository,sectionService);
-        ProductService prodService = new ProductService(mockProdRepository,batchService);
+        BatchService batchService = new BatchService(batchRepository, sectionService);
+        ProductService prodService = new ProductService(mockProdRepository, batchService);
 
         Product prodFind = prodService.findById(2L);
-        ObjectNotFoundException ex = assertThrows(ObjectNotFoundException.class,() -> prodService.findById(1L));
+        ObjectNotFoundException ex = assertThrows(ObjectNotFoundException.class, () -> prodService.findById(1L));
 
         assertEquals(prodFind, product);
         assertTrue(ex.getMessage().contains("Produto não encontrado! Por favor verifique dados informados."));
@@ -97,7 +98,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    public void productUpdate(){
+    public void productUpdate() {
         Product product = new Product(2L, "Test", "Product", 0, 9, RefrigerationType.FROZEN);
 
         ProductRepository mockProdRepository = Mockito.mock(ProductRepository.class);
@@ -111,7 +112,7 @@ public class ProductServiceTest {
         ProductService prodService = new ProductService(mockProdRepository, batchService);
 
         Product prod = prodService.update(product);
-        ObjectNotFoundException ex = assertThrows(ObjectNotFoundException.class,() -> prodService.findById(1L));
+        ObjectNotFoundException ex = assertThrows(ObjectNotFoundException.class, () -> prodService.findById(1L));
 
         assertEquals(product, prod);
         assertNotNull(prod);
@@ -136,14 +137,14 @@ public class ProductServiceTest {
         ProductService prodService = new ProductService(mockProdRepository, batchService);
 
         prodService.delete(2L);
-        ObjectNotFoundException ex = assertThrows(ObjectNotFoundException.class,() -> prodService.findById(1L));
+        ObjectNotFoundException ex = assertThrows(ObjectNotFoundException.class, () -> prodService.findById(1L));
 
         Mockito.verify(mockProdRepository, Mockito.times(1)).delete(product);
         assertTrue(ex.getMessage().contains("Produto não encontrado! Por favor verifique dados informados."));
     }
 
     @Test
-    public void findProductInBatch(){
+    public void findProductInBatch() {
         Long idProduct = 1L;
         List<Batch> batchList = new ArrayList<>();
 
@@ -160,7 +161,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    public void findProductByCategory(){
+    public void OrderByProductByCategory() {
 
         List<Batch> list = new ArrayList<>();
         Batch b = new Batch();
@@ -169,7 +170,7 @@ public class ProductServiceTest {
         b.setInitialQuantity(2);
 
         Batch b2 = new Batch();
-        b2.setDueDate(LocalDate.of(2021,11,27));
+        b2.setDueDate(LocalDate.of(2021, 11, 27));
         b2.setId(3L);
         b.setInitialQuantity(24);
 
@@ -183,20 +184,40 @@ public class ProductServiceTest {
         BatchService batchService = new BatchService(batchRepository, sectionService);
         ProductService prodService = new ProductService(productRepository, batchService);
 
-        List<Batch> orderByBatch = prodService.OrderByBatchInProduct(2L,"L");
-        List<Batch> orderByBatch2 = prodService.OrderByBatchInProduct(2L,"C");
-        List<Batch> orderByBatch3 = prodService.OrderByBatchInProduct(2L,"F");
-
-        BusinessException ex = Assertions.assertThrows(
-                BusinessException.class,
-                () -> prodService.OrderByBatchInProduct(2L,"RT"));
-
+        List<Batch> orderByBatch = prodService.OrderByBatchInProduct(2L, "L");
+        List<Batch> orderByBatch2 = prodService.OrderByBatchInProduct(2L, "C");
+        List<Batch> orderByBatch3 = prodService.OrderByBatchInProduct(2L, "F");
+        List<Batch> orderByBatch4 = prodService.OrderByBatchInProduct(3L, "");
 
         Assertions.assertEquals(list, orderByBatch);
         Assertions.assertEquals(list, orderByBatch2);
         Assertions.assertEquals(list, orderByBatch3);
-        Assertions.assertTrue(ex.getMessage().contains("Metodo de Ordenação informado está errado"));
+        assertNull(orderByBatch4);
+
     }
 
+    @Test
+    public void findByBatchInProduct() {
+        Product product = new Product(2L, "Test", "Product", 0, 9, RefrigerationType.FROZEN);
+        Product product2 = new Product(3L, "Test", "Product2", 0, 9, RefrigerationType.COLD);
+        Product product3 = new Product(4L, "Test", "Product3", 0, 9, RefrigerationType.FRESH);
+        Product product4 = new Product(5L, "Test", "Product2", 0, 9, RefrigerationType.COLD);
+        Product product5 = new Product(6L, "Test", "Product2", 0, 9, RefrigerationType.COLD);
+        List<Product> listProduct = new ArrayList<>(Arrays.asList(product, product2, product3, product4, product5));
+
+        ProductRepository mockProdRepository = Mockito.mock(ProductRepository.class);
+        BatchRepository batchRepository = Mockito.mock(BatchRepository.class);
+        SectionService sectionService = Mockito.mock(SectionService.class);
+
+        Mockito.when(mockProdRepository.findByCategoryRefrigeration(RefrigerationType.COLD)).thenReturn(listProduct);
+
+        BatchService batchService = new BatchService(batchRepository, sectionService);
+        ProductService prodService = new ProductService(mockProdRepository, batchService);
+
+        List<Product> prodFind = prodService.findByCategoryProduct(RefrigerationType.COLD);
+
+        assertEquals(listProduct, prodFind);
+        assertNotNull(prodService);
+    }
 
 }
