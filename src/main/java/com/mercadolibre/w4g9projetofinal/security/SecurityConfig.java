@@ -49,7 +49,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String[] PUBLIC_MATCHERS_POST = {
             "/api/v1/fresh-products/representative",
-            "/api/v1/fresh-products/seller"
+            "/api/v1/fresh-products/seller",
+            "/auth/forgot/**"
     };
 
     @Override
