@@ -27,7 +27,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/v1/fresh-products/seller")
-@PreAuthorize("hasRole('ADMIN') OR hasRole('SELLER')")
 public class SellerController {
 
     /*** Instancia de serviço: <b>RepresentativeService</b> com notação <i>{@literal @}Autowired</i> do lombok */
@@ -39,7 +38,8 @@ public class SellerController {
      * @return Payload com Lista de Sellers e ResponseEntity com status <b>OK</b>
      */
     @GetMapping
-    public ResponseEntity<List<SellerResponseDTO>> findAll(){
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<List<SellerResponseDTO>> findAll() {
         List<SellerResponseDTO> list = SellerConverter.convertEntityListToDtoList(service.findAll());
         return ResponseEntity.ok(list);
     }
@@ -51,6 +51,7 @@ public class SellerController {
      */
     @GetMapping(value = "/{id}")
     public ResponseEntity<SellerResponseDTO> findById(@PathVariable Long id) {
+        UserService.adminOrSameUser(id);
         UserSS user = UserService.authenticated();
         if (user == null || !user.hasRole(Profile.ADMIN) && !id.equals(user.getId())) {
             throw new AccessDeniedException("Acesso Negado");
@@ -82,6 +83,7 @@ public class SellerController {
     @PutMapping(value = "/{id}")
     public ResponseEntity<Void> update(@PathVariable Long id,
                                        @RequestBody @Valid SellerRequestDTO newObj) {
+        UserService.adminOrSameUser(id);
         Seller obj = SellerConverter.convertDtoToEntity(newObj);
         obj.setId(id);
         obj = service.update(obj);
@@ -95,6 +97,7 @@ public class SellerController {
      */
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
+        UserService.adminOrSameUser(id);
         service.delete(id);
         return ResponseEntity.ok().build();
     }

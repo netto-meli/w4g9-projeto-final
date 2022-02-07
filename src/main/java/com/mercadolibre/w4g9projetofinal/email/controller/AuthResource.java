@@ -4,10 +4,7 @@ import com.mercadolibre.w4g9projetofinal.dtos.request.EmailDTO;
 import com.mercadolibre.w4g9projetofinal.email.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -19,9 +16,8 @@ public class AuthResource {
     private AuthService authService;
 
     @PostMapping(value = "/forgot")
-    public ResponseEntity<Void> forgot(@Valid @RequestBody EmailDTO objDto) {
-        authService.sendNewPassword(objDto.getEmail());
+    public ResponseEntity<Void> forgot(@RequestParam String email) {
+        authService.sendNewPassword(email);
         return ResponseEntity.noContent().build();
     }
-
 }

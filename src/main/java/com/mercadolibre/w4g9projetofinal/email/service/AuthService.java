@@ -12,24 +12,26 @@ import java.util.Random;
 @Service
 public class AuthService {
 
-    @Autowired
     private UserRepository userRepository;
 
-    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Autowired
     private EmailService emailService;
 
-    private Random rand = new Random();
+    private Random rand;
+
+    public AuthService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.userRepository = userRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.emailService = new SmtpEmailService();
+        this.rand = new Random();
+    }
 
     public void sendNewPassword(String email) {
-        User user = userRepository.findByEmail(email);
-        if (user == null) {
-            throw new ObjectNotFoundException("Email não encontrado");
-        }
+        User user = userRepository.findByEmail(email)
+                .orElseThrow( () -> new ObjectNotFoundException("Email não encontrado"));
 
-        String newPass = newPassword();
+        String newPass = this.newPassword();
         user.setPassword(bCryptPasswordEncoder.encode(newPass));
 
         userRepository.save(user);
@@ -55,7 +57,7 @@ public class AuthService {
             return (char) (rand.nextInt(26) + 65);
         }
         //Gera Caracteres especiais
-        else if (opt == 4) {
+        else if (opt == 2) {
             return (char) (rand.nextInt(6) + 33);
         }
         //Gera letra Minúscula

@@ -36,7 +36,6 @@ public class SellerService {
 
     /*** Instancia de service: <b>AdvertiseService</b>.
      */
-    @Autowired
     private AdvertiseService advertiseService;
 
     /*** Método que retorna lista de Sellers */

@@ -32,7 +32,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/v1/fresh-products/buyer")
-@PreAuthorize("hasRole('ADMIN') OR hasRole('BUYER')")
 public class BuyerController {
 
     /*** Instancia de serviço: <b>CompradorService</b> com notação <i>{@literal @}Autowired</i> do lombok
@@ -45,6 +44,7 @@ public class BuyerController {
      * @return retorna a lista e status 200
      */
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<BuyerResponseDTO>> findAll() {
         List<BuyerResponseDTO> list = BuyerConverter.convertEntityListToDtoList(service.findAll());
         if(list == null || list.isEmpty()){
@@ -60,6 +60,7 @@ public class BuyerController {
      */
     @GetMapping(value = "/{id}")
     public ResponseEntity<BuyerResponseDTO> findById(@PathVariable Long id) {
+        UserService.adminOrSameUser(id);
         UserSS user = UserService.authenticated();
         if(user == null || !user.hasRole(Profile.ADMIN) && !id.equals(user.getId())) {
             throw new AccessDeniedException("Acesso negado");
@@ -88,6 +89,7 @@ public class BuyerController {
     @PutMapping(value = "/{id}")
     public ResponseEntity<Void> update(@RequestBody @Valid BuyerRequestDTO newBuyer,
                                        @PathVariable Long id) {
+        UserService.adminOrSameUser(id);
         Buyer buyer = BuyerConverter.convertDtoToEntity(newBuyer);
         buyer.setId(id);
         service.update(buyer);
@@ -100,6 +102,7 @@ public class BuyerController {
      */
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
+        UserService.adminOrSameUser(id);
         service.delete(id);
         return ResponseEntity.ok().build();
     }
