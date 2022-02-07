@@ -10,7 +10,7 @@ import java.util.List;
 public class SellerConverter {
 
     public static Seller convertDtoToEntity (SellerRequestDTO objDTO){
-        return new Seller(null, objDTO.getUsername(), objDTO.getName(), objDTO.getEmail(), objDTO.getPassword(), null);
+        return new Seller(null, objDTO.getUsername(), objDTO.getName(), objDTO.getEmail(), objDTO.getPass(), null);
     }
 
     public static SellerResponseDTO convertEntityToDto (Seller obj){

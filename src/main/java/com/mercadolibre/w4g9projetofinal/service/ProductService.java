@@ -5,9 +5,11 @@ import com.mercadolibre.w4g9projetofinal.entity.Product;
 import com.mercadolibre.w4g9projetofinal.entity.enums.OrderByProductInBatch;
 import com.mercadolibre.w4g9projetofinal.entity.enums.RefrigerationType;
 import com.mercadolibre.w4g9projetofinal.exceptions.BusinessException;
+import com.mercadolibre.w4g9projetofinal.exceptions.ExistingUserException;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.ProductRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -84,34 +86,41 @@ public class ProductService {
      *                  F = data vencimento
      * @return lista de lotes em que o produto esta cadastrado
      */
-    public List<Batch> OrderByBatchInProduct(Long idProduct, String orderBy) {
-        List<Batch> batch = findByBatchInProduct(idProduct);
-        if (OrderByProductInBatch.ORDER_BY_BATCH.getCod().equals(orderBy)) {
-            return batch.stream().sorted(Comparator.comparing(Batch::getId)).collect(Collectors.toList());
-        } else if (OrderByProductInBatch.ORDER_BY_QUANTITY.getCod().equals(orderBy)) {
-            return batch.stream().sorted(Comparator.comparing(Batch::getCurrentQuantity)).collect(Collectors.toList());
-        } else if (OrderByProductInBatch.ORDER_BY_DUEDATE.getCod().equals(orderBy)) {
-            return batch.stream().sorted(Comparator.comparing(Batch::getDueDate)).collect(Collectors.toList());
-        } else {
+    public List<Batch> OrderByBatchInProduct(Long idProduct, String orderBy) throws BusinessException{
+        try {
+            List<Batch> batch = findByBatchInProduct(idProduct);
+            if (OrderByProductInBatch.ORDER_BY_BATCH.getCod().equals(orderBy)) {
+                return batch.stream().sorted(Comparator.comparing(Batch::getId)).collect(Collectors.toList());
+            } else if (OrderByProductInBatch.ORDER_BY_QUANTITY.getCod().equals(orderBy)) {
+                return batch.stream().sorted(Comparator.comparing(Batch::getCurrentQuantity)).collect(Collectors.toList());
+            } else if (OrderByProductInBatch.ORDER_BY_DUEDATE.getCod().equals(orderBy)) {
+                return batch.stream().sorted(Comparator.comparing(Batch::getDueDate)).collect(Collectors.toList());
+            }
+        }catch (BusinessException businessException){
             throw new BusinessException("Metodo de Ordenação informado está errado");
         }
+        return null;
     }
 
     /*** Método que insere um Product
-     * @param obj objeto Product a ser inserido
+     * @param product objeto Product a ser inserido
      */
-    public Product insert(Product obj) {
-        return repository.save(obj);
+    public Product insert(Product product) {
+        try {
+            return repository.save(product);
+        } catch (DataIntegrityViolationException e) {
+            throw new ExistingUserException("Username ou Email existente na base de dados");
+        }
     }
 
     /*** Método que atualiza um Seller já existente
      *
-     * @param newObj Objeto com informações para atualização de um seller existente
+     * @param product Objeto com informações para atualização de um seller existente
      */
-    public Product update(Product newObj) {
-        Product obj = findById(newObj.getId());
-        updateProduct(newObj, obj);
-        return repository.save(obj);
+    public Product update(Product product) {
+        Product pr = findById(product.getId());
+        updateProduct(product, pr);
+        return repository.save(pr);
     }
 
     /*** Método deleta um Seller do Bando de dados
@@ -124,11 +133,11 @@ public class ProductService {
     }
 
     //Método para update de Seller
-    private static void updateProduct(Product obj, Product newObj) {
-        newObj.setName(obj.getName());
-        newObj.setDescription(obj.getDescription());
-        newObj.setMaxTemperature(obj.getMaxTemperature());
-        newObj.setMinTemperature(obj.getMinTemperature());
-        newObj.setCategoryRefrigeration(obj.getCategoryRefrigeration());
+    private static void updateProduct(Product product, Product newProduct) {
+        newProduct.setName(product.getName());
+        newProduct.setDescription(product.getDescription());
+        newProduct.setMaxTemperature(product.getMaxTemperature());
+        newProduct.setMinTemperature(product.getMinTemperature());
+        newProduct.setCategoryRefrigeration(product.getCategoryRefrigeration());
     }
 }
