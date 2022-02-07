@@ -45,30 +45,6 @@ public class ResourceExceptionHandler {
 	 * @param request webRequest
 	 * @return Response Entity com status code de erro e mensagem.
 	 */
-	@ExceptionHandler(InvalidFormatException.class)
-	public ResponseEntity<StandardError> invalidFormatException(InvalidFormatException ex, HttpServletRequest request) {
-		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.UNPROCESSABLE_ENTITY.value(), "Não encontrado", ex.getMessage(), request.getRequestURI());
-		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(err);
-	}
-
-	/*** Handler de erro
-	 *
-	 * @param ex exceção lançada
-	 * @param request webRequest
-	 * @return Response Entity com status code de erro e mensagem.
-	 */
-	@ExceptionHandler(JsonParseException.class)
-	public ResponseEntity<StandardError> jsonParseException(JsonParseException ex, HttpServletRequest request) {
-		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.UNPROCESSABLE_ENTITY.value(), "Não encontrado", ex.getMessage(), request.getRequestURI());
-		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(err);
-	}
-
-	/*** Handler de erro
-	 *
-	 * @param ex exceção lançada
-	 * @param request webRequest
-	 * @return Response Entity com status code de erro e mensagem.
-	 */
 	@ExceptionHandler(CartManagementException.class)
 	public ResponseEntity<StandardError> cartManagementException(CartManagementException ex, HttpServletRequest request) {
 		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.UNPROCESSABLE_ENTITY.value(), "Não encontrado", ex.getMessage(), request.getRequestURI());

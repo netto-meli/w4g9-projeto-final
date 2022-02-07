@@ -11,8 +11,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class EmailDTO implements Serializable {
-    private static final long serialVersionUID = -6135537228291738302L;
+public class EmailDTO {
 
     @NotEmpty(message = "Preenchimento Obrigatório")
     @Email(message = "Email inválido")

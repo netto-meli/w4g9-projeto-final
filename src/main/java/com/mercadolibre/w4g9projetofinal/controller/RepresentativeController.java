@@ -5,12 +5,12 @@ import com.mercadolibre.w4g9projetofinal.dtos.request.RepresentativeRequestDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.RepresentativeResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Representative;
 import com.mercadolibre.w4g9projetofinal.entity.enums.Profile;
-import com.mercadolibre.w4g9projetofinal.exceptions.AuthorizationException;
-import com.mercadolibre.w4g9projetofinal.security.UserSS;
+import com.mercadolibre.w4g9projetofinal.security.entity.UserSS;
 import com.mercadolibre.w4g9projetofinal.service.RepresentativeService;
 import com.mercadolibre.w4g9projetofinal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -53,7 +53,7 @@ public class RepresentativeController {
     public ResponseEntity<RepresentativeResponseDTO> findById(@PathVariable Long id) {
         UserSS user = UserService.authenticated();
         if (user == null || !user.hasRole(Profile.ADMIN) && !id.equals(user.getId())) {
-            throw new AuthorizationException("Acesso Negado");
+            throw new AccessDeniedException("Acesso Negado");
         }
         Representative obj = service.findById(id);
         return ResponseEntity.ok(RepresentativeConverter.convertEntityToDto(obj));

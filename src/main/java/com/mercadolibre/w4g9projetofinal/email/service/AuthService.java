@@ -37,7 +37,7 @@ public class AuthService {
     }
 
     private String newPassword() {
-        char[] vet = new char[10];
+        char[] vet = new char[12];
         for (int i=0; i<10; i++) {
             vet[i] = randomChar();
         }
@@ -45,7 +45,7 @@ public class AuthService {
     }
 
     private char randomChar() {
-        int opt = rand.nextInt(3);
+        int opt = rand.nextInt(4);
         //gera um dígito
         if (opt == 0) {
             return (char) (rand.nextInt(10) + 48);
@@ -53,6 +53,10 @@ public class AuthService {
         //Gera letra Maiúscula
         else if (opt == 1) {
             return (char) (rand.nextInt(26) + 65);
+        }
+        //Gera Caracteres especiais
+        else if (opt == 4) {
+            return (char) (rand.nextInt(6) + 33);
         }
         //Gera letra Minúscula
         else {
