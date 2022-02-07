@@ -74,12 +74,12 @@ public class CartController {
 			@RequestParam(value = "idAdvertise", defaultValue = "0") Long idAdvertise,
 			@RequestParam(value = "qtdRemove", defaultValue = "0") int qtdRemove,
 			UriComponentsBuilder uriBuilder) throws CartManagementException {
-			SellOrder sellOrderAberto = cartService.removeAdvertiseItemsFromCart(idBuyer, idAdvertise,qtdRemove);
+			SellOrder cart = cartService.removeAdvertiseItemsFromCart(idBuyer, idAdvertise,qtdRemove);
 			URI uri = uriBuilder
 					.path("/{idBuyer}")
-					.buildAndExpand(sellOrderAberto.getBuyer().getId())
+					.buildAndExpand(cart.getBuyer().getId())
 					.toUri();
-			return ResponseEntity.created(uri).body(SellOrderConverter.convertEntityToDto(sellOrderAberto));
+			return ResponseEntity.created(uri).body(SellOrderConverter.convertEntityToDto(cart));
 	}
 
 	/*** Método para limpar o carrinho de compras do cliente.<br>
