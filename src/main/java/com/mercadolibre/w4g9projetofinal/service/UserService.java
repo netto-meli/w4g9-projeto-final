@@ -3,6 +3,7 @@ package com.mercadolibre.w4g9projetofinal.service;
 import com.mercadolibre.w4g9projetofinal.entity.User;
 import com.mercadolibre.w4g9projetofinal.repository.UserRepository;
 import com.mercadolibre.w4g9projetofinal.security.entity.UserSS;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class UserService {
 
     @Autowired
