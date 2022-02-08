@@ -2,6 +2,7 @@ package com.mercadolibre.w4g9projetofinal.util;
 
 import com.mercadolibre.w4g9projetofinal.entity.*;
 import com.mercadolibre.w4g9projetofinal.entity.enums.AdvertiseStatus;
+import com.mercadolibre.w4g9projetofinal.entity.enums.Profile;
 import com.mercadolibre.w4g9projetofinal.entity.enums.RefrigerationType;
 import com.mercadolibre.w4g9projetofinal.entity.enums.RepresentativeJob;
 import com.mercadolibre.w4g9projetofinal.repository.*;
@@ -53,82 +54,54 @@ public class Instantiation implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 /*
-        Warehouse w1 = new Warehouse(null, "k", "l" );
-        Warehouse w2 = new Warehouse(null, "k", "l" );
-        Warehouse w3 = new Warehouse(null, "k", "l" );
-        w1 = warehouseRepository.save(w1);
-        w2 = warehouseRepository.save(w2);
-        w3 = warehouseRepository.save(w3);
+        Warehouse warehouse = new Warehouse(null, "k", "l" );
+        warehouse = warehouseRepository.save(warehouse);
 
-        Product p1 = new Product(null, "kk", "kk", 0F, 8F, RefrigerationType.FRESH);
-        Product p2 = new Product(null, "kk", "kk", 0F, 8F, RefrigerationType.COLD);
-        Product p3 = new Product(null, "kk", "kk", 0F, 8F, RefrigerationType.FROZEN);
-        p1 = productRepository.save(p1);
-        p2 = productRepository.save(p2);
-        p3 = productRepository.save(p3);
+        Buyer buyer = new Buyer(null, "123",
+                "Comprador nome", "email1@hotkkmail.com", pe.encode("123"), "Endereco");
+        buyer.getProfile().add(Profile.ADMIN);
+        buyer = buyerRepository.save(buyer);
 
+        Seller seller = new Seller(null, "userSeller",
+                "vendedor nome", "email1@hotmail.com", pe.encode("123456"), null);
+        seller = sellerRepository.save(seller);
 
-        Seller s1 = new Seller(null, "khjfud", "Marcos Sá", "email1@hotmail.com", pe.encode("123456"), null);
-        s1 = sellerRepository.save(s1);
+        Representative representative = new Representative(null, "userRepresentative",
+                "Representante nome", "em1@gmail.com", pe.encode("151515"),
+                RepresentativeJob.LIDER, warehouse);
+        representative = representativeRepository.save(representative);
 
-        Representative r1 = new Representative(null, "kkk", "Marcos Sá", "em1@gmail.com", pe.encode("151515"), RepresentativeJob.LIDER, w1);
-        r1 = representativeRepository.save(r1);
+        Product product1 = new Product(null, "produto1", "desc produto 1",
+                10F, 20F, RefrigerationType.FRESH);
+        Product product2 = new Product(null, "produto2", "desc produto 2",
+                10F, 20F, RefrigerationType.FRESH);
+        product1 = productRepository.save(product1);
+        product2 = productRepository.save(product2);
 
-        Buyer u1 = new Buyer(null, "kh88jfud", "Marjhghhjcos Sá", "email1@hotkkmail.com", pe.encode("123776456"), "jhghhjghgh");
-        u1 = buyerRepository.save(u1);
-
-        p1 = productRepository.findById(1L).orElse(null);
-        p2 = productRepository.findById(2L).orElse(null);
-        p3 = productRepository.findById(3L).orElse(null);
-        Advertise a1 = new Advertise(null, "k", p1, s1, BigDecimal.TEN, AdvertiseStatus.ATIVO,false );
-        Advertise a2 = new Advertise(null, "k", p2, s1, BigDecimal.TEN, AdvertiseStatus.ATIVO,false );
-        Advertise a3 = new Advertise(null, "k", p1, s1, BigDecimal.TEN, AdvertiseStatus.ATIVO,false );
-        Advertise a4 = new Advertise(null, "k", p3, s1, BigDecimal.TEN, AdvertiseStatus.ATIVO,false );
-        Advertise a5 = new Advertise(null, "k", p1, s1, BigDecimal.TEN, AdvertiseStatus.ATIVO,false );
+        product1 = productRepository.findById(1L).orElse(null);
+        product2 = productRepository.findById(2L).orElse(null);
+        Advertise a1 = new Advertise(null, "Anuncio 1", product1, seller, BigDecimal.TEN, AdvertiseStatus.ATIVO,false );
+        Advertise a2 = new Advertise(null, "Anuncio 2", product2, seller, BigDecimal.TEN, AdvertiseStatus.ATIVO,true );
         a1 = advertiseRepository.save(a1);
         a2 = advertiseRepository.save(a2);
-        a3 = advertiseRepository.save(a3);
-        a4 = advertiseRepository.save(a4);
-        a5 = advertiseRepository.save(a5);
 
-        Section c1 = new Section(null, w1, "l", RefrigerationType.FRESH, 4, 1, 1F, 1F, null );
-        Section c2 = new Section(null, w2, "l", RefrigerationType.COLD, 4, 1, 1F, 1F, null );
-        Section c3 = new Section(null, w1, "l", RefrigerationType.FROZEN, 4, 1, 1F, 1F, null );
-        c1 = sectionRepository.save(c1);
-        c2 = sectionRepository.save(c2);
-        c3 = sectionRepository.save(c3);
+        Section section = new Section(null, warehouse, "Setor", RefrigerationType.FRESH, 10, 10, 10F, 20F, null );
+        section = sectionRepository.save(section);
 
         LocalDate lc = LocalDate.now();
         LocalDateTime lt = LocalDateTime.now();
         List<Batch> l1 = new ArrayList<>();
         List<Batch> l2 = new ArrayList<>();
-        List<Batch> l3 = new ArrayList<>();
-        Batch t1 = new Batch(1L, 1, 1, 1F, 1F, lc, lc, lt, a1, null);
-        Batch t2 = new Batch(2L, 1, 10, 1F, 1F, lc.plusDays(5), lc, lt, a2, null);
-        Batch t3 = new Batch(3L, 1, 100, 1F, 1F, lc.plusDays(15), lc, lt, a3, null);
-        Batch t4 = new Batch(4L, 1, 2, 1F, 1F, lc.plusDays(25), lc, lt, a4, null);
-        Batch t5 = new Batch(5L, 1, 20, 1F, 1F, lc.plusDays(35), lc, lt, a5, null);
-        Batch t6 = new Batch(6L, 1, 1, 1F, 1F, lc.plusDays(45), lc, lt, a5, null);
-        Batch t7 = new Batch(7L, 1, 10, 1F, 1F, lc.plusDays(55), lc, lt, a4, null);
-        Batch t8 = new Batch(8L, 1, 100, 1F, 1F, lc.plusDays(65), lc, lt, a5, null);
-        Batch t9 = new Batch(9L, 1, 2, 1F, 1F, lc.plusDays(75), lc, lt, a4, null);
-        Batch t10 = new Batch(10L, 1, 20, 1F, 1F, lc.plusDays(85), lc, lt, a5, null);
+        Batch t1 = new Batch(1L, 10, 10, 10F, 10F,
+                lc.plusDays(10), lc, lt, a1, null);
+        Batch t2 = new Batch(2L, 10, 10, 10F, 10F,
+                lc.plusDays(10), lc, lt, a2, null);
         l1.add(t1);
         l1.add(t2);
-        l2.add(t3);
-        l1.add(t7);
-        l2.add(t8);
-        l3.add(t4);
-        l2.add(t10);
-        l3.add(t9);
-        l3.add(t6);
-        l3.add(t5);
-        InboundOrder i1 = new InboundOrder(1L, lc, s1, r1, l1, c1);
-        InboundOrder i2 = new InboundOrder(2L, lc, s1, r1, l2, c2);
-        InboundOrder i3 = new InboundOrder(3L, lc, s1, r1, l3, c3);
+        InboundOrder i1 = new InboundOrder(1L, lc, seller, representative, l1, section);
+        InboundOrder i2 = new InboundOrder(2L, lc, seller, representative, l2, section);
         i1.setInboundOrderToBatchList();
         i2.setInboundOrderToBatchList();
-        i3.setInboundOrderToBatchList();
-        inboundOrderRepository.saveAll(Arrays.asList(i1, i2, i3));*/
+        inboundOrderRepository.saveAll(Arrays.asList(i1, i2));*/
     }
 }

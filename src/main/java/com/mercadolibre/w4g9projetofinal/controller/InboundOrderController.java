@@ -39,9 +39,6 @@ public class InboundOrderController {
             @RequestBody @Valid InboundOrderRequestDTO inboundOrderRequestDTO,
             UriComponentsBuilder uriBuilder) {
         UserSS user = UserService.authenticated();
-        if(user == null) {
-            throw new AccessDeniedException("Acesso negado");
-        }
         InboundOrder inboundOrder = InboundOrderConverter.convertDtoToEntity(inboundOrderRequestDTO);
         inboundOrder = inboundOrderService.inboundOrderManager(user, inboundOrder, false);
         List<BatchResponseDTO> response = BatchConverter.convertEntityListToDtoList(inboundOrder.getBatchList());
@@ -57,9 +54,6 @@ public class InboundOrderController {
             @RequestBody @Valid InboundOrderRequestDTO request,
             UriComponentsBuilder uriBuilder) {
         UserSS user = UserService.authenticated();
-        if(user == null) {
-            throw new AccessDeniedException("Acesso negado");
-        }
         InboundOrder io = InboundOrderConverter.convertDtoToEntity(request);
         io = inboundOrderService.inboundOrderManager(user, io, true);
         List<BatchResponseDTO> response = BatchConverter.convertEntityListToDtoList(io.getBatchList());
