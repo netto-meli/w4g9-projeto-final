@@ -28,12 +28,12 @@ public class BuyerService {
 
     /*** Instancia de BCryptPasswordEncoder: <b>BCryptPasswordEncoder</b>.
      */
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final BCryptPasswordEncoder pe;
 
     /**
      * Instancia para Buyer Repository
      */
-    private BuyerRepository repository;
+    private final BuyerRepository repository;
 
     /**
      * Metodo que lista todos os compradores
@@ -60,7 +60,7 @@ public class BuyerService {
      * @return status 200
      */
     public Buyer insert(Buyer buyer) {
-        buyer.setPassword(bCryptPasswordEncoder.encode(buyer.getPassword()));
+        buyer.setPassword(pe.encode(buyer.getPassword()));
         try {
             return repository.save(buyer);
         } catch (DataIntegrityViolationException e) {

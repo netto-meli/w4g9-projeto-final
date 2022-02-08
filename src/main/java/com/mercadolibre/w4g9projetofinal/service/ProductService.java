@@ -28,10 +28,10 @@ import java.util.stream.Collectors;
 public class ProductService {
 
     /*** Instancia de ProductRepository*/
-    private ProductRepository repository;
+    private final ProductRepository repository;
 
     /*** Instancia de BatchService*/
-    private BatchService batchService;
+    private final BatchService batchService;
 
     /**
      * Metodo que busca todos os produtos
@@ -88,23 +88,27 @@ public class ProductService {
      * @return lista de lotes em que o produto esta cadastrado
      */
     public List<Batch> OrderByBatchInProduct(Long idProduct, String orderBy) {
-        List<Batch> batch = findByBatchInProduct(idProduct);
-        if (OrderByProductInBatch.ORDER_BY_BATCH.getCod().equals(orderBy)) {
-            return batch.stream().sorted(Comparator.comparing(Batch::getId)).collect(Collectors.toList());
-        } else if (OrderByProductInBatch.ORDER_BY_QUANTITY.getCod().equals(orderBy)) {
-            return batch.stream().sorted(Comparator.comparing(Batch::getCurrentQuantity)).collect(Collectors.toList());
-        } else if (OrderByProductInBatch.ORDER_BY_DUEDATE.getCod().equals(orderBy)) {
-            return batch.stream().sorted(Comparator.comparing(Batch::getDueDate)).collect(Collectors.toList());
-        } else {
-            throw new BusinessException("Metodo de Ordenação informado está errado");
-        }
+            List<Batch> batch = findByBatchInProduct(idProduct);
+            if (OrderByProductInBatch.ORDER_BY_BATCH.getCod().equals(orderBy)) {
+                return batch.stream().sorted(Comparator.comparing(Batch::getId)).collect(Collectors.toList());
+            } else if (OrderByProductInBatch.ORDER_BY_QUANTITY.getCod().equals(orderBy)) {
+                return batch.stream().sorted(Comparator.comparing(Batch::getCurrentQuantity)).collect(Collectors.toList());
+            } else if (OrderByProductInBatch.ORDER_BY_DUEDATE.getCod().equals(orderBy)) {
+                return batch.stream().sorted(Comparator.comparing(Batch::getDueDate)).collect(Collectors.toList());
+            }
+
+        return null;
     }
 
     /*** Método que insere um Product
      * @param product objeto Product a ser inserido
      */
     public Product insert(Product product) {
-        return repository.save(product);
+        try {
+            return repository.save(product);
+        } catch (DataIntegrityViolationException e) {
+            throw new ExistingUserException("Username ou Email existente na base de dados");
+        }
     }
 
     /*** Método que atualiza um Seller já existente

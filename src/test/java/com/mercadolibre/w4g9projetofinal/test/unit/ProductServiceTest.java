@@ -3,15 +3,18 @@ package com.mercadolibre.w4g9projetofinal.test.unit;
 import com.mercadolibre.w4g9projetofinal.entity.Batch;
 import com.mercadolibre.w4g9projetofinal.entity.Product;
 import com.mercadolibre.w4g9projetofinal.entity.enums.RefrigerationType;
+import com.mercadolibre.w4g9projetofinal.exceptions.ExistingUserException;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.BatchRepository;
 import com.mercadolibre.w4g9projetofinal.repository.ProductRepository;
 import com.mercadolibre.w4g9projetofinal.service.BatchService;
 import com.mercadolibre.w4g9projetofinal.service.ProductService;
 import com.mercadolibre.w4g9projetofinal.service.SectionService;
+import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.dao.DataIntegrityViolationException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -73,19 +76,24 @@ public class ProductServiceTest {
     public void insertProduct() {
 
         Product product = new Product(2L, "Test", "Product", 0, 9, RefrigerationType.FROZEN);
+        Product product2 = new Product(3L, "Test", "Product2", 0, 9, RefrigerationType.COLD);
 
         ProductRepository mockProdRepository = Mockito.mock(ProductRepository.class);
         BatchRepository batchRepository = Mockito.mock(BatchRepository.class);
         SectionService sectionService = Mockito.mock(SectionService.class);
 
         Mockito.when(mockProdRepository.save(product)).thenReturn(product);
+        Mockito.when(mockProdRepository.save(product2)).thenThrow(DataIntegrityViolationException.class);
 
         BatchService batchService = new BatchService(batchRepository, sectionService);
         ProductService prodService = new ProductService(mockProdRepository, batchService);
 
         Product prodSave = prodService.insert(product);
 
+        ExistingUserException expectedException = assertThrows(ExistingUserException.class, () -> prodService.insert(product2));
+
         assertEquals(prodSave, product);
+        assertTrue(expectedException.getMessage().contains("Username ou Email existente na base de dados"));
 
     }
 
