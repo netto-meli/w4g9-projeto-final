@@ -15,7 +15,7 @@ public class AuthResource {
     @Autowired
     private AuthService authService;
 
-    @PostMapping(value = "/forgot")
+    @PostMapping(value = "/forgot/")
     public ResponseEntity<Void> forgot(@RequestParam String email) {
         authService.sendNewPassword(email);
         return ResponseEntity.noContent().build();

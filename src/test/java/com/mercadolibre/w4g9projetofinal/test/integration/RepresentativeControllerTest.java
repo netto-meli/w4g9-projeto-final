@@ -7,7 +7,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
@@ -20,13 +19,20 @@ public class RepresentativeControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    public void deveRetornarListaRepresentatives() throws Exception {
-        MvcResult result = mockMvc
+    public void insertRepresentative() throws Exception{
+        String payLoad = "{\n"
+                + " \"name\":\"Nome pessoal\",\n"
+                + " \"email\": \"email@gmail.com\",\n"
+                + " \"password\" : \"123456\",\n"
+                + " \"job\" : 1\n"
+                + "}";
+        mockMvc
                 .perform(MockMvcRequestBuilders
-                        .get("/api/v1/fresh-products/representative"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andReturn();
-    }
+                        .post("/api/v1/fresh-products/representatives")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(payLoad))
+                .andExpect(MockMvcResultMatchers.status().isCreated());
 
+    }
 
 }
