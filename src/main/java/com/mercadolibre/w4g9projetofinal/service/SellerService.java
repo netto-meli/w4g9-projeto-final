@@ -89,6 +89,11 @@ public class SellerService {
         newObj.setPassword(obj.getPassword());
     }
 
+    /***
+     * Verifica o vendedor na lista de lote
+     * @param batchList lista de lote
+     * @return vendedor
+     */
     public Seller verifySellerInInboundOrder(List<Batch> batchList) {
         Long sellerId = null;
         Advertise ad = new Advertise();

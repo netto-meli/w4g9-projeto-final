@@ -7,6 +7,7 @@ import com.mercadolibre.w4g9projetofinal.entity.OrderItem;
 import com.mercadolibre.w4g9projetofinal.entity.SellOrder;
 import com.mercadolibre.w4g9projetofinal.entity.enums.SellOrderStatus;
 import com.mercadolibre.w4g9projetofinal.exceptions.CartManagementException;
+import com.mercadolibre.w4g9projetofinal.repository.OrderItemRepository;
 import com.mercadolibre.w4g9projetofinal.repository.SellOrderRepository;
 import com.mercadolibre.w4g9projetofinal.service.AdvertiseService;
 import com.mercadolibre.w4g9projetofinal.service.BatchService;
@@ -33,6 +34,7 @@ public class CartServiceTest {
         SellOrder carrinhoVazio = new SellOrder(1L, buyer, SellOrderStatus.CART,
                 new ArrayList<>(), BigDecimal.ZERO, BigDecimal.ZERO);
         // Mock - Class
+        OrderItemRepository orderItemRepository = Mockito.mock(OrderItemRepository.class);
         SellOrderRepository sellOrderRepository = Mockito.mock(SellOrderRepository.class);
         BuyerService buyerService = Mockito.mock(BuyerService.class);
         BatchService batchServce = Mockito.mock(BatchService.class);
@@ -43,7 +45,8 @@ public class CartServiceTest {
         Mockito.when(buyerService.findById(idBuyer)).thenReturn(buyer);
         Mockito.when(sellOrderRepository.save(Mockito.any(SellOrder.class))).thenReturn(carrinhoVazio);
         // Service
-        CartService cs = new CartService(sellOrderRepository, buyerService, batchServce, advertiseService);
+        CartService cs = new CartService(orderItemRepository, sellOrderRepository,
+                buyerService, batchServce, advertiseService);
 
         // <-- ACT -->
         SellOrder so = cs.getCart(idBuyer);
@@ -62,6 +65,7 @@ public class CartServiceTest {
         SellOrder carrinhoExistente = new SellOrder(1L, buyer, SellOrderStatus.CART,
                 new ArrayList<>(), BigDecimal.ZERO, BigDecimal.ZERO);
         // Mock - Class
+        OrderItemRepository orderItemRepository = Mockito.mock(OrderItemRepository.class);
         SellOrderRepository sellOrderRepository = Mockito.mock(SellOrderRepository.class);
         BuyerService buyerService = Mockito.mock(BuyerService.class);
         BatchService batchServce = Mockito.mock(BatchService.class);
@@ -71,7 +75,8 @@ public class CartServiceTest {
                 .findSellOrderByBuyer_IdAndOrderStatus(idBuyer, SellOrderStatus.CART))
                 .thenReturn(Optional.of(carrinhoExistente));
         // Service
-        CartService cs = new CartService(sellOrderRepository, buyerService, batchServce, advertiseService);
+        CartService cs = new CartService(orderItemRepository, sellOrderRepository,
+                buyerService, batchServce, advertiseService);
 
         // <-- ACT -->
         SellOrder so = cs.getCart(idBuyer);
@@ -87,12 +92,14 @@ public class CartServiceTest {
         Long idBuyer = 1L;
         Long idAdvertise = 1L;
         // Mocks
+        OrderItemRepository orderItemRepository = Mockito.mock(OrderItemRepository.class);
         SellOrderRepository sellOrderRepository = Mockito.mock(SellOrderRepository.class);
         BuyerService buyerService = Mockito.mock(BuyerService.class);
         BatchService batchServce = Mockito.mock(BatchService.class);
         AdvertiseService advertiseService = Mockito.mock(AdvertiseService.class);
         // Service
-        CartService cs = new CartService(sellOrderRepository, buyerService, batchServce, advertiseService);
+        CartService cs = new CartService(orderItemRepository,sellOrderRepository,
+                buyerService, batchServce, advertiseService);
 
         // <-- ACT -->
         CartManagementException excecaoEsperada = Assertions.assertThrows(
@@ -129,6 +136,7 @@ public class CartServiceTest {
         Mockito.doReturn(itemdoPedido).when(soSpy).getOrderItem(advertise);
         Mockito.doReturn(1).when(soSpy).updateCart(Mockito.anyInt(), Mockito.any(), Mockito.any());
         // Mocks - Class
+        OrderItemRepository orderItemRepository = Mockito.mock(OrderItemRepository.class);
         SellOrderRepository sellOrderRepository = Mockito.mock(SellOrderRepository.class);
         BuyerService buyerService = Mockito.mock(BuyerService.class);
         BatchService batchServce = Mockito.mock(BatchService.class);
@@ -138,7 +146,8 @@ public class CartServiceTest {
         Mockito.when(batchServce.verifyStock(Mockito.eq(idAdvertise), Mockito.anyInt())).thenReturn(lote);
         Mockito.when(sellOrderRepository.save(Mockito.any(SellOrder.class))).thenReturn(novoCarrinho);
         // Service + Spy
-        CartService cs = new CartService(sellOrderRepository, buyerService, batchServce, advertiseService);
+        CartService cs = new CartService(orderItemRepository, sellOrderRepository,
+                buyerService, batchServce, advertiseService);
         CartService csSpy = Mockito.spy(cs);
         Mockito.doReturn(soSpy).when(csSpy).getCart(idBuyer);
 
@@ -165,6 +174,7 @@ public class CartServiceTest {
         SellOrder soSpy = Mockito.spy(cart);
         Mockito.doReturn(null).when(soSpy).getOrderItem(advertise);
         // Mocks - Class
+        OrderItemRepository orderItemRepository = Mockito.mock(OrderItemRepository.class);
         SellOrderRepository sellOrderRepository = Mockito.mock(SellOrderRepository.class);
         BuyerService buyerService = Mockito.mock(BuyerService.class);
         BatchService batchServce = Mockito.mock(BatchService.class);
@@ -172,7 +182,8 @@ public class CartServiceTest {
         // Mock - Actions
         Mockito.when(advertiseService.findById(idAdvertise)).thenReturn(advertise);
         // Service + Spy
-        CartService cs = new CartService(sellOrderRepository, buyerService, batchServce, advertiseService);
+        CartService cs = new CartService(orderItemRepository, sellOrderRepository,
+                buyerService, batchServce, advertiseService);
         CartService csSpy = Mockito.spy(cs);
         Mockito.doReturn(soSpy).when(csSpy).getCart(idBuyer);
 
@@ -208,6 +219,7 @@ public class CartServiceTest {
         SellOrder soSpy = Mockito.spy(cart);
         Mockito.doReturn(itemDoPedido).when(soSpy).getOrderItem(advertise);
         // Mocks - Class
+        OrderItemRepository orderItemRepository = Mockito.mock(OrderItemRepository.class);
         SellOrderRepository sellOrderRepository = Mockito.mock(SellOrderRepository.class);
         BuyerService buyerService = Mockito.mock(BuyerService.class);
         BatchService batchServce = Mockito.mock(BatchService.class);
@@ -215,7 +227,8 @@ public class CartServiceTest {
         // Mock - Actions
         Mockito.when(advertiseService.findById(idAdvertise)).thenReturn(advertise);
         // Service + Spy
-        CartService cs = new CartService(sellOrderRepository, buyerService, batchServce, advertiseService);
+        CartService cs = new CartService(orderItemRepository, sellOrderRepository,
+                buyerService, batchServce, advertiseService);
         CartService csSpy = Mockito.spy(cs);
         Mockito.doReturn(soSpy).when(csSpy).getCart(idBuyer);
 
@@ -252,6 +265,7 @@ public class CartServiceTest {
         Mockito.doReturn(itemDoPedido).when(soSpy).getOrderItem(advertise);
         Mockito.doNothing().when(soSpy).calcTotalValueOrder();
         // Mocks - Class
+        OrderItemRepository orderItemRepository = Mockito.mock(OrderItemRepository.class);
         SellOrderRepository sellOrderRepository = Mockito.mock(SellOrderRepository.class);
         BuyerService buyerService = Mockito.mock(BuyerService.class);
         BatchService batchServce = Mockito.mock(BatchService.class);
@@ -260,7 +274,8 @@ public class CartServiceTest {
         Mockito.when(advertiseService.findById(idAdvertise)).thenReturn(advertise);
         Mockito.when(sellOrderRepository.save(Mockito.any(SellOrder.class))).thenReturn(cart);
         // Service + Spy
-        CartService cs = new CartService(sellOrderRepository, buyerService, batchServce, advertiseService);
+        CartService cs = new CartService(orderItemRepository, sellOrderRepository,
+                buyerService, batchServce, advertiseService);
         CartService csSpy = Mockito.spy(cs);
         Mockito.doReturn(soSpy).when(csSpy).getCart(idBuyer);
 
@@ -301,6 +316,7 @@ public class CartServiceTest {
         Mockito.doReturn(itemDoPedido).when(soSpy).getOrderItem(advertise);
         Mockito.doNothing().when(soSpy).calcTotalValueOrder();
         // Mocks - Class
+        OrderItemRepository orderItemRepository = Mockito.mock(OrderItemRepository.class);
         SellOrderRepository sellOrderRepository = Mockito.mock(SellOrderRepository.class);
         BuyerService buyerService = Mockito.mock(BuyerService.class);
         BatchService batchServce = Mockito.mock(BatchService.class);
@@ -308,8 +324,10 @@ public class CartServiceTest {
         // Mock - Actions
         Mockito.when(advertiseService.findById(idAdvertise)).thenReturn(advertise);
         Mockito.when(sellOrderRepository.save(Mockito.any(SellOrder.class))).thenReturn(carrinhoComItens);
+        Mockito.doNothing().when(orderItemRepository).delete(Mockito.any(OrderItem.class));
         // Service + Spy
-        CartService cs = new CartService(sellOrderRepository, buyerService, batchServce, advertiseService);
+        CartService cs = new CartService(orderItemRepository, sellOrderRepository,
+                buyerService, batchServce, advertiseService);
         CartService csSpy = Mockito.spy(cs);
         Mockito.doReturn(soSpy).when(csSpy).getCart(idBuyer);
 
@@ -327,6 +345,7 @@ public class CartServiceTest {
         // Comprador
         Long idBuyer = 1L;
         // Mocks - Class
+        OrderItemRepository orderItemRepository = Mockito.mock(OrderItemRepository.class);
         SellOrderRepository sellOrderRepository = Mockito.mock(SellOrderRepository.class);
         BuyerService buyerService = Mockito.mock(BuyerService.class);
         BatchService batchServce = Mockito.mock(BatchService.class);
@@ -334,7 +353,8 @@ public class CartServiceTest {
         // Mock - Actions
         Mockito.doNothing().when(sellOrderRepository).deleteByBuyer_IdAndOrderStatus(idBuyer, SellOrderStatus.CART);
         // Service
-        CartService cs = new CartService(sellOrderRepository, buyerService, batchServce, advertiseService);
+        CartService cs = new CartService(orderItemRepository, sellOrderRepository,
+                buyerService, batchServce, advertiseService);
 
         // <-- ACT -->
         cs.emptyCart(idBuyer);
@@ -353,12 +373,14 @@ public class CartServiceTest {
         SellOrder carrinho = new SellOrder(1L, null, SellOrderStatus.CART,
                 new ArrayList<>(), BigDecimal.ZERO, BigDecimal.ZERO);
         // Mocks - Class
+        OrderItemRepository orderItemRepository = Mockito.mock(OrderItemRepository.class);
         SellOrderRepository sellOrderRepository = Mockito.mock(SellOrderRepository.class);
         BuyerService buyerService = Mockito.mock(BuyerService.class);
         BatchService batchServce = Mockito.mock(BatchService.class);
         AdvertiseService advertiseService = Mockito.mock(AdvertiseService.class);
         // Service + Spy
-        CartService cs = new CartService(sellOrderRepository, buyerService, batchServce, advertiseService);
+        CartService cs = new CartService(orderItemRepository, sellOrderRepository,
+                buyerService, batchServce, advertiseService);
         CartService csSpy = Mockito.spy(cs);
         Mockito.doReturn(carrinho).when(csSpy).getCart(idBuyer);
 
@@ -391,6 +413,7 @@ public class CartServiceTest {
         SellOrder soSpy = Mockito.spy(carrinho);
         Mockito.doNothing().when(soSpy).calcTotalValueOrder();
         // Mocks - Class
+        OrderItemRepository orderItemRepository = Mockito.mock(OrderItemRepository.class);
         SellOrderRepository sellOrderRepository = Mockito.mock(SellOrderRepository.class);
         BuyerService buyerService = Mockito.mock(BuyerService.class);
         BatchService batchServce = Mockito.mock(BatchService.class);
@@ -399,7 +422,8 @@ public class CartServiceTest {
         Mockito.doNothing().when(batchServce).updateStock(Mockito.anyList());
         Mockito.when(sellOrderRepository.save(Mockito.any(SellOrder.class))).thenReturn(pedidoCriado);
         // Service + Spy
-        CartService cs = new CartService(sellOrderRepository, buyerService, batchServce, advertiseService);
+        CartService cs = new CartService(orderItemRepository, sellOrderRepository,
+                buyerService, batchServce, advertiseService);
         CartService csSpy = Mockito.spy(cs);
         Mockito.doReturn(soSpy).when(csSpy).getCart(idBuyer);
 

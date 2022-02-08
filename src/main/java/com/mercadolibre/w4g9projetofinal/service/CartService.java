@@ -7,6 +7,7 @@ import com.mercadolibre.w4g9projetofinal.entity.OrderItem;
 import com.mercadolibre.w4g9projetofinal.entity.SellOrder;
 import com.mercadolibre.w4g9projetofinal.entity.enums.SellOrderStatus;
 import com.mercadolibre.w4g9projetofinal.exceptions.CartManagementException;
+import com.mercadolibre.w4g9projetofinal.repository.OrderItemRepository;
 import com.mercadolibre.w4g9projetofinal.repository.SellOrderRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,9 @@ import java.util.List;
 @AllArgsConstructor
 public class CartService {
 
+    /*** Instancia de repositório: <b>SellOrderRepository</b>.
+     */
+    private OrderItemRepository orderItemRepository;
     /*** Instancia de repositório: <b>SellOrderRepository</b>.
      */
     private SellOrderRepository sellOrderRepository;
@@ -100,6 +104,7 @@ public class CartService {
         item.setQuantity(qtd - qtdProducts);
         if (item.getQuantity() == 0) {
             cart.getOrderItemList().remove(item);
+            orderItemRepository.delete(item);
         }
         cart.calcTotalValueOrder();
         return sellOrderRepository.save(cart);
