@@ -4,7 +4,6 @@ import com.mercadolibre.w4g9projetofinal.dtos.converter.BuyerConverter;
 import com.mercadolibre.w4g9projetofinal.dtos.request.BuyerRequestDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.BuyerResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Buyer;
-import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.service.BuyerService;
 import com.mercadolibre.w4g9projetofinal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,9 +43,6 @@ public class BuyerController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<BuyerResponseDTO>> findAll() {
         List<BuyerResponseDTO> list = BuyerConverter.convertEntityListToDtoList(service.findAll());
-        if(list == null || list.isEmpty()){
-            throw new ObjectNotFoundException("Ainda nao consta dados cadastrados");
-        }
         return ResponseEntity.ok(list);
     }
 
@@ -94,9 +90,9 @@ public class BuyerController {
      * @return status ok.
      */
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<String> delete(@PathVariable Long id) {
         UserService.adminOrSameUser(id);
         service.delete(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body("Comprador com id : " + id + "exxcluido");
     }
 }
