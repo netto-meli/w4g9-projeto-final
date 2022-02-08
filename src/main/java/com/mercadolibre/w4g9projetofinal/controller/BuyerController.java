@@ -4,14 +4,11 @@ import com.mercadolibre.w4g9projetofinal.dtos.converter.BuyerConverter;
 import com.mercadolibre.w4g9projetofinal.dtos.request.BuyerRequestDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.BuyerResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Buyer;
-import com.mercadolibre.w4g9projetofinal.entity.enums.Profile;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
-import com.mercadolibre.w4g9projetofinal.security.entity.UserSS;
 import com.mercadolibre.w4g9projetofinal.service.BuyerService;
 import com.mercadolibre.w4g9projetofinal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -70,12 +67,12 @@ public class BuyerController {
      * @return Retorna payload de Comprador em um ResponseEntity com status <b>CREATED</b>
      */
     @PostMapping
-    public ResponseEntity<Void> insert(@RequestBody @Valid BuyerRequestDTO buyer) {
+    public ResponseEntity<BuyerResponseDTO> insert(@RequestBody @Valid BuyerRequestDTO buyer) {
         Buyer newBuyer = BuyerConverter.convertDtoToEntity(buyer);
         newBuyer = service.insert(newBuyer);
         BuyerResponseDTO buyerFinal = BuyerConverter.convertEntityToDto(newBuyer);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(buyerFinal.getId()).toUri();
-        return ResponseEntity.created(uri).build();
+        return ResponseEntity.created(uri).body(buyerFinal);
     }
 
     /*** Método para Alterar Comprador<br>
@@ -83,13 +80,13 @@ public class BuyerController {
      * @return Retorna payload de CompradorDto em um ResponseEntity com status <b>CREATED</b>
      */
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Void> update(@RequestBody @Valid BuyerRequestDTO newBuyer,
-                                       @PathVariable Long id) {
+    public ResponseEntity<BuyerRequestDTO> update(@RequestBody @Valid BuyerRequestDTO newBuyer,
+                                                  @PathVariable Long id) {
         UserService.adminOrSameUser(id);
         Buyer buyer = BuyerConverter.convertDtoToEntity(newBuyer);
         buyer.setId(id);
         service.update(buyer);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(newBuyer);
     }
 
     /*** Método para deltear Anuncio<br>
