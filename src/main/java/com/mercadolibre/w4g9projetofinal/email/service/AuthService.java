@@ -3,7 +3,6 @@ package com.mercadolibre.w4g9projetofinal.email.service;
 import com.mercadolibre.w4g9projetofinal.entity.User;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +38,7 @@ public class AuthService {
     }
 
     private String newPassword() {
-        char[] vet = new char[10];
+        char[] vet = new char[12];
         for (int i=0; i<10; i++) {
             vet[i] = randomChar();
         }
@@ -47,7 +46,7 @@ public class AuthService {
     }
 
     private char randomChar() {
-        int opt = rand.nextInt(3);
+        int opt = rand.nextInt(4);
         //gera um dígito
         if (opt == 0) {
             return (char) (rand.nextInt(10) + 48);
@@ -55,6 +54,10 @@ public class AuthService {
         //Gera letra Maiúscula
         else if (opt == 1) {
             return (char) (rand.nextInt(26) + 65);
+        }
+        //Gera Caracteres especiais
+        else if (opt == 2) {
+            return (char) (rand.nextInt(6) + 33);
         }
         //Gera letra Minúscula
         else {
