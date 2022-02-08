@@ -53,7 +53,7 @@ public class RepresentativeService {
         try {
             return repository.save(obj);
         } catch (DataIntegrityViolationException e) {
-            throw new ExistingUserException("Username ou Email existente na base de dados");
+            throw new ExistingUserException("Username ou Email existente na base de dados, ou Armazém não existe");
         }
     }
 

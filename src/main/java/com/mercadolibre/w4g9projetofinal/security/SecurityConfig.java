@@ -3,6 +3,7 @@ package com.mercadolibre.w4g9projetofinal.security;
 import com.mercadolibre.w4g9projetofinal.security.jwt.JWTAuthenticationFilter;
 import com.mercadolibre.w4g9projetofinal.security.jwt.JWTAuthorizationFilter;
 import com.mercadolibre.w4g9projetofinal.security.jwt.JWTUtil;
+import com.mercadolibre.w4g9projetofinal.util.ScopeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,7 +39,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String[] PUBLIC_MATCHERS = {
             "/h2-console/**",
-            "/api/**",
             "**"
     };
 
@@ -49,13 +49,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String[] PUBLIC_MATCHERS_POST = {
             "/api/v1/fresh-products/representative",
-            "/api/v1/fresh-products/seller"
+            "/api/v1/fresh-products/seller",
+            "/auth/forgot/**"
     };
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        if (Arrays.asList(env.getActiveProfiles()).contains("local")) {
+        if (Arrays.asList(env.getActiveProfiles()).contains(ScopeUtils.getScopeValue())) {
             http.headers().frameOptions().disable();
         }
 

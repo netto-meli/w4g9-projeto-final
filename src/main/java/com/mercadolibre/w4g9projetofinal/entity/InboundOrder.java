@@ -53,8 +53,4 @@ public class InboundOrder {
     public int hashCode() {
         return getClass().hashCode();
     }
-
-    public void setInboundOrderToBatchList() {
-        for (Batch b: batchList) b.setInboundOrder(this);
-    }
 }

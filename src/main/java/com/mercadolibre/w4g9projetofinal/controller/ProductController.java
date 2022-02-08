@@ -28,7 +28,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(value = "/api/v1/fresh-products/product")
-@PreAuthorize("hasRole('ADMIN') OR hasRole('REPRESENTATIVE') OR hasRole('SELLER')")
+@PreAuthorize("hasRole('ADMIN') OR hasRole('REPRESENTATIVE')")
 public class ProductController {
 
     /*** Instancia de serviço: <b>ProdutoService</b> com notação <i>{@literal @}Autowired</i> do lombok
