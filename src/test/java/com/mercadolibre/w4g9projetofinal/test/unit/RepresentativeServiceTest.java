@@ -103,7 +103,7 @@ public class RepresentativeServiceTest {
 
         //Assertation
         assertEquals(r2, representative);
-        assertTrue(expectedException.getMessage().equals("Username ou Email existente na base de dados"));
+        assertTrue(expectedException.getMessage().equals("Username ou Email existente na base de dados, ou Armazém não existe"));
     }
 
     /*** <b>US-0004</b>
