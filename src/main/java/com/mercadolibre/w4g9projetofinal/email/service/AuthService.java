@@ -13,15 +13,19 @@ import java.util.Random;
 public class AuthService {
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    @Autowired
     private EmailService emailService;
 
-    private Random rand = new Random();
+    private final UserRepository userRepository;
+
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    private final Random rand;
+
+    public AuthService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.userRepository = userRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.rand = new Random();
+    }
 
     public void sendNewPassword(String email) {
         User user = userRepository.findByEmail(email)
