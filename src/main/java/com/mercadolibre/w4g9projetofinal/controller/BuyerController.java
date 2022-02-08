@@ -4,6 +4,7 @@ import com.mercadolibre.w4g9projetofinal.dtos.converter.BuyerConverter;
 import com.mercadolibre.w4g9projetofinal.dtos.request.BuyerRequestDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.BuyerResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Buyer;
+import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.service.BuyerService;
 import com.mercadolibre.w4g9projetofinal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,12 +64,12 @@ public class BuyerController {
      * @return Retorna payload de Comprador em um ResponseEntity com status <b>CREATED</b>
      */
     @PostMapping
-    public ResponseEntity<Buyer> insert(@RequestBody @Valid BuyerRequestDTO buyer) {
+    public ResponseEntity<BuyerResponseDTO> insert(@RequestBody @Valid BuyerRequestDTO buyer) {
         Buyer newBuyer = BuyerConverter.convertDtoToEntity(buyer);
         newBuyer = service.insert(newBuyer);
         BuyerResponseDTO buyerFinal = BuyerConverter.convertEntityToDto(newBuyer);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(buyerFinal.getId()).toUri();
-        return ResponseEntity.created(uri).body(newBuyer);
+        return ResponseEntity.created(uri).body(buyerFinal);
     }
 
     /*** Método para Alterar Comprador<br>

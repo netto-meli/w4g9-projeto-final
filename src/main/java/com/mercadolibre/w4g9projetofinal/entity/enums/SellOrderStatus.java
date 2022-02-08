@@ -12,7 +12,8 @@ public enum SellOrderStatus {
     SEPARATION(2, "Products in Separation"),
     SHIPPED(3, "Order Shipped"),
     DELIVERED(4, "Order Dilivered"),
-    CANCELED(5,"Order Canceled");
+    NOT_DELIVERED(5, "Order Not Dilivered"),
+    CANCELED(6,"Order Canceled");
 
     private final int cod;
     private final String descricao;

@@ -1,6 +1,7 @@
 package com.mercadolibre.w4g9projetofinal.advice;
 
 import com.fasterxml.jackson.core.JsonParseException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.mercadolibre.w4g9projetofinal.exceptions.BusinessException;
 import com.mercadolibre.w4g9projetofinal.exceptions.CartManagementException;
@@ -37,6 +38,18 @@ public class ResourceExceptionHandler {
 			err.addError(x.getField(), x.getDefaultMessage());
 		}
 		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(err);
+	}
+
+	/*** Handler de erro
+	 *
+	 * @param ex exceção lançada
+	 * @param request webRequest
+	 * @return Response Entity status code de erro e mensagem.
+	 */
+	@ExceptionHandler(UsernameNotFoundException.class)
+	public ResponseEntity<StandardError> usernameNotFoundException(UsernameNotFoundException ex, HttpServletRequest request) {
+		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.FORBIDDEN.value(), "Not Authorized", ex.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
 	}
 
 	/*** Handler de erro

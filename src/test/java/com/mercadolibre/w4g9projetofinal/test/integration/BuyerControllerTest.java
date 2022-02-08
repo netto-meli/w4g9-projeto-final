@@ -3,7 +3,6 @@ package com.mercadolibre.w4g9projetofinal.test.integration;
 import com.mercadolibre.w4g9projetofinal.dtos.request.BuyerRequestDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Buyer;
 import com.mercadolibre.w4g9projetofinal.repository.BuyerRepository;
-import com.mercadolibre.w4g9projetofinal.service.UserService;
 import org.json.JSONObject;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;

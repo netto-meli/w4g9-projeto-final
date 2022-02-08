@@ -50,9 +50,9 @@ public class AdvertiseController {
      * @return retorna a lista de anuncio do id enviado
      */
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Advertise> findById(@PathVariable Long id) {
+    public ResponseEntity<AdvertiseResponseDTO> findById(@PathVariable Long id) {
         Advertise advertise = service.findById(id);
-        return ResponseEntity.ok(advertise);
+        return ResponseEntity.ok(AdvertiseConverter.convertEntityToDto(advertise));
     }
 
     /*** Método para adicionar novo Anuncio<br>
