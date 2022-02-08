@@ -3,6 +3,7 @@ package com.mercadolibre.w4g9projetofinal.test.integration;
 import com.mercadolibre.w4g9projetofinal.entity.Seller;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.SellerRepository;
+import com.mercadolibre.w4g9projetofinal.service.AdvertiseService;
 import com.mercadolibre.w4g9projetofinal.service.SellerService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -34,9 +35,10 @@ public class SellerServiceTest {
         List<Seller> list = new ArrayList<>(Arrays.asList(s1, s2, s3, s4, s5));
 
         SellerRepository mockSellerRepository = Mockito.mock(SellerRepository.class);
+        AdvertiseService advertiseService = Mockito.mock(AdvertiseService.class);
         Mockito.when(mockSellerRepository.findAll()).thenReturn(list);
 
-        SellerService sellerService = new SellerService(null, mockSellerRepository);
+        SellerService sellerService = new SellerService(null,mockSellerRepository,advertiseService);
 
         //Action
         List<Seller> listSeller = sellerService.findAll();
@@ -56,8 +58,9 @@ public class SellerServiceTest {
 
         SellerRepository mockSellerRepository = Mockito.mock(SellerRepository.class);
         Mockito.when(mockSellerRepository.findById(2l)).thenReturn(java.util.Optional.of(new Seller(2L, "felipe.133", "Felipe Bontempo", "email2@hotmail.com", "123456", null)));
+        AdvertiseService advertiseService = Mockito.mock(AdvertiseService.class);
 
-        SellerService sellerService = new SellerService(null, mockSellerRepository);
+        SellerService sellerService = new SellerService(null,mockSellerRepository,advertiseService);
 
         //Action
         Seller seller = sellerService.findById(2L);
