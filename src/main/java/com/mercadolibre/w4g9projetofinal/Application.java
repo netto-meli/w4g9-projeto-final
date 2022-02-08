@@ -21,10 +21,4 @@ public class Application {
     ScopeUtils.calculateScopeSuffix();
     new SpringApplicationBuilder(Application.class).registerShutdownHook(true).run(args);
   }
-
-  @Bean
-  public EmailService emailService() {
-    return new SmtpEmailService();
-  }
-
 }
