@@ -32,10 +32,9 @@ public class SectionController {
      * @return Retorna uma lista de SectionResponseDTO
      */
     @GetMapping
-    @ResponseBody
-    public List<SectionResponseDTO> findAll(){
+    public ResponseEntity<List<SectionResponseDTO>> findAll(){
         List<Section> sections = sectionService.findAll();
-        return SectionConverter.convertEntityListToDtoList(sections);
+        return ResponseEntity.ok(SectionConverter.convertEntityListToDtoList(sections));
     }
 
     /** Retorna uma Section pesquisa pelo ID.
