@@ -12,18 +12,20 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class BuyerControllerTest extends ControllerTest {
+public class BuyerControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
     public void insertBuyer() throws Exception{
-        String payLoad = "{\n"
-                + "	\"address\":\"Endereco qualquer\",\n"
-                + "    \"name\": \"Luis\",\n"
-                + "    \"email\" : \"email@email\"\n"
-                + "}";
+        String payLoad = "{\n" +
+                "  \"username\": \"gf6jhfuyu6f6jhf\",\n" +
+                "  \"name\": \"jhgh hg o\",\n" +
+                "  \"email\": \"h@h.co\",\n" +
+                "  \"pass\": \"fg#Dh9tredg\",\n" +
+                "  \"address\": \"hjghhgjhghjhghjhghhhj\"\n" +
+                "}";
         mockMvc
                 .perform(MockMvcRequestBuilders
                         .post("/api/v1/fresh-products/buyer")
