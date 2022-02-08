@@ -43,9 +43,6 @@ public class ProductController {
     @GetMapping
     public ResponseEntity<List<ProductResponseDTO>> findAll() {
         List<ProductResponseDTO> list = ProductConverter.convertEntityListToDtoList(service.findAll());
-        if(list == null || list.isEmpty()){
-            throw new ObjectNotFoundException("Ainda nao consta dados cadastrados");
-        }
         return ResponseEntity.ok(list);
     }
 
@@ -64,26 +61,26 @@ public class ProductController {
      * @return ResponseEntity com status <b>CREATED</b>
      */
     @PostMapping
-    public ResponseEntity<Void> insert(@RequestBody @Valid ProductRequestDTO obj) {
+    public ResponseEntity<Product> insert(@RequestBody @Valid ProductRequestDTO obj) {
         Product newObj = ProductConverter.convertDtoToEntity(obj);
         newObj = service.insert(newObj);
         ProductResponseDTO newObj2 = ProductConverter.convertEntityToDto(newObj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj2.getId()).toUri();
-        return ResponseEntity.created(uri).build();
+        return ResponseEntity.created(uri).body(newObj);
     }
 
     /*** Método para atualização de product existente<br>
-     * @param newObj Objeto product com informações para atualização
      * @param id id do product a ser atualizado
+     * @param newProd Objeto product com informações para atualização
      * @return ResponseEntity com status <b>NO CONTENT</b>
      */
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Void> update(@PathVariable Long id,
-                                       @RequestBody @Valid ProductRequestDTO newObj) {
-        Product obj = ProductConverter.convertDtoToEntity(newObj);
-        obj.setId(id);
-        obj = service.update(obj);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<Product> update(@PathVariable Long id,
+                                          @RequestBody @Valid ProductRequestDTO newProd) {
+        Product product = ProductConverter.convertDtoToEntity(newProd);
+        product.setId(id);
+        product = service.update(product);
+        return ResponseEntity.ok().body(product);
     }
 
     /*** Método para atualização de Seller existente<br>
@@ -92,9 +89,9 @@ public class ProductController {
      * @return ResponseEntity com status <b>OK</b>
      */
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<String> delete(@PathVariable Long id) {
         service.delete(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body("Id " + id + " excluido");
     }
 
     /***
@@ -103,9 +100,6 @@ public class ProductController {
      */
     @GetMapping(value = "/listCategory/{categoryProd}")
     public ResponseEntity<List<ProductResponseDTO>> findListCategory(@PathVariable RefrigerationType categoryProd) {
-        if(categoryProd == null ){
-            throw new ObjectNotFoundException("Ainda nao consta dados cadastrados");
-        }
         List<ProductResponseDTO> product = ProductConverter.convertEntityListToDtoList(
                 service.findByCategoryProduct(categoryProd));
         return ResponseEntity.ok(product);
@@ -117,9 +111,6 @@ public class ProductController {
      */
     @GetMapping("/listBatch/")
     public ResponseEntity<List<BatchResponseDTO>> findBatchByProductId(@RequestParam Long id) {
-        if(id == null){
-            throw new ObjectNotFoundException("Ainda nao consta dados cadastrados");
-        }
         List<BatchResponseDTO> response = BatchConverter.convertEntityListToDtoList(service.findByBatchInProduct(id));
         return ResponseEntity.ok().body(response);
     }
@@ -133,9 +124,6 @@ public class ProductController {
      */
     @GetMapping("/listBatch/{order}")
     public ResponseEntity<List<BatchResponseDTO>> orderByProductId(@RequestParam Long id, @PathVariable String order) {
-        if(id == null){
-            throw new ObjectNotFoundException("Ainda nao consta dados cadastrados");
-        }
         List<BatchResponseDTO> response = BatchConverter.convertEntityListToDtoList(service.OrderByBatchInProduct(id, order));
         return ResponseEntity.ok().body(response);
     }
