@@ -21,4 +21,9 @@ public class Application {
     new SpringApplicationBuilder(Application.class).registerShutdownHook(true).run(args);
   }
 
+  @Bean
+  public EmailService emailService() {
+    return new SmtpEmailService();
+  }
+
 }

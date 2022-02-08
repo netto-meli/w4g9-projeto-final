@@ -3,6 +3,7 @@ package com.mercadolibre.w4g9projetofinal.email.service;
 import com.mercadolibre.w4g9projetofinal.entity.User;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -11,20 +12,16 @@ import java.util.Random;
 @Service
 public class AuthService {
 
+    @Autowired
     private UserRepository userRepository;
 
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @Autowired
     private EmailService emailService;
 
-    private Random rand;
-
-    public AuthService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
-        this.userRepository = userRepository;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-        this.emailService = new SmtpEmailService();
-        this.rand = new Random();
-    }
+    private Random rand = new Random();
 
     public void sendNewPassword(String email) {
         User user = userRepository.findByEmail(email)
