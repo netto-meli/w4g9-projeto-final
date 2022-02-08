@@ -30,31 +30,6 @@ public class Batch {
     @ManyToOne
     private InboundOrder inboundOrder;
 
-    /*** Realiza verificação do estoque da quantidade de itens de um produto para o carrinho
-     *
-     * @param qtd Quantidade de itens vendidos de um produto.
-     */
-    public void verifyStock(int qtd) {
-        if ( qtd > currentQuantity ){
-            String erro = "Imposssível realizar compra, pois o Produto "
-                    + this.id
-                    + " tem somente "
-                    + this.currentQuantity
-                    + " itens em estoque, e você está tentando comprar "
-                    + qtd
-                    + " itens.";
-            throw new CartManagementException(erro);
-        }
-    }
-
-    /*** Realiza baixa no estoque da quantidade de itens de um produto que foi vendido
-     *
-     * @param qtd Quantidade de itens vendidos de um produto.
-     */
-    public void updateStock(int qtd) {
-        currentQuantity -= qtd;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

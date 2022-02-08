@@ -48,12 +48,4 @@ public class Section {
     public int hashCode() {
         return getClass().hashCode();
     }
-
-    /*** Realiza baixa no estoque da quantidade de itens de um produto que foi vendido
-     *
-     * @param qtd Quantidade de itens vendidos de um produto.
-     */
-    public void updateStock(int qtd) {
-        currentStock -= qtd;
-    }
 }

@@ -79,8 +79,8 @@ public class CartService {
             throw new CartManagementException("Impossível incluir ZERO produtos no carrinho");
         SellOrder cart = this.getCart(idBuyer);
         Advertise advertise = advertiseService.findById(idAdvertise);
-        OrderItem orderItem = cart.getOrderItem(advertise);
-        int finalQuantity = cart.updateCart(qtdProduct, advertise, orderItem);
+        OrderItem orderItem = this.getOrderItem(cart, advertise);
+        int finalQuantity = this.updateCart(cart, qtdProduct, advertise, orderItem);
         batchServce.verifyStock(idAdvertise, finalQuantity);
         return sellOrderRepository.save(cart);
     }
@@ -96,7 +96,7 @@ public class CartService {
     public SellOrder removeAdvertiseItemsFromCart(Long idBuyer, Long idAdvertise, int qtdProducts) {
         SellOrder cart = this.getCart(idBuyer);
         Advertise advertise = advertiseService.findById(idAdvertise);
-        OrderItem item = cart.getOrderItem(advertise);
+        OrderItem item = this.getOrderItem(cart, advertise);
         if (item == null) throw new CartManagementException("Impossivel retirar produto que não foi adicionado");
         if (item.getQuantity() < qtdProducts) throw new CartManagementException(
                 "Impossível retirar mais itens de um produto do que os que já estão no carrinho");
@@ -106,7 +106,7 @@ public class CartService {
             cart.getOrderItemList().remove(item);
             orderItemRepository.delete(item);
         }
-        cart.calcTotalValueOrder();
+        this.calcTotalValueOrder(cart);
         return sellOrderRepository.save(cart);
     }
 
@@ -130,9 +130,100 @@ public class CartService {
         List<OrderItem> orderItemList = cart.getOrderItemList();
         if (orderItemList.size() == 0)
             throw new CartManagementException("Impossível gerar pedido utilizando um carrinho vazio.");
-        cart.calcTotalValueOrder();
+        this.calcTotalValueOrder(cart);
         cart.setOrderStatus(SellOrderStatus.CREATED);
         batchServce.updateStock(orderItemList);
         return sellOrderRepository.save(cart);
+    }
+
+
+
+    /*** Método para buscar dentro do pedido, o produto selecionado
+     *
+     * @param advertise ID do Produto para o método buscar os dados de ItemCarinho
+     * @return ItemCarrinho contendo o produto buscado e quantidade no carrinho
+     */
+    private OrderItem getOrderItem(SellOrder sellOrder, Advertise advertise) {
+        return sellOrder.getOrderItemList().stream()
+                .filter( ic -> ic.getAdvertise().equals(advertise))
+                .findAny()
+                .orElse(null);
+    }
+
+    /*** Método para atualizar o carrinho, conforme foram adicionados ou removidos itens de um produto
+     *
+     * @param qtdProduct Quantidade de itens do produto
+     * @param advertise Anuncio do produto
+     * @param orderItem Produto para atualizar no carrinho
+     */
+    private int updateCart(SellOrder sellOrder, int qtdProduct, Advertise advertise, OrderItem orderItem) {
+        if (orderItem == null) {
+            orderItem = new OrderItem(null, qtdProduct, advertise, sellOrder);
+            sellOrder.getOrderItemList().add(orderItem);
+        } else {
+            orderItem.setQuantity(orderItem.getQuantity() + qtdProduct);
+            int idx = sellOrder.getOrderItemList().indexOf(orderItem);
+            sellOrder.getOrderItemList().set(idx, orderItem);
+        }
+        this.calcTotalValueOrder(sellOrder);
+        return orderItem.getQuantity();
+    }
+
+    /*** Método para calcular o valor total de itens de um produto no carrinho
+     *
+     */
+    private void calcTotalValueOrder(SellOrder sellOrder){
+        BigDecimal orderPrice = BigDecimal.ZERO;
+        boolean isFreeShipping = true;
+        for (OrderItem item : sellOrder.getOrderItemList()) {
+            BigDecimal totalValueForProduct = this.calculaValorTotalProduto(item);
+            orderPrice = totalValueForProduct.add(orderPrice);
+            // Se algum dos produtos no pedido não tiver frete gratis,
+            // o pedido precisa calcular o valor do frete
+            if (!item.getAdvertise().isFreeShipping()) isFreeShipping = false;
+        }
+        calculateShipping(sellOrder, isFreeShipping);
+        sellOrder.setTotalValue(orderPrice.add(sellOrder.getShippingRate()));
+    }
+
+    /***
+     * Metodo para calcular o valor total do produto no carrinho,
+     * com base na quantidade de itens no pedido
+     *
+     * @return valor total calculado
+     */
+    private BigDecimal calculaValorTotalProduto(OrderItem orderItem){
+        return orderItem.getAdvertise().getPrice().multiply(BigDecimal.valueOf(orderItem.getQuantity()));
+    }
+
+    /*** Método para calcular o frete
+     *
+     * @param isFreeShipping Informação se o pedido somente contém produtos com frete grátis
+     */
+    private void calculateShipping(SellOrder sellOrder, boolean isFreeShipping) {
+        sellOrder.setShippingRate(BigDecimal.ZERO);
+        if (!isFreeShipping) {
+            sellOrder.setShippingRate( mockShippingRateByAddress(sellOrder.getBuyer().getAddress()) );
+        }
+    }
+
+    /*** Método MOCK para cálculo do frete baseado nos caracteres do endereço
+     *
+     * @param address Endereço do cliente, para calcular o frete atual
+     * @return Valor do Frete calculado
+     */
+    private BigDecimal mockShippingRateByAddress(String address) {
+        long tempShippingRate = 0;
+        if (address == null) address = "a";
+        // remove todos os espaços em branco
+        String mockFrete = address.toLowerCase().replaceAll("\\s", "");
+        final String alphabet = "abcdefghijklmnopqrstuvwxyz";
+        for(int i=0; i < mockFrete.length(); i++){
+            tempShippingRate += (alphabet.indexOf(mockFrete.charAt(i))) + 1;
+            // Acrescenta em +1; pois se não houver o caractere na lista,
+            // o método indexOf retorna -1.
+            // Ex: números, caracteres especiais...
+        }
+        return BigDecimal.valueOf(tempShippingRate);
     }
 }

@@ -92,9 +92,9 @@ public class CartContorllerTest {
         LocalDateTime lt = LocalDateTime.now();
         List<Batch> l1 = new ArrayList<>();
         List<Batch> l2 = new ArrayList<>();
-        Batch t1 = new Batch(1L, 10, 10, 10F, 10F,
+        Batch t1 = new Batch(1L, 50, 100, 10F, 10F,
                 lc.plusDays(10), lc, lt, a1, null);
-        Batch t2 = new Batch(2L, 10, 10, 10F, 10F,
+        Batch t2 = new Batch(2L, 50, 100, 10F, 10F,
                 lc.plusDays(10), lc, lt, a2, null);
         l1.add(t1);
         l1.add(t2);

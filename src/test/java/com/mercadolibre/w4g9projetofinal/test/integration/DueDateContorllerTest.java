@@ -92,11 +92,11 @@ public class DueDateContorllerTest {
         a3 = advertiseRepository.save(a3);
         a4 = advertiseRepository.save(a4);
 
-        Section section1 = new Section(null, warehouse, "Setor1", RefrigerationType.FRESH, 10, 10, 10F, 20F, null);
+        Section section1 = new Section(null, warehouse, "Setor1", RefrigerationType.FRESH, 50, 100, 10F, 20F, null);
         section1 = sectionRepository.save(section1);
-        Section section2 = new Section(null, warehouse, "Setor2", RefrigerationType.FRESH, 10, 10, 00F, 10F, null);
+        Section section2 = new Section(null, warehouse, "Setor2", RefrigerationType.FRESH, 50, 100, 00F, 10F, null);
         section2 = sectionRepository.save(section2);
-        Section section3 = new Section(null, warehouse, "Setor3", RefrigerationType.FRESH, 10, 10, -10F, 0F, null);
+        Section section3 = new Section(null, warehouse, "Setor3", RefrigerationType.FRESH, 50, 100, -10F, 0F, null);
         section3 = sectionRepository.save(section3);
 
         LocalDate lc = LocalDate.now();

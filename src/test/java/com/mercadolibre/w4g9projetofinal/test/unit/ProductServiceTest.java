@@ -3,6 +3,7 @@ package com.mercadolibre.w4g9projetofinal.test.unit;
 import com.mercadolibre.w4g9projetofinal.entity.Batch;
 import com.mercadolibre.w4g9projetofinal.entity.Product;
 import com.mercadolibre.w4g9projetofinal.entity.enums.RefrigerationType;
+import com.mercadolibre.w4g9projetofinal.exceptions.BusinessException;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.BatchRepository;
 import com.mercadolibre.w4g9projetofinal.repository.ProductRepository;
@@ -23,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 /***
- * @autor Leonardo
+ * @author Leonardo
  */
 public class ProductServiceTest {
     @Test
@@ -179,12 +180,15 @@ public class ProductServiceTest {
         List<Batch> orderByBatch = prodService.OrderByBatchInProduct(2L, "L");
         List<Batch> orderByBatch2 = prodService.OrderByBatchInProduct(2L, "C");
         List<Batch> orderByBatch3 = prodService.OrderByBatchInProduct(2L, "F");
-        List<Batch> orderByBatch4 = prodService.OrderByBatchInProduct(3L, "");
+        BusinessException excecaoEsperada = Assertions.assertThrows(
+                BusinessException.class,
+                () -> prodService.OrderByBatchInProduct(3L, "")
+        );
 
         Assertions.assertEquals(list, orderByBatch);
         Assertions.assertEquals(list, orderByBatch2);
         Assertions.assertEquals(list, orderByBatch3);
-        assertNull(orderByBatch4);
+        Assertions.assertTrue(excecaoEsperada.getMessage().contains("Metodo de Ordenação informado está errado"));
 
     }
 

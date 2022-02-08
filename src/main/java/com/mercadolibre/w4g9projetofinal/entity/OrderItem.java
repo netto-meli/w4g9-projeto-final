@@ -38,14 +38,4 @@ public class OrderItem {
     @ToString.Exclude
     @ManyToOne
     private SellOrder sellOrder;
-
-    /***
-     * Metodo para calcular o valor total do produto no carrinho,
-     * com base na quantidade de itens no pedido
-     *
-     * @return valor total calculado
-     */
-    public BigDecimal calculaValorTotalProduto(){
-        return advertise.getPrice().multiply(BigDecimal.valueOf(quantity));
-    }
 }

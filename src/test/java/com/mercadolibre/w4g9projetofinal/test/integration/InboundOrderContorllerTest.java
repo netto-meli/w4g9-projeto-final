@@ -139,7 +139,7 @@ public class InboundOrderContorllerTest {
                 "  \"batch_stock\": [\n" +
                 "    {\n" +
                 "      \"batch_number\": 10,\n" +
-                "      \"advertise_id\": 1,\n" +
+                "      \"advertise_id\": 3,\n" +
                 "      \"current_temperature\": 19.0,\n" +
                 "      \"minimum_temperature\": 10.0,\n" +
                 "      \"initial_quantity\": 2,\n" +
@@ -178,7 +178,7 @@ public class InboundOrderContorllerTest {
                 "  \"batch_stock\": [\n" +
                 "    {\n" +
                 "      \"batch_number\": 11,\n" +
-                "      \"advertise_id\": 1,\n" +
+                "      \"advertise_id\": 3,\n" +
                 "      \"current_temperature\": 9.0,\n" +
                 "      \"minimum_temperature\": 10.0,\n" +
                 "      \"initial_quantity\": 2,\n" +
