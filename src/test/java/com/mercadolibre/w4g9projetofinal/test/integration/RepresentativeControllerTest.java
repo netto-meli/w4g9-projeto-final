@@ -123,6 +123,4 @@ public class RepresentativeControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
     }
-
-
 }

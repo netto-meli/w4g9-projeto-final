@@ -1,10 +1,18 @@
 package com.mercadolibre.w4g9projetofinal.entity;
 
-import com.mercadolibre.w4g9projetofinal.exceptions.CartManagementException;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.Hibernate;
 
-import javax.persistence.*;
-import java.math.BigDecimal;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import java.util.Objects;
 
 /*** Entidade para persistência de ItemCarinho
  *
@@ -39,13 +47,16 @@ public class OrderItem {
     @ManyToOne
     private SellOrder sellOrder;
 
-    /***
-     * Metodo para calcular o valor total do produto no carrinho,
-     * com base na quantidade de itens no pedido
-     *
-     * @return valor total calculado
-     */
-    public BigDecimal calculaValorTotalProduto(){
-        return advertise.getPrice().multiply(BigDecimal.valueOf(quantity));
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        OrderItem orderItem = (OrderItem) o;
+        return id != null && Objects.equals(id, orderItem.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }

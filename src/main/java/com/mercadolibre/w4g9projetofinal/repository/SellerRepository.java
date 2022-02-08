@@ -10,6 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface SellerRepository extends JpaRepository<Seller, Long> {
+
     @Query("select s.id from Seller s, Advertise a where s.id = a.seller.id AND a.id = ?1")
     Optional<Long> findSellerByAdvertiseId(Long id);
 }

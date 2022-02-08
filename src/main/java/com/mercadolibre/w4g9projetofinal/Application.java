@@ -13,6 +13,9 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class Application {
 
+  /**
+   * @param args command line arguments for the application.
+   */
   public static void main(String[] args) {
     ScopeUtils.calculateScopeSuffix();
     new SpringApplicationBuilder(Application.class).registerShutdownHook(true).run(args);

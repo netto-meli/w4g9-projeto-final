@@ -110,6 +110,4 @@ public class SellerControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
     }
-
-
 }

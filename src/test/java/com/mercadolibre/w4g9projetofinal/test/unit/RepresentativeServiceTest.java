@@ -110,7 +110,7 @@ public class RepresentativeServiceTest {
 
         //Assertation
         assertEquals(r2, representative);
-        assertTrue(expectedException.getMessage().equals("Username ou Email existente na base de dados"));
+        assertTrue(expectedException.getMessage().equals("Username ou Email existente na base de dados, ou Armazém não existe"));
     }
 
     /*** <b>US-0004</b>
@@ -145,6 +145,8 @@ public class RepresentativeServiceTest {
         ObjectNotFoundException excesaoEsperada = assertThrows(ObjectNotFoundException.class,() -> representativeService.findById(3L));
 
         //Action
+
+
         assertEquals(representativeUpdate, representative);
         assertTrue(excesaoEsperada.getMessage().equals("Representante não encontrado! Por favor verifique o id."));
     }
@@ -178,6 +180,4 @@ public class RepresentativeServiceTest {
         Mockito.verify(mockRepresentativeRepository, Mockito.times(1)).delete(r1);
         assertTrue(excesaoEsperada.getMessage().contains("Representante não encontrado! Por favor verifique o id."));
     }
-
-
 }

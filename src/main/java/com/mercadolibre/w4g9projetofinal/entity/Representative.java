@@ -2,7 +2,10 @@ package com.mercadolibre.w4g9projetofinal.entity;
 
 import com.mercadolibre.w4g9projetofinal.entity.enums.Profile;
 import com.mercadolibre.w4g9projetofinal.entity.enums.RepresentativeJob;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import javax.persistence.Entity;
@@ -14,7 +17,6 @@ import java.util.Objects;
 @Setter
 @ToString
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 public class Representative extends User{
     private RepresentativeJob job;

@@ -1,9 +1,20 @@
 package com.mercadolibre.w4g9projetofinal.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,15 +29,17 @@ public class Transporter {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @ManyToOne
+    @ToString.Exclude
+    private Representative representative;
+    private int freshMaxQuantity;
+    private int frozenMaxQuantity;
+    private int coldMaxQuantity;
     @OneToMany
     @ToString.Exclude
-    private List<Product> freshList;
-    @OneToMany
-    @ToString.Exclude
-    private List<Product> coldList;
-    @OneToMany
-    @ToString.Exclude
-    private List<Product> frozenList;
+    private List<SellOrder> deliveryOrderList;
+    private boolean inRoute;
+    private BigDecimal salary;
 
     @Override
     public boolean equals(Object o) {

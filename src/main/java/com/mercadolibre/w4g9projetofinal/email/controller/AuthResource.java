@@ -1,12 +1,9 @@
 package com.mercadolibre.w4g9projetofinal.email.controller;
 
-import com.mercadolibre.w4g9projetofinal.dtos.request.EmailDTO;
 import com.mercadolibre.w4g9projetofinal.email.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/auth")

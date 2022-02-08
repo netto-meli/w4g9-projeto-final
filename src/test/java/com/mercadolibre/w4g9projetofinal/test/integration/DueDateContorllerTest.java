@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -93,11 +92,11 @@ public class DueDateContorllerTest {
         a3 = advertiseRepository.save(a3);
         a4 = advertiseRepository.save(a4);
 
-        Section section1 = new Section(null, warehouse, "Setor1", RefrigerationType.FRESH, 10, 10, 10F, 20F, null);
+        Section section1 = new Section(null, warehouse, "Setor1", RefrigerationType.FRESH, 50, 100, 10F, 20F, null);
         section1 = sectionRepository.save(section1);
-        Section section2 = new Section(null, warehouse, "Setor2", RefrigerationType.FRESH, 10, 10, 00F, 10F, null);
+        Section section2 = new Section(null, warehouse, "Setor2", RefrigerationType.FRESH, 50, 100, 00F, 10F, null);
         section2 = sectionRepository.save(section2);
-        Section section3 = new Section(null, warehouse, "Setor3", RefrigerationType.FRESH, 10, 10, -10F, 0F, null);
+        Section section3 = new Section(null, warehouse, "Setor3", RefrigerationType.FRESH, 50, 100, -10F, 0F, null);
         section3 = sectionRepository.save(section3);
 
         LocalDate lc = LocalDate.now();
@@ -118,8 +117,10 @@ public class DueDateContorllerTest {
         l2.add(t4);
         InboundOrder i1 = new InboundOrder(1L, lc, seller, representative, l1, section1);
         InboundOrder i2 = new InboundOrder(2L, lc, seller, representative, l2, section1);
-        i1.setInboundOrderToBatchList();
-        i2.setInboundOrderToBatchList();
+        for (Batch b: i1.getBatchList())
+            b.setInboundOrder(i1);
+        for (Batch b: i2.getBatchList())
+            b.setInboundOrder(i2);
         inboundOrderRepository.saveAll(Arrays.asList(i1, i2));
     }
 

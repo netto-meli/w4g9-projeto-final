@@ -4,13 +4,10 @@ import com.mercadolibre.w4g9projetofinal.dtos.converter.RepresentativeConverter;
 import com.mercadolibre.w4g9projetofinal.dtos.request.RepresentativeRequestDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.RepresentativeResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Representative;
-import com.mercadolibre.w4g9projetofinal.entity.enums.Profile;
-import com.mercadolibre.w4g9projetofinal.security.entity.UserSS;
 import com.mercadolibre.w4g9projetofinal.service.RepresentativeService;
 import com.mercadolibre.w4g9projetofinal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -97,5 +94,4 @@ public class RepresentativeController {
         service.delete(id);
         return ResponseEntity.ok().build();
     }
-
 }

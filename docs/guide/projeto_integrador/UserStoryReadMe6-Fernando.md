@@ -56,7 +56,7 @@ Os pedidos de compra (purchaseOrder) feitos pelo comprador terão apenas o statu
   }
 }
 ```
-</details></p>
+</p></details>
 
 <details><summary>Response</summary><p>
 
@@ -65,7 +65,7 @@ Os pedidos de compra (purchaseOrder) feitos pelo comprador terão apenas o statu
   "total_price": "double"
 }
 ```
-</details></p>
+</p></details>
 
 ### Contratos relativos a User Story
 | HTTP | Modelo de URI                                             | Descrição                                                                                                                                                                                                                                                                           | US-code |

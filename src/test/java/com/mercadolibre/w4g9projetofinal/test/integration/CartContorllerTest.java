@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -93,16 +92,18 @@ public class CartContorllerTest {
         LocalDateTime lt = LocalDateTime.now();
         List<Batch> l1 = new ArrayList<>();
         List<Batch> l2 = new ArrayList<>();
-        Batch t1 = new Batch(1L, 10, 10, 10F, 10F,
+        Batch t1 = new Batch(1L, 50, 100, 10F, 10F,
                 lc.plusDays(10), lc, lt, a1, null);
-        Batch t2 = new Batch(2L, 10, 10, 10F, 10F,
+        Batch t2 = new Batch(2L, 50, 100, 10F, 10F,
                 lc.plusDays(10), lc, lt, a2, null);
         l1.add(t1);
         l1.add(t2);
         InboundOrder i1 = new InboundOrder(1L, lc, seller, representative, l1, section);
         InboundOrder i2 = new InboundOrder(2L, lc, seller, representative, l2, section);
-        i1.setInboundOrderToBatchList();
-        i2.setInboundOrderToBatchList();
+        for (Batch b: i1.getBatchList())
+            b.setInboundOrder(i1);
+        for (Batch b: i2.getBatchList())
+            b.setInboundOrder(i2);
         inboundOrderRepository.saveAll(Arrays.asList(i1, i2));
     }
 
