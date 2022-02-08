@@ -83,7 +83,7 @@ public class BuyerControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
 
-        System.out.println("\n\nDados comsultados:\n" + result.getResponse().getContentAsString() + "\n\n");
+        System.out.println("\n\nDados consultados:\n" + result.getResponse().getContentAsString() + "\n\n");
 
         mockMvc.perform(MockMvcRequestBuilders
                 .post("/api/v1/freshproducts/buyer")
