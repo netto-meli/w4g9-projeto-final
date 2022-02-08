@@ -55,16 +55,4 @@ public class SectionConverter {
         }
         return sectionResponseDTOList;
     }
-
-    public static Section convertDtoRequestForEntity(SectionRequestDTO s){
-        Section section = new Section();
-        section.setName(s.getName());
-        section.setRefrigerationType(s.getType());
-        section.setWarehouse(s.getWarehouse());
-        section.setStockLimit(s.getStockLimit());
-        section.setCurrentStock(s.getCurrentStock());
-        section.setMinTeperature(s.getMinTeperature());
-        section.setMaxTeperature(s.getMaxTeperature());
-        return section;
-    }
 }
