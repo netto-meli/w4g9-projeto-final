@@ -15,7 +15,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -53,10 +52,5 @@ public class InboundOrder {
     @Override
     public int hashCode() {
         return getClass().hashCode();
-    }
-
-    public void setInboundOrderToBatchList() {
-        if(batchList == null) batchList = new ArrayList<>();
-        for (Batch b: batchList) b.setInboundOrder(this);
     }
 }

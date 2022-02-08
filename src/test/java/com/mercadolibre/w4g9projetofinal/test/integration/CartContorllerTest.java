@@ -100,8 +100,10 @@ public class CartContorllerTest {
         l1.add(t2);
         InboundOrder i1 = new InboundOrder(1L, lc, seller, representative, l1, section);
         InboundOrder i2 = new InboundOrder(2L, lc, seller, representative, l2, section);
-        i1.setInboundOrderToBatchList();
-        i2.setInboundOrderToBatchList();
+        for (Batch b: i1.getBatchList())
+            b.setInboundOrder(i1);
+        for (Batch b: i2.getBatchList())
+            b.setInboundOrder(i2);
         inboundOrderRepository.saveAll(Arrays.asList(i1, i2));
     }
 

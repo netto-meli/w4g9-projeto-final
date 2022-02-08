@@ -119,8 +119,10 @@ public class InboundOrderContorllerTest {
         l2.add(t4);
         InboundOrder i1 = new InboundOrder(1L, lc, seller, representative, l1, section1);
         InboundOrder i2 = new InboundOrder(2L, lc, seller, representative, l2, section1);
-        i1.setInboundOrderToBatchList();
-        i2.setInboundOrderToBatchList();
+        for (Batch b: i1.getBatchList())
+            b.setInboundOrder(i1);
+        for (Batch b: i2.getBatchList())
+            b.setInboundOrder(i2);
         inboundOrderRepository.saveAll(Arrays.asList(i1, i2));
     }
 
