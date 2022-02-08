@@ -8,8 +8,11 @@ import org.springframework.mail.SimpleMailMessage;
 
 public class SmtpEmailService extends AbstractEmailService{
 
-    @Autowired
     private MailSender mailSender;
+
+    public SmtpEmailService(MailSender mailSender) {
+        this.mailSender = mailSender;
+    }
 
     private static final Logger LOG = LoggerFactory.getLogger(SmtpEmailService.class);
 
@@ -17,5 +20,4 @@ public class SmtpEmailService extends AbstractEmailService{
     public void sendEmail(SimpleMailMessage msg) {
         mailSender.send(msg);
     }
-
 }

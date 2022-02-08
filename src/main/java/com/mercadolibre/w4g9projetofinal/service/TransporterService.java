@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class DeliveryService {
+public class TransporterService {
     /*** Instancia de repositório: <b>SellOrderRepository</b>.
      */
     private SellOrderRepository sellOrderRepository;
@@ -20,15 +20,15 @@ public class DeliveryService {
     }
 
     public void findById(){
-
-    }
-
-    public void findByStatus(){
         //on route or not
 
     }
 
-    public void insert(){
+    public void findByStatus(){
+
+    }
+
+    public void insertTransporter(){
 
     }
 
@@ -40,7 +40,7 @@ public class DeliveryService {
 
     }
 
-    public void callTransporter(){
+    public void call(){
 // lista todos q cabem delivery + nao em rota
     }
 
