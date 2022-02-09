@@ -29,6 +29,8 @@ public class Transporter {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private String carModel;
+    private String carPlate;
     @ManyToOne
     @ToString.Exclude
     private Representative representative;

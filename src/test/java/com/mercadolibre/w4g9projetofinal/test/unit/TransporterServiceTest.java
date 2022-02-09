@@ -235,7 +235,7 @@ public class TransporterServiceTest {
         // <-- ACT -->
         ObjectNotFoundException excecaoEsperada = Assertions.assertThrows(
                 ObjectNotFoundException.class,
-                () -> ts.call(listaDeIdsDeEntregas) //act
+                () -> ts.calldelivery(listaDeIdsDeEntregas) //act
         );
 
         // <-- ASSERTION -->
@@ -276,7 +276,7 @@ public class TransporterServiceTest {
         // <-- ACT -->
         ObjectNotFoundException excecaoEsperada = Assertions.assertThrows(
                 ObjectNotFoundException.class,
-                () -> ts.call(listaDeIdsDeEntregas) //act
+                () -> ts.calldelivery(listaDeIdsDeEntregas) //act
         );
 
         // <-- ASSERTION -->
@@ -321,7 +321,7 @@ public class TransporterServiceTest {
         TransporterService ts = new TransporterService(sellOrderRepository,transporterRepository);
 
         // <-- ACT -->
-        Transporter entregadorRetornado = ts.call(listaDeIdsDeEntregas);
+        Transporter entregadorRetornado = ts.calldelivery(listaDeIdsDeEntregas);
 
         // <-- ASSERTION -->
         Assertions.assertEquals(entregadorEmTransito,entregadorRetornado);
@@ -365,7 +365,7 @@ public class TransporterServiceTest {
         TransporterService ts = new TransporterService(sellOrderRepository, transporterRepository);
 
         // <-- ACT -->
-        Transporter entregadorRetornado = ts.call(listaDeIdsDeEntregas);
+        Transporter entregadorRetornado = ts.calldelivery(listaDeIdsDeEntregas);
 
         // <-- ASSERTION -->
         Assertions.assertEquals(entregadorEmTransito, entregadorRetornado);

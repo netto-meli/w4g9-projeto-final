@@ -62,7 +62,7 @@ public class TransporterService {
     }
 
     @Transactional
-    public Transporter call(List<Long> listIdToDeliver) {
+    public Transporter calldelivery(List<Long> listIdToDeliver) {
         List<SellOrder> listDelivery = this.findAllById(listIdToDeliver);
         Transporter transporter = this.findAvailableTransporter(listDelivery);
         transporter.setDeliveryOrderList(listDelivery);

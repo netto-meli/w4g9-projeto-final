@@ -1,13 +1,11 @@
 package com.mercadolibre.w4g9projetofinal.controller;
 
-import com.mercadolibre.w4g9projetofinal.dtos.converter.BatchConverter;
-import com.mercadolibre.w4g9projetofinal.dtos.converter.InboundOrderConverter;
-import com.mercadolibre.w4g9projetofinal.dtos.request.InboundOrderRequestDTO;
-import com.mercadolibre.w4g9projetofinal.dtos.response.BatchResponseDTO;
-import com.mercadolibre.w4g9projetofinal.dtos.response.InboundOrderResponseDTO;
-import com.mercadolibre.w4g9projetofinal.entity.InboundOrder;
+import com.mercadolibre.w4g9projetofinal.dtos.converter.TransporterConverter;
+import com.mercadolibre.w4g9projetofinal.dtos.request.DeliveryRequestDTO;
+import com.mercadolibre.w4g9projetofinal.dtos.request.TransporterRequestDTO;
+import com.mercadolibre.w4g9projetofinal.dtos.response.TransporterResponseDTO;
+import com.mercadolibre.w4g9projetofinal.entity.Transporter;
 import com.mercadolibre.w4g9projetofinal.security.entity.UserSS;
-import com.mercadolibre.w4g9projetofinal.service.InboundOrderService;
 import com.mercadolibre.w4g9projetofinal.service.TransporterService;
 import com.mercadolibre.w4g9projetofinal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,57 +17,91 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(value = "/api/v1/fresh-products/inboundorder")
+@RequestMapping(value = "/api/v1/fresh-products/delivery")
 @PreAuthorize("hasRole('ADMIN') OR hasRole('REPRESENTATIVE')")
 public class DeliveryController {
 
     @Autowired
     TransporterService transporterService;
-/*
+
     @PostMapping
-    public ResponseEntity<List<BatchResponseDTO>> createInboundOrder(
-            @RequestBody @Valid InboundOrderRequestDTO inboundOrderRequestDTO,
+    public ResponseEntity<TransporterResponseDTO> insert(
+            @RequestBody @Valid TransporterRequestDTO transporterRequestDTO,
             UriComponentsBuilder uriBuilder) {
         UserSS user = UserService.authenticated();
-        InboundOrder inboundOrder = InboundOrderConverter.convertDtoToEntity(inboundOrderRequestDTO);
-        inboundOrder = inboundOrderService.inboundOrderManager(user, inboundOrder, false);
-        List<BatchResponseDTO> response = BatchConverter.convertEntityListToDtoList(inboundOrder.getBatchList());
+        Transporter transporter = TransporterConverter.convertDtoToEntity(transporterRequestDTO, user.getId());
+        transporter = transporterService.insert(transporter);
+        TransporterResponseDTO response = TransporterConverter.convertEntityToDto(transporter);
         URI uri = uriBuilder
                 .path("/{id}")
-                .buildAndExpand(inboundOrder.getId())
+                .buildAndExpand(response.getId())
                 .toUri();
         return ResponseEntity.created(uri).body(response);
     }
 
-    @PutMapping
-    public ResponseEntity<List<BatchResponseDTO>> updateInboundOrder(
-            @RequestBody @Valid InboundOrderRequestDTO request,
-            UriComponentsBuilder uriBuilder) {
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<TransporterResponseDTO> update(@PathVariable Long id,
+            @RequestBody @Valid TransporterRequestDTO transporterRequestDTO) {
         UserSS user = UserService.authenticated();
-        InboundOrder io = InboundOrderConverter.convertDtoToEntity(request);
-        io = inboundOrderService.inboundOrderManager(user, io, true);
-        List<BatchResponseDTO> response = BatchConverter.convertEntityListToDtoList(io.getBatchList());
-        URI uri = uriBuilder
-                .path("/{id}")
-                .buildAndExpand(io.getId())
-                .toUri();
-        return ResponseEntity.created(uri).body(response);
+        Transporter transporter = TransporterConverter.convertDtoToEntity(transporterRequestDTO, user.getId());
+        transporter.setId(id);
+        transporter = transporterService.update(transporter);
+        TransporterResponseDTO response = TransporterConverter.convertEntityToDto(transporter);
+        return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<String> delete(@PathVariable Long id) {
+        transporterService.delete(id);
+        return ResponseEntity.ok("Transporter with ID: " + id + " deleted.");
     }
 
     @GetMapping
-    public ResponseEntity<List<InboundOrderResponseDTO>> findAllInboundOrders() {
-        List<InboundOrder> inboundOrderList = inboundOrderService.findAll();
-        List<InboundOrderResponseDTO> response = InboundOrderConverter.convertEntityListToDtoList(inboundOrderList);
+    public ResponseEntity<List<TransporterResponseDTO>> findAllI() {
+        List<Transporter> transporterList = transporterService.findAll();
+        List<TransporterResponseDTO> response = TransporterConverter.convertEntityListToDtoList(transporterList);
         return ResponseEntity.ok().body(response);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<InboundOrderResponseDTO> findInboundOrderById(@PathVariable Long id) {
-        InboundOrder io = inboundOrderService.findById(id);
-        InboundOrderResponseDTO response = InboundOrderConverter.convertEntityToDto(io);
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<TransporterResponseDTO> findById(@PathVariable Long id) {
+        Transporter transporter = transporterService.findById(id);
+        TransporterResponseDTO response = TransporterConverter.convertEntityToDto(transporter);
         return ResponseEntity.ok().body(response);
     }
- */
+
+    @GetMapping(value = "/byStatus/")
+    public ResponseEntity<List<TransporterResponseDTO>> findByStatus(
+            @RequestParam(defaultValue = "false")  boolean isInRoute) {
+        List<Transporter> transporterList = transporterService.findByStatus(isInRoute);
+        List<TransporterResponseDTO> response = TransporterConverter.convertEntityListToDtoList(transporterList);
+        return ResponseEntity.ok().body(response);
+    }
+
+    @PostMapping(value = "/delivery/")
+    public ResponseEntity<TransporterResponseDTO> callDelivery(
+            @RequestBody @Valid List<DeliveryRequestDTO> deliveryIdList,
+            UriComponentsBuilder uriBuilder) {
+        List<Long> idList = deliveryIdList.stream().map(DeliveryRequestDTO::getId).collect(Collectors.toList());
+        Transporter transporter = transporterService.calldelivery(idList);
+        TransporterResponseDTO response = TransporterConverter.convertEntityToDto(transporter);
+        URI uri = uriBuilder
+                .path("/{id}")
+                .buildAndExpand(response.getId())
+                .toUri();
+        return ResponseEntity.created(uri).body(response);
+    }
+
+    @PutMapping(value = "/delivery/{idTransporter}")
+    public ResponseEntity<TransporterResponseDTO> confirmDelivery(
+            @PathVariable Long idTransporter,
+            @RequestBody @Valid List<DeliveryRequestDTO> deliveryIdList) {
+        List<Long> idList = deliveryIdList.stream().map(DeliveryRequestDTO::getId).collect(Collectors.toList());
+        Transporter transporter = transporterService.confirmDelivery(idTransporter, idList);
+        TransporterResponseDTO response = TransporterConverter.convertEntityToDto(transporter);
+        return ResponseEntity.ok(response);
+    }
 }
