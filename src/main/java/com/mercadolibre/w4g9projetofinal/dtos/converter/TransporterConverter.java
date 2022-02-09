@@ -32,7 +32,7 @@ public class TransporterConverter {
         return new TransporterResponseDTO(t.getId(),
                 t.getName(),
                 t.getCarModel(),
-                t.getCarModel(),
+                t.getCarPlate() ,
                 sellOrderResponseDTOList,
                 t.isInRoute(),
                 t.getPaymentForDelivery(),
