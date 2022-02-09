@@ -5,7 +5,7 @@
 ### Especificações de Requisitos
 
 #### Requerimentos US:
-#### ml-forgot-users-01
+#### ml-forgot-users-06
 
 **Importante:**
 As histórias são narradas do ponto de vista do usuário com base em
@@ -31,13 +31,14 @@ consumidos pelos usuários que os solicita. Os contratos referem-se à história
 > Observação:
  Para que o recebimento do email com a nova senha seja concretizado é necessário informar um email válido e que este o mesmo esteja cadastrado diretamente com algum usuário existente.
 
-##### Representação JSON:
+##### Representação params:
 <details><summary>Request</summary><p>
 
-```JSON
-{
-  "email": "email@exemplo.com"
-}
+```PARAMS
+                 PARAMS
+                 
+      KEY          |        VALUE
+     email         |   email@exemplo.com 
 ```
 </p></details>
 
@@ -45,4 +46,4 @@ consumidos pelos usuários que os solicita. Os contratos referem-se à história
 ### Contratos relativos a User Story
 | HTTP | Modelo de URI                                             | Descrição                                                                                                                                                                                                                                                                           | US-code |
 |------|-----------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---|
-| POST | /api/v1/auth/forgot/?email=email@exemplo.com                            | Gera uma nova senha e envia para o email informado. <br>Devolve resposta HTTP Status "204 NO CONTENT". | ml-forgot-users-01 |
+| POST | /api/v1/auth/forgot/?email=email@exemplo.com                            | Gera uma nova senha e envia para o email informado. <br>Devolve resposta HTTP Status "204 NO CONTENT". | ml-forgot-users-06 |
