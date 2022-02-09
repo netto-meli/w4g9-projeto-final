@@ -180,10 +180,12 @@ public class ProductServiceTest {
         List<Batch> orderByBatch = prodService.OrderByBatchInProduct(2L, "L");
         List<Batch> orderByBatch2 = prodService.OrderByBatchInProduct(2L, "C");
         List<Batch> orderByBatch3 = prodService.OrderByBatchInProduct(2L, "F");
+        List<Batch> orderByBatch4 = prodService.OrderByBatchInProduct(2L, "");
 
         Assertions.assertEquals(list, orderByBatch);
         Assertions.assertEquals(list, orderByBatch2);
         Assertions.assertEquals(list, orderByBatch3);
+        assertNull(orderByBatch4);
     }
 
     @Test
