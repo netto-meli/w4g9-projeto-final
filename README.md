@@ -1,71 +1,21 @@
-# w4g9-projeto-final
+# MERCADO LIVRE — FRESCOS
+## Projeto Integrador
+***
+## Links Úteis
+#### -> Documentação [Docsify](https://netto-meli.github.io/w4g9-projeto-final/guide/#/) do projeto
+#### -> Link para o [JavaDoc](https://netto-meli.github.io/w4g9-projeto-final/JavaDoc/) do pacote
+#### -> Yaml/Json do [Swagger](https://netto-meli.github.io/w4g9-projeto-final/guide/swagger) para testar Endpoints
+## Repositórios da Equipe 9
+[GitHub](https://github.com/fpbontempo) - <b>Felipe Pereira Bontempo</b>
 
-# Spring Boot App model for Java 11
+[Github](https://github.com/netto-meli) - <b>Fernando José Dias Netto</b>
 
-We provide a basic model for JDK 11 / Spring based web applications.
+[GitHub](https://github.com/LeoDevMeli) - <b>Leonardo Teixeira Assunção</b>
 
-Please address any questions and comments to [Fury Issue Tracker](https://github.com/mercadolibre/fury/issues).
+[GitHub](https://github.com/marcossa01) - <b>Marcos Vinicius Rodrigues De Sá</b>
 
-[![](https://mermaid.ink/img/pako:eNpVkM1qw0AMhF9F6JRC_AI-BBo7ySWQQnPz5iC8cnZJ9oe1TAm2373rpIVWJ6H5Zhg0Yhs0Y4nXRNHAuVYe8rw3lUm2F0f9BYpiMx1YwAXPjwm2q0OA3oQYrb--vfjtAkE1HheMQYz1t_klVU__yfMEdXOkKCFe_irnrzDBrrEfJsf_V0zi7No3HZUdFS0lqCg9EVyj4-TI6lx9XC4KxbBjhWVeNXc03EWh8nNGh6hJeKethIQ56t7zGmmQ8PnwLZaSBv6Fakv5E-6Hmr8B2pxc3Q)](https://mermaid.live/edit#pako:eNpVkM1qw0AMhF9F6JRC_AI-BBo7ySWQQnPz5iC8cnZJ9oe1TAm2373rpIVWJ6H5Zhg0Yhs0Y4nXRNHAuVYe8rw3lUm2F0f9BYpiMx1YwAXPjwm2q0OA3oQYrb--vfjtAkE1HheMQYz1t_klVU__yfMEdXOkKCFe_irnrzDBrrEfJsf_V0zi7No3HZUdFS0lqCg9EVyj4-TI6lx9XC4KxbBjhWVeNXc03EWh8nNGh6hJeKethIQ56t7zGmmQ8PnwLZaSBv6Fakv5E-6Hmr8B2pxc3Q)
+[GitHub](https://github.com/rafaelmenez) - <b>Rafael Menezes Da Silva</b>
+## Meli Bootcamp IT - Wave 4
+[Playground](https://br-playground.digitalhouse.com/login) - Digital House
 
-
-## Usage
-
-### SCOPE
-
-The suffix of each Fury **SCOPE** is used to know which properties file to use, it is identified from the last '-' of the name of the scope.
-
-If you want to run the application from your development IDE, you need to configure the environment variable **SCOPE=local** in the app luncher.
-
-The properties of **application.yml** are always loaded and at the same time they are complemented with **application-<SCOPE_SUFFIX>.yml** properties. If a property is in both files, the one that is configured in **application-<SCOPE_SUFFIX>.yml** has preference over the property of **application.yml**.
-
-For example, for the **SCOPE** 'items-loader-test' the **SCOPE_SUFFIX** would be 'test' and the loaded property files will be **application.yml** and **application-test.yml**
-
-### Web Server
-
-Each Spring Boot web application includes an embedded web server. For servlet stack applications, Its supports three web Servers:
-  * Tomcat (maven dependency: `spring-boot-starter-tomcat`)
-  * Jetty (maven dependency: `spring-boot-starter-jetty`)
-  * Undertow (maven dependency: `spring-boot-starter-undertow`)
-
-This project is configured with Jetty, but to exchange WebServer, it is enough to configure the dependencies mentioned above in the pom.xml file.
-
-### Main
-
-The main class for this app is Application, where Spring context is initialized and SCOPE_SUFFIX is generated.
-
-### Error Handling
-
-We also provide basic handling for exceptions in ControllerExceptionHandler class.
-
-## Api Documentation
-
-This project uses Springfox to automate the generation of machine and human readable specifications for JSON APIs written using Spring. Springfox works by examining an application, once, at runtime to infer API semantics based on spring configurations, class structure and various compile time java Annotations.
-
-You can change this configuration in SpringfoxConfig class.
-
-## [Release Process](https://release-process.furycloud.io/#/)
-
-### Usage
-
-1. Specify the correct tag for your app in your `Dockerfile` and `Dockerfile.runtime`, according to the desired Java runtime version.
-
-```
-# Dockerfile
-FROM hub.furycloud.io/mercadolibre/java:1.11-mini
-```
-
-You can find all available tags for your `Dockerfile` [here](https://github.com/mercadolibre/fury_java-mini#supported-tags)
-
-```
-# Dockerfile.runtime
-FROM hub.furycloud.io/mercadolibre/java:1.11-runtime-mini
-```
-
-You can find all available tags for your `Dockerfile.runtime` [here](https://github.com/mercadolibre/fury_java-mini-runtime#supported-tags)
-
-2. Start coding!!
-
-### Questions
-
-[Release Process Issue Tracker](https://github.com/mercadolibre/fury_release-process/issues)
+[Workplace](https://meli.workplace.com/) - Mercado Livre

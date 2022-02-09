@@ -7,6 +7,22 @@ spring:
   web:
     resources:
       add-mappings: false
+  mail:
+    host: smtp.gmail.com
+    username: projetofinalbootcamp@gmail.com
+    password: It123456
+    properties:
+      mail:
+        smtp:
+          auth: true
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
+            fallback: false
+          starttls:
+            enable: true
+          ssl:
+            enable: true
 
 server:
   compression:
@@ -25,3 +41,11 @@ app:
   title: fernando-netto-projeto-final
   description: '@project.description@'
   version: @project.version@
+
+jwt:
+  expiration: 6000000
+  secret: SequenciaDeCaracteresParaAssinarToken
+
+default:
+  sender: projetofinalbootcamp@gmail.com
+  recipient: vrr.marcos@hotmail.com

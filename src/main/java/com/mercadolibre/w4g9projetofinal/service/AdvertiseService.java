@@ -1,22 +1,93 @@
 package com.mercadolibre.w4g9projetofinal.service;
 
 import com.mercadolibre.w4g9projetofinal.entity.Advertise;
-import com.mercadolibre.w4g9projetofinal.entity.Seller;
-import com.mercadolibre.w4g9projetofinal.entity.Warehouse;
-import com.mercadolibre.w4g9projetofinal.repository.WarehouseRepository;
+import com.mercadolibre.w4g9projetofinal.exceptions.BusinessException;
+import com.mercadolibre.w4g9projetofinal.exceptions.ExistingUserException;
+import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
+import com.mercadolibre.w4g9projetofinal.repository.AdvertiseRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
+/***
+ * Classe de Servico do anuncio
+ * lista todos anuncios
+ * busca por id
+ * insere anuncio
+ * altera anuncio
+ * exclui anuncio
+ * @autor Leonardo
+ */
 @Service
+@AllArgsConstructor
 public class AdvertiseService {
 
-    public AdvertiseService( ) {
+    /***
+     * instancia de repositorio do anuncio
+     */
+    private final AdvertiseRepository repository;
+
+    /***
+     * metodo de listagem de anuncio
+     * @return todos os anuncios
+     */
+    public List<Advertise> findAll() {
+       return repository.findAll();
     }
 
-    public Seller findSellerByadvertiseId(Long id) {
-        return new Seller();
+    /**
+     * Metodo para buscar anuncio por id
+     * @param id
+     * @return o anuncio procurado
+     */
+    public Advertise findById(Long id) {
+        Optional<Advertise> obj = repository.findById(id);
+        return obj.orElseThrow( () -> new ObjectNotFoundException("Anuncio não encontrado! Por favor verifique o id."));
     }
 
+    /**
+     * Metodo para inserir anuncio
+     * @param advertise
+     * @return status 200 quando salvo
+     */
+    public Advertise insert(Advertise advertise) {
+        return repository.save(advertise);
+    }
 
+    /**
+     * Metodo para alterar informaçoes de anuncio
+     * @param newAdvertise
+     * @return o novo anuncio salvo status 200
+     */
+    public Advertise update(Advertise newAdvertise) {
+        Advertise advertise = findById(newAdvertise.getId());
+        updateSeller(newAdvertise, advertise);
+        return repository.save(advertise);
+    }
 
+    /**
+     * Metodo para deletar anuncio por id
+     * @param id
+     */
+    public void delete(Long id) {
+        Advertise advertise = findById(id);
+        repository.delete(advertise);
+    }
 
+    /**
+     * Metodo para atualizar um vendedor pelo anuncio
+     * @param advertise
+     * @param newAdvertise
+     */
+    private static void updateSeller(Advertise advertise, Advertise newAdvertise) {
+        newAdvertise.setDescription(advertise.getDescription());
+        newAdvertise.setProduct(advertise.getProduct());
+        newAdvertise.setSeller(advertise.getSeller());
+        newAdvertise.setPrice(advertise.getPrice());
+        newAdvertise.setStatus(advertise.getStatus());
+        newAdvertise.setFreeShipping(advertise.isFreeShipping());
+    }
 }

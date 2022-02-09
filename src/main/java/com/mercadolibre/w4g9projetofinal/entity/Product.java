@@ -1,16 +1,26 @@
 package com.mercadolibre.w4g9projetofinal.entity;
 
-import lombok.*;
+import com.mercadolibre.w4g9projetofinal.entity.enums.RefrigerationType;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Objects;
 
 @Getter
 @Setter
 @ToString
 @Entity
-public abstract class Product {
+@AllArgsConstructor
+@NoArgsConstructor
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,6 +28,7 @@ public abstract class Product {
     private String description;
     private float minTemperature;
     private float maxTemperature;
+    private RefrigerationType categoryRefrigeration;
 
     @Override
     public boolean equals(Object o) {

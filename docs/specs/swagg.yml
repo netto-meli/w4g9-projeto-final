@@ -1,0 +1,2497 @@
+openapi: 3.0.1
+info:
+  title: Api Documentation
+  description: Api Documentation
+  termsOfService: urn:tos
+  contact: {}
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0
+  version: "1.0"
+servers:
+  - url: https://localhost:8080/
+  - url: http://localhost:8080/
+security:
+  - APIKey: []
+tags:
+  - name: advertise-controller
+    description: Advertise Controller
+  - name: basic-error-controller
+    description: Basic Error Controller
+  - name: buyer-controller
+    description: Buyer Controller
+  - name: cart-controller
+    description: Cart Controller
+  - name: due-date-controller
+    description: Due Date Controller
+  - name: inbound-order-controller
+    description: Inbound Order Controller
+  - name: multiple-open-api-web-mvc-resource
+    description: Multiple Open Api Web Mvc Resource
+  - name: open-api-web-mvc-resource
+    description: Open Api Web Mvc Resource
+  - name: ping-controller
+    description: Ping Controller
+  - name: product-controller
+    description: Product Controller
+  - name: representative-controller
+    description: Representative Controller
+  - name: section-controller
+    description: Section Controller
+  - name: seller-controller
+    description: Seller Controller
+  - name: swagger-config-resource
+    description: Swagger Config Resource
+  - name: swagger-welcome-web-mvc
+    description: Swagger Welcome Web Mvc
+  - name: user-controller
+    description: User Controller
+  - name: warehouse-controller
+    description: Warehouse Controller
+paths:
+  /api/v1/fresh-products/advertise:
+    get:
+      tags:
+        - advertise-controller
+      summary: findAll
+      operationId: findAllUsingGET
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AdvertiseResponseDTO'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    post:
+      tags:
+        - advertise-controller
+      summary: insert
+      operationId: insertUsingPOST
+      requestBody:
+        description: advertise
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdvertiseRequestDTO'
+        required: true
+      responses:
+        200:
+          description: OK
+          content: {}
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: advertise
+  /api/v1/fresh-products/advertise/{id}:
+    get:
+      tags:
+        - advertise-controller
+      summary: findById
+      operationId: findByIdUsingGET
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Advertise'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    put:
+      tags:
+        - advertise-controller
+      summary: update
+      operationId: updateUsingPUT
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: advertiseDto
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdvertiseRequestDTO'
+        required: true
+      responses:
+        200:
+          description: OK
+          content: {}
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: advertiseDto
+    delete:
+      tags:
+        - advertise-controller
+      summary: delete
+      operationId: deleteUsingDELETE
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content: {}
+        204:
+          description: No Content
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+  /api/v1/fresh-products/buyer:
+    get:
+      tags:
+        - buyer-controller
+      summary: findAll
+      operationId: findAllUsingGET_1
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BuyerResponseDTO'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    post:
+      tags:
+        - buyer-controller
+      summary: insert
+      operationId: insertUsingPOST_1
+      requestBody:
+        description: buyer
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BuyerRequestDTO'
+        required: true
+      responses:
+        200:
+          description: OK
+          content: {}
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: buyer
+  /api/v1/fresh-products/buyer/{id}:
+    get:
+      tags:
+        - buyer-controller
+      summary: findById
+      operationId: findByIdUsingGET_1
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BuyerResponseDTO'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    put:
+      tags:
+        - buyer-controller
+      summary: update
+      operationId: updateUsingPUT_1
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: newBuyer
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BuyerRequestDTO'
+        required: true
+      responses:
+        200:
+          description: OK
+          content: {}
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: newBuyer
+    delete:
+      tags:
+        - buyer-controller
+      summary: delete
+      operationId: deleteUsingDELETE_1
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content: {}
+        204:
+          description: No Content
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+  /api/v1/fresh-products/cart/addProduct/{idBuyer}:
+    post:
+      tags:
+        - cart-controller
+      summary: addAdvertiseItemsToCart
+      operationId: addAdvertiseItemsToCartUsingPOST
+      parameters:
+        - name: idAdvertise
+          in: query
+          description: idAdvertise
+          schema:
+            type: integer
+            format: int64
+            default: 0
+        - name: idBuyer
+          in: path
+          description: idBuyer
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: qtdProduct
+          in: query
+          description: qtdProduct
+          schema:
+            type: integer
+            format: int32
+            default: 0
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SellOrderResponseDTO'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /api/v1/fresh-products/cart/createSellOrder/{idBuyer}:
+    post:
+      tags:
+        - cart-controller
+      summary: createSellOrder
+      operationId: createSellOrderUsingPOST
+      parameters:
+        - name: idBuyer
+          in: path
+          description: idBuyer
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SellOrderResponseDTO'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /api/v1/fresh-products/cart/emptyCart/{idBuyer}:
+    delete:
+      tags:
+        - cart-controller
+      summary: emptyCart
+      operationId: emptyCartUsingDELETE
+      parameters:
+        - name: idBuyer
+          in: path
+          description: idBuyer
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        204:
+          description: No Content
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+  /api/v1/fresh-products/cart/removeProduct/{idBuyer}:
+    delete:
+      tags:
+        - cart-controller
+      summary: removeAdvertiseItemsFromCart
+      operationId: removeAdvertiseItemsFromCartUsingDELETE
+      parameters:
+        - name: idAdvertise
+          in: query
+          description: idAdvertise
+          schema:
+            type: integer
+            format: int64
+            default: 0
+        - name: idBuyer
+          in: path
+          description: idBuyer
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: qtdRemove
+          in: query
+          description: qtdRemove
+          schema:
+            type: integer
+            format: int32
+            default: 0
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SellOrderResponseDTO'
+        204:
+          description: No Content
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+  /api/v1/fresh-products/cart/{idBuyer}:
+    get:
+      tags:
+        - cart-controller
+      summary: showCart
+      operationId: showCartUsingGET
+      parameters:
+        - name: idBuyer
+          in: path
+          description: idBuyer
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SellOrderResponseDTO'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /api/v1/fresh-products/due-date/byRefrigeration/{numberOfDays}:
+    get:
+      tags:
+        - due-date-controller
+      summary: findByDueDateBeforeAndRefrigerationType
+      operationId: findByDueDateBeforeAndRefrigerationTypeUsingGET
+      parameters:
+        - name: numberOfDays
+          in: path
+          description: numberOfDays
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: orderBy
+          in: query
+          description: orderBy
+          required: true
+          schema:
+            type: string
+        - name: refrigerationType
+          in: query
+          description: refrigerationType
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BatchByDueDateRequestDTO'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /api/v1/fresh-products/due-date/bySection/{numberOfDays}:
+    get:
+      tags:
+        - due-date-controller
+      summary: findByDueDateBeforeAndSectionId
+      operationId: findByDueDateBeforeAndSectionIdUsingGET
+      parameters:
+        - name: numberOfDays
+          in: path
+          description: numberOfDays
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: sectionId
+          in: query
+          description: sectionId
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BatchByDueDateRequestDTO'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /api/v1/fresh-products/inboundorder:
+    get:
+      tags:
+        - inbound-order-controller
+      summary: findAllInboundOrders
+      operationId: findAllInboundOrdersUsingGET
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InboundOrderResponseDTO'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    put:
+      tags:
+        - inbound-order-controller
+      summary: updateInboundOrder
+      operationId: updateInboundOrderUsingPUT
+      requestBody:
+        description: request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InboundOrderRequestDTO'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BatchResponseDTO'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: request
+    post:
+      tags:
+        - inbound-order-controller
+      summary: createInboundOrder
+      operationId: createInboundOrderUsingPOST
+      requestBody:
+        description: inboundOrderRequestDTO
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InboundOrderRequestDTO'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BatchResponseDTO'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: inboundOrderRequestDTO
+  /api/v1/fresh-products/inboundorder/{id}:
+    get:
+      tags:
+        - inbound-order-controller
+      summary: findInboundOrderById
+      operationId: findInboundOrderByIdUsingGET
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/InboundOrderResponseDTO'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /api/v1/fresh-products/product:
+    get:
+      tags:
+        - product-controller
+      summary: findAll
+      operationId: findAllUsingGET_2
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductResponseDTO'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    post:
+      tags:
+        - product-controller
+      summary: insert
+      operationId: insertUsingPOST_2
+      requestBody:
+        description: obj
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductRequestDTO'
+        required: true
+      responses:
+        200:
+          description: OK
+          content: {}
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: obj
+  /api/v1/fresh-products/product/listBatch/:
+    get:
+      tags:
+        - product-controller
+      summary: findBatchByProductId
+      operationId: findBatchByProductIdUsingGET
+      parameters:
+        - name: id
+          in: query
+          description: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BatchResponseDTO'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /api/v1/fresh-products/product/listBatch/{order}:
+    get:
+      tags:
+        - product-controller
+      summary: orderByProductId
+      operationId: orderByProductIdUsingGET
+      parameters:
+        - name: id
+          in: query
+          description: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: order
+          in: path
+          description: order
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BatchResponseDTO'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /api/v1/fresh-products/product/listCategory/{categoryProd}:
+    get:
+      tags:
+        - product-controller
+      summary: findListCategory
+      operationId: findListCategoryUsingGET
+      parameters:
+        - name: categoryProd
+          in: path
+          description: categoryProd
+          required: true
+          schema:
+            type: string
+            enum:
+              - COLD
+              - FRESH
+              - FROZEN
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductResponseDTO'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /api/v1/fresh-products/product/{id}:
+    get:
+      tags:
+        - product-controller
+      summary: findById
+      operationId: findByIdUsingGET_2
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProductResponseDTO'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    put:
+      tags:
+        - product-controller
+      summary: update
+      operationId: updateUsingPUT_2
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: newObj
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductRequestDTO'
+        required: true
+      responses:
+        200:
+          description: OK
+          content: {}
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: newObj
+    delete:
+      tags:
+        - product-controller
+      summary: delete
+      operationId: deleteUsingDELETE_2
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content: {}
+        204:
+          description: No Content
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+  /api/v1/fresh-products/representative:
+    get:
+      tags:
+        - representative-controller
+      summary: findAll
+      operationId: findAllUsingGET_3
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RepresentativeResponseDTO'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    post:
+      tags:
+        - representative-controller
+      summary: insert
+      operationId: insertUsingPOST_3
+      requestBody:
+        description: obj
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RepresentativeRequestDTO'
+        required: true
+      responses:
+        200:
+          description: OK
+          content: {}
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: obj
+  /api/v1/fresh-products/representative/{id}:
+    get:
+      tags:
+        - representative-controller
+      summary: findById
+      operationId: findByIdUsingGET_3
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RepresentativeResponseDTO'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    put:
+      tags:
+        - representative-controller
+      summary: update
+      operationId: updateUsingPUT_3
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: newObj
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RepresentativeRequestDTO'
+        required: true
+      responses:
+        200:
+          description: OK
+          content: {}
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: newObj
+    delete:
+      tags:
+        - representative-controller
+      summary: delete
+      operationId: deleteUsingDELETE_3
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content: {}
+        204:
+          description: No Content
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+  /api/v1/fresh-products/section:
+    get:
+      tags:
+        - section-controller
+      summary: findAll
+      operationId: findAllUsingGET_4
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SectionResponseDTO'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    post:
+      tags:
+        - section-controller
+      summary: insert
+      operationId: insertUsingPOST_4
+      requestBody:
+        description: sectionRequestDTO
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SectionRequestDTO'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SectionResponseDTO'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: sectionRequestDTO
+  /api/v1/fresh-products/section/{id}:
+    get:
+      tags:
+        - section-controller
+      summary: findById
+      operationId: findByIdUsingGET_4
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SectionResponseDTO'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    put:
+      tags:
+        - section-controller
+      summary: update
+      operationId: updateUsingPUT_4
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: sectionDTO
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SectionRequestDTO'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SectionResponseDTO'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: sectionDTO
+    delete:
+      tags:
+        - section-controller
+      summary: delete
+      operationId: deleteUsingDELETE_4
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content: {}
+        204:
+          description: No Content
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+  /api/v1/fresh-products/seller:
+    get:
+      tags:
+        - seller-controller
+      summary: findAll
+      operationId: findAllUsingGET_5
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SellerResponseDTO'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    post:
+      tags:
+        - seller-controller
+      summary: insert
+      operationId: insertUsingPOST_5
+      requestBody:
+        description: obj
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SellerRequestDTO'
+        required: true
+      responses:
+        200:
+          description: OK
+          content: {}
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: obj
+  /api/v1/fresh-products/seller/{id}:
+    get:
+      tags:
+        - seller-controller
+      summary: findById
+      operationId: findByIdUsingGET_5
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SellerResponseDTO'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    put:
+      tags:
+        - seller-controller
+      summary: update
+      operationId: updateUsingPUT_5
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: newObj
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SellerRequestDTO'
+        required: true
+      responses:
+        200:
+          description: OK
+          content: {}
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: newObj
+    delete:
+      tags:
+        - seller-controller
+      summary: delete
+      operationId: deleteUsingDELETE_5
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content: {}
+        204:
+          description: No Content
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+  /api/v1/fresh-products/users:
+    get:
+      tags:
+        - user-controller
+      summary: findAll
+      operationId: findAllUsingGET_6
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserResponseDTO'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /api/v1/fresh-products/warehouse:
+    get:
+      tags:
+        - warehouse-controller
+      summary: findAll
+      operationId: findAllUsingGET_7
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WarehouseResponseDTO'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    post:
+      tags:
+        - warehouse-controller
+      summary: insert
+      operationId: insertUsingPOST_6
+      requestBody:
+        description: wh
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WarehouseRequestDTO'
+        required: true
+      responses:
+        200:
+          description: OK
+          content: {}
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: wh
+  /api/v1/fresh-products/warehouse/byProduct/{id}:
+    get:
+      tags:
+        - warehouse-controller
+      summary: findWarehousesByProductId
+      operationId: findWarehousesByProductIdUsingGET
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProductByWarehouseResponseDTO'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /api/v1/fresh-products/warehouse/{id}:
+    get:
+      tags:
+        - warehouse-controller
+      summary: findById
+      operationId: findByIdUsingGET_6
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Warehouse'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    put:
+      tags:
+        - warehouse-controller
+      summary: update
+      operationId: updateUsingPUT_6
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: nWarehouse1
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WarehouseRequestDTO'
+        required: true
+      responses:
+        200:
+          description: OK
+          content: {}
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: nWarehouse1
+    delete:
+      tags:
+        - warehouse-controller
+      summary: delete
+      operationId: deleteUsingDELETE_6
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content: {}
+        204:
+          description: No Content
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+  /error:
+    get:
+      tags:
+        - basic-error-controller
+      summary: errorHtml
+      operationId: errorHtmlUsingGET
+      responses:
+        200:
+          description: OK
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/ModelAndView'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    put:
+      tags:
+        - basic-error-controller
+      summary: errorHtml
+      operationId: errorHtmlUsingPUT
+      responses:
+        200:
+          description: OK
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/ModelAndView'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    post:
+      tags:
+        - basic-error-controller
+      summary: errorHtml
+      operationId: errorHtmlUsingPOST
+      responses:
+        200:
+          description: OK
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/ModelAndView'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    delete:
+      tags:
+        - basic-error-controller
+      summary: errorHtml
+      operationId: errorHtmlUsingDELETE
+      responses:
+        200:
+          description: OK
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/ModelAndView'
+        204:
+          description: No Content
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+    options:
+      tags:
+        - basic-error-controller
+      summary: errorHtml
+      operationId: errorHtmlUsingOPTIONS
+      responses:
+        200:
+          description: OK
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/ModelAndView'
+        204:
+          description: No Content
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+    head:
+      tags:
+        - basic-error-controller
+      summary: errorHtml
+      operationId: errorHtmlUsingHEAD
+      responses:
+        200:
+          description: OK
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/ModelAndView'
+        204:
+          description: No Content
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+    patch:
+      tags:
+        - basic-error-controller
+      summary: errorHtml
+      operationId: errorHtmlUsingPATCH
+      responses:
+        200:
+          description: OK
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/schemas/ModelAndView'
+        204:
+          description: No Content
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+  /ping:
+    get:
+      tags:
+        - ping-controller
+      summary: ping
+      operationId: pingUsingGET
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+components:
+  schemas:
+    Advertise:
+      title: Advertise
+      type: object
+      properties:
+        description:
+          type: string
+        free_shipping:
+          type: boolean
+        id:
+          type: integer
+          format: int64
+        price:
+          type: number
+        product:
+          $ref: '#/components/schemas/Product'
+        seller:
+          $ref: '#/components/schemas/Seller'
+        status:
+          type: string
+          enum:
+            - ATIVO
+            - FINALIZADO
+            - INATIVO
+            - PAUSADO
+            - PENDENTE
+            - REMOVIDO
+    AdvertiseRequestDTO:
+      title: AdvertiseRequestDTO
+      required:
+        - price
+        - status
+      type: object
+      properties:
+        description:
+          maxLength: 20
+          minLength: 4
+          type: string
+        free_shipping:
+          type: boolean
+        price:
+          type: number
+        product_id:
+          type: integer
+          format: int64
+        seller_id:
+          type: integer
+          format: int64
+        status:
+          type: string
+          enum:
+            - ATIVO
+            - FINALIZADO
+            - INATIVO
+            - PAUSADO
+            - PENDENTE
+            - REMOVIDO
+    AdvertiseResponseDTO:
+      title: AdvertiseResponseDTO
+      type: object
+      properties:
+        description:
+          type: string
+        free_shipping:
+          type: boolean
+        id:
+          type: integer
+          format: int64
+        price:
+          type: number
+        product:
+          $ref: '#/components/schemas/ProductResponseDTO'
+        seller:
+          $ref: '#/components/schemas/SellerResponseDTO'
+        status:
+          type: string
+          enum:
+            - ATIVO
+            - FINALIZADO
+            - INATIVO
+            - PAUSADO
+            - PENDENTE
+            - REMOVIDO
+    BatchByDueDateRequestDTO:
+      title: BatchByDueDateRequestDTO
+      type: object
+      properties:
+        advertise_id:
+          type: integer
+          format: int64
+        batch_number:
+          type: integer
+          format: int64
+        due_date:
+          type: string
+          format: date
+        product_type:
+          type: string
+        quantity:
+          type: integer
+          format: int32
+    BatchRequestDTO:
+      title: BatchRequestDTO
+      type: object
+      properties:
+        advertise_id:
+          type: integer
+          format: int64
+        batch_number:
+          type: integer
+          format: int64
+        current_quantity:
+          type: integer
+          format: int32
+        current_temperature:
+          type: number
+          format: float
+        due_date:
+          type: string
+          format: date
+        initial_quantity:
+          type: integer
+          format: int32
+        manufacturing_date:
+          type: string
+          format: date
+        manufacturing_time:
+          type: string
+          format: date-time
+        minimum_temperature:
+          type: number
+          format: float
+    BatchResponseDTO:
+      title: BatchResponseDTO
+      type: object
+      properties:
+        advertise_id:
+          type: integer
+          format: int64
+        batch_number:
+          type: integer
+          format: int64
+        current_quantity:
+          type: integer
+          format: int32
+        current_temperature:
+          type: number
+          format: float
+        due_date:
+          type: string
+          format: date
+        initial_quantity:
+          type: integer
+          format: int32
+        manufacturing_date:
+          type: string
+          format: date
+        manufacturing_time:
+          type: string
+          format: date-time
+        minimum_temperature:
+          type: number
+          format: float
+    BuyerRequestDTO:
+      title: BuyerRequestDTO
+      type: object
+      properties:
+        address:
+          type: string
+        email:
+          type: string
+        name:
+          maxLength: 20
+          minLength: 2
+          type: string
+        pass:
+          type: string
+        username:
+          type: string
+    BuyerResponseDTO:
+      title: BuyerResponseDTO
+      type: object
+      properties:
+        address:
+          type: string
+        email:
+          type: string
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        username:
+          type: string
+    InboundOrderRequestDTO:
+      title: InboundOrderRequestDTO
+      required:
+        - batch_stock
+      type: object
+      properties:
+        batch_stock:
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchRequestDTO'
+        order_date:
+          type: string
+          format: date
+        order_number:
+          type: integer
+          format: int32
+        section:
+          $ref: '#/components/schemas/SectionRequestDTOForInboundOrder'
+    InboundOrderResponseDTO:
+      title: InboundOrderResponseDTO
+      type: object
+      properties:
+        batch_stock:
+          type: array
+          items:
+            $ref: '#/components/schemas/BatchResponseDTO'
+        order_date:
+          type: string
+          format: date
+        order_number:
+          type: integer
+          format: int32
+        section:
+          $ref: '#/components/schemas/SectionResponseDTOForInboundOrder'
+    ModelAndView:
+      title: ModelAndView
+      type: object
+      properties:
+        empty:
+          type: boolean
+        model:
+          type: object
+          properties: {}
+        model_map:
+          type: object
+          additionalProperties:
+            type: object
+            properties: {}
+        reference:
+          type: boolean
+        status:
+          type: string
+          enum:
+            - ACCEPTED
+            - ALREADY_REPORTED
+            - BAD_GATEWAY
+            - BAD_REQUEST
+            - BANDWIDTH_LIMIT_EXCEEDED
+            - CHECKPOINT
+            - CONFLICT
+            - CONTINUE
+            - CREATED
+            - DESTINATION_LOCKED
+            - EXPECTATION_FAILED
+            - FAILED_DEPENDENCY
+            - FORBIDDEN
+            - FOUND
+            - GATEWAY_TIMEOUT
+            - GONE
+            - HTTP_VERSION_NOT_SUPPORTED
+            - IM_USED
+            - INSUFFICIENT_SPACE_ON_RESOURCE
+            - INSUFFICIENT_STORAGE
+            - INTERNAL_SERVER_ERROR
+            - I_AM_A_TEAPOT
+            - LENGTH_REQUIRED
+            - LOCKED
+            - LOOP_DETECTED
+            - METHOD_FAILURE
+            - METHOD_NOT_ALLOWED
+            - MOVED_PERMANENTLY
+            - MOVED_TEMPORARILY
+            - MULTIPLE_CHOICES
+            - MULTI_STATUS
+            - NETWORK_AUTHENTICATION_REQUIRED
+            - NON_AUTHORITATIVE_INFORMATION
+            - NOT_ACCEPTABLE
+            - NOT_EXTENDED
+            - NOT_FOUND
+            - NOT_IMPLEMENTED
+            - NOT_MODIFIED
+            - NO_CONTENT
+            - OK
+            - PARTIAL_CONTENT
+            - PAYLOAD_TOO_LARGE
+            - PAYMENT_REQUIRED
+            - PERMANENT_REDIRECT
+            - PRECONDITION_FAILED
+            - PRECONDITION_REQUIRED
+            - PROCESSING
+            - PROXY_AUTHENTICATION_REQUIRED
+            - REQUESTED_RANGE_NOT_SATISFIABLE
+            - REQUEST_ENTITY_TOO_LARGE
+            - REQUEST_HEADER_FIELDS_TOO_LARGE
+            - REQUEST_TIMEOUT
+            - REQUEST_URI_TOO_LONG
+            - RESET_CONTENT
+            - SEE_OTHER
+            - SERVICE_UNAVAILABLE
+            - SWITCHING_PROTOCOLS
+            - TEMPORARY_REDIRECT
+            - TOO_EARLY
+            - TOO_MANY_REQUESTS
+            - UNAUTHORIZED
+            - UNAVAILABLE_FOR_LEGAL_REASONS
+            - UNPROCESSABLE_ENTITY
+            - UNSUPPORTED_MEDIA_TYPE
+            - UPGRADE_REQUIRED
+            - URI_TOO_LONG
+            - USE_PROXY
+            - VARIANT_ALSO_NEGOTIATES
+        view:
+          $ref: '#/components/schemas/View'
+        view_name:
+          type: string
+    OrderItemResponseDTO:
+      title: OrderItemResponseDTO
+      type: object
+      properties:
+        id_advertise:
+          type: integer
+          format: int64
+        quantity:
+          type: integer
+          format: int32
+    Product:
+      title: Product
+      type: object
+      properties:
+        category_refrigeration:
+          type: string
+          enum:
+            - COLD
+            - FRESH
+            - FROZEN
+        description:
+          type: string
+        id:
+          type: integer
+          format: int64
+        max_temperature:
+          type: number
+          format: float
+        min_temperature:
+          type: number
+          format: float
+        name:
+          type: string
+    ProductByWarehouseResponseDTO:
+      title: ProductByWarehouseResponseDTO
+      type: object
+      properties:
+        product_id:
+          type: integer
+          format: int64
+        warehouses:
+          type: array
+          items:
+            $ref: '#/components/schemas/WarehouseResponseDTOByProduct'
+    ProductRequestDTO:
+      title: ProductRequestDTO
+      required:
+        - category_refrigeration
+        - max_temperature
+        - min_temperature
+        - name
+      type: object
+      properties:
+        category_refrigeration:
+          type: string
+          enum:
+            - COLD
+            - FRESH
+            - FROZEN
+        description:
+          maxLength: 20
+          minLength: 4
+          type: string
+        max_temperature:
+          type: number
+          format: float
+        min_temperature:
+          type: number
+          format: float
+        name:
+          maxLength: 20
+          minLength: 4
+          type: string
+    ProductResponseDTO:
+      title: ProductResponseDTO
+      type: object
+      properties:
+        category_refrigeration:
+          type: string
+          enum:
+            - COLD
+            - FRESH
+            - FROZEN
+        description:
+          type: string
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+    RepresentativeRequestDTO:
+      title: RepresentativeRequestDTO
+      type: object
+      properties:
+        email:
+          type: string
+        job:
+          type: string
+          enum:
+            - LIDER
+            - SUPERVISOR
+        name:
+          type: string
+        pass:
+          type: string
+        username:
+          type: string
+        warehouse_id:
+          type: integer
+          format: int64
+    RepresentativeResponseDTO:
+      title: RepresentativeResponseDTO
+      type: object
+      properties:
+        email:
+          type: string
+        id:
+          type: integer
+          format: int64
+        job:
+          type: string
+          enum:
+            - LIDER
+            - SUPERVISOR
+        name:
+          type: string
+        username:
+          type: string
+        warehouse_id:
+          type: integer
+          format: int64
+    SectionRequestDTO:
+      title: SectionRequestDTO
+      required:
+        - name
+      type: object
+      properties:
+        current_stock:
+          maximum: 1E+2
+          exclusiveMaximum: false
+          minimum: 1
+          exclusiveMinimum: false
+          type: integer
+          format: int32
+        id_warehouse:
+          type: integer
+          format: int64
+        max_teperature:
+          maximum: 15
+          exclusiveMaximum: false
+          minimum: -2E+1
+          exclusiveMinimum: false
+          type: number
+          format: float
+        min_teperature:
+          maximum: 15
+          exclusiveMaximum: false
+          minimum: -2E+1
+          exclusiveMinimum: false
+          type: number
+          format: float
+        name:
+          maxLength: 15
+          minLength: 5
+          type: string
+        stock_limit:
+          maximum: 1E+2
+          exclusiveMaximum: false
+          minimum: 1
+          exclusiveMinimum: false
+          type: integer
+          format: int32
+        type:
+          type: string
+          enum:
+            - COLD
+            - FRESH
+            - FROZEN
+    SectionRequestDTOForInboundOrder:
+      title: SectionRequestDTOForInboundOrder
+      type: object
+      properties:
+        section_code:
+          type: integer
+          format: int64
+        warehouse_code:
+          type: integer
+          format: int64
+    SectionResponseDTO:
+      title: SectionResponseDTO
+      type: object
+      properties:
+        current_stock:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int64
+        max_teperature:
+          type: number
+          format: float
+        min_teperature:
+          type: number
+          format: float
+        name:
+          type: string
+        refrigeration_type:
+          type: string
+          enum:
+            - COLD
+            - FRESH
+            - FROZEN
+        stock_limit:
+          type: integer
+          format: int32
+        warehouse_code:
+          type: integer
+          format: int64
+    SectionResponseDTOForInboundOrder:
+      title: SectionResponseDTOForInboundOrder
+      type: object
+      properties:
+        section_code:
+          type: integer
+          format: int64
+        warehouse_code:
+          type: integer
+          format: int64
+    SellOrderResponseDTO:
+      title: SellOrderResponseDTO
+      type: object
+      properties:
+        buyer_id:
+          type: integer
+          format: int64
+        id:
+          type: integer
+          format: int64
+        order_item_response_dtolist:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItemResponseDTO'
+        shipping_rate:
+          type: number
+        total_value:
+          type: number
+    Seller:
+      title: Seller
+      type: object
+      properties:
+        advertise_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/Advertise'
+        email:
+          type: string
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        password:
+          type: string
+        profile:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+            enum:
+              - ADMIN
+              - BUYER
+              - REPRESENTATIVE
+              - SELLER
+        profiles:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+            enum:
+              - ADMIN
+              - BUYER
+              - REPRESENTATIVE
+              - SELLER
+        username:
+          type: string
+    SellerRequestDTO:
+      title: SellerRequestDTO
+      type: object
+      properties:
+        email:
+          type: string
+        name:
+          type: string
+        pass:
+          type: string
+        username:
+          type: string
+    SellerResponseDTO:
+      title: SellerResponseDTO
+      type: object
+      properties:
+        email:
+          type: string
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        username:
+          type: string
+    UserResponseDTO:
+      title: UserResponseDTO
+      type: object
+      properties:
+        email:
+          type: string
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        username:
+          type: string
+    View:
+      title: View
+      type: object
+      properties:
+        content_type:
+          type: string
+    Warehouse:
+      title: Warehouse
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        location:
+          type: string
+        nome:
+          type: string
+    WarehouseRequestDTO:
+      title: WarehouseRequestDTO
+      type: object
+      properties:
+        location:
+          type: string
+        name:
+          type: string
+    WarehouseResponseDTO:
+      title: WarehouseResponseDTO
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        location:
+          type: string
+        name:
+          type: string
+    WarehouseResponseDTOByProduct:
+      title: WarehouseResponseDTOByProduct
+      type: object
+      properties:
+        total_quantity:
+          type: integer
+          format: int32
+        warehouse_code:
+          type: integer
+          format: int64
+  securitySchemes:
+    APIKey:
+      type: apiKey
+      name: Authorization
+      in: header

@@ -271,7 +271,6 @@
       <groupId>com.newrelic.agent.java</groupId>
       <artifactId>newrelic-api</artifactId>
     </dependency>
-
     <!-- Test dependencies for all projects -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
@@ -361,6 +360,46 @@
       <artifactId>validation-api</artifactId>
     </dependency>
 
+
+    <!-- Swagger -->
+
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-boot-starter</artifactId>
+      <version>3.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-swagger-ui</artifactId>
+      <version>3.0.0</version>
+    </dependency>
+
+
+    <!-- Start Dependências Spring Security -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-test</artifactId>
+      <version>5.6.1</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt</artifactId>
+      <version>0.9.1</version>
+    </dependency>
+
+    <!-- End Dependências Spring Security -->
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-mail</artifactId>
+    </dependency>
 
   </dependencies>
 
