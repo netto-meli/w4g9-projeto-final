@@ -39,6 +39,7 @@ public class Transporter {
     @ToString.Exclude
     private List<SellOrder> deliveryOrderList;
     private boolean inRoute;
+    private BigDecimal paymentForDelivery;
     private BigDecimal salary;
 
     @Override
