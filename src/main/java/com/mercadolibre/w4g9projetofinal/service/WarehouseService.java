@@ -27,7 +27,7 @@ public class WarehouseService {
 
     public Warehouse findById(Long id) {
         Optional<Warehouse> wh = warehouseRepository.findById(id);
-        return wh.orElse(null);
+        return wh.orElseThrow(()-> new ObjectNotFoundException("Armazem não encontrado! Verifique se os dados digitados estão corretos."));
     }
 
     public Warehouse insert(Warehouse wh) {

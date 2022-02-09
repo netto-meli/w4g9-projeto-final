@@ -4,6 +4,7 @@ import com.mercadolibre.w4g9projetofinal.entity.Advertise;
 import com.mercadolibre.w4g9projetofinal.entity.Product;
 import com.mercadolibre.w4g9projetofinal.entity.Seller;
 import com.mercadolibre.w4g9projetofinal.entity.enums.AdvertiseStatus;
+import com.mercadolibre.w4g9projetofinal.exceptions.BusinessException;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.AdvertiseRepository;
 import com.mercadolibre.w4g9projetofinal.service.AdvertiseService;
@@ -65,11 +66,15 @@ public class AdvertiseServiceTest {
 
         AdvertiseRepository advertiseRepository = Mockito.mock(AdvertiseRepository.class);
         Mockito.when(advertiseRepository.save(adv)).thenReturn(adv);
+        Mockito.when(advertiseRepository.save(adv1)).thenThrow(BusinessException.class);
 
         AdvertiseService advertiseService = new AdvertiseService(advertiseRepository);
         Advertise adInsert = advertiseService.insert(adv);
 
+        BusinessException businessException = assertThrows(BusinessException.class, () -> advertiseService.insert(adv1));
+
         assertEquals(adv,adInsert);
+        assertTrue(businessException.getMessage().contains("Não foi possivel incluir o anuncio."));
     }
 
     @Test

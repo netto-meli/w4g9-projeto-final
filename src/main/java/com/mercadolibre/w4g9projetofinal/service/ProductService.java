@@ -28,10 +28,10 @@ import java.util.stream.Collectors;
 public class ProductService {
 
     /*** Instancia de ProductRepository*/
-    private ProductRepository repository;
+    private final ProductRepository repository;
 
     /*** Instancia de BatchService*/
-    private BatchService batchService;
+    private final BatchService batchService;
 
     /**
      * Metodo que busca todos os produtos
