@@ -98,8 +98,8 @@ public class ProductController {
      * Motodo GET para listar produtos por categoria.
      * @return retorna a lista por categora e status 200
      */
-    @GetMapping(value = "/listCategory/{categoryProd}")
-    public ResponseEntity<List<ProductResponseDTO>> findListCategory(@PathVariable RefrigerationType categoryProd) {
+    @GetMapping(value = "/listCategory/")
+    public ResponseEntity<List<ProductResponseDTO>> findListCategory(@RequestParam RefrigerationType categoryProd) {
         List<ProductResponseDTO> product = ProductConverter.convertEntityListToDtoList(
                 service.findByCategoryProduct(categoryProd));
         return ResponseEntity.ok(product);
@@ -122,8 +122,8 @@ public class ProductController {
      * C = ordenado por quantidade atual
      * F = ordenado por data de vencimento
      */
-    @GetMapping("/listBatch/{order}")
-    public ResponseEntity<List<BatchResponseDTO>> orderByProductId(@RequestParam Long id, @PathVariable String order) {
+    @GetMapping("/listBatchByProduct/")
+    public ResponseEntity<List<BatchResponseDTO>> orderByProductId(@RequestParam Long id, @RequestParam String order) {
         List<BatchResponseDTO> response = BatchConverter.convertEntityListToDtoList(service.OrderByBatchInProduct(id, order));
         return ResponseEntity.ok().body(response);
     }

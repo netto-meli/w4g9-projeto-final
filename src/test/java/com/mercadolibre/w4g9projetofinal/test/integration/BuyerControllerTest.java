@@ -43,7 +43,7 @@ public class BuyerControllerTest {
     public void incluiDados() {
         Buyer buyer = new Buyer(2L, "userComprador",
                 "Comprador nome", "email1@hotkkmail.com", crypt.encode("123776456"), "Endereco");
-        buyer = buyerRepository.save(buyer);
+        buyerRepository.save(buyer);
     }
 
     @Test
@@ -63,7 +63,8 @@ public class BuyerControllerTest {
                 .post("/api/v1/fresh-products/buyer")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(String.valueOf(item)))
-                .andExpect(MockMvcResultMatchers.status().isCreated());
+                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andReturn();
 
         mockMvc.perform(MockMvcRequestBuilders
                 .post("/api/v1/freshproducts/buyer")
@@ -107,6 +108,7 @@ public class BuyerControllerTest {
                 .get("/api/v1/fresh-products/buyer/" + 4L)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is4xxClientError());
+
     }
 
     @Test

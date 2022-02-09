@@ -57,14 +57,14 @@ public class AdvertiseContorllerTest {
     public void incluiDados() {
         Product product1 = new Product(2L, "produto1", "desc produto 1",
                 10F, 20F, RefrigerationType.FRESH);
-        product1 = productRepository.save(product1);
+        productRepository.save(product1);
 
         Seller seller = new Seller(2L, "userSeller",
                 "vendedor nome", "email1@hotmail.com", crypt.encode("123456"), null);
-        seller = sellerRepository.save(seller);
+        sellerRepository.save(seller);
 
         Advertise advertise = new Advertise(2L, "description", product1, seller, BigDecimal.valueOf(46), AdvertiseStatus.ATIVO, true);
-        advertise = advertiseRepository.save(advertise);
+        advertiseRepository.save(advertise);
 
     }
 
