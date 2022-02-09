@@ -128,11 +128,6 @@ public class AdvertiseContorllerTest {
                 .andReturn();
 
         System.out.println("\n\nDado consultados:\n" + result.getResponse().getContentAsString() + "\n\n");
-
-        mockMvc.perform(MockMvcRequestBuilders
-                .get("/api/v1/fresh-products/advertise/" + 4L)
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().is4xxClientError());
     }
 
     @Test
