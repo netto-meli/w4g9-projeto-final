@@ -5,12 +5,12 @@
 ### Especificações de Requisitos
 
 #### Requerimentos US:
-#### ml-forgot-users-01
+#### ml-forgot-users-06
 
 **Importante:**
-As histórias de usuários são narradas do ponto de vista do comprador com base em
+As histórias são narradas do ponto de vista do usuário com base em
 suas necessidades. Os serviços são expostos a partir do Marketplace para serem
-consumidos pelo comprador que os solicita. Os contratos referem-se à História do Usuário.
+consumidos pelos usuários que os solicita. Os contratos referem-se à história do usuário.
 
 ## Recuperação de Senha: Ao esquecer a senha o usuário poderá solicitar uma nova senha, onde será gerada automaticamente e enviada para seu email cadastrado. 
 ### User Story
@@ -31,13 +31,14 @@ consumidos pelo comprador que os solicita. Os contratos referem-se à História 
 > Observação:
  Para que o recebimento do email com a nova senha seja concretizado é necessário informar um email válido e que este o mesmo esteja cadastrado diretamente com algum usuário existente.
 
-##### Representação JSON:
+##### Representação params:
 <details><summary>Request</summary><p>
 
-```JSON
-{
-  "email": "email@exemplo.com"
-}
+```PARAMS
+                 PARAMS
+                 
+      KEY          |        VALUE
+     email         |   email@exemplo.com 
 ```
 </p></details>
 
@@ -45,4 +46,4 @@ consumidos pelo comprador que os solicita. Os contratos referem-se à História 
 ### Contratos relativos a User Story
 | HTTP | Modelo de URI                                             | Descrição                                                                                                                                                                                                                                                                           | US-code |
 |------|-----------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---|
-| POST | /api/v1/auth/forgot/?email=email@exemplo.com                            | Gera uma nova senha e envia para o email informado. <br>Devolve resposta HTTP Status "204 NO CONTENT". | ml-forgot-users-01 |
+| POST | /api/v1/auth/forgot/?email=email@exemplo.com                            | Gera uma nova senha e envia para o email informado. <br>Devolve resposta HTTP Status "204 NO CONTENT". | ml-forgot-users-06 |
