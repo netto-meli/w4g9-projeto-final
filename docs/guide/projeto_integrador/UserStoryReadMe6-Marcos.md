@@ -8,9 +8,9 @@
 #### ml-forgot-users-01
 
 **Importante:**
-As histórias de usuários são narradas do ponto de vista do comprador com base em
+As histórias são narradas do ponto de vista do usuário com base em
 suas necessidades. Os serviços são expostos a partir do Marketplace para serem
-consumidos pelo comprador que os solicita. Os contratos referem-se à História do Usuário.
+consumidos pelos usuários que os solicita. Os contratos referem-se à história do usuário.
 
 ## Recuperação de Senha: Ao esquecer a senha o usuário poderá solicitar uma nova senha, onde será gerada automaticamente e enviada para seu email cadastrado. 
 ### User Story
