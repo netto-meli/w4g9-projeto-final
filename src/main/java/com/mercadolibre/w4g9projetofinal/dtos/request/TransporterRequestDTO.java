@@ -28,18 +28,15 @@ public class TransporterRequestDTO {
     @NotNull(message = "Campo Obrigatório")
     @NotEmpty(message = "Campo Obrigatório")
     @Pattern(regexp = "[A-Z]{3}[0-9][0-9A-Z][0-9]{2}",
-            message = "Placa do carro deve ser por exemplo AAA0A00")
+            message = "Placa do carro deve ser padrão antigo ou mercosul, por exemplo AAA0000 ou AAA0A00")
     private String carPlate;
     @NotNull(message = "Campo Obrigatório")
-    @NotEmpty(message = "Campo Obrigatório")
     @PositiveOrZero(message = "Espaço máximo para itens frescos deve ser um valor positivo ou Zero")
     private Integer freshMaxQuantity;
     @NotNull(message = "Campo Obrigatório")
-    @NotEmpty(message = "Campo Obrigatório")
     @PositiveOrZero(message = "Espaço máximo para itens congelados deve ser um valor positivo ou Zero")
     private Integer frozenMaxQuantity;
     @NotNull(message = "Campo Obrigatório")
-    @NotEmpty(message = "Campo Obrigatório")
     @PositiveOrZero(message = "Espaço máximo para itens refrigerados deve ser um valor positivo ou Zero")
     private Integer coldMaxQuantity;
 }

@@ -137,8 +137,9 @@ public class TransporterService {
     }
 
     private Transporter updateTransporter(Transporter old, Transporter transporter) {
-        old.setId(transporter.getId());
         old.setName(transporter.getName());
+        old.setCarModel(transporter.getCarModel());
+        old.setCarPlate(transporter.getCarPlate());
         old.setRepresentative(transporter.getRepresentative());
         old.setFreshMaxQuantity(transporter.getFreshMaxQuantity());
         old.setFrozenMaxQuantity(transporter.getFrozenMaxQuantity());
