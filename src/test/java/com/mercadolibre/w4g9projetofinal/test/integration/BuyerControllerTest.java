@@ -42,23 +42,23 @@ public class BuyerControllerTest {
     @Test
     @Order(1)
     public void incluiDados() {
-        Buyer buyer = new Buyer(1L, "userComprador",
+        Buyer buyer = new Buyer(null, "userComprador",
                 "Compradorfg nome", "email1@hotkkmail.com", crypt.encode("123776456"), "Endereco");
-        Buyer buyer1 = new Buyer(2L, "userCompr",
+        Buyer buyer1 = new Buyer(null, "userCompr",
                 "Comprador fnome", "email@hotkkmail.com", crypt.encode("123776456"), "Endereco");
-        Buyer buyer2 = new Buyer(3L, "userComp",
+        Buyer buyer2 = new Buyer(null, "userComp",
                 "Compradorg nome", "email1@hotkmail.com", crypt.encode("123776456"), "Endereco");
-        Buyer buyer3 = new Buyer(4L, "userCom",
+        Buyer buyer3 = new Buyer(null, "userCom",
                 "Comprador gnome", "email1@hokkmail.com", crypt.encode("123776456"), "Endereco");
-        Buyer buyer4 = new Buyer(5L, "userComprado",
+        Buyer buyer4 = new Buyer(null, "userComprado",
                 "Comprador snome", "email@hotkmail.com", crypt.encode("123776456"), "Endereco");
+        buyer.getProfile().add(Profile.ADMIN);
         buyerRepository.save(buyer);
         buyerRepository.save(buyer1);
         buyerRepository.save(buyer2);
         buyerRepository.save(buyer3);
         buyerRepository.save(buyer4);
 
-        buyer.getProfile().add(Profile.ADMIN);
     }
 
     @Test
@@ -114,7 +114,7 @@ public class BuyerControllerTest {
     public void getId() throws Exception {
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
-                .get("/api/v1/fresh-products/buyer/" + 1L)
+                .get("/api/v1/fresh-products/buyer/" + 4L)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
@@ -137,7 +137,7 @@ public class BuyerControllerTest {
         item.put("address", buyerUpdate.getAddress());
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
-                .put("/api/v1/fresh-products/buyer/" + 1L)
+                .put("/api/v1/fresh-products/buyer/" + 4L)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(String.valueOf(item)))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -152,7 +152,7 @@ public class BuyerControllerTest {
     public void delete() throws Exception {
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
-                .delete("/api/v1/fresh-products/buyer/" + 1L)
+                .delete("/api/v1/fresh-products/buyer/" + 4L)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
