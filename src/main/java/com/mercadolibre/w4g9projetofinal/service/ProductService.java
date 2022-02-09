@@ -95,9 +95,9 @@ public class ProductService {
             return batch.stream().sorted(Comparator.comparing(Batch::getCurrentQuantity)).collect(Collectors.toList());
         } else if (OrderByProductInBatch.ORDER_BY_DUEDATE.getCod().equals(orderBy)) {
             return batch.stream().sorted(Comparator.comparing(Batch::getDueDate)).collect(Collectors.toList());
-        } else {
-            throw new BusinessException("Metodo de Ordenação informado está errado");
         }
+
+        return null;
     }
 
     /*** Método que insere um Product

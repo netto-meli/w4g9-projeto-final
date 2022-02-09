@@ -107,29 +107,23 @@ public class ProductContorllerTest {
 
     @Test
     @Order(2)
-    public void insertBuyer() throws Exception {
+    public void insertProduct() throws Exception {
 
-        ProductRequestDTO prod = new ProductRequestDTO( "produto100", "desc produto 1",
-                20F, 40F, RefrigerationType.FROZEN);
+        ProductRequestDTO prod = new ProductRequestDTO( "produto", "desc produto",
+                20, 40, RefrigerationType.COLD);
 
         JSONObject item = new JSONObject();
         item.put("name",prod.getName());
         item.put("description",prod.getDescription());
         item.put("minTemperature",prod.getMinTemperature());
         item.put("maxTemperature",prod.getMaxTemperature());
-        item.put("categoryRefrigeration",prod.getCategoryRefrigeration());
+        item.put("category_refrigeration",prod.getCategoryRefrigeration());
 
         mockMvc.perform(MockMvcRequestBuilders
                 .post("/api/v1/fresh-products/product")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(String.valueOf(item)))
                 .andExpect(MockMvcResultMatchers.status().isCreated());
-
-        mockMvc.perform(MockMvcRequestBuilders
-                .post("/api/v1/freshproducts/product")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(String.valueOf(item)))
-                .andExpect(MockMvcResultMatchers.status().is4xxClientError());
     }
 
     @Test
@@ -165,7 +159,7 @@ public class ProductContorllerTest {
 
     @Test
     @Order(5)
-    public void putIdUpedate() throws Exception {
+    public void putIdUpdate() throws Exception {
 
         ProductRequestDTO prod = new ProductRequestDTO( "produto11", "desc produto 123",
                 20F, 40F, RefrigerationType.FROZEN);
@@ -175,7 +169,7 @@ public class ProductContorllerTest {
         item.put("description",prod.getDescription());
         item.put("minTemperature",prod.getMinTemperature());
         item.put("maxTemperature",prod.getMaxTemperature());
-        item.put("categoryRefrigeration",prod.getCategoryRefrigeration());
+        item.put("category_refrigeration",prod.getCategoryRefrigeration());
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
                 .put("/api/v1/fresh-products/product/" + 3L)

@@ -40,7 +40,7 @@ public class AuthResourceTest {
     @Order(2)
     public void deveAlterarSenha() throws Exception {
         MvcResult result = mockMvc
-                .perform(MockMvcRequestBuilders.post("/auth/forgot/").param("email", "seller1@gmail.com"))
+                .perform(MockMvcRequestBuilders.post("/api/v1/auth/forgot/").param("email", "seller1@gmail.com"))
                 .andExpect(MockMvcResultMatchers.status().isNoContent())
                 .andReturn();
     }
