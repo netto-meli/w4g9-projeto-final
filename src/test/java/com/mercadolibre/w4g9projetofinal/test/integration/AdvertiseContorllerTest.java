@@ -55,28 +55,27 @@ public class AdvertiseContorllerTest {
     @Test
     @Order(1)
     public void incluiDados() {
-        Product product1 = new Product(2L, "produto1", "desc produto 1",
+        Product product1 = new Product(null, "produto1", "desc produto 1",
                 10F, 20F, RefrigerationType.FRESH);
         productRepository.save(product1);
 
-        Seller seller = new Seller(2L, "userSeller",
-                "vendedor nome", "email1@hotmail.com", crypt.encode("123456"), null);
+        Seller seller = new Seller(null, "userSeller",
+                "vendedor nome", "email@hotmail.com", crypt.encode("123456"), null);
         sellerRepository.save(seller);
 
-        Advertise advertise = new Advertise(2L, "description", product1, seller, BigDecimal.valueOf(46), AdvertiseStatus.ATIVO, true);
+        Advertise advertise = new Advertise(null, "description", product1, seller, BigDecimal.valueOf(46), AdvertiseStatus.ATIVO, true);
         advertiseRepository.save(advertise);
-
     }
 
     @Order(2)
     @Test
     public void insertAdvertise() throws Exception {
 
-        Product product1 = new Product(4L, "produto2", "desc produto 3",
+        Product product1 = new Product(null, "produto2", "desc produto 3",
                 10F, 20F, RefrigerationType.FRESH);
         product1 = productRepository.save(product1);
 
-        Seller seller = new Seller(4L, "userSellerIdinclu",
+        Seller seller = new Seller(null, "userSellerIdinclu",
                 "vendedor nome incluso", "email1@hotmail.com", crypt.encode("123456"), null);
         seller = sellerRepository.save(seller);
 
@@ -84,11 +83,11 @@ public class AdvertiseContorllerTest {
 
         JSONObject item = new JSONObject();
         item.put("description",advertiseRequestDTO.getDescription());
-        item.put("productId",advertiseRequestDTO.getProductId());
-        item.put("sellerId",advertiseRequestDTO.getSellerId());
+        item.put("product_id",advertiseRequestDTO.getProductId());
+        item.put("seller_id",advertiseRequestDTO.getSellerId());
         item.put("price",advertiseRequestDTO.getPrice());
         item.put("status",advertiseRequestDTO.getStatus());
-        item.put("freeShipping",advertiseRequestDTO.getFreeShipping());
+        item.put("free_shipping",advertiseRequestDTO.getFreeShipping());
 
         MvcResult result =  mockMvc.perform(MockMvcRequestBuilders
                 .post("/api/v1/fresh-products/advertise")
@@ -139,24 +138,24 @@ public class AdvertiseContorllerTest {
         product1 = productRepository.save(product1);
 
         Seller seller = new Seller(2L, "userSellerIdinclu",
-                "vendedor nome incluso", "email1@hotmail.com", crypt.encode("123456"), null);
+                "vendedor nome incluso", "emailtu@hotmail.com", crypt.encode("123456"), null);
         seller = sellerRepository.save(seller);
 
         AdvertiseRequestDTO advertiseRequestDTO = new AdvertiseRequestDTO( "description", product1.getId(), seller.getId(), BigDecimal.valueOf(461), AdvertiseStatus.INATIVO, true);
 
         JSONObject item = new JSONObject();
         item.put("description",advertiseRequestDTO.getDescription());
-        item.put("productId",advertiseRequestDTO.getProductId());
-        item.put("sellerId",advertiseRequestDTO.getSellerId());
+        item.put("product_id",advertiseRequestDTO.getProductId());
+        item.put("seller_id",advertiseRequestDTO.getSellerId());
         item.put("price",advertiseRequestDTO.getPrice());
         item.put("status",advertiseRequestDTO.getStatus());
-        item.put("freeShipping",advertiseRequestDTO.getFreeShipping());
+        item.put("free_shipping",advertiseRequestDTO.getFreeShipping());
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
                 .put("/api/v1/fresh-products/advertise/" + 1L)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(String.valueOf(item)))
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.status().isAccepted())
                 .andReturn();
 
         System.out.println("\n\nDado alterado:\n" + result.getResponse().getContentAsString() + "\n\n");
