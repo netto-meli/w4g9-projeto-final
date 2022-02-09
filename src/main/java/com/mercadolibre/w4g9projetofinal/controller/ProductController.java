@@ -61,12 +61,12 @@ public class ProductController {
      * @return ResponseEntity com status <b>CREATED</b>
      */
     @PostMapping
-    public ResponseEntity<Product> insert(@RequestBody @Valid ProductRequestDTO obj) {
+    public ResponseEntity<ProductResponseDTO> insert(@RequestBody @Valid ProductRequestDTO obj) {
         Product newObj = ProductConverter.convertDtoToEntity(obj);
         newObj = service.insert(newObj);
         ProductResponseDTO newObj2 = ProductConverter.convertEntityToDto(newObj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj2.getId()).toUri();
-        return ResponseEntity.created(uri).body(newObj);
+        return ResponseEntity.created(uri).body(newObj2);
     }
 
     /*** Método para atualização de product existente<br>
