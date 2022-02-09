@@ -517,7 +517,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/fresh-products/product/listCategory?categoryProd",
+							"raw": "http://localhost:8080/api/v1/fresh-products/product/listCategory/?categoryProd",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -578,7 +578,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/fresh-products/product/listBatch/{{order}}?id",
+							"raw": "http://localhost:8080/api/v1/fresh-products/product/listBatch/?id&order=",
 							"protocol": "http",
 							"host": [
 								"localhost"
