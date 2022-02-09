@@ -1,5 +1,6 @@
 package com.mercadolibre.w4g9projetofinal.dtos.response;
 
+import com.mercadolibre.w4g9projetofinal.entity.enums.SellOrderStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -25,6 +26,10 @@ public class SellOrderResponseDTO {
      * Lista de ItemCarrinhodTO (produto no pedido) no formato BigDecimal
      */
     private List<OrderItemResponseDTO> orderItemResponseDTOList;
+    /***
+     * Indicador se a ordem de compra ja foi realizada ou se ainda é um carrinho de compras
+     */
+    private SellOrderStatus orderStatus;
     /***
      * Valor do frete do Pedido no formato BigDecimal
      */
