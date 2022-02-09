@@ -5,8 +5,8 @@ public enum RepresentativeJob {
     SUPERVISOR(0, "Supervisor"),
     LIDER(1, "Líder");
 
-    private final int cod;
-    private final String descricao;
+    private int cod;
+    private String descricao;
 
     RepresentativeJob(int cod, String descricao) {
         this.cod = cod;

@@ -40,37 +40,8 @@ public class BatchService {
     public Batch verifyStock(Long idAdvertise, int qtdProduct) {
         Batch batch = batchRepository.findByAdvertise_Id(idAdvertise).orElseThrow(() ->
                 new CartManagementException("Lote referente ao anuncio " + idAdvertise + " não encontrado"));
-        this.verifyStockOfBatch(batch, qtdProduct);
+        batch.verifyStock(qtdProduct);
         return batch;
-    }
-
-
-
-    /*** Realiza verificação do estoque da quantidade de itens de um produto para o carrinho
-     *
-     * @param qtd Quantidade de itens vendidos de um produto.
-     */
-    private void verifyStockOfBatch(Batch batch, int qtd) {
-        if ( qtd > batch.getCurrentQuantity() ){
-            String erro = "Imposssível realizar compra, pois o Produto "
-                    + batch.getId()
-                    + " tem somente "
-                    + batch.getCurrentQuantity()
-                    + " itens em estoque, e você está tentando comprar "
-                    + qtd
-                    + " itens.";
-            throw new CartManagementException(erro);
-        }
-    }
-
-    /*** Realiza baixa no estoque da quantidade de itens de um produto que foi vendido
-     *
-     * @param qtd Quantidade de itens vendidos de um produto.
-     */
-    private void updateStock(Batch batch, int qtd) {
-        int quantity = batch.getCurrentQuantity();
-        quantity -= qtd;
-        batch.setCurrentQuantity(quantity);
     }
 
     /*** Método que dá baixa de Produtos no estoque
@@ -82,23 +53,12 @@ public class BatchService {
         for (OrderItem cartItem : orderItemList) {
             Batch batch = this.verifyStock(cartItem.getAdvertise().getId(), cartItem.getQuantity());
             Section section = batch.getInboundOrder().getSection();
-            this.updateStock(batch, cartItem.getQuantity());
+            batch.updateStock(cartItem.getQuantity());
             batchIterable.add(batch);
-            this.updateStock(section, cartItem.getQuantity());
+            section.updateStock(cartItem.getQuantity());
             sectionService.save(section);
         }
         batchRepository.saveAll(batchIterable);
-    }
-
-
-    /*** Realiza baixa no estoque da quantidade de itens de um produto que foi vendido
-     *
-     * @param qtd Quantidade de itens vendidos de um produto.
-     */
-    public void updateStock(Section section, int qtd) {
-        int quantity = section.getCurrentStock();
-        quantity -= qtd;
-        section.setCurrentStock(quantity);
     }
 
     /***

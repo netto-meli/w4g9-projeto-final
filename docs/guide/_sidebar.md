@@ -7,6 +7,6 @@
     - [Postman](postman/)
 
 - About
-    - [Fury Project](fury_Install/)
+    - [Fury Project](fury_install/)
     - [Git Commit Guidelines](git/)
     - [Documentation Service](docsify/)

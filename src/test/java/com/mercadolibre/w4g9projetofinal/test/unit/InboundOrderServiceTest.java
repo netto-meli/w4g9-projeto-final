@@ -1,6 +1,10 @@
 package com.mercadolibre.w4g9projetofinal.test.unit;
 
-import com.mercadolibre.w4g9projetofinal.entity.*;
+import com.mercadolibre.w4g9projetofinal.entity.InboundOrder;
+import com.mercadolibre.w4g9projetofinal.entity.Representative;
+import com.mercadolibre.w4g9projetofinal.entity.Section;
+import com.mercadolibre.w4g9projetofinal.entity.Seller;
+import com.mercadolibre.w4g9projetofinal.entity.Warehouse;
 import com.mercadolibre.w4g9projetofinal.exceptions.BusinessException;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.exceptions.SectionManagementException;
@@ -332,10 +336,6 @@ public class InboundOrderServiceTest {
         Long idSetor = 1L;
         Long idArmazem = 1L;
         InboundOrder ordemDeEntrada = new InboundOrder();
-        Batch b = new Batch();
-        List<Batch> lb = new ArrayList<>();
-        lb.add(b);
-        ordemDeEntrada.setBatchList(lb);
         Section setor = new Section();
         Warehouse armazem = new Warehouse();
         armazem.setId(idArmazem);
@@ -354,7 +354,7 @@ public class InboundOrderServiceTest {
         Mockito.when(inboundOrderRepository.findById(idOrdemEntrada)).thenReturn(Optional.of(ordemDeEntrada));
         Mockito.when(representativeService.findById(Mockito.anyLong())).thenReturn(representante);
         Mockito.when(sellerService.verifySellerInInboundOrder(Mockito.any())).thenReturn(new Seller());
-        Mockito.when(sectionService.updateOldSectionStock(Mockito.any(), Mockito.any())).thenReturn(lb);
+        Mockito.when(sectionService.updateOldSectionStock(Mockito.any(), Mockito.any())).thenReturn(new ArrayList<>());
         Mockito.when(inboundOrderRepository.save(Mockito.any())).thenReturn(ordemDeEntrada);
         Mockito.when(sectionService.validateBatchSection(Mockito.any(), Mockito.any(), Mockito.anyBoolean()))
                 .thenReturn(setor);

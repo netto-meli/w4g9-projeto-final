@@ -57,18 +57,18 @@ public class Instantiation implements CommandLineRunner {
         Warehouse warehouse = new Warehouse(null, "k", "l" );
         warehouse = warehouseRepository.save(warehouse);
 
-        Buyer buyer = new Buyer(null, "1jhjggkg23",
+        Buyer buyer = new Buyer(null, "123",
                 "Comprador nome", "email1@hotkkmail.com", pe.encode("123"), "Endereco");
+        buyer.getProfile().add(Profile.ADMIN);
         buyer = buyerRepository.save(buyer);
 
         Seller seller = new Seller(null, "userSeller",
-                "vendedor nome", "email1@hotmail.com", pe.encode("123"), null);
+                "vendedor nome", "email1@hotmail.com", pe.encode("123456"), null);
         seller = sellerRepository.save(seller);
 
-        Representative representative = new Representative(null, "123",
-                "Representante nome", "em1@gmail.com", pe.encode("123"),
+        Representative representative = new Representative(null, "userRepresentative",
+                "Representante nome", "em1@gmail.com", pe.encode("151515"),
                 RepresentativeJob.LIDER, warehouse);
-        representative.getProfile().add(Profile.ADMIN);
         representative = representativeRepository.save(representative);
 
         Product product1 = new Product(null, "produto1", "desc produto 1",

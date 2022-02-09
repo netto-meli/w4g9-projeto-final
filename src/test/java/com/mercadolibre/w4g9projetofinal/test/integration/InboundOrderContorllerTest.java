@@ -119,10 +119,8 @@ public class InboundOrderContorllerTest {
         l2.add(t4);
         InboundOrder i1 = new InboundOrder(1L, lc, seller, representative, l1, section1);
         InboundOrder i2 = new InboundOrder(2L, lc, seller, representative, l2, section1);
-        for (Batch b: i1.getBatchList())
-            b.setInboundOrder(i1);
-        for (Batch b: i2.getBatchList())
-            b.setInboundOrder(i2);
+        i1.setInboundOrderToBatchList();
+        i2.setInboundOrderToBatchList();
         inboundOrderRepository.saveAll(Arrays.asList(i1, i2));
     }
 
@@ -141,7 +139,7 @@ public class InboundOrderContorllerTest {
                 "  \"batch_stock\": [\n" +
                 "    {\n" +
                 "      \"batch_number\": 10,\n" +
-                "      \"advertise_id\": 3,\n" +
+                "      \"advertise_id\": 1,\n" +
                 "      \"current_temperature\": 19.0,\n" +
                 "      \"minimum_temperature\": 10.0,\n" +
                 "      \"initial_quantity\": 2,\n" +
@@ -180,7 +178,7 @@ public class InboundOrderContorllerTest {
                 "  \"batch_stock\": [\n" +
                 "    {\n" +
                 "      \"batch_number\": 11,\n" +
-                "      \"advertise_id\": 3,\n" +
+                "      \"advertise_id\": 1,\n" +
                 "      \"current_temperature\": 9.0,\n" +
                 "      \"minimum_temperature\": 10.0,\n" +
                 "      \"initial_quantity\": 2,\n" +

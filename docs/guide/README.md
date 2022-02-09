@@ -78,18 +78,6 @@
 
 </p></details>
 
-<details><summary>US - 6</summary><p>
-
-| HTTP | LINK                                                                                                              |
-|------|-------------------------------------------------------------------------------------------------------------------|
-| GET  | http://localhost:8080/api/v1/fresh-products/due-date/bySection/{{numberOfDays}}?sectionId=                        |
-| GET  | http://localhost:8080/api/v1/fresh-products/due-date/byRefrigeration/{{numberOfDays}}?refrigerationType=&orderBy= |
-
-</p></details>
-
-
-
-
 ``` plantuml
 @startuml
 skinparam actorStyle awesome
@@ -98,10 +86,10 @@ skinparam actorStyle awesome
 "Leonardo" as lnd
 "Marcos" as mcs
 "Rafael" as rfl
-flp --> (US - 6 - Gerenciamento de Setores)
-frn --> (US - 6 - Entregadores e Delivery)
-lnd --> (US - 6 - XXXXX)
-mcs --> (US - 6 - Receber senha perdida por e-mail)
+flp --> (US - 6 - XXXXXX)
+frn --> (US - 6 - XXXXXX)
+lnd --> (US - 6 - XXXXXX)
+mcs --> (US - 6 - XXXXXX)
 rfl --> (US - 6 - XXXXXX)
 @enduml
 ```

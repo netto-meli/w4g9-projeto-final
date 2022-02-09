@@ -94,4 +94,5 @@ public class RepresentativeController {
         service.delete(id);
         return ResponseEntity.ok().build();
     }
+
 }

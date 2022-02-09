@@ -55,7 +55,7 @@ public class InboundOrderService {
         section = sectionService.validateBatchSection(
                 inboundOrder.getBatchList(), oldInboundOrder.getSection(), isUpdate);
         inboundOrder.setSection(section);
-        this.setInboundOrderToBatchList(inboundOrder);
+        inboundOrder.setInboundOrderToBatchList();
         return inboundOrderRepository.save(inboundOrder);
     }
 
@@ -88,12 +88,5 @@ public class InboundOrderService {
                     + section.getWarehouse().getName() );
         }
         inboundOrder.setRepresentative(representative);
-    }
-
-    private void setInboundOrderToBatchList(InboundOrder inboundOrder) {
-        if(inboundOrder.getBatchList() == null)
-            inboundOrder.setBatchList(new ArrayList<>());
-        for (Batch b: inboundOrder.getBatchList())
-            b.setInboundOrder(inboundOrder);
     }
 }

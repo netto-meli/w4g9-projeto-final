@@ -39,7 +39,7 @@ public class SectionConverter {
         return new Section(null,
                 new Warehouse(section.getIdWarehouse(), null, null),
                 section.getName(),
-                section.getType(),
+                null,
                 section.getCurrentStock(),
                 section.getStockLimit(),
                 section.getMinTeperature(),

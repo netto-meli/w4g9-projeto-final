@@ -1,124 +1,82 @@
 # Programação Java
-## Requisito 6
+## Requisito 2
 ### // Especificações de Requisitos
 
 #### Requerimientos US:
-#### ml-delivery-orders-01
+#### ml-add-products-to-cart-01
 
 **Importante:**
-As histórias dos usuários são contadas do ponto de vista do representante e com base em suas necessidades.
-Os serviços são expostos a partir do armazém de atendimento. Os contratos referem-se à História do Usuário.
+As histórias de usuários são narradas do ponto de vista do comprador com base em
+suas necessidades. Os serviços são expostos a partir do Marketplace para serem
+consumidos pelo comprador que os solicita. Os contratos referem-se à História do Usuário.
 
-Sinônimos do Representante: supervisor, líder.
-
-## Gerenciar Entregadores e suas Entregas
+## Registrar Venda: Adicione o produto ao carrinho de comprasRegistrar Venda: Adicione o produto ao carrinho de compras
 ### User Story
 
 
-|                                                           User Story Code: ml-delivery-orders-01                                                            | Horas estimadas |
-|:-----------------------------------------------------------------------------------------------------------------------------------------------------------:|:---------------:|
-|                                                 **User Story Name: Gerenciar Entregadores e suas Entregas**                                                 |       12        |
-| **COMO** _Representante_ **QUERO** adicionar _Entregadores_ na Base de Dados **PARA** que eles possam fazer entregas das Ordens de Pedido dos _Compradores_ |                 |
+|                                      User Story Code: ml-add-products-to-cart-01                                       | Horas estimadas |
+|:----------------------------------------------------------------------------------------------------------------------:|:---------------:|
+|                             **User Story Name: Adicionar produto ao carrinho de compras**                              |                 |
+| **COMO** _comprador **QUERO** adicionar produtos ao carrinho de compras do Marketplace **PARA** comprá-los, se desejar ||
 
-| **CENÁRIO 1:** O Entregador é registrado.                  |
-|:-----------------------------------------------------------|
-| **DESDE** o Representante esteja autorizado                |
-| **E** que o Entregador tenha um meio de condução           |
-| **E** que o meio de condução tenha placa                   |
-| **E/OU** que o haja espaço para produtos frescos            |
-| **E/OU** que o haja espaço para produtos refrigerados      |
-| **E/OU** que o haja espaço para produtos congelados        |
-| **QUANDO** o Representante aciona o cadastro do Entregador |
-| **ENTÃO** um Entregador é cadastrado                       |
-| **E** seu status fica disponivel para entrega              |
+| **CENÁRIO 1:** O produto de um vendedor é registrado.                  |
+|:-----------------------------------------------------------------------|
+| **DESDE** o produto de um Vendedor é registrado                        |
+| **E** que o comprador esteja cadastrado                                |
+| **E** que o produto tem estoque                                        |
+| **E** que o prazo de validade do produto não seja inferior a 3 semanas |
+| **QUANDO** o comprador adiciona o produto com a quantidade ao carrinho |
+| **ENTÃO** um produto é adicionado ao carrinho de compras               |
+| **E** atualiza o estoque atual do produto                              |
 
-| **CENÁRIO 2:** Um Entregador chamado para entrega.                           |
-|:-----------------------------------------------------------------------------|
-| **DESDE** o Entregador não esteja fazendo uma entrega                        |
-| **E** que o haja espaço para produtos frescos da lista de pedidos            |
-| **E** que o haja espaço para produtos refrigerados da lista de pedidos       |
-| **E** que o haja espaço para produtos congelados da lista de pedidos      |
-| **QUANDO** o Representante aciona a busca de Entregadores                    |
-| **ENTÃO** um Entregador estipulado para a entrega dos pedidos                |
-| **E** seu estatus fica como indisponível para entrega ("Em Rota de Entrega") |
-| **E** recebe como pagamento 25% do valor do frete do pedido.                 |
+| VALIDAÇÃO                                             |
+|-------------------------------------------------------|
+| * Autentique-se como comprador e acesse os terminais. | 
+| * Consultar produto                                   |
+| * Adicione um produto ao carrinho do comprador.       |
 
-| VALIDAÇÃO                                                  |
-|------------------------------------------------------------|
-| * Autentique-se como Representante e acesse os terminais.  |
-| * Validação de parâmetros obrigatórios.                    |
-| * Calculo do valor do frete total dos pedidos              |
-| * Para Frete for gratis, o entregador recebe um valor fixo |
+> Observação:
+Os pedidos de compra (purchaseOrder) feitos pelo comprador terão apenas o status de Order (OrderStatus) Cart
 
 ##### Representação JSON:
 <details><summary>Request</summary><p>
 
-Referente ao Entregador
 ```JSON
 {
-  "name": "String",
-  "car_model": "String",
-  "car_plate": "string",
-  "fresh_max_quantity": "int",
-  "frozen_max_quantity": "int",
-  "cold_max_quantity": "int"
+  "purchase_order": {
+    "date": "LocalDate",
+    "buyer_id": "String",
+    "order_status": {
+      "status_code": "String"
+    },
+    "products": [{
+      "product_id": "String",
+      "quantity": "int"
+    }]
+  }
 }
 ```
-
-Referente a Lista de Entregas a serem feitas
-```JSON
-[
-  {
-    "id": "int"
-  }
-]
-```
-</p></details>
+</details></p>
 
 <details><summary>Response</summary><p>
 
 ```JSON
 {
-  "id": "int",
-  "name": "Strting",
-  "car_model": "String",
-  "car_plate": "String",
-  "delivery_order_list": [
-    {
-      "id": "int",
-      "buyer_id": "int",
-      "order_item_response_dtolist": [
-        {
-          "quantity": "int",
-          "id_advertise": "int"
-        }
-      ],
-      "order_status": "String",
-      "shipping_rate": "float",
-      "total_value": "float"
-    }
-  ],
-  "in_route": "boolean",
-  "payment_for_delivery": "float",
-  "salary": "float"
+  "total_price": "double"
 }
 ```
-</p></details>
+</details></p>
 
 ### Contratos relativos a User Story
-| HTTP   | Modelo de URI                                                | Descrição                                                                                                                | US-code               |
-|--------|--------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|-----------------------|
-| POST   | api/v1/fresh-products/delivery                               | Cadastre um Emtregador. Devolva o Entregador criado com o código de status "201 CREATED".                                | ml-delivery-orders-01 |
-| PUT    | api/v1/fresh-products/delivery/[idEntregador]                | Altere um Emtregador. Devolva o Entregador alterado com o código de status "200 OK".                                     | ml-delivery-orders-01 |
-| DELETE | api/v1/fresh-products/delivery/[idEntregador]                | Exclua um Emtregador. Devolva o código de status "200 OK".                                                               | ml-delivery-orders-01 |
-| GET    | api/v1/fresh-products/delivery/[idEntregador]                | Veja um Entregador. <br>Se o Entregador não existir, deve retornar um "404 Not Found".                                   | ml-delivery-orders-01 |
-| GET    | api/v1/fresh-products/delivery/                              | Veja uma lista de Entregadores. <br>Se a lista não existir, ela deve retornar um "404 Not Found".                        | ml-delivery-orders-01 |
-| GET    | api/v1/fresh-products/delivery/byStatus/?isInRoute=[boolean] | Veja uma lista de Entregadores, filtrados por estar ou não em rota de entrega.                                           | ml-delivery-orders-01 |
-| POST   | api/v1/fresh-products/delivery/delivery                      | Solicite Entregador para delivery de Pedidos. <br>Se não houver entregador disponivel, deve retornar um "404 Not Found". | ml-delivery-orders-01 |
-| PUT    | api/v1/fresh-products/delivery/delivery/[idEntregador]       | Verifica Pedidos entregues do Entregador.                                                                                | ml-delivery-orders-01 |
+| HTTP | Modelo de URI                                             | Descrição                                                                                                                                                                                                                                                                           | US-code |
+|------|-----------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---|
+| GET  | /api/v1/fresh-products/                                   | Veja uma lista completa de produtos. <br>Se a lista não existir, ela deve retornar um "404 Not Found".                                                                                                                                                                              | ml-add-products-to-cart-01 |
+| GET  | /api/v1/fresh-products/list?querytype=[categoría producto] | Veja uma lista de produtos por categoria. <br>category:<br> FS = Fresco <br>RF = Refrigerado <br>FF = Congelado<br> Se a lista não existir, ela deve retornar um "404 Not Found".                                                                                                   | ml-add-products-to-cart-01                                                                                                                                                                                                                                                   |
+| POST | /api/v1/fresh-products/orders/                            | Registre um sellOrder com a lista de produtos que compõem o PurchaseOrder. <br>Calcule o preço final e devolva-o juntamente com o código de status "201 CREATED". <br>Se não houver estoque de um produto, notifique a situação retornando um erro por produto, não no nível do sellOrder. | ml-add-products-to-cart-01 |
+| GET  | /api/v1/fresh-products/orders/querytype=[idOrder]|| Mostrar produtos no sellOrder. ml-add-products-to-cart-01 |
+| PUT | /api/v1/fresh-products/orders/query param=[idOrder] |Modifique o sellOrder existente. torná-lo do tipo de carrinho para modificar | ml-add-products-to-cart-01 |
 
-> Observação:<br>
-Contemple outros tipos de erros.<br>
-Use o script de carregamento<br>
-Trabalhe com o token de acesso para o Representante autenticado.<br>
-O Entregador que estiver em rota de Delivery, não pode ser Alterado nem Excluído, e não pode receber mais Ordens de Pedidos.
+> Observação:
+Contemple outros tipos de erros.
+Use o script de carregamento
+Trabalhe com o token de acesso para o sellOrder como um cliente autenticado.

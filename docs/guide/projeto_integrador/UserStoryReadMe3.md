@@ -66,7 +66,8 @@ Sinônimos do Representante: supervisor, líder.
   ]
 }
 ```
-</p></details>
+
+</details></p>
 
 ### Contratos relativos a User Story
 

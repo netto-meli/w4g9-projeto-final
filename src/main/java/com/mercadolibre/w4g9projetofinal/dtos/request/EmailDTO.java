@@ -1,4 +1,4 @@
-package com.mercadolibre.w4g9projetofinal.email.dto;
+package com.mercadolibre.w4g9projetofinal.dtos.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

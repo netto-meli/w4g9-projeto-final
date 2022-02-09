@@ -1,4 +1,4 @@
-# Documentation Service
+# Socumentation Service
 
 > The introduction intends to explain to the user what this documentation is about
 

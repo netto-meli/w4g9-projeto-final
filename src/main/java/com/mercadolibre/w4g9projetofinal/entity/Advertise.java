@@ -1,18 +1,10 @@
 package com.mercadolibre.w4g9projetofinal.entity;
 
 import com.mercadolibre.w4g9projetofinal.entity.enums.AdvertiseStatus;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.Hibernate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -38,13 +30,13 @@ public class Advertise {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (!(o instanceof Advertise)) return false;
         Advertise advertise = (Advertise) o;
-        return id != null && Objects.equals(id, advertise.id);
+        return getId().equals(advertise.getId()) && getDescription().equals(advertise.getDescription()) && Objects.equals(getProduct(), advertise.getProduct()) && Objects.equals(getSeller(), advertise.getSeller()) && getPrice().equals(advertise.getPrice()) && getStatus() == advertise.getStatus();
     }
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hash(getId(), getDescription(), getProduct(), getSeller(), getPrice(), getStatus());
     }
 }

@@ -4,11 +4,14 @@ import com.mercadolibre.w4g9projetofinal.dtos.converter.BuyerConverter;
 import com.mercadolibre.w4g9projetofinal.dtos.request.BuyerRequestDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.BuyerResponseDTO;
 import com.mercadolibre.w4g9projetofinal.entity.Buyer;
+import com.mercadolibre.w4g9projetofinal.entity.enums.Profile;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
+import com.mercadolibre.w4g9projetofinal.security.entity.UserSS;
 import com.mercadolibre.w4g9projetofinal.service.BuyerService;
 import com.mercadolibre.w4g9projetofinal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -26,6 +29,7 @@ import java.util.List;
  *
  * @author Leonardo
  */
+
 @RestController
 @RequestMapping(value = "/api/v1/fresh-products/buyer")
 public class BuyerController {
@@ -43,6 +47,9 @@ public class BuyerController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<BuyerResponseDTO>> findAll() {
         List<BuyerResponseDTO> list = BuyerConverter.convertEntityListToDtoList(service.findAll());
+        if(list == null || list.isEmpty()){
+            throw new ObjectNotFoundException("Ainda nao consta dados cadastrados");
+        }
         return ResponseEntity.ok(list);
     }
 
@@ -63,12 +70,12 @@ public class BuyerController {
      * @return Retorna payload de Comprador em um ResponseEntity com status <b>CREATED</b>
      */
     @PostMapping
-    public ResponseEntity<BuyerResponseDTO> insert(@RequestBody @Valid BuyerRequestDTO buyer) {
+    public ResponseEntity<Void> insert(@RequestBody @Valid BuyerRequestDTO buyer) {
         Buyer newBuyer = BuyerConverter.convertDtoToEntity(buyer);
         newBuyer = service.insert(newBuyer);
         BuyerResponseDTO buyerFinal = BuyerConverter.convertEntityToDto(newBuyer);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(buyerFinal.getId()).toUri();
-        return ResponseEntity.created(uri).body(buyerFinal);
+        return ResponseEntity.created(uri).build();
     }
 
     /*** Método para Alterar Comprador<br>
@@ -76,13 +83,13 @@ public class BuyerController {
      * @return Retorna payload de CompradorDto em um ResponseEntity com status <b>CREATED</b>
      */
     @PutMapping(value = "/{id}")
-    public ResponseEntity<BuyerRequestDTO> update(@RequestBody @Valid BuyerRequestDTO newBuyer,
-                                                  @PathVariable Long id) {
+    public ResponseEntity<Void> update(@RequestBody @Valid BuyerRequestDTO newBuyer,
+                                       @PathVariable Long id) {
         UserService.adminOrSameUser(id);
         Buyer buyer = BuyerConverter.convertDtoToEntity(newBuyer);
         buyer.setId(id);
         service.update(buyer);
-        return ResponseEntity.ok().body(newBuyer);
+        return ResponseEntity.noContent().build();
     }
 
     /*** Método para deltear Anuncio<br>
@@ -90,24 +97,9 @@ public class BuyerController {
      * @return status ok.
      */
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<String> delete(@PathVariable Long id) {
-        UserService.adminOrSameUser(id);
-        service.delete(id);
-        return ResponseEntity.ok().body("Comprador com id : " + id + " excluido");
-    }
-
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<Void> update(@RequestBody BuyerRequestDTO newBuyer, @PathVariable Long id) {
-        Buyer buyer = BuyerConverter.convertDtoToEntityBuyer(newBuyer);
-        buyer.setId(id);
-        service.update(buyer);
-        return ResponseEntity.noContent().build();
-    }
-
-    @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
+        UserService.adminOrSameUser(id);
         service.delete(id);
         return ResponseEntity.ok().build();
     }
-
 }

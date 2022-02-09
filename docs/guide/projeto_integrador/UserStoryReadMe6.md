@@ -36,7 +36,7 @@ todos os requisitos do Projeto Final. (Req. 1 a Req. 6)
 Os resultados a seguir serão adicionados de acordo com cada nível.
 #### Nível 1: Base
 1. Readme.txt descritivo.
-2. Documentação em PDF com formato de histórico do usuário fornecido pela cadeira [(Template.)](/guide/assets/template.pdf)
+2. Documentação em PDF com formato de histórico do usuário fornecido pela cadeira [(Template)](assets/template.pdf)
 3. Histórico do usuário com até 4 endpoints.
 4. Coleção de casos de teste do Postman para cada endpoint.
 5. Cobertura de teste entre 50% e 80%.

@@ -1,21 +1,10 @@
 package com.mercadolibre.w4g9projetofinal.entity;
 
 import com.mercadolibre.w4g9projetofinal.entity.enums.RefrigerationType;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.Hibernate;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
@@ -58,5 +47,13 @@ public class Section {
     @Override
     public int hashCode() {
         return getClass().hashCode();
+    }
+
+    /*** Realiza baixa no estoque da quantidade de itens de um produto que foi vendido
+     *
+     * @param qtd Quantidade de itens vendidos de um produto.
+     */
+    public void updateStock(int qtd) {
+        currentStock -= qtd;
     }
 }

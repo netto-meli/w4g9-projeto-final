@@ -50,9 +50,9 @@ public class AdvertiseController {
      * @return retorna a lista de anuncio do id enviado
      */
     @GetMapping(value = "/{id}")
-    public ResponseEntity<AdvertiseResponseDTO> findById(@PathVariable Long id) {
+    public ResponseEntity<Advertise> findById(@PathVariable Long id) {
         Advertise advertise = service.findById(id);
-        return ResponseEntity.ok(AdvertiseConverter.convertEntityToDto(advertise));
+        return ResponseEntity.ok(advertise);
     }
 
     /*** Método para adicionar novo Anuncio<br>
@@ -61,12 +61,12 @@ public class AdvertiseController {
      */
 
     @PostMapping
-    public ResponseEntity<Advertise> insert(@RequestBody @Valid AdvertiseRequestDTO advertise) {
+    public ResponseEntity<Void> insert(@RequestBody @Valid AdvertiseRequestDTO advertise) {
         Advertise newAdvertise = AdvertiseConverter.convertDtoToEntity(advertise);
         newAdvertise = service.insert(newAdvertise);
         AdvertiseResponseDTO newAdvertisedto = AdvertiseConverter.convertEntityToDto(newAdvertise);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newAdvertisedto.getId()).toUri();
-        return ResponseEntity.created(uri).body(newAdvertise);
+        return ResponseEntity.created(uri).build();
     }
 
     /*** Método para Alterar Anuncio<br>
@@ -75,12 +75,12 @@ public class AdvertiseController {
      */
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<AdvertiseRequestDTO> update(@RequestBody @Valid AdvertiseRequestDTO advertiseDto,
-                                                      @PathVariable Long id) {
+    public ResponseEntity<Void> update(@RequestBody @Valid AdvertiseRequestDTO advertiseDto,
+                                       @PathVariable Long id) {
         Advertise advertise = AdvertiseConverter.convertDtoToEntity(advertiseDto);
         advertise.setId(id);
         service.update(advertise);
-        return ResponseEntity.accepted().body(advertiseDto);
+        return ResponseEntity.noContent().build();
     }
 
     /*** Método para deltear Anuncio<br>
@@ -88,8 +88,8 @@ public class AdvertiseController {
      * @return status ok.
      */
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<String> delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
-        return ResponseEntity.ok().body("Anuncio excluido id: " + id);
+        return ResponseEntity.ok().build();
     }
 }

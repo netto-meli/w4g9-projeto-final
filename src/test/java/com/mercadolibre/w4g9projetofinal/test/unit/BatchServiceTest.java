@@ -40,42 +40,18 @@ public class BatchServiceTest {
     }
 
     @Test
-    public void verificaLoteQuandoTentaRetirarMaisItensDoQueOsDoEstoque() {
-        // <-- ARRANGE -->
-        Long idAdvertise = 1L;
-        Batch batch = new Batch(null, 10, 10, 10F, 10F,
-                null, null, null, null, null);
-        // Mocks - Class
-        BatchRepository batchRepository = Mockito.mock(BatchRepository.class);
-        SectionService sectionService = Mockito.mock(SectionService.class);
-        // Mock - Actions
-        Mockito.when(batchRepository.findByAdvertise_Id(idAdvertise)).thenReturn(Optional.of(batch));
-        // Service
-        BatchService bs = new BatchService(batchRepository, sectionService);
-
-        // <-- ACT -->
-        CartManagementException excecaoEsperada = Assertions.assertThrows(
-                CartManagementException.class,
-                () -> bs.verifyStock(idAdvertise, 20) //act
-        );
-
-        // <-- ASSERTION -->
-        Assertions.assertTrue(excecaoEsperada.getMessage()
-                .contains("Imposssível realizar compra, pois o Produto null tem somente 10 itens em estoque, "
-                        + "e você está tentando comprar 20 itens."));
-    }
-
-    @Test
     public void verificaLoteQuandoPertenceAoAnuncio() {
         // <-- ARRANGE -->
         Long idAdvertise = 1L;
-        Batch batch = new Batch(null, 10, 10, 10F, 10F,
-                null, null, null, null, null);
+        Batch batch = new Batch();
+        // Spy Entity
+        Batch batchSpy = Mockito.spy(batch);
+        Mockito.doNothing().when(batchSpy).verifyStock(1);
         // Mocks - Class
         BatchRepository batchRepository = Mockito.mock(BatchRepository.class);
         SectionService sectionService = Mockito.mock(SectionService.class);
         // Mock - Actions
-        Mockito.when(batchRepository.findByAdvertise_Id(idAdvertise)).thenReturn(Optional.of(batch));
+        Mockito.when(batchRepository.findByAdvertise_Id(idAdvertise)).thenReturn(Optional.of(batchSpy));
         // Service
         BatchService bs = new BatchService(batchRepository, sectionService);
 
@@ -83,7 +59,7 @@ public class BatchServiceTest {
         Batch loteRetornado = bs.verifyStock(idAdvertise, 1);
 
         // <-- ASSERTION -->
-        Assertions.assertEquals(batch, loteRetornado);
+        Assertions.assertEquals(batchSpy, loteRetornado);
     }
 
     @Test
@@ -99,18 +75,22 @@ public class BatchServiceTest {
         OrderItem orderItem = new OrderItem(null, 1, advertise, null);
         itemList.add(orderItem);
         // Spy Entity
-        inboundOrder.setSection(setor);
-        batch.setInboundOrder(inboundOrder);
+        Section setorSpy = Mockito.spy(setor);
+        Mockito.doNothing().when(setorSpy).updateStock(1);
+        inboundOrder.setSection(setorSpy);
+        Batch batchSpy = Mockito.spy(batch);
+        batchSpy.setInboundOrder(inboundOrder);
+        Mockito.doNothing().when(batchSpy).updateStock(1);
         // Mocks - Class
         BatchRepository batchRepository = Mockito.mock(BatchRepository.class);
         SectionService sectionService = Mockito.mock(SectionService.class);
         // Mock - Actions
-        Mockito.when(batchRepository.findByAdvertise_Id(idAdvertise)).thenReturn(Optional.of(batch));
+        Mockito.when(batchRepository.findByAdvertise_Id(idAdvertise)).thenReturn(Optional.of(batchSpy));
         Mockito.when(sectionService.save(Mockito.any())).thenReturn(new Section());
         // Service + Spy
         BatchService bs = new BatchService(batchRepository, sectionService);
         BatchService bsSpy = Mockito.spy(bs);
-        Mockito.doReturn(batch).when(bsSpy).verifyStock(Mockito.anyLong(), Mockito.anyInt());
+        Mockito.doReturn(batchSpy).when(bsSpy).verifyStock(Mockito.anyLong(), Mockito.anyInt());
 
         // <-- ACT -->
         bsSpy.updateStock(itemList);
