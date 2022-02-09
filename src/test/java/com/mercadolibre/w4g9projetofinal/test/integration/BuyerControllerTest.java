@@ -40,28 +40,14 @@ public class BuyerControllerTest {
 
     @Test
     @Order(1)
-    public void getAllError() throws Exception {
-
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders
-                .get("/api/v1/fresh-products/buyer")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().is4xxClientError())
-                .andReturn();
-
-        System.out.println("\n\nDados comsultados:\n" + result.getResponse().getContentAsString() + "\n\n");
-
+    public void incluiDados() {
+        Buyer buyer = new Buyer(2L, "userComprador",
+                "Comprador nome", "email1@hotkkmail.com", crypt.encode("123776456"), "Endereco");
+        buyerRepository.save(buyer);
     }
 
     @Test
     @Order(2)
-    public void incluiDados() {
-        Buyer buyer = new Buyer(2L, "userComprador",
-                "Comprador nome", "email1@hotkkmail.com", crypt.encode("123776456"), "Endereco");
-        buyer = buyerRepository.save(buyer);
-    }
-
-    @Test
-    @Order(3)
     public void insertBuyer() throws Exception {
 
         BuyerRequestDTO buyer = new BuyerRequestDTO("user", "Comprador", "email12@hotkkmail.com", crypt.encode("1237764526"), "Endereco2");
@@ -77,7 +63,8 @@ public class BuyerControllerTest {
                 .post("/api/v1/fresh-products/buyer")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(String.valueOf(item)))
-                .andExpect(MockMvcResultMatchers.status().isCreated());
+                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andReturn();
 
         mockMvc.perform(MockMvcRequestBuilders
                 .post("/api/v1/freshproducts/buyer")
@@ -87,7 +74,7 @@ public class BuyerControllerTest {
     }
 
     @Test
-    @Order(4)
+    @Order(3)
     public void getAll() throws Exception {
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
@@ -96,7 +83,7 @@ public class BuyerControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
 
-        System.out.println("\n\nDados comsultados:\n" + result.getResponse().getContentAsString() + "\n\n");
+        System.out.println("\n\nDados consultados:\n" + result.getResponse().getContentAsString() + "\n\n");
 
         mockMvc.perform(MockMvcRequestBuilders
                 .post("/api/v1/freshproducts/buyer")
@@ -105,7 +92,7 @@ public class BuyerControllerTest {
     }
 
     @Test
-    @Order(5)
+    @Order(4)
     @WithUserDetails("userComprador")
     public void getId() throws Exception {
 
@@ -121,10 +108,11 @@ public class BuyerControllerTest {
                 .get("/api/v1/fresh-products/buyer/" + 4L)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is4xxClientError());
+
     }
 
     @Test
-    @Order(6)
+    @Order(5)
     @WithUserDetails("userComprador")
     public void putIdUpedate() throws Exception {
 
@@ -148,16 +136,16 @@ public class BuyerControllerTest {
     }
 
     @Test
-    @Order(7)
+    @Order(6)
     @WithUserDetails("userComprador")
     public void delete() throws Exception {
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
                 .delete("/api/v1/fresh-products/buyer/" + 1L)
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
 
+        System.out.println("\n\nDado excluido:\n" + result.getResponse().getContentAsString() + "\n\n");
     }
-
 }
