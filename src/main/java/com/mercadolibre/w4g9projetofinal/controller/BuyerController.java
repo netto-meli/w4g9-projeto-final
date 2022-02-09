@@ -26,7 +26,6 @@ import java.util.List;
  *
  * @author Leonardo
  */
-
 @RestController
 @RequestMapping(value = "/api/v1/fresh-products/buyer")
 public class BuyerController {
