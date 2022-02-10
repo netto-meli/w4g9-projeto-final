@@ -38,7 +38,7 @@ public class SectionController {
     }
 
     /** Retorna uma Section pesquisa pelo ID.
-     * @param id
+     * @param id id
      * @return O Section pesquisado caso OK.
      */
     @GetMapping("/{id}")
@@ -48,8 +48,8 @@ public class SectionController {
     }
 
     /*** Cadastra uma Section
-     * @param sectionRequestDTO
-     * @param uriBuilder
+     * @param sectionRequestDTO section
+     * @param uriBuilder uri
      * @return Retorna o payload de SectionResponseDTO em um ResponseEntity com o status 201
      */
     @PostMapping
@@ -62,8 +62,8 @@ public class SectionController {
     }
 
     /*** Atualiza uma Section com base no ID
-     * @param id
-     * @param sectionDTO
+     * @param id id
+     * @param sectionDTO section
      * @return Retorna o payload de SectionResponseDTO em um ResponseEntity com o status 200
      */
     @PutMapping("/{id}")
@@ -79,7 +79,7 @@ public class SectionController {
     }
 
     /*** Deleta uma Section com base no ID
-     * @param id
+     * @param id id
      * @return Retorna o status 200
      */
     @DeleteMapping("/{id}")

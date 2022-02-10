@@ -1,27 +1,18 @@
 package com.mercadolibre.w4g9projetofinal.test.unit;
 
-import com.mercadolibre.w4g9projetofinal.entity.*;
-import com.mercadolibre.w4g9projetofinal.entity.enums.RefrigerationType;
-import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
-import com.mercadolibre.w4g9projetofinal.exceptions.SectionManagementException;
+import com.mercadolibre.w4g9projetofinal.entity.InboundOrder;
+import com.mercadolibre.w4g9projetofinal.entity.Section;
 import com.mercadolibre.w4g9projetofinal.repository.SectionRepository;
 import com.mercadolibre.w4g9projetofinal.service.SectionService;
-import com.sun.xml.bind.v2.TODO;
+import org.hibernate.ObjectNotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-@DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class SectionServiceTest {
 
     @Test
@@ -69,18 +60,17 @@ class SectionServiceTest {
     void verificaSeSectionEstaSendoDeletada() {
         SectionRepository repositoryMock = Mockito.mock(SectionRepository.class);
         SectionService sectionService = new SectionService(repositoryMock);
+        Section section = new Section();
+        section.setId(1L);
 
         //Vai tentar deletar uma Section que nao existe e vai lançar uma exception
-        Mockito.doThrow(new ObjectNotFoundException(null))
-                .when(repositoryMock).deleteById(Mockito.anyLong());
+        Mockito.doNothing().when(repositoryMock).delete(Mockito.any());
+        Mockito.when(repositoryMock.findById(1L)).thenReturn(Optional.of(section));
         //Tente deletar uma Section qualquer
-        try {
-            sectionService.delete(Mockito.anyLong());
-            //Verifico se ouve interação com o repositoryMock.deleteById, se houve então tudo funcionando!
-            Mockito.verify(repositoryMock).deleteById(Mockito.anyLong());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+        sectionService.delete(1L);
+        //Verifico se ouve interação com o repositoryMock.deleteById, se houve então tudo funcionando!
+        Mockito.verify(repositoryMock).delete(Mockito.any());
     }
 
     @Test

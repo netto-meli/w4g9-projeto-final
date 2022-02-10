@@ -20,7 +20,7 @@ import java.util.Optional;
  * alterar informacoes de comprador
  * deletar comprador
  * para alterar Representante pelo comprador
- * @autor Leonardo
+ * @author Leonardo
  */
 @Service
 @AllArgsConstructor
@@ -45,7 +45,7 @@ public class BuyerService {
 
     /**
      * Metodo de busca de comprador por id
-     * @param id
+     * @param id id
      * @return comprador do id da procura
      */
     public Buyer findById(Long id) {
@@ -56,7 +56,7 @@ public class BuyerService {
 
     /**
      * Metodo para inserir um novo comprador
-     * @param buyer
+     * @param buyer comprador
      * @return status 200
      */
     public Buyer insert(Buyer buyer) {
@@ -70,18 +70,19 @@ public class BuyerService {
 
     /**
      * Metodo para alterar informacoes de comprador
-     * @param buyer
+     * @param buyer comprador
      * @return comprador alterado
      */
     public Buyer update(Buyer buyer) {
         Buyer newBuyer = findById(buyer.getId());
         updateRepresentation(newBuyer, buyer);
+        buyer.setPassword(bCryptPasswordEncoder.encode(buyer.getPassword()));
         return repository.save(buyer);
     }
 
     /**
      * Metodo para deletar comprador por id
-     * @param id
+     * @param id id
      */
     public void delete(Long id) {
         Buyer buyer = findById(id);
@@ -90,8 +91,8 @@ public class BuyerService {
 
     /**
      * Metodo para alterar Representante pelo comprador
-     * @param buyer
-     * @param newBuyer
+     * @param buyer comprador
+     * @param newBuyer comprador
      */
     private static void updateRepresentation(Buyer buyer, Buyer newBuyer) {
         newBuyer.setUsername(buyer.getUsername());

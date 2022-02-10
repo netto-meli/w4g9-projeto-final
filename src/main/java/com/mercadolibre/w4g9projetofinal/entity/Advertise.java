@@ -1,6 +1,5 @@
 package com.mercadolibre.w4g9projetofinal.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mercadolibre.w4g9projetofinal.entity.enums.AdvertiseStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,7 +17,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
- * @autor Leonardo
+ * @author Leonardo
  */
 @Getter
 @Setter
@@ -33,8 +32,6 @@ public class Advertise {
     private String description;
     @ManyToOne
     private Product product;
-
-    @JsonIgnore
     @ManyToOne
     private Seller seller;
     private BigDecimal price;

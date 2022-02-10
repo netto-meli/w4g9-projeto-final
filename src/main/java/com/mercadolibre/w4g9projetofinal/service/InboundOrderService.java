@@ -14,16 +14,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/***
+ * Classe referente a Ordem de Entrada
+ */
 @Service
 @AllArgsConstructor
 public class InboundOrderService {
 
     private InboundOrderRepository inboundOrderRepository;
-    @Autowired
     private SellerService sellerService;
-    @Autowired
     private SectionService sectionService;
-    @Autowired
     private RepresentativeService representativeService;
 
     public List<InboundOrder> findAll() {
@@ -38,6 +38,13 @@ public class InboundOrderService {
                 .orElseThrow( () -> new ObjectNotFoundException("Inbound Order not found! Please check the id.") );
     }
 
+    /**
+     * Gerenciador de Ordem de Entrada
+     * @param user Representante
+     * @param inboundOrder Ordem de Entrada
+     * @param isUpdate é uma atualização (ou inclusão)
+     * @return Ordem de Entrada
+     */
     public InboundOrder inboundOrderManager(UserSS user, InboundOrder inboundOrder, boolean isUpdate) {
         Section section = sectionService.findById(inboundOrder.getSection().getId());
         InboundOrder oldInboundOrder = this.getOldInboundOrder(inboundOrder, isUpdate);
@@ -59,6 +66,12 @@ public class InboundOrderService {
         return inboundOrderRepository.save(inboundOrder);
     }
 
+    /***
+     * Busca ordem de entrada antiga (ou reutiliza se é uma nova)
+     * @param inboundOrder ordem de entrada
+     * @param isUpdate é atualização?
+     * @return Ordem de Entrada antiga
+     */
     private InboundOrder getOldInboundOrder(InboundOrder inboundOrder, boolean isUpdate) {
         InboundOrder oldInboundOrder;
         Optional<InboundOrder> optionalInboundOrder = inboundOrderRepository.findById(inboundOrder.getId());
@@ -72,6 +85,12 @@ public class InboundOrderService {
         return oldInboundOrder;
     }
 
+    /***
+     * Valida armazém
+     * @param user representante
+     * @param inboundOrder ordem de entrada
+     * @param section setor
+     */
     private void validateWarehouse(UserSS user, InboundOrder inboundOrder, Section section) {
         if (!section.getWarehouse().getId()
                 .equals(inboundOrder.getSection().getWarehouse().getId())) {
@@ -90,6 +109,10 @@ public class InboundOrderService {
         inboundOrder.setRepresentative(representative);
     }
 
+    /***
+     * Atualiza lote, com referência a Ordem de Entrada
+     * @param inboundOrder Ordem atualizada
+     */
     private void setInboundOrderToBatchList(InboundOrder inboundOrder) {
         if(inboundOrder.getBatchList() == null)
             inboundOrder.setBatchList(new ArrayList<>());

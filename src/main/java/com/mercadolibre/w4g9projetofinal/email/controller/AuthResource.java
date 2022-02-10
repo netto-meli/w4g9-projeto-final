@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
  *
  * @author Marcos Sá
  */
-
 @RestController
 @RequestMapping(value = "/api/v1/auth")
 public class AuthResource {
@@ -18,6 +17,11 @@ public class AuthResource {
     @Autowired
     private AuthService authService;
 
+    /*** Método para solicitar envio de nova senha<br>
+     * POST - /forgot/?{email}
+     * @param email email válido do user
+     * @return ResponseEntity com status <b>NO CONTENT</b>
+     */
     @PostMapping(value = "/forgot/")
     public ResponseEntity<Void> forgot(@RequestParam String email) {
         authService.sendNewPassword(email);

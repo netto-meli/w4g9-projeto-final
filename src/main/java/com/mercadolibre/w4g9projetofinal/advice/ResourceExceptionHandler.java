@@ -1,6 +1,7 @@
 package com.mercadolibre.w4g9projetofinal.advice;
 
 import com.fasterxml.jackson.core.JsonParseException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.mercadolibre.w4g9projetofinal.exceptions.BusinessException;
@@ -47,8 +48,10 @@ public class ResourceExceptionHandler {
 	 * @return Response Entity status code de erro e mensagem.
 	 */
 	@ExceptionHandler(UsernameNotFoundException.class)
-	public ResponseEntity<StandardError> usernameNotFoundException(UsernameNotFoundException ex, HttpServletRequest request) {
-		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.FORBIDDEN.value(), "Not Authorized", ex.getMessage(), request.getRequestURI());
+	public ResponseEntity<StandardError> usernameNotFoundException(UsernameNotFoundException ex,
+																   HttpServletRequest request) {
+		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.FORBIDDEN.value(),
+				"Usuário não encontrado", ex.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
 	}
 
@@ -58,10 +61,26 @@ public class ResourceExceptionHandler {
 	 * @param request webRequest
 	 * @return Response Entity com status code de erro e mensagem.
 	 */
-	@ExceptionHandler(InvalidFormatException.class)
-	public ResponseEntity<StandardError> invalidFormatException(InvalidFormatException ex, HttpServletRequest request) {
-		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.UNPROCESSABLE_ENTITY.value(), "Não encontrado", ex.getMessage(), request.getRequestURI());
+	@ExceptionHandler(DataIntegrityViolationException.class)
+	public ResponseEntity<StandardError> dataIntegrityViolationException(DataIntegrityViolationException ex,
+																		 HttpServletRequest request) {
+		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.UNPROCESSABLE_ENTITY.value(),
+				"Erro ao executar SQL, provável violação de Constraint", ex.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(err);
+	}
+
+	/*** Handler de erro
+	 *
+	 * @param ex exceção lançada
+	 * @param request webRequest
+	 * @return Response Entity com status code de erro e mensagem.
+	 */
+	@ExceptionHandler(InvalidFormatException.class)
+	public ResponseEntity<StandardError> invalidFormatException(InvalidFormatException ex,
+																HttpServletRequest request) {
+		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(),
+				"Formáto Inválido", ex.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
 	}
 
 	/*** Handler de erro
@@ -71,9 +90,11 @@ public class ResourceExceptionHandler {
 	 * @return Response Entity com status code de erro e mensagem.
 	 */
 	@ExceptionHandler(JsonParseException.class)
-	public ResponseEntity<StandardError> jsonParseException(JsonParseException ex, HttpServletRequest request) {
-		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.UNPROCESSABLE_ENTITY.value(), "Não encontrado", ex.getMessage(), request.getRequestURI());
-		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(err);
+	public ResponseEntity<StandardError> jsonParseException(JsonParseException ex,
+															HttpServletRequest request) {
+		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(),
+				"Problema ao realizar Parsing do JSON", ex.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
 	}
 
 	/*** Handler de erro
@@ -83,8 +104,39 @@ public class ResourceExceptionHandler {
 	 * @return Response Entity com status code de erro e mensagem.
 	 */
 	@ExceptionHandler(CartManagementException.class)
-	public ResponseEntity<StandardError> cartManagementException(CartManagementException ex, HttpServletRequest request) {
-		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.UNPROCESSABLE_ENTITY.value(), "Não encontrado", ex.getMessage(), request.getRequestURI());
+	public ResponseEntity<StandardError> cartManagementException(CartManagementException ex,
+																 HttpServletRequest request) {
+		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.UNPROCESSABLE_ENTITY.value(),
+				"Não encontrado", ex.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(err);
+	}
+
+	/*** Handler de erro
+	 *
+	 * @param ex exceção lançada
+	 * @param request webRequest
+	 * @return Response Entity com status code de erro e mensagem.
+	 */
+	@ExceptionHandler(IllegalArgumentException.class)
+	public ResponseEntity<StandardError> illegalArgumentException(IllegalArgumentException ex,
+																  HttpServletRequest request) {
+		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(),
+				"Não encontrado", ex.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
+	}
+
+
+	/*** Handler de erro
+	 *
+	 * @param ex exceção lançada
+	 * @param request webRequest
+	 * @return Response Entity com status code de erro e mensagem.
+	 */
+	@ExceptionHandler(BusinessException.class)
+	public ResponseEntity<StandardError> businessException(BusinessException ex,
+														   HttpServletRequest request) {
+		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.UNPROCESSABLE_ENTITY.value(),
+				"Não encontrado", ex.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(err);
 	}
 
@@ -95,8 +147,10 @@ public class ResourceExceptionHandler {
 	 * @return Response Entity status code de erro e mensagem.
 	 */
 	@ExceptionHandler(ObjectNotFoundException.class)
-	public ResponseEntity<StandardError> notFoundException(ObjectNotFoundException ex, HttpServletRequest request) {
-		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.NOT_FOUND.value(), "Não encontrado", ex.getMessage(), request.getRequestURI());
+	public ResponseEntity<StandardError> notFoundException(ObjectNotFoundException ex,
+														   HttpServletRequest request) {
+		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.NOT_FOUND.value(),
+				"Não encontrado", ex.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
 	}
 
@@ -107,9 +161,11 @@ public class ResourceExceptionHandler {
 	 * @return Response Entity status code de erro e mensagem.
 	 */
 	@ExceptionHandler(SectionManagementException.class)
-	public ResponseEntity<StandardError> sectionManagementException(SectionManagementException ex, HttpServletRequest request) {
-		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.NOT_FOUND.value(), "Não encontrado", ex.getMessage(), request.getRequestURI());
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
+	public ResponseEntity<StandardError> sectionManagementException(SectionManagementException ex,
+																	HttpServletRequest request) {
+		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.UNPROCESSABLE_ENTITY.value(),
+				"Não encontrado", ex.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(err);
 	}
 
 	/*** Handler de erro
@@ -119,8 +175,10 @@ public class ResourceExceptionHandler {
 	 * @return Response Entity status code de erro e mensagem.
 	 */
 	@ExceptionHandler(ExistingUserException.class)
-	public ResponseEntity<StandardError> ExistingUserException(ExistingUserException ex, HttpServletRequest request) {
-		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.UNAUTHORIZED.value(), "Usúario já existente na base de dados", ex.getMessage(), request.getRequestURI());
+	public ResponseEntity<StandardError> existingUserException(ExistingUserException ex,
+															   HttpServletRequest request) {
+		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.UNAUTHORIZED.value(),
+				"Usúario já existente na base de dados", ex.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(err);
 	}
 
@@ -131,8 +189,10 @@ public class ResourceExceptionHandler {
 	 * @return Response Entity status code de erro e mensagem.
 	 */
 	@ExceptionHandler(AccessDeniedException.class)
-	public ResponseEntity<StandardError> accessDeniedException(AccessDeniedException ex, HttpServletRequest request) {
-		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.FORBIDDEN.value(), "Not Authorized", ex.getMessage(), request.getRequestURI());
+	public ResponseEntity<StandardError> accessDeniedException(AccessDeniedException ex,
+															   HttpServletRequest request) {
+		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.FORBIDDEN.value(),
+				"Not Authorized", ex.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
 	}
 }

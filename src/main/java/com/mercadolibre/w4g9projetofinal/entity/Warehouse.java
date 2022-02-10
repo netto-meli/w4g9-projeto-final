@@ -9,6 +9,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Objects;
 
+/***
+ * @author Rafael Menezes
+ * @author Fernando
+ * @version 1.0
+ * @since Release 01 da aplicação
+ */
 @Getter
 @Setter
 @ToString

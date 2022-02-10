@@ -5,10 +5,14 @@ import com.mercadolibre.w4g9projetofinal.entity.enums.AdvertiseStatus;
 import com.mercadolibre.w4g9projetofinal.entity.enums.Profile;
 import com.mercadolibre.w4g9projetofinal.entity.enums.RefrigerationType;
 import com.mercadolibre.w4g9projetofinal.entity.enums.RepresentativeJob;
+import com.mercadolibre.w4g9projetofinal.exceptions.ExistingUserException;
 import com.mercadolibre.w4g9projetofinal.repository.*;
+import com.mercadolibre.w4g9projetofinal.service.BuyerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.math.BigDecimal;
@@ -49,10 +53,17 @@ public class Instantiation implements CommandLineRunner {
     @Autowired
     private InboundOrderRepository inboundOrderRepository;
 
-// TODO DELETAR ESSA CLASSE NO FINAL
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public void run(String... args) throws Exception {
+        Buyer adm = new Buyer(null, "admin", "Administrator", "adm@adm.com", "123", "Endereço");
+        adm.getProfile().add(Profile.ADMIN);
+        BuyerService bs = new BuyerService(new BCryptPasswordEncoder(), buyerRepository);
+        try {
+            bs.insert(adm);
+        } catch (ExistingUserException ignored) {}
 /*
         Warehouse warehouse = new Warehouse(null, "k", "l" );
         warehouse = warehouseRepository.save(warehouse);

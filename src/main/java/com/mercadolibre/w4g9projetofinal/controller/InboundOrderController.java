@@ -26,6 +26,9 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
+/***
+ * @author Fernando
+ */
 @RestController
 @RequestMapping(value = "/api/v1/fresh-products/inboundorder")
 @PreAuthorize("hasRole('ADMIN') OR hasRole('REPRESENTATIVE')")
@@ -34,8 +37,8 @@ public class InboundOrderController {
     @Autowired
     InboundOrderService inboundOrderService;
 
-    /*@PostMapping
-    public ResponseEntity<List<BatchResponseDTO>> createInboundOrder(
+    @PostMapping
+    public ResponseEntity<List<BatchResponseDTO>> insert(
             @RequestBody @Valid InboundOrderRequestDTO inboundOrderRequestDTO,
             UriComponentsBuilder uriBuilder) {
         UserSS user = UserService.authenticated();
@@ -50,7 +53,7 @@ public class InboundOrderController {
     }
 
     @PutMapping
-    public ResponseEntity<List<BatchResponseDTO>> updateInboundOrder(
+    public ResponseEntity<List<BatchResponseDTO>> update(
             @RequestBody @Valid InboundOrderRequestDTO request,
             UriComponentsBuilder uriBuilder) {
         UserSS user = UserService.authenticated();
@@ -65,16 +68,16 @@ public class InboundOrderController {
     }
 
     @GetMapping
-    public ResponseEntity<List<InboundOrderResponseDTO>> findAllInboundOrders() {
+    public ResponseEntity<List<InboundOrderResponseDTO>> findAll() {
         List<InboundOrder> inboundOrderList = inboundOrderService.findAll();
         List<InboundOrderResponseDTO> response = InboundOrderConverter.convertEntityListToDtoList(inboundOrderList);
         return ResponseEntity.ok().body(response);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<InboundOrderResponseDTO> findInboundOrderById(@PathVariable Long id) {
+    public ResponseEntity<InboundOrderResponseDTO> findById(@PathVariable Long id) {
         InboundOrder io = inboundOrderService.findById(id);
         InboundOrderResponseDTO response = InboundOrderConverter.convertEntityToDto(io);
         return ResponseEntity.ok().body(response);
-    }*/
+    }
 }

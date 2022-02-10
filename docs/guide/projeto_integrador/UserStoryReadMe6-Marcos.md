@@ -47,3 +47,7 @@ consumidos pelos usuários que os solicita. Os contratos referem-se à história
 | HTTP | Modelo de URI                                             | Descrição                                                                                                                                                                                                                                                                           | US-code |
 |------|-----------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---|
 | POST | /api/v1/auth/forgot/?email=email@exemplo.com                            | Gera uma nova senha e envia para o email informado. <br>Devolve resposta HTTP Status "204 NO CONTENT". | ml-forgot-users-06 |
+
+
+### Modelo de template referente ao recebimento de email
+![Alt text](assets/img/templateEmail.png?raw=true "Title")
