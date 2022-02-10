@@ -125,9 +125,8 @@ public class SectionService {
     }
 
     public void delete(Long id) {
-        Optional<Section> section = sectionRepository.findById(id);
-        section.orElseThrow(() -> new ObjectNotFoundException("Setor não encontrado"));
-        sectionRepository.deleteById(id);
+        Section section = findById(id);
+        sectionRepository.delete(section);
     }
 
     public List<Section> findAll() {
