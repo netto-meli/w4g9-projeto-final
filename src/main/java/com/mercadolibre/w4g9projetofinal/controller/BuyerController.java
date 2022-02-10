@@ -93,6 +93,6 @@ public class BuyerController {
     public ResponseEntity<String> delete(@PathVariable Long id) {
         UserService.adminOrSameUser(id);
         service.delete(id);
-        return ResponseEntity.ok().body("Comprador com id : " + id + "excluido");
+        return ResponseEntity.ok().body("Comprador com id : " + id + " excluido");
     }
 }
