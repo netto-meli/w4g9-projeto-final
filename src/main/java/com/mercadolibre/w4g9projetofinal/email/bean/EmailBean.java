@@ -20,5 +20,4 @@ public class EmailBean {
     public EmailService emailServiceHTML() {
         return new SmtpEmailService(javaMailSender);
     }
-
 }

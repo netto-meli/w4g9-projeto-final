@@ -54,11 +54,7 @@ public class AdvertiseService {
      * @return status 200 quando salvo
      */
     public Advertise insert(Advertise advertise) {
-        try {
-            return repository.save(advertise);
-        } catch (BusinessException e) {
-            throw new BusinessException("Não foi possivel incluir o anuncio.");
-        }
+        return repository.save(advertise);
     }
 
     /**
