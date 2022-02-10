@@ -13,6 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/***
+ * Classe de configuração para Autorização JWT
+ *
+ * @author Marcos Sá
+ */
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
     private final JWTUtil jwtUtil;
