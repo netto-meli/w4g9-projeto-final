@@ -1,7 +1,10 @@
 package com.mercadolibre.w4g9projetofinal.test.integration;
 
 import com.mercadolibre.w4g9projetofinal.entity.Section;
+import com.mercadolibre.w4g9projetofinal.entity.Warehouse;
+import com.mercadolibre.w4g9projetofinal.entity.enums.RefrigerationType;
 import com.mercadolibre.w4g9projetofinal.repository.SectionRepository;
+import com.mercadolibre.w4g9projetofinal.repository.WarehouseRepository;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -39,8 +42,20 @@ public class SectionControllerTest {
     @Autowired
     SectionRepository repository;
 
+    @Autowired
+    WarehouseRepository repositoryWarehouse;
+
     @Test
-    @Order(2)
+    @Order(1)
+    public void incluirDados(){
+        Warehouse w = new Warehouse(1L, "SP", "Melicidade");
+        repositoryWarehouse.save(w);
+        Section s = new Section(1L, "Section-001", RefrigerationType.FRESH, w, 100, 70, 0.10f, 5.0f );
+        repository.save(s);
+    }
+
+    @Test
+    @Order(3)
     void deveRetornaTodasAsSectionsRegistradas() throws Exception {
         URI path = URI.create("/api/v1/fresh-products/section");
         request = MockMvcRequestBuilders.get(path);
@@ -52,7 +67,7 @@ public class SectionControllerTest {
     }
 
     @Test
-    @Order(3)
+    @Order(4)
     void deveRetornaUmaSectionPeloId() throws Exception {
         List<Section> sections = repository.findAll();
         Long sectionId = sections.get(0).getId();
@@ -66,7 +81,7 @@ public class SectionControllerTest {
     }
 
     @Test
-    @Order(1)
+    @Order(2)
     void deveRegistrarUmaNovaSection() throws Exception {
         String payload = "{\n" +
                 "  \"name\": \"Sector 005\",\n" +
@@ -86,7 +101,7 @@ public class SectionControllerTest {
     }
 
     @Test
-    @Order(4)
+    @Order(5)
     void deveAtualizarUmaSection() throws Exception {
         List<Section> sections = repository.findAll();
         System.out.println(sections);
@@ -112,7 +127,7 @@ public class SectionControllerTest {
     }
 
     @Test
-    @Order(5)
+    @Order(6)
     void deveDeletarUmaSection() throws Exception {
         List<Section> sections = repository.findAll();
         System.out.println(sections);
