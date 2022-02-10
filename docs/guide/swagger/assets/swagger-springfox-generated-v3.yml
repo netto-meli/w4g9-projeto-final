@@ -9,19 +9,20 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0
   version: "1.0"
 servers:
-  - url: https://localhost:8080/
-  - url: http://localhost:8080/
-security:
-  - APIKey: []
+  - url: //localhost:8080/
 tags:
   - name: advertise-controller
     description: Advertise Controller
+  - name: auth-resource
+    description: Auth Resource
   - name: basic-error-controller
     description: Basic Error Controller
   - name: buyer-controller
     description: Buyer Controller
   - name: cart-controller
     description: Cart Controller
+  - name: delivery-controller
+    description: Delivery Controller
   - name: due-date-controller
     description: Due Date Controller
   - name: inbound-order-controller
@@ -49,6 +50,35 @@ tags:
   - name: warehouse-controller
     description: Warehouse Controller
 paths:
+  /api/v1/auth/forgot/:
+    post:
+      tags:
+        - auth-resource
+      summary: forgot
+      operationId: forgotUsingPOST
+      parameters:
+        - name: email
+          in: query
+          description: email
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content: {}
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
   /api/v1/fresh-products/advertise:
     get:
       tags:
@@ -88,7 +118,10 @@ paths:
       responses:
         200:
           description: OK
-          content: {}
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AdvertiseResponseDTO'
         201:
           description: Created
           content: {}
@@ -122,7 +155,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/Advertise'
+                $ref: '#/components/schemas/AdvertiseResponseDTO'
         401:
           description: Unauthorized
           content: {}
@@ -155,7 +188,10 @@ paths:
       responses:
         200:
           description: OK
-          content: {}
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AdvertiseResponseDTO'
         201:
           description: Created
           content: {}
@@ -185,7 +221,10 @@ paths:
       responses:
         200:
           description: OK
-          content: {}
+          content:
+            '*/*':
+              schema:
+                type: string
         204:
           description: No Content
           content: {}
@@ -234,7 +273,10 @@ paths:
       responses:
         200:
           description: OK
-          content: {}
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BuyerResponseDTO'
         201:
           description: Created
           content: {}
@@ -301,7 +343,10 @@ paths:
       responses:
         200:
           description: OK
-          content: {}
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BuyerRequestDTO'
         201:
           description: Created
           content: {}
@@ -331,7 +376,10 @@ paths:
       responses:
         200:
           description: OK
-          content: {}
+          content:
+            '*/*':
+              schema:
+                type: string
         204:
           description: No Content
           content: {}
@@ -389,11 +437,11 @@ paths:
           description: Not Found
           content: {}
   /api/v1/fresh-products/cart/createSellOrder/{idBuyer}:
-    post:
+    put:
       tags:
         - cart-controller
       summary: createSellOrder
-      operationId: createSellOrderUsingPOST
+      operationId: createSellOrderUsingPUT
       parameters:
         - name: idBuyer
           in: path
@@ -525,6 +573,270 @@ paths:
         404:
           description: Not Found
           content: {}
+  /api/v1/fresh-products/delivery:
+    get:
+      tags:
+        - delivery-controller
+      summary: findAllI
+      operationId: findAllIUsingGET
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TransporterResponseDTO'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    post:
+      tags:
+        - delivery-controller
+      summary: insert
+      operationId: insertUsingPOST_2
+      requestBody:
+        description: transporterRequestDTO
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransporterRequestDTO'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TransporterResponseDTO'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: transporterRequestDTO
+  /api/v1/fresh-products/delivery/byStatus/:
+    get:
+      tags:
+        - delivery-controller
+      summary: findByStatus
+      operationId: findByStatusUsingGET
+      parameters:
+        - name: isInRoute
+          in: query
+          description: isInRoute
+          schema:
+            type: boolean
+            default: false
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TransporterResponseDTO'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /api/v1/fresh-products/delivery/delivery/:
+    post:
+      tags:
+        - delivery-controller
+      summary: callDelivery
+      operationId: callDeliveryUsingPOST
+      requestBody:
+        description: deliveryIdList
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/DeliveryRequestDTO'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TransporterResponseDTO'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: deliveryIdList
+  /api/v1/fresh-products/delivery/delivery/{idTransporter}:
+    put:
+      tags:
+        - delivery-controller
+      summary: confirmDelivery
+      operationId: confirmDeliveryUsingPUT
+      parameters:
+        - name: idTransporter
+          in: path
+          description: idTransporter
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: deliveryIdList
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/DeliveryRequestDTO'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TransporterResponseDTO'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: deliveryIdList
+  /api/v1/fresh-products/delivery/{id}:
+    get:
+      tags:
+        - delivery-controller
+      summary: findById
+      operationId: findByIdUsingGET_2
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TransporterResponseDTO'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+    put:
+      tags:
+        - delivery-controller
+      summary: update
+      operationId: updateUsingPUT_2
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: transporterRequestDTO
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransporterRequestDTO'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/TransporterResponseDTO'
+        201:
+          description: Created
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+      x-codegen-request-body-name: transporterRequestDTO
+    delete:
+      tags:
+        - delivery-controller
+      summary: delete
+      operationId: deleteUsingDELETE_2
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        204:
+          description: No Content
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
   /api/v1/fresh-products/due-date/byRefrigeration/{numberOfDays}:
     get:
       tags:
@@ -612,8 +924,8 @@ paths:
     get:
       tags:
         - inbound-order-controller
-      summary: findAllInboundOrders
-      operationId: findAllInboundOrdersUsingGET
+      summary: findAll
+      operationId: findAllUsingGET_2
       responses:
         200:
           description: OK
@@ -635,8 +947,8 @@ paths:
     put:
       tags:
         - inbound-order-controller
-      summary: updateInboundOrder
-      operationId: updateInboundOrderUsingPUT
+      summary: update
+      operationId: updateUsingPUT_3
       requestBody:
         description: request
         content:
@@ -669,8 +981,8 @@ paths:
     post:
       tags:
         - inbound-order-controller
-      summary: createInboundOrder
-      operationId: createInboundOrderUsingPOST
+      summary: insert
+      operationId: insertUsingPOST_3
       requestBody:
         description: inboundOrderRequestDTO
         content:
@@ -704,8 +1016,8 @@ paths:
     get:
       tags:
         - inbound-order-controller
-      summary: findInboundOrderById
-      operationId: findInboundOrderByIdUsingGET
+      summary: findById
+      operationId: findByIdUsingGET_3
       parameters:
         - name: id
           in: path
@@ -735,7 +1047,7 @@ paths:
       tags:
         - product-controller
       summary: findAll
-      operationId: findAllUsingGET_2
+      operationId: findAllUsingGET_3
       responses:
         200:
           description: OK
@@ -758,7 +1070,7 @@ paths:
       tags:
         - product-controller
       summary: insert
-      operationId: insertUsingPOST_2
+      operationId: insertUsingPOST_4
       requestBody:
         description: obj
         content:
@@ -769,7 +1081,10 @@ paths:
       responses:
         200:
           description: OK
-          content: {}
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProductResponseDTO'
         201:
           description: Created
           content: {}
@@ -815,7 +1130,7 @@ paths:
         404:
           description: Not Found
           content: {}
-  /api/v1/fresh-products/product/listBatch/{order}:
+  /api/v1/fresh-products/product/listBatchByProduct/:
     get:
       tags:
         - product-controller
@@ -830,7 +1145,7 @@ paths:
             type: integer
             format: int64
         - name: order
-          in: path
+          in: query
           description: order
           required: true
           schema:
@@ -853,7 +1168,7 @@ paths:
         404:
           description: Not Found
           content: {}
-  /api/v1/fresh-products/product/listCategory/{categoryProd}:
+  /api/v1/fresh-products/product/listCategory/:
     get:
       tags:
         - product-controller
@@ -861,7 +1176,7 @@ paths:
       operationId: findListCategoryUsingGET
       parameters:
         - name: categoryProd
-          in: path
+          in: query
           description: categoryProd
           required: true
           schema:
@@ -893,7 +1208,7 @@ paths:
       tags:
         - product-controller
       summary: findById
-      operationId: findByIdUsingGET_2
+      operationId: findByIdUsingGET_4
       parameters:
         - name: id
           in: path
@@ -922,7 +1237,7 @@ paths:
       tags:
         - product-controller
       summary: update
-      operationId: updateUsingPUT_2
+      operationId: updateUsingPUT_4
       parameters:
         - name: id
           in: path
@@ -932,7 +1247,7 @@ paths:
             type: integer
             format: int64
       requestBody:
-        description: newObj
+        description: newProd
         content:
           application/json:
             schema:
@@ -941,7 +1256,10 @@ paths:
       responses:
         200:
           description: OK
-          content: {}
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ProductResponseDTO'
         201:
           description: Created
           content: {}
@@ -954,12 +1272,12 @@ paths:
         404:
           description: Not Found
           content: {}
-      x-codegen-request-body-name: newObj
+      x-codegen-request-body-name: newProd
     delete:
       tags:
         - product-controller
       summary: delete
-      operationId: deleteUsingDELETE_2
+      operationId: deleteUsingDELETE_3
       parameters:
         - name: id
           in: path
@@ -971,7 +1289,10 @@ paths:
       responses:
         200:
           description: OK
-          content: {}
+          content:
+            '*/*':
+              schema:
+                type: string
         204:
           description: No Content
           content: {}
@@ -986,7 +1307,7 @@ paths:
       tags:
         - representative-controller
       summary: findAll
-      operationId: findAllUsingGET_3
+      operationId: findAllUsingGET_4
       responses:
         200:
           description: OK
@@ -1009,7 +1330,7 @@ paths:
       tags:
         - representative-controller
       summary: insert
-      operationId: insertUsingPOST_3
+      operationId: insertUsingPOST_5
       requestBody:
         description: obj
         content:
@@ -1039,7 +1360,7 @@ paths:
       tags:
         - representative-controller
       summary: findById
-      operationId: findByIdUsingGET_3
+      operationId: findByIdUsingGET_5
       parameters:
         - name: id
           in: path
@@ -1068,7 +1389,7 @@ paths:
       tags:
         - representative-controller
       summary: update
-      operationId: updateUsingPUT_3
+      operationId: updateUsingPUT_5
       parameters:
         - name: id
           in: path
@@ -1105,7 +1426,7 @@ paths:
       tags:
         - representative-controller
       summary: delete
-      operationId: deleteUsingDELETE_3
+      operationId: deleteUsingDELETE_4
       parameters:
         - name: id
           in: path
@@ -1132,7 +1453,7 @@ paths:
       tags:
         - section-controller
       summary: findAll
-      operationId: findAllUsingGET_4
+      operationId: findAllUsingGET_5
       responses:
         200:
           description: OK
@@ -1155,7 +1476,7 @@ paths:
       tags:
         - section-controller
       summary: insert
-      operationId: insertUsingPOST_4
+      operationId: insertUsingPOST_6
       requestBody:
         description: sectionRequestDTO
         content:
@@ -1188,7 +1509,7 @@ paths:
       tags:
         - section-controller
       summary: findById
-      operationId: findByIdUsingGET_4
+      operationId: findByIdUsingGET_6
       parameters:
         - name: id
           in: path
@@ -1217,7 +1538,7 @@ paths:
       tags:
         - section-controller
       summary: update
-      operationId: updateUsingPUT_4
+      operationId: updateUsingPUT_6
       parameters:
         - name: id
           in: path
@@ -1257,7 +1578,7 @@ paths:
       tags:
         - section-controller
       summary: delete
-      operationId: deleteUsingDELETE_4
+      operationId: deleteUsingDELETE_5
       parameters:
         - name: id
           in: path
@@ -1284,7 +1605,7 @@ paths:
       tags:
         - seller-controller
       summary: findAll
-      operationId: findAllUsingGET_5
+      operationId: findAllUsingGET_6
       responses:
         200:
           description: OK
@@ -1307,7 +1628,7 @@ paths:
       tags:
         - seller-controller
       summary: insert
-      operationId: insertUsingPOST_5
+      operationId: insertUsingPOST_7
       requestBody:
         description: obj
         content:
@@ -1337,7 +1658,7 @@ paths:
       tags:
         - seller-controller
       summary: findById
-      operationId: findByIdUsingGET_5
+      operationId: findByIdUsingGET_7
       parameters:
         - name: id
           in: path
@@ -1366,7 +1687,7 @@ paths:
       tags:
         - seller-controller
       summary: update
-      operationId: updateUsingPUT_5
+      operationId: updateUsingPUT_7
       parameters:
         - name: id
           in: path
@@ -1403,7 +1724,7 @@ paths:
       tags:
         - seller-controller
       summary: delete
-      operationId: deleteUsingDELETE_5
+      operationId: deleteUsingDELETE_6
       parameters:
         - name: id
           in: path
@@ -1430,7 +1751,7 @@ paths:
       tags:
         - user-controller
       summary: findAll
-      operationId: findAllUsingGET_6
+      operationId: findAllUsingGET_7
       responses:
         200:
           description: OK
@@ -1454,7 +1775,7 @@ paths:
       tags:
         - warehouse-controller
       summary: findAll
-      operationId: findAllUsingGET_7
+      operationId: findAllUsingGET_8
       responses:
         200:
           description: OK
@@ -1477,7 +1798,7 @@ paths:
       tags:
         - warehouse-controller
       summary: insert
-      operationId: insertUsingPOST_6
+      operationId: insertUsingPOST_8
       requestBody:
         description: wh
         content:
@@ -1537,7 +1858,7 @@ paths:
       tags:
         - warehouse-controller
       summary: findById
-      operationId: findByIdUsingGET_6
+      operationId: findByIdUsingGET_8
       parameters:
         - name: id
           in: path
@@ -1552,7 +1873,7 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/Warehouse'
+                $ref: '#/components/schemas/WarehouseResponseDTO'
         401:
           description: Unauthorized
           content: {}
@@ -1566,7 +1887,7 @@ paths:
       tags:
         - warehouse-controller
       summary: update
-      operationId: updateUsingPUT_6
+      operationId: updateUsingPUT_8
       parameters:
         - name: id
           in: path
@@ -1603,7 +1924,7 @@ paths:
       tags:
         - warehouse-controller
       summary: delete
-      operationId: deleteUsingDELETE_6
+      operationId: deleteUsingDELETE_7
       parameters:
         - name: id
           in: path
@@ -1801,38 +2122,452 @@ paths:
         404:
           description: Not Found
           content: {}
+  /swagger-ui.html:
+    get:
+      tags:
+        - swagger-welcome-web-mvc
+      summary: redirectToUi
+      operationId: redirectToUiUsingGET
+      responses:
+        200:
+          description: OK
+          content: {}
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /v3/api-docs:
+    get:
+      tags:
+        - open-api-web-mvc-resource
+      summary: openapiJson
+      operationId: openapiJsonUsingGET_1
+      parameters:
+        - name: apiDocsUrl
+          in: query
+          description: apiDocsUrl
+          schema:
+            type: string
+        - name: country
+          in: query
+          schema:
+            type: string
+        - name: displayCountry
+          in: query
+          schema:
+            type: string
+        - name: displayLanguage
+          in: query
+          schema:
+            type: string
+        - name: displayName
+          in: query
+          schema:
+            type: string
+        - name: displayScript
+          in: query
+          schema:
+            type: string
+        - name: displayVariant
+          in: query
+          schema:
+            type: string
+        - name: extensionKeys
+          in: query
+          style: form
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: ISO3Country
+          in: query
+          schema:
+            type: string
+        - name: ISO3Language
+          in: query
+          schema:
+            type: string
+        - name: language
+          in: query
+          schema:
+            type: string
+        - name: script
+          in: query
+          schema:
+            type: string
+        - name: unicodeLocaleAttributes
+          in: query
+          style: form
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: unicodeLocaleKeys
+          in: query
+          style: form
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: variant
+          in: query
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /v3/api-docs.yaml:
+    get:
+      tags:
+        - open-api-web-mvc-resource
+      summary: openapiYaml
+      operationId: openapiYamlUsingGET_1
+      parameters:
+        - name: apiDocsUrl
+          in: query
+          description: apiDocsUrl
+          schema:
+            type: string
+        - name: country
+          in: query
+          schema:
+            type: string
+        - name: displayCountry
+          in: query
+          schema:
+            type: string
+        - name: displayLanguage
+          in: query
+          schema:
+            type: string
+        - name: displayName
+          in: query
+          schema:
+            type: string
+        - name: displayScript
+          in: query
+          schema:
+            type: string
+        - name: displayVariant
+          in: query
+          schema:
+            type: string
+        - name: extensionKeys
+          in: query
+          style: form
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: ISO3Country
+          in: query
+          schema:
+            type: string
+        - name: ISO3Language
+          in: query
+          schema:
+            type: string
+        - name: language
+          in: query
+          schema:
+            type: string
+        - name: script
+          in: query
+          schema:
+            type: string
+        - name: unicodeLocaleAttributes
+          in: query
+          style: form
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: unicodeLocaleKeys
+          in: query
+          style: form
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: variant
+          in: query
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/vnd.oai.openapi:
+              schema:
+                type: string
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /v3/api-docs.yaml/{group}:
+    get:
+      tags:
+        - multiple-open-api-web-mvc-resource
+      summary: openapiYaml
+      operationId: openapiYamlUsingGET
+      parameters:
+        - name: apiDocsUrl
+          in: query
+          description: apiDocsUrl
+          schema:
+            type: string
+        - name: country
+          in: query
+          schema:
+            type: string
+        - name: displayCountry
+          in: query
+          schema:
+            type: string
+        - name: displayLanguage
+          in: query
+          schema:
+            type: string
+        - name: displayName
+          in: query
+          schema:
+            type: string
+        - name: displayScript
+          in: query
+          schema:
+            type: string
+        - name: displayVariant
+          in: query
+          schema:
+            type: string
+        - name: extensionKeys
+          in: query
+          style: form
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: group
+          in: path
+          description: group
+          required: true
+          schema:
+            type: string
+        - name: ISO3Country
+          in: query
+          schema:
+            type: string
+        - name: ISO3Language
+          in: query
+          schema:
+            type: string
+        - name: language
+          in: query
+          schema:
+            type: string
+        - name: script
+          in: query
+          schema:
+            type: string
+        - name: unicodeLocaleAttributes
+          in: query
+          style: form
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: unicodeLocaleKeys
+          in: query
+          style: form
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: variant
+          in: query
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/vnd.oai.openapi:
+              schema:
+                type: string
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /v3/api-docs/swagger-config:
+    get:
+      tags:
+        - swagger-config-resource
+      summary: openapiJson
+      operationId: openapiJsonUsingGET_2
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+  /v3/api-docs/{group}:
+    get:
+      tags:
+        - multiple-open-api-web-mvc-resource
+      summary: openapiJson
+      operationId: openapiJsonUsingGET
+      parameters:
+        - name: apiDocsUrl
+          in: query
+          description: apiDocsUrl
+          schema:
+            type: string
+        - name: country
+          in: query
+          schema:
+            type: string
+        - name: displayCountry
+          in: query
+          schema:
+            type: string
+        - name: displayLanguage
+          in: query
+          schema:
+            type: string
+        - name: displayName
+          in: query
+          schema:
+            type: string
+        - name: displayScript
+          in: query
+          schema:
+            type: string
+        - name: displayVariant
+          in: query
+          schema:
+            type: string
+        - name: extensionKeys
+          in: query
+          style: form
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: group
+          in: path
+          description: group
+          required: true
+          schema:
+            type: string
+        - name: ISO3Country
+          in: query
+          schema:
+            type: string
+        - name: ISO3Language
+          in: query
+          schema:
+            type: string
+        - name: language
+          in: query
+          schema:
+            type: string
+        - name: script
+          in: query
+          schema:
+            type: string
+        - name: unicodeLocaleAttributes
+          in: query
+          style: form
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: unicodeLocaleKeys
+          in: query
+          style: form
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: variant
+          in: query
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
 components:
   schemas:
-    Advertise:
-      title: Advertise
-      type: object
-      properties:
-        description:
-          type: string
-        free_shipping:
-          type: boolean
-        id:
-          type: integer
-          format: int64
-        price:
-          type: number
-        product:
-          $ref: '#/components/schemas/Product'
-        seller:
-          $ref: '#/components/schemas/Seller'
-        status:
-          type: string
-          enum:
-            - ATIVO
-            - FINALIZADO
-            - INATIVO
-            - PAUSADO
-            - PENDENTE
-            - REMOVIDO
     AdvertiseRequestDTO:
       title: AdvertiseRequestDTO
       required:
+        - free_shipping
         - price
+        - product_id
+        - seller_id
         - status
       type: object
       properties:
@@ -1843,6 +2578,8 @@ components:
         free_shipping:
           type: boolean
         price:
+          minimum: 0.01
+          exclusiveMinimum: false
           type: number
         product_id:
           type: integer
@@ -1905,6 +2642,16 @@ components:
           format: int32
     BatchRequestDTO:
       title: BatchRequestDTO
+      required:
+        - advertise_id
+        - batch_number
+        - current_quantity
+        - current_temperature
+        - due_date
+        - initial_quantity
+        - manufacturing_date
+        - manufacturing_time
+        - minimum_temperature
       type: object
       properties:
         advertise_id:
@@ -1917,6 +2664,10 @@ components:
           type: integer
           format: int32
         current_temperature:
+          maximum: 1E+2
+          exclusiveMaximum: false
+          minimum: -1E+2
+          exclusiveMinimum: false
           type: number
           format: float
         due_date:
@@ -1932,6 +2683,10 @@ components:
           type: string
           format: date-time
         minimum_temperature:
+          maximum: 1E+2
+          exclusiveMaximum: false
+          minimum: -1E+2
+          exclusiveMinimum: false
           type: number
           format: float
     BatchResponseDTO:
@@ -1967,19 +2722,35 @@ components:
           format: float
     BuyerRequestDTO:
       title: BuyerRequestDTO
+      required:
+        - address
+        - email
+        - name
+        - pass
+        - username
       type: object
       properties:
         address:
-          type: string
-        email:
-          type: string
-        name:
-          maxLength: 20
+          maxLength: 80
           minLength: 2
           type: string
+        email:
+          pattern: ^[\w!#$%&'*+/=?`{|}~^-]+(?:\.[\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}$
+          type: string
+        name:
+          maxLength: 60
+          minLength: 2
+          pattern: ^[-'a-zA-ZÀ-ÖØ-öø-ÿ ]+$
+          type: string
         pass:
+          maxLength: 2147483647
+          minLength: 8
+          pattern: ^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,}$
           type: string
         username:
+          maxLength: 16
+          minLength: 4
+          pattern: ^[A-Za-z][A-Za-z0-9_]{3,16}$
           type: string
     BuyerResponseDTO:
       title: BuyerResponseDTO
@@ -1996,10 +2767,22 @@ components:
           type: string
         username:
           type: string
+    DeliveryRequestDTO:
+      title: DeliveryRequestDTO
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
     InboundOrderRequestDTO:
       title: InboundOrderRequestDTO
       required:
         - batch_stock
+        - order_date
+        - order_number
+        - section
       type: object
       properties:
         batch_stock:
@@ -2011,7 +2794,7 @@ components:
           format: date
         order_number:
           type: integer
-          format: int32
+          format: int64
         section:
           $ref: '#/components/schemas/SectionRequestDTOForInboundOrder'
     InboundOrderResponseDTO:
@@ -2131,29 +2914,6 @@ components:
         quantity:
           type: integer
           format: int32
-    Product:
-      title: Product
-      type: object
-      properties:
-        category_refrigeration:
-          type: string
-          enum:
-            - COLD
-            - FRESH
-            - FROZEN
-        description:
-          type: string
-        id:
-          type: integer
-          format: int64
-        max_temperature:
-          type: number
-          format: float
-        min_temperature:
-          type: number
-          format: float
-        name:
-          type: string
     ProductByWarehouseResponseDTO:
       title: ProductByWarehouseResponseDTO
       type: object
@@ -2169,6 +2929,7 @@ components:
       title: ProductRequestDTO
       required:
         - category_refrigeration
+        - description
         - max_temperature
         - min_temperature
         - name
@@ -2181,13 +2942,21 @@ components:
             - FRESH
             - FROZEN
         description:
-          maxLength: 20
+          maxLength: 100
           minLength: 4
           type: string
         max_temperature:
+          maximum: 1E+2
+          exclusiveMaximum: false
+          minimum: -1E+2
+          exclusiveMinimum: false
           type: number
           format: float
         min_temperature:
+          maximum: 1E+2
+          exclusiveMaximum: false
+          minimum: -1E+2
+          exclusiveMinimum: false
           type: number
           format: float
         name:
@@ -2213,9 +2982,17 @@ components:
           type: string
     RepresentativeRequestDTO:
       title: RepresentativeRequestDTO
+      required:
+        - email
+        - job
+        - name
+        - pass
+        - username
+        - warehouse_id
       type: object
       properties:
         email:
+          pattern: ^[\w!#$%&'*+/=?`{|}~^-]+(?:\.[\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}$
           type: string
         job:
           type: string
@@ -2223,10 +3000,19 @@ components:
             - LIDER
             - SUPERVISOR
         name:
+          maxLength: 60
+          minLength: 2
+          pattern: ^[-'a-zA-ZÀ-ÖØ-öø-ÿ ]+$
           type: string
         pass:
+          maxLength: 2147483647
+          minLength: 8
+          pattern: ^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,}$
           type: string
         username:
+          maxLength: 16
+          minLength: 4
+          pattern: ^[A-Za-z][A-Za-z0-9_]{3,16}$
           type: string
         warehouse_id:
           type: integer
@@ -2255,42 +3041,40 @@ components:
     SectionRequestDTO:
       title: SectionRequestDTO
       required:
+        - current_stock
+        - id_warehouse
+        - max_teperature
+        - min_teperature
         - name
+        - stock_limit
+        - type
       type: object
       properties:
         current_stock:
-          maximum: 1E+2
-          exclusiveMaximum: false
-          minimum: 1
-          exclusiveMinimum: false
           type: integer
           format: int32
         id_warehouse:
           type: integer
           format: int64
         max_teperature:
-          maximum: 15
+          maximum: 1E+2
           exclusiveMaximum: false
-          minimum: -2E+1
+          minimum: -1E+2
           exclusiveMinimum: false
           type: number
           format: float
         min_teperature:
-          maximum: 15
+          maximum: 1E+2
           exclusiveMaximum: false
-          minimum: -2E+1
+          minimum: -1E+2
           exclusiveMinimum: false
           type: number
           format: float
         name:
-          maxLength: 15
-          minLength: 5
+          maxLength: 16
+          minLength: 4
           type: string
         stock_limit:
-          maximum: 1E+2
-          exclusiveMaximum: false
-          minimum: 1
-          exclusiveMinimum: false
           type: integer
           format: int32
         type:
@@ -2301,6 +3085,9 @@ components:
             - FROZEN
     SectionRequestDTOForInboundOrder:
       title: SectionRequestDTOForInboundOrder
+      required:
+        - section_code
+        - warehouse_code
       type: object
       properties:
         section_code:
@@ -2363,60 +3150,47 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/OrderItemResponseDTO'
+        order_status:
+          type: string
+          enum:
+            - CANCELED
+            - CART
+            - CREATED
+            - DELIVERED
+            - NOT_DELIVERED
+            - PAID
+            - SEPARATION
+            - SHIPPED
         shipping_rate:
           type: number
         total_value:
           type: number
-    Seller:
-      title: Seller
-      type: object
-      properties:
-        advertise_list:
-          type: array
-          items:
-            $ref: '#/components/schemas/Advertise'
-        email:
-          type: string
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-        password:
-          type: string
-        profile:
-          uniqueItems: true
-          type: array
-          items:
-            type: string
-            enum:
-              - ADMIN
-              - BUYER
-              - REPRESENTATIVE
-              - SELLER
-        profiles:
-          uniqueItems: true
-          type: array
-          items:
-            type: string
-            enum:
-              - ADMIN
-              - BUYER
-              - REPRESENTATIVE
-              - SELLER
-        username:
-          type: string
     SellerRequestDTO:
       title: SellerRequestDTO
+      required:
+        - email
+        - name
+        - pass
+        - username
       type: object
       properties:
         email:
+          pattern: ^[\w!#$%&'*+/=?`{|}~^-]+(?:\.[\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}$
           type: string
         name:
+          maxLength: 60
+          minLength: 2
+          pattern: ^[-'a-zA-ZÀ-ÖØ-öø-ÿ ]+$
           type: string
         pass:
+          maxLength: 2147483647
+          minLength: 8
+          pattern: ^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,}$
           type: string
         username:
+          maxLength: 16
+          minLength: 4
+          pattern: ^[A-Za-z][A-Za-z0-9_]{3,16}$
           type: string
     SellerResponseDTO:
       title: SellerResponseDTO
@@ -2431,6 +3205,62 @@ components:
           type: string
         username:
           type: string
+    TransporterRequestDTO:
+      title: TransporterRequestDTO
+      required:
+        - car_model
+        - car_plate
+        - cold_max_quantity
+        - fresh_max_quantity
+        - frozen_max_quantity
+        - name
+      type: object
+      properties:
+        car_model:
+          maxLength: 20
+          minLength: 2
+          pattern: ^[A-Za-z0-9-_ ]{2,20}$
+          type: string
+        car_plate:
+          pattern: '[A-Z]{3}[0-9][0-9A-Z][0-9]{2}'
+          type: string
+        cold_max_quantity:
+          type: integer
+          format: int32
+        fresh_max_quantity:
+          type: integer
+          format: int32
+        frozen_max_quantity:
+          type: integer
+          format: int32
+        name:
+          maxLength: 60
+          minLength: 2
+          pattern: ^[-'a-zA-ZÀ-ÖØ-öø-ÿ ]+$
+          type: string
+    TransporterResponseDTO:
+      title: TransporterResponseDTO
+      type: object
+      properties:
+        car_model:
+          type: string
+        car_plate:
+          type: string
+        delivery_order_list:
+          type: array
+          items:
+            $ref: '#/components/schemas/SellOrderResponseDTO'
+        id:
+          type: integer
+          format: int64
+        in_route:
+          type: boolean
+        name:
+          type: string
+        payment_for_delivery:
+          type: number
+        salary:
+          type: number
     UserResponseDTO:
       title: UserResponseDTO
       type: object
@@ -2450,24 +3280,20 @@ components:
       properties:
         content_type:
           type: string
-    Warehouse:
-      title: Warehouse
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        location:
-          type: string
-        nome:
-          type: string
     WarehouseRequestDTO:
       title: WarehouseRequestDTO
+      required:
+        - location
+        - name
       type: object
       properties:
         location:
+          maxLength: 80
+          minLength: 2
           type: string
         name:
+          maxLength: 16
+          minLength: 4
           type: string
     WarehouseResponseDTO:
       title: WarehouseResponseDTO
@@ -2490,8 +3316,3 @@ components:
         warehouse_code:
           type: integer
           format: int64
-  securitySchemes:
-    APIKey:
-      type: apiKey
-      name: Authorization
-      in: header

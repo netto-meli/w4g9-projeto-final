@@ -1,9 +1,9 @@
 # Programação Java
-## Requisito 2
+## Requisito 6
 ### // Especificações de Requisitos
 
 #### Requerimientos US:
-#### ml-add-products-to-cart-01
+#### [ml-add-sections-06](https://netto-meli.github.io/w4g9-projeto-final/guide/projeto_integrador/US-6/Requisito_6_-_Felipe_Bontempo.pdf) <-(clique para acessar PDF)
 
 **Importante:**
 As histórias de usuários são narradas do ponto de vista do comprador com base em
