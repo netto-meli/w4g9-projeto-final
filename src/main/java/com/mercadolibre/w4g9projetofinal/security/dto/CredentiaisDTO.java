@@ -6,6 +6,10 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
+/***
+ * Classe para realizar conversao de dados para tratativa e devolutiva de dados
+ * @Autor Marcos Sá
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

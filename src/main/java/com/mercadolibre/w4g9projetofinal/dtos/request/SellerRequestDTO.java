@@ -6,6 +6,12 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.*;
 
+/***
+ * Classe de Request para Seller
+ *
+ * @author Marcos Sá
+ * @author Fernando
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

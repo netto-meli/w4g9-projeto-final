@@ -15,6 +15,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 
+/***
+ * Classe Seller
+ *
+ * @author Marcos Sá
+ */
 @Getter
 @Setter
 @ToString

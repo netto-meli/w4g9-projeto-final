@@ -10,7 +10,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 /***
- * @author Fernando
+ * Classe para realizar conversao de dados para tratativa de dados
+ * @author Marcos Sá - Classe
+ * @author Fernando Netto - validações
  */
 @Data
 @NoArgsConstructor

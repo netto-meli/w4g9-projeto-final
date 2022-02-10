@@ -5,7 +5,9 @@ import com.mercadolibre.w4g9projetofinal.entity.User;
 import javax.mail.internet.MimeMessage;
 
 /***
- * @author Marcos
+ * Interface de serviço para Email
+ *
+ * @author Marcos Sá
  */
 public interface EmailService {
 
