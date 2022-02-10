@@ -15,13 +15,8 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
-/*** Controller dos métodos do Setor
- * <b>Lista Setores registrados</b>
- * <b>Localiza Setor pelo código ID</b>
- * <b>Registra novo Setor</b>
- * <b>Atualiza os dados de um Setor, localize pelo ID</b>
- * <b>Deleta um Setor selecionado pelo ID</b>
- * @author Felipe Bontempo
+/**
+ * @author fbontempo
  * @version 0.4
  *
  */
@@ -29,14 +24,11 @@ import java.util.List;
 @RequestMapping("/api/v1/fresh-products/section")
 @PreAuthorize("hasRole('ADMIN') OR hasRole('REPRESENTATIVE')")
 public class SectionController {
-    /***
-     * Instancia de serviço <b>SectionService</b> com notação <i>{@literal @}Autowired</i> do lombok
-     */
+
     @Autowired
     private SectionService sectionService;
 
-    /*** Método retorna uma lista de Sections registradas
-     * GET - /api/v1/fresh-products/section
+    /*** Retorna uma lista de Sections registradas
      * @return Retorna uma lista de SectionResponseDTO
      */
     @GetMapping
@@ -45,11 +37,9 @@ public class SectionController {
         return ResponseEntity.ok(SectionConverter.convertEntityListToDtoList(sections));
     }
 
-    /** Método que retorna uma Section pelo ID.
-     * GET - /api/v1/fresh-products/section/{id}
-     * @param id ID da Section que o representante deseja selecionar
+    /** Retorna uma Section pesquisa pelo ID.
+     * @param id id
      * @return O Section pesquisado caso OK.
-     * @return Retorna payload de SectionResponseDTO em um ResponseEntity com status <b>OK</b> e
      */
     @GetMapping("/{id}")
     public ResponseEntity<SectionResponseDTO> findById(@PathVariable Long id){
@@ -57,11 +47,10 @@ public class SectionController {
         return ResponseEntity.ok(SectionConverter.convertEntityToDto(section));
     }
 
-    /*** Método que cadastra uma Section
-     * POST - /api/v1/fresh-products/section
-     * @param sectionRequestDTO
-     * @param uriBuilder
-     * @return Retorna o payload de SectionResponseDTO em um ResponseEntity com o status <b>CREATED</b>
+    /*** Cadastra uma Section
+     * @param sectionRequestDTO section
+     * @param uriBuilder uri
+     * @return Retorna o payload de SectionResponseDTO em um ResponseEntity com o status 201
      */
     @PostMapping
     public ResponseEntity<SectionResponseDTO> insert(@RequestBody @Valid SectionRequestDTO sectionRequestDTO,
@@ -73,10 +62,9 @@ public class SectionController {
     }
 
     /*** Atualiza uma Section com base no ID
-     * PUT - /api/v1/fresh-products/section/{id}
-     * @param id
-     * @param sectionDTO
-     * @return Retorna o payload de SectionResponseDTO em um ResponseEntity com o status <b>OK</b>
+     * @param id id
+     * @param sectionDTO section
+     * @return Retorna o payload de SectionResponseDTO em um ResponseEntity com o status 200
      */
     @PutMapping("/{id}")
     public ResponseEntity<SectionResponseDTO> update(@PathVariable Long id,
@@ -91,8 +79,7 @@ public class SectionController {
     }
 
     /*** Deleta uma Section com base no ID
-     * DELETE - /api/v1/fresh-products/section/{id}
-     * @param id
+     * @param id id
      * @return Retorna o status 200
      */
     @DeleteMapping("/{id}")

@@ -51,7 +51,7 @@ public class AdvertiseService {
      * @return status 200 quando salvo
      */
     public Advertise insert(Advertise advertise) {
-            return repository.save(advertise);
+        return repository.save(advertise);
     }
 
     /**
