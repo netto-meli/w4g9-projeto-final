@@ -11,6 +11,7 @@ import javax.validation.constraints.*;
  *
  * @author Felipe
  * @author Fernando Netto
+ * @author Leonardo
  */
 @Data
 @NoArgsConstructor

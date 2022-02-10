@@ -4,6 +4,7 @@ import com.mercadolibre.w4g9projetofinal.entity.Advertise;
 import com.mercadolibre.w4g9projetofinal.entity.Product;
 import com.mercadolibre.w4g9projetofinal.entity.Seller;
 import com.mercadolibre.w4g9projetofinal.entity.enums.AdvertiseStatus;
+import com.mercadolibre.w4g9projetofinal.exceptions.BusinessException;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.AdvertiseRepository;
 import com.mercadolibre.w4g9projetofinal.service.AdvertiseService;
@@ -61,7 +62,6 @@ public class AdvertiseServiceTest {
     public void insertAdvertise(){
 
         Advertise adv = new Advertise(1L,"primeiro",new Product(), new Seller(),new BigDecimal(4),AdvertiseStatus.ATIVO, true);
-        Advertise adv1 = new Advertise(2L,"segundo",new Product(), new Seller(),new BigDecimal(8),AdvertiseStatus.INATIVO, false);
 
         AdvertiseRepository advertiseRepository = Mockito.mock(AdvertiseRepository.class);
         Mockito.when(advertiseRepository.save(adv)).thenReturn(adv);

@@ -26,7 +26,6 @@ import java.util.List;
  *
  * @author Leonardo
  */
-
 @RestController
 @RequestMapping(value = "/api/v1/fresh-products/buyer")
 public class BuyerController {
@@ -44,9 +43,6 @@ public class BuyerController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<BuyerResponseDTO>> findAll() {
         List<BuyerResponseDTO> list = BuyerConverter.convertEntityListToDtoList(service.findAll());
-        if(list == null || list.isEmpty()){
-            throw new ObjectNotFoundException("Ainda nao consta dados cadastrados");
-        }
         return ResponseEntity.ok(list);
     }
 
@@ -94,9 +90,9 @@ public class BuyerController {
      * @return status ok.
      */
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<String> delete(@PathVariable Long id) {
         UserService.adminOrSameUser(id);
         service.delete(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body("Comprador com id : " + id + " excluido");
     }
 }

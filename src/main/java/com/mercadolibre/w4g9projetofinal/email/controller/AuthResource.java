@@ -5,8 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+/***
+ * Classe de controller para recuperação de senha
+ *
+ * @author Marcos Sá
+ */
+
 @RestController
-@RequestMapping(value = "/auth")
+@RequestMapping(value = "/api/v1/auth")
 public class AuthResource {
 
     @Autowired

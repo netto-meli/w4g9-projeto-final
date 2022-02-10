@@ -33,7 +33,7 @@ public class BuyerService {
     /**
      * Instancia para Buyer Repository
      */
-    private BuyerRepository repository;
+    private final BuyerRepository repository;
 
     /**
      * Metodo que lista todos os compradores
