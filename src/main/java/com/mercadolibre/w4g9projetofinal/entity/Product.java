@@ -14,9 +14,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Objects;
 
-/**
- * @author Leonardo
- */
 @Getter
 @Setter
 @ToString

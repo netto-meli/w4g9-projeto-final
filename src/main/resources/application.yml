@@ -1,7 +1,7 @@
 # Default properties file
 spring:
   profiles:
-    active: test # Comma-separated list of active profiles. Can be overridden by a command line switch.
+    active: ${SCOPE_SUFFIX} # Comma-separated list of active profiles. Can be overridden by a command line switch.
   mvc:
     throw-exception-if-no-handler-found: true # Whether a "NoHandlerFoundException" should be thrown if no Handler was found to process a request.
   web:
