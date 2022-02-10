@@ -30,6 +30,7 @@ import java.math.BigDecimal;
  ***/
 public class AdvertiseRequestDTO {
     @NotEmpty(message = "Campo Obrigatório")
+    @NotEmpty(message = "Campo Obrigatório")
     @Size(min=4,max=20,message="Descrição deve ter no máximo 20 caracteres e no minimo 4 caracteres. ")
     private String description;
     @NotNull(message = "Campo Obrigatório")

@@ -11,8 +11,8 @@ import javax.validation.constraints.*;
  * Classe de Request para Representative
  *
  * @author Marcos Sá
+ * @author Fernando
  */
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

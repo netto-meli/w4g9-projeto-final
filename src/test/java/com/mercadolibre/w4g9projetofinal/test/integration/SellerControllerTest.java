@@ -59,7 +59,7 @@ public class SellerControllerTest {
     @WithUserDetails("UserSeller4")
     public void deveBuscarUmSellerPorId() throws Exception {
         MvcResult result = mockMvc
-                .perform(MockMvcRequestBuilders.get("/api/v1/fresh-products/seller/" + 1L))
+                .perform(MockMvcRequestBuilders.get("/api/v1/fresh-products/seller/" + 2L))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
     }
@@ -94,7 +94,7 @@ public class SellerControllerTest {
                 "}";
 
         MvcResult result = mockMvc
-                .perform(MockMvcRequestBuilders.put("/api/v1/fresh-products/seller/" + 1L)
+                .perform(MockMvcRequestBuilders.put("/api/v1/fresh-products/seller/" + 2L)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(payLoad))
                 .andExpect(MockMvcResultMatchers.status().isNoContent())
@@ -106,7 +106,7 @@ public class SellerControllerTest {
     @WithUserDetails("UserSeller4")
     public void deveDeletarUser() throws Exception {
         MvcResult result = mockMvc
-                .perform(MockMvcRequestBuilders.delete("/api/v1/fresh-products/seller/" + 1L))
+                .perform(MockMvcRequestBuilders.delete("/api/v1/fresh-products/seller/" + 2L))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
     }

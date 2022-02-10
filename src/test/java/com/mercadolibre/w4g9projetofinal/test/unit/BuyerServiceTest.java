@@ -18,7 +18,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 /***
- * @autor Leonardo
+ * @author Leonardo
  */
 public class BuyerServiceTest {
 

@@ -75,12 +75,12 @@ public class ProductController {
      * @return ResponseEntity com status <b>NO CONTENT</b>
      */
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Product> update(@PathVariable Long id,
+    public ResponseEntity<ProductResponseDTO> update(@PathVariable Long id,
                                           @RequestBody @Valid ProductRequestDTO newProd) {
         Product product = ProductConverter.convertDtoToEntity(newProd);
         product.setId(id);
         product = service.update(product);
-        return ResponseEntity.ok().body(product);
+        return ResponseEntity.ok().body(ProductConverter.convertEntityToDto(product));
     }
 
     /*** Método para atualização de Seller existente<br>
@@ -96,6 +96,7 @@ public class ProductController {
 
     /***
      * Motodo GET para listar produtos por categoria.
+     * @param categoryProd  categoria
      * @return retorna a lista por categora e status 200
      */
     @GetMapping(value = "/listCategory/")
@@ -107,6 +108,7 @@ public class ProductController {
 
     /***
      * Motodo GET para listar produtos por lote.
+     * @param id id
      * @return retorna lote dos produtos status 200
      */
     @GetMapping("/listBatch/")
@@ -117,10 +119,12 @@ public class ProductController {
 
     /***
      * Motodo GET para listar produtos por Ordenacao.
-     * @return retorna lote dos produtos de acordo com a ordenacao status 200
      * L = ordenado por lote
      * C = ordenado por quantidade atual
      * F = ordenado por data de vencimento
+     * @param id id
+     * @param order ordenacao
+     * @return retorna lote dos produtos de acordo com a ordenacao status 200
      */
     @GetMapping("/listBatchByProduct/")
     public ResponseEntity<List<BatchResponseDTO>> orderByProductId(@RequestParam Long id, @RequestParam String order) {

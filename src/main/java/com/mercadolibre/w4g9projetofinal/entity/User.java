@@ -25,8 +25,8 @@ import java.util.Set;
  * Classe User
  *
  * @author Marcos Sá
+ * @author Fernando
  */
-
 @Getter
 @Setter
 @ToString

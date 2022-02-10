@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
+/***
+ * @author Fernando
+ */
 @RestController
 @RequestMapping(value = "/api/v1/fresh-products/due-date")
 @PreAuthorize("hasRole('ADMIN') OR hasRole('REPRESENTATIVE')")
@@ -21,6 +24,12 @@ public class DueDateController {
     @Autowired
     BatchService batchService;
 
+    /***
+     * Busca Lotes, conforme datade validade, filtrado por setor
+     * @param numberOfDays nnumero de dias para expiração da validae
+     * @param sectionId setor
+     * @return lista
+     */
     @GetMapping("/bySection/{numberOfDays}")
     public ResponseEntity<List<BatchByDueDateRequestDTO>> findByDueDateBeforeAndSectionId(
             @PathVariable int numberOfDays,
@@ -30,6 +39,13 @@ public class DueDateController {
         return ResponseEntity.ok().body(response);
     }
 
+    /***
+     * Busca Lotes, conforme datade validade, filtrado por tipo de refrigeração e ordenado crescente ou decrescente
+     * @param numberOfDays nnumero de dias para expiração da validae
+     * @param refrigerationType tipo de refrigeração
+     * @param orderBy ordenação asc / desc
+     * @return lista
+     */
     @GetMapping("/byRefrigeration/{numberOfDays}")
     public ResponseEntity<List<BatchByDueDateRequestDTO>> findByDueDateBeforeAndRefrigerationType(
             @PathVariable int numberOfDays,

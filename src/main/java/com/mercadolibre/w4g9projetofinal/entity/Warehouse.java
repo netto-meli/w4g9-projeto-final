@@ -15,10 +15,10 @@ import java.util.Objects;
 
 /***
  * @author Rafael Menezes
+ * @author Fernando
  * @version 1.0
  * @since Release 01 da aplicação
  */
-
 @Getter
 @Setter
 @ToString
@@ -38,10 +38,6 @@ public class Warehouse {
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Warehouse warehouse = (Warehouse) o;
         return id != null && Objects.equals(id, warehouse.id);
-    }
-
-    public Long getId() {
-        return id;
     }
 
     @Override

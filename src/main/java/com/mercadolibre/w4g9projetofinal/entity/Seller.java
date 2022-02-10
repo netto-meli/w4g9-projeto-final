@@ -20,7 +20,6 @@ import java.util.Objects;
  *
  * @author Marcos Sá
  */
-
 @Getter
 @Setter
 @ToString

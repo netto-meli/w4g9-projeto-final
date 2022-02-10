@@ -12,6 +12,7 @@ import java.util.List;
  * Classe de conversão - Representative
  *
  * @author Marcos Sá
+ * @author Fernando
  */
 
 public class RepresentativeConverter {

@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
- * @autor Leonardo
+ * @author Leonardo
  */
 @Getter
 @Setter

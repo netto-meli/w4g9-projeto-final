@@ -9,7 +9,6 @@ import com.mercadolibre.w4g9projetofinal.entity.Warehouse;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class SectionConverter {
     public static Section convertDtoFIOToEntity (SectionRequestDTOForInboundOrder sectionRequestDTO) {

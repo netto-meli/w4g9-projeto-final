@@ -20,7 +20,6 @@ import java.util.ArrayList;
  *
  * @author Marcos Sá
  */
-
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;

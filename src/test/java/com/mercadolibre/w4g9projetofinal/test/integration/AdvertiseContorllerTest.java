@@ -28,7 +28,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import java.math.BigDecimal;
 
 /***
- * @autor Leonardo
+ * @author Leonardo
  */
 
 @SpringBootTest
@@ -137,7 +137,7 @@ public class AdvertiseContorllerTest {
                 10F, 20F, RefrigerationType.FRESH);
         product1 = productRepository.save(product1);
 
-        Seller seller = new Seller(2L, "userSellerIdinclu",
+        Seller seller = new Seller(3L, "userSellerIdinclu",
                 "vendedor nome incluso", "emailtu@hotmail.com", crypt.encode("123456"), null);
         seller = sellerRepository.save(seller);
 

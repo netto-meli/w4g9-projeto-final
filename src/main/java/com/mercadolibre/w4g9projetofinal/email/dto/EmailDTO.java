@@ -11,8 +11,8 @@ import javax.validation.constraints.Pattern;
 
 /***
  * Classe para realizar conversao de dados para tratativa de dados
- * @Autor Marcos Sá - Classe
- * @Autor Fernando Netto - validações
+ * @author Marcos Sá - Classe
+ * @author Fernando Netto - validações
  */
 @Data
 @NoArgsConstructor

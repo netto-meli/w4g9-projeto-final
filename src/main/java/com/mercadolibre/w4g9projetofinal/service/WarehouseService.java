@@ -13,6 +13,11 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.*;
 
+/***
+ * Service de Armazem
+ * @author Fernando
+ * @author Rafael
+ */
 @Service
 @AllArgsConstructor
 public class WarehouseService {
@@ -40,16 +45,21 @@ public class WarehouseService {
         return warehouseRepository.save(wh);
     }
 
-    private static void updateWarehouse(Warehouse wh, Warehouse nWarehouse) {
-        nWarehouse.setName(wh.getName());
-        nWarehouse.setLocation(wh.getLocation());
-    }
-
     public void delete(Long id) {
         Warehouse wh = findById(id);
         warehouseRepository.delete(wh);
     }
 
+    private static void updateWarehouse(Warehouse wh, Warehouse nWarehouse) {
+        nWarehouse.setName(wh.getName());
+        nWarehouse.setLocation(wh.getLocation());
+    }
+
+    /***
+     * Metodo para buscar todos os armazens, filtrados por um produto
+     * @param idProduct id do produto
+     * @return lista de armazens
+     */
     public Map<Long, Integer> findWarehousesByProductId(Long idProduct) {
         List<Batch> batchList = batchService.findByProductId(idProduct);
         Map<Long, Integer> warehouses = new HashMap<>();

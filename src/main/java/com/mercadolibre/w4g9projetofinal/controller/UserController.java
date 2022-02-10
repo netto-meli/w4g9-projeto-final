@@ -17,6 +17,7 @@ import java.util.List;
  * Classe de controle para User
  *
  * @author Marcos Sá
+ * @author Fernando
  */
 @RestController
 @RequestMapping("/api/v1/fresh-products/users")

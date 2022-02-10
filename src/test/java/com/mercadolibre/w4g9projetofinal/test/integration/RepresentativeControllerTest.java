@@ -67,7 +67,7 @@ public class RepresentativeControllerTest {
     @WithUserDetails("representative1")
     public void deveBuscarRepresentativePorId() throws Exception {
         MvcResult result = mockMvc
-                .perform(MockMvcRequestBuilders.get("/api/v1/fresh-products/representative/" + 1L))
+                .perform(MockMvcRequestBuilders.get("/api/v1/fresh-products/representative/" + 2L))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
     }
@@ -107,7 +107,7 @@ public class RepresentativeControllerTest {
                 " \n }";
 
         MvcResult result = mockMvc
-                .perform(MockMvcRequestBuilders.put("/api/v1/fresh-products/representative/" + 2L)
+                .perform(MockMvcRequestBuilders.put("/api/v1/fresh-products/representative/" + 3L)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(payLoad))
                 .andExpect(MockMvcResultMatchers.status().isNoContent())
@@ -119,7 +119,7 @@ public class RepresentativeControllerTest {
     @WithUserDetails("representative1")
     public void deveDeletarUmRepresentative() throws Exception {
         MvcResult result = mockMvc
-                .perform(MockMvcRequestBuilders.delete("/api/v1/fresh-products/representative/" + 1L))
+                .perform(MockMvcRequestBuilders.delete("/api/v1/fresh-products/representative/" + 2L))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn();
     }

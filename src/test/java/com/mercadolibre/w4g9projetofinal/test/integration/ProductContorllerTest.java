@@ -32,7 +32,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /***
- * @autor Leonardo
+ * @author Leonardo
  */
 @SpringBootTest
 @AutoConfigureMockMvc

@@ -11,6 +11,7 @@ import java.util.List;
  * Classe de conversão - Seller
  *
  * @author Marcos Sá
+ * @author Fernando
  */
 
 public class SellerConverter {

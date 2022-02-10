@@ -17,7 +17,6 @@ import java.util.Date;
  *
  * @author Marcos Sá
  */
-
 public abstract class AbstractEmailService implements EmailService{
 
     /*** sender definido em Application.yml: <b>{default.sender}</b>.
@@ -38,6 +37,7 @@ public abstract class AbstractEmailService implements EmailService{
     /*** Método que faz intância de User e newPass para template de Email HTML
      * @param user objeto user a ser inserido no template HTML
      * @param newPass objeto newwPass a ser inserido no template HTML
+     * @return string
      */
     protected String htmlFromTemplateNewPassword(User user, String newPass) {
         Context context = new Context();
@@ -64,6 +64,8 @@ public abstract class AbstractEmailService implements EmailService{
     /*** Método que faz ajustes para envio de Email HTML
      * @param user objeto user vindo do template HTML
      * @param newPass objeto newPass vindo do template HTML
+     * @return msg
+     * @throws MessagingException ex
      */
     protected MimeMessage prepareMimeMessagePassword(User user, String newPass) throws MessagingException {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();

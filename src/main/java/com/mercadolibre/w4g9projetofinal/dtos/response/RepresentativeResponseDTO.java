@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
  *
  * @author Marcos Sá
  */
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

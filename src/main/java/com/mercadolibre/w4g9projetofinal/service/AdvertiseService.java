@@ -19,7 +19,7 @@ import java.util.Optional;
  * insere anuncio
  * altera anuncio
  * exclui anuncio
- * @autor Leonardo
+ * @author Leonardo
  */
 @Service
 @AllArgsConstructor
@@ -40,7 +40,7 @@ public class AdvertiseService {
 
     /**
      * Metodo para buscar anuncio por id
-     * @param id
+     * @param id id
      * @return o anuncio procurado
      */
     public Advertise findById(Long id) {
@@ -50,7 +50,7 @@ public class AdvertiseService {
 
     /**
      * Metodo para inserir anuncio
-     * @param advertise
+     * @param advertise anuncio
      * @return status 200 quando salvo
      */
     public Advertise insert(Advertise advertise) {
@@ -59,7 +59,7 @@ public class AdvertiseService {
 
     /**
      * Metodo para alterar informaçoes de anuncio
-     * @param newAdvertise
+     * @param newAdvertise anuncio
      * @return o novo anuncio salvo status 200
      */
     public Advertise update(Advertise newAdvertise) {
@@ -70,7 +70,7 @@ public class AdvertiseService {
 
     /**
      * Metodo para deletar anuncio por id
-     * @param id
+     * @param id id
      */
     public void delete(Long id) {
         Advertise advertise = findById(id);
@@ -79,8 +79,8 @@ public class AdvertiseService {
 
     /**
      * Metodo para atualizar um vendedor pelo anuncio
-     * @param advertise
-     * @param newAdvertise
+     * @param advertise anuncio
+     * @param newAdvertise anuncio
      */
     private static void updateSeller(Advertise advertise, Advertise newAdvertise) {
         newAdvertise.setDescription(advertise.getDescription());

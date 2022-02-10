@@ -17,6 +17,10 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+/***
+ * Classe referente ao servico de Entregadores e Delivery
+ * @author Fernando
+ */
 @Service
 @AllArgsConstructor
 public class TransporterService {
@@ -36,6 +40,11 @@ public class TransporterService {
                 .orElseThrow(() -> new ObjectNotFoundException("Transporter not found"));
     }
 
+    /**
+     * Metodo para buscar lista de Entregadores, conforme informação de que se estão em rota ou não.
+     * @param inRoute boolean informando se estão fazendo Entregas ou não
+     * @return Lista de Entregadores
+     */
     public List<Transporter> findByStatus(boolean inRoute) {
         return transporterRepository.findByInRoute(inRoute);
     }
@@ -44,6 +53,11 @@ public class TransporterService {
         return transporterRepository.save(transporter);
     }
 
+    /***
+     * Atualiza entregador somente se o mesmo não estiver fazendo entregas
+     * @param transporter Entregador
+     * @return entrtegadot
+     */
     public Transporter update(Transporter transporter) {
         Transporter old = this.findById(transporter.getId());
         if (old.isInRoute()) {
@@ -53,6 +67,10 @@ public class TransporterService {
         return transporterRepository.save(transporter);
     }
 
+    /***
+     * Exclui entregador somente se o mesmo não estiver fazendo entregas
+     * @param idTransporter Entregador
+     */
     public void delete(Long idTransporter) {
         Transporter transporter = this.findById(idTransporter);
         if (transporter.isInRoute()) {
@@ -61,19 +79,30 @@ public class TransporterService {
         transporterRepository.delete(transporter);
     }
 
+    /***
+     * Metodo que indica um Entregador para a entrega dos pedidos
+     * @param listIdToDeliver lista de IDs de entrtegas (pedidos realizados)
+     * @return Entregador
+     */
     @Transactional
     public Transporter calldelivery(List<Long> listIdToDeliver) {
-        List<SellOrder> listDelivery = this.findAllById(listIdToDeliver);
+        List<SellOrder> listDelivery = this.findAllSellOrdersByID(listIdToDeliver);
         Transporter transporter = this.findAvailableTransporter(listDelivery);
         transporter.setDeliveryOrderList(listDelivery);
         transporter.setInRoute(true);
         return transporterRepository.save(transporter);
     }
 
+    /***
+     * Metodo que valida entrega dos pedidos
+     * @param idTransporter id do entnrtegador
+     * @param listIdsDelivered lista dos pedidos entregues
+     * @return entregador disponivel
+     */
     @Transactional
     public Transporter confirmDelivery(Long idTransporter, List<Long> listIdsDelivered) {
         Transporter transporter = this.findById(idTransporter);
-        List<SellOrder> listDelivery = this.findAllById(listIdsDelivered);
+        List<SellOrder> listDelivery = this.findAllSellOrdersByID(listIdsDelivered);
         for (SellOrder delivery : listDelivery) {
             if (!transporter.getDeliveryOrderList().remove(delivery)) {
                 throw new ObjectNotFoundException("Delivery id: " + delivery.getId() + " informed, "
@@ -97,6 +126,11 @@ public class TransporterService {
         return transporterRepository.save(transporter);
     }
 
+    /***
+     * Metodo que verifica quais entregadores estão aptos a fazer a entrega
+     * @param listDelivery lista de pedidos para entrega
+     * @return Entregador apto
+     */
     private Transporter findAvailableTransporter(List<SellOrder> listDelivery) {
         int qtdFrozen = 0;
         int qtdFresh = 0;
@@ -129,7 +163,12 @@ public class TransporterService {
         return transporter;
     }
 
-    private List<SellOrder> findAllById(List<Long> listIdToDeliver) {
+    /***
+     * Traz a lista de pedidos conforme ids
+     * @param listIdToDeliver id dos pedidos
+     * @return lista dos pedidos
+     */
+    private List<SellOrder> findAllSellOrdersByID(List<Long> listIdToDeliver) {
         List<SellOrder> listDelivery = sellOrderRepository.findAllById(listIdToDeliver);
         if (listDelivery.size() != listIdToDeliver.size())
             throw new ObjectNotFoundException("Some Id's doesn't exist.");
