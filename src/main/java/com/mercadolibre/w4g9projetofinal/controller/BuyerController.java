@@ -60,6 +60,7 @@ public class BuyerController {
 
     /*** Método para adicionar novo Comprador<br>
      * POST - /api/v1/fresh-products/buyer
+     * @param buyer comprador
      * @return Retorna payload de Comprador em um ResponseEntity com status <b>CREATED</b>
      */
     @PostMapping
@@ -73,6 +74,8 @@ public class BuyerController {
 
     /*** Método para Alterar Comprador<br>
      * PUT - /api/v1/fresh-products/buyer
+     * @param newBuyer comprador
+     * @param id id
      * @return Retorna payload de CompradorDto em um ResponseEntity com status <b>CREATED</b>
      */
     @PutMapping(value = "/{id}")
@@ -87,6 +90,7 @@ public class BuyerController {
 
     /*** Método para deltear Anuncio<br>
      * DELETE - /api/v1/fresh-products/buyer
+     * @param id id
      * @return status ok.
      */
     @DeleteMapping(value = "/{id}")

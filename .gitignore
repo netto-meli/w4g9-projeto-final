@@ -3,7 +3,6 @@
 *.iml
 *.swp
 data/
-docs/JavaDoc/
 target/
 .settings
 .classpath

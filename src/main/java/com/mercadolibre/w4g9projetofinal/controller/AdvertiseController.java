@@ -57,9 +57,9 @@ public class AdvertiseController {
 
     /*** Método para adicionar novo Anuncio<br>
      * POST - /api/v1/fresh-products/advertise
+     * @param advertise anuncio
      * @return Retorna payload de AnuncioDto em um ResponseEntity com status <b>CREATED</b>
      */
-
     @PostMapping
     public ResponseEntity<AdvertiseResponseDTO> insert(@RequestBody @Valid AdvertiseRequestDTO advertise) {
         Advertise newAdvertise = AdvertiseConverter.convertDtoToEntity(advertise);
@@ -71,9 +71,10 @@ public class AdvertiseController {
 
     /*** Método para Alterar Anuncio<br>
      * PUT - /api/v1/fresh-products/advertise
+     * @param advertiseDto anuncio
+     * @param id id
      * @return Retorna payload de AnuncioDto em um ResponseEntity com status <b>CREATED</b>
      */
-
     @PutMapping(value = "/{id}")
     public ResponseEntity<AdvertiseResponseDTO> update(@RequestBody @Valid AdvertiseRequestDTO advertiseDto,
                                                       @PathVariable Long id) {
@@ -85,6 +86,7 @@ public class AdvertiseController {
 
     /*** Método para deltear Anuncio<br>
      * DELETE - /api/v1/fresh-products/advertise
+     * @param id id
      * @return status ok.
      */
     @DeleteMapping(value = "/{id}")

@@ -37,13 +37,17 @@ public class SellerService {
      */
     private AdvertiseService advertiseService;
 
-    /*** Método que retorna lista de Sellers */
+    /*** Método que retorna lista de Sellers
+     *
+     * @return lista de compradores
+     */
     public List<Seller> findAll() {
         return repository.findAll();
     }
 
     /*** Método que busca Seller por Id
      * @param id ID do Seller a ser retornado
+     * @return comprador
      */
     public Seller findById(Long id) {
         Optional<Seller> obj = repository.findById(id);
@@ -52,6 +56,7 @@ public class SellerService {
 
     /*** Método que insere um Seller
      * @param obj objeto Seller a ser inserido
+     * @return comprador
      */
     public Seller insert(Seller obj) {
         obj.setPassword(bCryptPasswordEncoder.encode(obj.getPassword()));
@@ -65,6 +70,7 @@ public class SellerService {
     /*** Método que atualiza um Seller já existente
      *
      * @param newObj Objeto com informações para atualização de um seller existente
+     * @return comprador
      */
     public Seller update(Seller newObj) {
         Seller obj = findById(newObj.getId());

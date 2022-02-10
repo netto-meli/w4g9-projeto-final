@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 /***
  * Classe para realizar conversao de dados para tratativa e devolutiva de dados
- * @Autor Marcos Sá
+ * @author Marcos Sá
  */
 @Data
 @NoArgsConstructor

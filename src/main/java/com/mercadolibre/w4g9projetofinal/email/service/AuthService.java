@@ -34,7 +34,9 @@ public class AuthService {
      */
     private final Random rand;
 
-    /*** Construtor para instância de userRepository e bCryptPasswordEncoder</b>.
+    /*** Construtor para instância de userRepository e bCryptPasswordEncoder.
+     * @param userRepository user
+     * @param bCryptPasswordEncoder crypt
      */
     public AuthService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
@@ -57,7 +59,7 @@ public class AuthService {
     }
 
     /*** Método que gera uma senha de 12 caracteres
-     *
+     * @return string
      */
     private String newPassword() {
         char[] vet = new char[12];
@@ -68,7 +70,7 @@ public class AuthService {
     }
 
     /*** Método que gera uma caracteres aleatórios para a criação de nova senha
-     *
+     * @return char
      */
     private char randomChar() {
         int opt = rand.nextInt(4);

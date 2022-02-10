@@ -31,7 +31,10 @@ public class RepresentativeService {
     private RepresentativeRepository repository;
 
 
-    /*** Método que retorna lista de Representatives */
+    /*** Método que retorna lista de Representatives
+     *
+     * @return lista representantes
+     */
     public List<Representative> findAll() {
         return repository.findAll();
     }
@@ -39,6 +42,7 @@ public class RepresentativeService {
 
     /*** Método que busca Representative por Id
      * @param id ID do Representative a ser retornado
+     * @return representante
      */
     public Representative findById(Long id) {
         Optional<Representative> obj = repository.findById(id);
@@ -47,6 +51,7 @@ public class RepresentativeService {
 
     /*** Método que insere um Representative
      * @param obj objeto Representative a ser inserido
+     * @return representante
      */
     public Representative insert(Representative obj) {
         obj.setPassword(bCryptPasswordEncoder.encode(obj.getPassword()));
@@ -60,6 +65,7 @@ public class RepresentativeService {
     /*** Método que atualiza um Representative já existente
      *
      * @param newObj Objeto com informações para atualização de um Representative existente
+     * @return representante
      */
     public Representative update(Representative newObj) {
         Representative obj = findById(newObj.getId());

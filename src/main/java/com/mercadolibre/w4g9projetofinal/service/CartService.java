@@ -140,6 +140,7 @@ public class CartService {
 
     /*** Método para buscar dentro do pedido, o produto selecionado
      *
+     * @param sellOrder carrinho
      * @param advertise ID do Produto para o método buscar os dados de ItemCarinho
      * @return ItemCarrinho contendo o produto buscado e quantidade no carrinho
      */
@@ -152,9 +153,11 @@ public class CartService {
 
     /*** Método para atualizar o carrinho, conforme foram adicionados ou removidos itens de um produto
      *
+     * @param sellOrder carrinho
      * @param qtdProduct Quantidade de itens do produto
      * @param advertise Anuncio do produto
      * @param orderItem Produto para atualizar no carrinho
+     * @return quantidade da ordem
      */
     private int updateCart(SellOrder sellOrder, int qtdProduct, Advertise advertise, OrderItem orderItem) {
         if (orderItem == null) {
@@ -171,6 +174,7 @@ public class CartService {
 
     /*** Método para calcular o valor total de itens de um produto no carrinho
      *
+     * @param sellOrder carrinho
      */
     private void calcTotalValueOrder(SellOrder sellOrder){
         BigDecimal orderPrice = BigDecimal.ZERO;
@@ -190,6 +194,7 @@ public class CartService {
      * Metodo para calcular o valor total do produto no carrinho,
      * com base na quantidade de itens no pedido
      *
+     * @param orderItem item do carrinho
      * @return valor total calculado
      */
     private BigDecimal calculaValorTotalProduto(OrderItem orderItem){
@@ -198,6 +203,7 @@ public class CartService {
 
     /*** Método para calcular o frete
      *
+     * @param sellOrder carrinho
      * @param isFreeShipping Informação se o pedido somente contém produtos com frete grátis
      */
     private void calculateShipping(SellOrder sellOrder, boolean isFreeShipping) {

@@ -11,14 +11,14 @@ import java.util.stream.Collectors;
 
 /***
  * Classe para realizar conversao de dados para tratativa e devolutiva de dados
- * @Autor Leonardo
+ * @author Leonardo
  */
 public class AdvertiseConverter {
 
 
     /***
      * Metodo que recebe um AdvertiseDto e converte em um Advertise
-     * @param advertisedto
+     * @param advertisedto anuncio
      * @return Advertise
      */
     public static Advertise convertDtoToEntity(AdvertiseRequestDTO advertisedto) {
@@ -36,7 +36,7 @@ public class AdvertiseConverter {
 
     /***
      * Metodo que recebe um Advertise e converte em um AdvertiseDto
-     * @param newAdvertise
+     * @param newAdvertise anuncio
      * @return AdvertiseResponseDTO
      */
     public static AdvertiseResponseDTO convertEntityToDto(Advertise newAdvertise) {
@@ -52,7 +52,7 @@ public class AdvertiseConverter {
 
     /***
      * Metodo que recebe uma lista de AdvertiseResponseDTO e converte em uma lista de Advertise
-     * @param listAdvertise
+     * @param listAdvertise id
      * @return listAdvertise
      */
     public static List<AdvertiseResponseDTO> convertEntityListToDtoList(List<Advertise> listAdvertise) {

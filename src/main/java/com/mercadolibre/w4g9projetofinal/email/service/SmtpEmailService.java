@@ -18,12 +18,14 @@ public class SmtpEmailService extends AbstractEmailService{
     private JavaMailSender javaMailSender;
 
     /*** Construtor para instância de JavaMailSender.
+     * @param javaMailSender sender
      */
     public SmtpEmailService(JavaMailSender javaMailSender) {
         this.javaMailSender = javaMailSender;
     }
 
     /*** Método para envio de email HTML.
+     * @param msg msg
      */
     @Override
     public void sendHtmlEmail(MimeMessage msg) {

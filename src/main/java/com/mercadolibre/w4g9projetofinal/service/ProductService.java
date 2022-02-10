@@ -103,6 +103,7 @@ public class ProductService {
 
     /*** Método que insere um Product
      * @param product objeto Product a ser inserido
+     * @return produto
      */
     public Product insert(Product product) {
         return repository.save(product);
@@ -111,6 +112,7 @@ public class ProductService {
     /*** Método que atualiza um Seller já existente
      *
      * @param product Objeto com informações para atualização de um seller existente
+     * @return produto
      */
     public Product update(Product product) {
         Product pr = findById(product.getId());
