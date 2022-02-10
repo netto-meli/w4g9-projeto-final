@@ -1,19 +1,21 @@
 package com.mercadolibre.w4g9projetofinal.test.unit;
 
-import com.mercadolibre.w4g9projetofinal.entity.InboundOrder;
-import com.mercadolibre.w4g9projetofinal.entity.Section;
+import com.mercadolibre.w4g9projetofinal.entity.*;
+import com.mercadolibre.w4g9projetofinal.entity.enums.RefrigerationType;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
+import com.mercadolibre.w4g9projetofinal.exceptions.SectionManagementException;
 import com.mercadolibre.w4g9projetofinal.repository.SectionRepository;
 import com.mercadolibre.w4g9projetofinal.service.SectionService;
+import com.sun.xml.bind.v2.TODO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -121,7 +123,7 @@ class SectionServiceTest {
     }
 
     @Test
-    void sectionfindByInboundOrderId(){
+    public void sectionfindByInboundOrderId(){
         SectionRepository repositoryMock = Mockito.mock(SectionRepository.class);
         SectionService sectionService = new SectionService(repositoryMock);
 
@@ -134,7 +136,6 @@ class SectionServiceTest {
         section.setInboundOrderList(list);
 
         Mockito.when(repositoryMock.findByInboundOrder_Id(1L)).thenReturn(Optional.of(section));
-       // Mockito.when(repositoryMock.findByInboundOrder_Id(1L)).thenThrow(ObjectNotFoundException.class);
         Section sectionResult = sectionService.findByInboundOrderId(1L);
 
         ObjectNotFoundException expectedException = assertThrows(ObjectNotFoundException.class, () -> sectionService.findByInboundOrderId(3L));
@@ -142,5 +143,41 @@ class SectionServiceTest {
         assertTrue(expectedException.getMessage().contains("Setor nao encontrado através do ID da Inbound Order"));
         Assertions.assertEquals(sectionResult,section);
     }
+
+    @Test
+    public void sectionValidateAvailableSpaceInStock(){
+        SectionRepository repositoryMock = Mockito.mock(SectionRepository.class);
+        SectionService sectionService = new SectionService(repositoryMock);
+ //TODO tem que terminar
+        List<InboundOrder> list = new ArrayList<>();
+        InboundOrder inboundOrder = new InboundOrder();
+        inboundOrder.setId(1L);
+        list.add(inboundOrder);
+
+        Section section = new Section(1L, new Warehouse(1L,"nome","nome"), "nome", RefrigerationType.COLD, 10, 19, 10, 5, list);
+
+        List<Batch> batchList = new ArrayList<>();
+
+       Batch batch = new Batch(1L, 10, 10, 10, 5,
+                LocalDate.of(2023,11,30), LocalDate.of(2023,1,29), LocalDateTime.of(2023,2,6,6,8,1), null, new InboundOrder(1L,LocalDate.now(),new Seller(),new Representative(),batchList,section));
+
+        Batch batch2 = new Batch(2L, 10, 10, 10, 5,
+                LocalDate.of(2023,11,30), LocalDate.of(2023,1,29), LocalDateTime.of(2023,2,6,6,8,1), null, new InboundOrder(1L,LocalDate.now(),new Seller(),new Representative(),batchList,section));
+
+        batchList.add(batch);
+        batchList.add(batch2);
+
+       //Section section = new Section(1L, new Warehouse(1L,"nome","nome"), "nome", RefrigerationType.COLD, 10, 19, 10, 5, list);
+
+      //  Mockito.when(repositoryMock.findByInboundOrder_Id(1L)).thenReturn(Optional.of(section));
+          Mockito.when(sectionService.validateBatchSection(batchList,section,true)).thenThrow(SectionManagementException.class);
+      //  Section sectionResult = sectionService.validateBatchSection(batchList,section,true);
+
+        SectionManagementException expectedException = assertThrows(SectionManagementException.class, () -> sectionService.validateBatchSection(new ArrayList<>(),new Section(),true));
+
+        assertTrue(expectedException.getMessage().contains("Batch number(s): 1, 2, does not belong to the Section Informed."));
+
+    }
+
 
 }
