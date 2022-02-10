@@ -76,7 +76,7 @@ public class BuyerService {
     public Buyer update(Buyer buyer) {
         Buyer newBuyer = findById(buyer.getId());
         updateRepresentation(newBuyer, buyer);
-        buyer.setPassword(bCryptPasswordEncoder.encode(buyer.getPassword()));
+        buyer.setPassword(pe.encode(buyer.getPassword()));
         return repository.save(buyer);
     }
 
