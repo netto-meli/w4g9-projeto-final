@@ -62,7 +62,6 @@ public class AdvertiseServiceTest {
     public void insertAdvertise(){
 
         Advertise adv = new Advertise(1L,"primeiro",new Product(), new Seller(),new BigDecimal(4),AdvertiseStatus.ATIVO, true);
-        Advertise adv1 = new Advertise(2L,"segundo",new Product(), new Seller(),new BigDecimal(8),AdvertiseStatus.INATIVO, false);
 
         AdvertiseRepository advertiseRepository = Mockito.mock(AdvertiseRepository.class);
         Mockito.when(advertiseRepository.save(adv)).thenReturn(adv);
