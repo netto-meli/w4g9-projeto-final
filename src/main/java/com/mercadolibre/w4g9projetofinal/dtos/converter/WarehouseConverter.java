@@ -11,6 +11,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/***
+ * @author Rafael Menezes
+ */
+
 public class WarehouseConverter {
     public static Warehouse convertDtoToEntity (WarehouseRequestDTO whDTO){
         return new Warehouse( null, whDTO.getName(), whDTO.getLocation());
