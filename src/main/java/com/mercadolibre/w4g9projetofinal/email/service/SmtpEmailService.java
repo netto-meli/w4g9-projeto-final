@@ -2,12 +2,15 @@ package com.mercadolibre.w4g9projetofinal.email.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.mail.MailSender;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import javax.mail.internet.MimeMessage;
+
+/***
+ * Classe de configuração para envio de email
+ *
+ * @author Marcos Sá
+ */
 
 public class SmtpEmailService extends AbstractEmailService{
 
