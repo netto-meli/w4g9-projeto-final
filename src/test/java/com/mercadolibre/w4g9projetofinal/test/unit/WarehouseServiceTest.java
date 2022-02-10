@@ -12,14 +12,15 @@ import com.mercadolibre.w4g9projetofinal.service.WarehouseService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+	import java.util.Arrays;
+	import java.util.List;
+	import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+	import static org.junit.jupiter.api.Assertions.*;
 
 /***
  * @author Rafael Menezes
@@ -119,14 +120,10 @@ public class WarehouseServiceTest {
 
         List<Batch> batchList = new ArrayList<>();
         Batch batch = new Batch(1L, 10, 10, 10, 5,
-                LocalDate.of(2023, 11, 30), LocalDate.of(2023, 1, 29),
-                LocalDateTime.of(2023, 2, 6, 6, 8, 1), null,
-                new InboundOrder(1L, LocalDate.now(), new Seller(), new Representative(), batchList, section));
+                LocalDate.of(2023, 11, 30), LocalDate.of(2023, 1, 29), LocalDateTime.of(2023, 2, 6, 6, 8, 1), null, new InboundOrder(1L, LocalDate.now(), new Seller(), new Representative(), batchList, section));
 
         Batch batch2 = new Batch(2L, 10, 10, 10, 5,
-                LocalDate.of(2023, 11, 30), LocalDate.of(2023, 1, 29),
-                LocalDateTime.of(2023, 2, 6, 6, 8, 1), null,
-                new InboundOrder(1L, LocalDate.now(), new Seller(), new Representative(), batchList, section));
+                LocalDate.of(2023, 11, 30), LocalDate.of(2023, 1, 29), LocalDateTime.of(2023, 2, 6, 6, 8, 1), null, new InboundOrder(1L, LocalDate.now(), new Seller(), new Representative(), batchList, section));
         batchList.add(batch);
         batchList.add(batch2);
 
@@ -147,6 +144,7 @@ public class WarehouseServiceTest {
         assertTrue(ex.getMessage().contains("There is no Batch for this Product."));
         assertNotNull(warehouseService);
     }
-}
+
+    }
 
 

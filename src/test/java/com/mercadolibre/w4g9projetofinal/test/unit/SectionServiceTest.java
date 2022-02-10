@@ -120,7 +120,7 @@ class SectionServiceTest {
     }
 
     @Test
-    void sectionfindByInboundOrderId() {
+    public void sectionfindByInboundOrderId(){
         SectionRepository repositoryMock = Mockito.mock(SectionRepository.class);
         SectionService sectionService = new SectionService(repositoryMock);
 
@@ -133,13 +133,12 @@ class SectionServiceTest {
         section.setInboundOrderList(list);
 
         Mockito.when(repositoryMock.findByInboundOrder_Id(1L)).thenReturn(Optional.of(section));
-        // Mockito.when(repositoryMock.findByInboundOrder_Id(1L)).thenThrow(ObjectNotFoundException.class);
         Section sectionResult = sectionService.findByInboundOrderId(1L);
 
-        ObjectNotFoundException expectedException = Assertions.assertThrows(ObjectNotFoundException.class, () -> sectionService.findByInboundOrderId(3L));
+        ObjectNotFoundException expectedException = assertThrows(ObjectNotFoundException.class, () -> sectionService.findByInboundOrderId(3L));
 
         Assertions.assertTrue(expectedException.getMessage().contains("Setor nao encontrado através do ID da Inbound Order"));
-        Assertions.assertEquals(sectionResult, section);
+        Assertions.assertEquals(sectionResult,section);
     }
 
     @Test
