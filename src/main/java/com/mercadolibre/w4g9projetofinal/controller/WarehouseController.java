@@ -18,13 +18,27 @@ import java.net.URI;
 import java.util.List;
 import java.util.Map;
 
+/***Classe para Controle dos métodos do Armazém
+ * @author Rafael Menezes
+ * @version 1.0
+ * @since Release 01 da aplicação
+ */
+
 @RestController
 @RequestMapping(value = "/api/v1/fresh-products/warehouse")
 @PreAuthorize("hasRole('ADMIN') OR hasRole('REPRESENTATIVE')")
 public class WarehouseController {
 
+    /** Intancia de serviço: WarehouseService com notação <i>{@literal @}Autowired</i> do lombok
+     */
     @Autowired
     WarehouseService warehouseService;
+
+    /*** Método para buscar Produto dentro de Warehouse por Id
+     * GET - /byProduct/{id}
+     * @param id id do Product a ser encontrado
+     * @return Pooduct encontrado e ResponseEntity com status <b>OK</b>
+     */
 
     @GetMapping("byProduct/{id}")
     public ResponseEntity<ProductByWarehouseResponseDTO> findWarehousesByProductId(@PathVariable Long id) {
@@ -33,12 +47,22 @@ public class WarehouseController {
         return ResponseEntity.ok().body(response);
     }
 
+    /*** Método para buscar todos os Warehouse do banco de dados
+     * GET - /warehouse
+     * @return Lista de Warehouse e ResponseEntity com status <b>OK</b>
+     */
     @GetMapping
     public ResponseEntity<List<WarehouseResponseDTO>> findAll()
     {
         List<WarehouseResponseDTO> list = WarehouseConverter.convertEntityListToDtoList(warehouseService.findAll());
         return ResponseEntity.ok(list);
     }
+
+    /*** Método para buscar Warehouse por Id<br>
+     * GET - /warehouse/{id}
+     * @param id id do Warehouse a ser encontrado
+     * @return Warehouse encontrado e ResponseEntity com status <b>OK</b>
+     */
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Warehouse> findById(@PathVariable Long id)
@@ -47,6 +71,11 @@ public class WarehouseController {
         return ResponseEntity.ok(wh);
     }
 
+    /*** Método para inserção do Warehouse
+     * POST - /warehouse
+     * @param wh Objeto seller a ser inserido
+     * @return ResponseEntity com status <b>CREATED</b>
+     */
 
     @PostMapping
     public ResponseEntity<Void> insert(@RequestBody @Valid WarehouseRequestDTO wh)
@@ -58,6 +87,13 @@ public class WarehouseController {
         return ResponseEntity.created(uri).build();
     }
 
+    /*** Método para atualização do Armazém existente
+     * PUT - /warehouse/{id}
+     * @param nWarehouse1 Objeto warehouse com informações para atualização
+     * @param id id do Warehouse a ser atualizado
+     * @return ResponseEntity com status <b>NO CONTENT</b>
+     */
+
     @PutMapping(value = "/{id}")
     public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody @Valid WarehouseRequestDTO nWarehouse1)
     {
@@ -66,6 +102,11 @@ public class WarehouseController {
         wh = warehouseService.update(wh);
         return ResponseEntity.noContent().build();
     }
+    /*** Método para atualização do Armazém existente
+     * DELETE - /warehouse/{id}
+     * @param id Id do Warehouse  a ser deletado
+     * @return ResponseEntity com status <b>OK</b>
+     */
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id)
