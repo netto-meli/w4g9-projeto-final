@@ -15,6 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/***
+ * Classe de configuração para autenticação JWT
+ *
+ * @author Marcos Sá
+ */
+
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
