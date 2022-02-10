@@ -21,6 +21,12 @@ import javax.persistence.InheritanceType;
 import java.util.Objects;
 import java.util.Set;
 
+/***
+ * Classe User
+ *
+ * @author Marcos Sá
+ */
+
 @Getter
 @Setter
 @ToString

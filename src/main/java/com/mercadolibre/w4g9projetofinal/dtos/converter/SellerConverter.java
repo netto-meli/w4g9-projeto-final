@@ -7,6 +7,12 @@ import com.mercadolibre.w4g9projetofinal.entity.Seller;
 import java.util.ArrayList;
 import java.util.List;
 
+/***
+ * Classe de conversão - Seller
+ *
+ * @author Marcos Sá
+ */
+
 public class SellerConverter {
 
     public static Seller convertDtoToEntity (SellerRequestDTO objDTO){

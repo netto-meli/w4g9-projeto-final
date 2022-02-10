@@ -13,6 +13,12 @@ import javax.persistence.ManyToOne;
 import java.util.HashSet;
 import java.util.Objects;
 
+/***
+ * Classe Representative
+ *
+ * @author Marcos Sá
+ */
+
 @Getter
 @Setter
 @ToString

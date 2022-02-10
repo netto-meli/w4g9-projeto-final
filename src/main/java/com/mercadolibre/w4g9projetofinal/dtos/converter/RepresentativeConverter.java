@@ -8,6 +8,12 @@ import com.mercadolibre.w4g9projetofinal.entity.Warehouse;
 import java.util.ArrayList;
 import java.util.List;
 
+/***
+ * Classe de conversão - Representative
+ *
+ * @author Marcos Sá
+ */
+
 public class RepresentativeConverter {
 
     public static Representative convertDtoToEntity (RepresentativeRequestDTO objDTO){

@@ -12,6 +12,11 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/***
+ * Classe UserSS
+ *
+ * @author Marcos Sá
+ */
 @Getter
 public class UserSS implements UserDetails {
     private static final long serialVersionUID = 7179078869364575101L;
