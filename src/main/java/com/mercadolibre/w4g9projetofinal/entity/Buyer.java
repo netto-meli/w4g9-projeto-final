@@ -10,7 +10,9 @@ import org.hibernate.Hibernate;
 import javax.persistence.Entity;
 import java.util.HashSet;
 import java.util.Objects;
-
+/**
+ * @autor Leonardo
+ */
 @Getter
 @Setter
 @ToString
