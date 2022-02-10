@@ -1,7 +1,8 @@
 package com.mercadolibre.w4g9projetofinal.test.unit;
 
-import com.mercadolibre.w4g9projetofinal.entity.InboundOrder;
-import com.mercadolibre.w4g9projetofinal.entity.Section;
+import com.mercadolibre.w4g9projetofinal.entity.*;
+import com.mercadolibre.w4g9projetofinal.entity.enums.RefrigerationType;
+import com.mercadolibre.w4g9projetofinal.exceptions.SectionManagementException;
 import com.mercadolibre.w4g9projetofinal.repository.SectionRepository;
 import com.mercadolibre.w4g9projetofinal.service.SectionService;
 import org.hibernate.ObjectNotFoundException;
@@ -9,9 +10,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class SectionServiceTest {
 
@@ -130,7 +135,7 @@ class SectionServiceTest {
 
         ObjectNotFoundException expectedException = assertThrows(ObjectNotFoundException.class, () -> sectionService.findByInboundOrderId(3L));
 
-        assertTrue(expectedException.getMessage().contains("Setor nao encontrado através do ID da Inbound Order"));
+        Assertions.assertTrue(expectedException.getMessage().contains("Setor nao encontrado através do ID da Inbound Order"));
         Assertions.assertEquals(sectionResult,section);
     }
 
@@ -165,7 +170,7 @@ class SectionServiceTest {
 
         SectionManagementException expectedException = assertThrows(SectionManagementException.class, () -> sectionService.validateBatchSection(new ArrayList<>(),new Section(),true));
 
-        assertTrue(expectedException.getMessage().contains("Batch number(s): 1, 2, does not belong to the Section Informed."));
+        Assertions.assertTrue(expectedException.getMessage().contains("Batch number(s): 1, 2, does not belong to the Section Informed."));
 
     }
 
