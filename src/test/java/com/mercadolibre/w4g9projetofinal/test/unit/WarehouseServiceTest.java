@@ -17,7 +17,11 @@ package com.mercadolibre.w4g9projetofinal.test.unit;
 
 	import static org.junit.jupiter.api.Assertions.*;
 
-    public class WarehouseServiceTest {
+/***
+ * @author Rafael Menezes
+ */
+
+public class WarehouseServiceTest {
         @Test
         public void verificaBuscaDeWarehouse() {
 
