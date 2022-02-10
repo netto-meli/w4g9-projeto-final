@@ -1,9 +1,10 @@
 package com.mercadolibre.w4g9projetofinal.test.unit;
 
+import com.mercadolibre.w4g9projetofinal.entity.InboundOrder;
 import com.mercadolibre.w4g9projetofinal.entity.Section;
+import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.SectionRepository;
 import com.mercadolibre.w4g9projetofinal.service.SectionService;
-import org.hibernate.ObjectNotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -13,6 +14,9 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -65,7 +69,7 @@ class SectionServiceTest {
         SectionService sectionService = new SectionService(repositoryMock);
 
         //Vai tentar deletar uma Section que nao existe e vai lançar uma exception
-        Mockito.doThrow(new ObjectNotFoundException(null, null))
+        Mockito.doThrow(new ObjectNotFoundException(null))
                 .when(repositoryMock).deleteById(Mockito.anyLong());
         //Tente deletar uma Section qualquer
         try {
@@ -115,4 +119,28 @@ class SectionServiceTest {
         //A section precisa ter o ID 1
         Assertions.assertEquals(1L, sectionResult.getId());
     }
+
+    @Test
+    void sectionfindByInboundOrderId(){
+        SectionRepository repositoryMock = Mockito.mock(SectionRepository.class);
+        SectionService sectionService = new SectionService(repositoryMock);
+
+        Section section = new Section();
+        section.setId(1L);
+        List<InboundOrder> list = new ArrayList<>();
+        InboundOrder inboundOrder = new InboundOrder();
+        inboundOrder.setId(1L);
+        list.add(inboundOrder);
+        section.setInboundOrderList(list);
+
+        Mockito.when(repositoryMock.findByInboundOrder_Id(1L)).thenReturn(Optional.of(section));
+       // Mockito.when(repositoryMock.findByInboundOrder_Id(1L)).thenThrow(ObjectNotFoundException.class);
+        Section sectionResult = sectionService.findByInboundOrderId(1L);
+
+        ObjectNotFoundException expectedException = assertThrows(ObjectNotFoundException.class, () -> sectionService.findByInboundOrderId(3L));
+
+        assertTrue(expectedException.getMessage().contains("Setor nao encontrado através do ID da Inbound Order"));
+        Assertions.assertEquals(sectionResult,section);
+    }
+
 }
