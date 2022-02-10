@@ -3,80 +3,78 @@
 ### // Especificações de Requisitos
 
 #### Requerimientos US:
-#### [ml-add-sections-06](https://netto-meli.github.io/w4g9-projeto-final/guide/projeto_integrador/US-6/Requisito_6_-_Felipe_Bontempo.pdf) <-(clique para acessar PDF)
+#### [ml-sections-06](https://netto-meli.github.io/w4g9-projeto-final/guide/projeto_integrador/US-6/Requisito_6_-_Felipe_Bontempo.pdf) <-(clique para acessar PDF)
 
 **Importante:**
 As histórias de usuários são narradas do ponto de vista do comprador com base em
 suas necessidades. Os serviços são expostos a partir do Marketplace para serem
 consumidos pelo comprador que os solicita. Os contratos referem-se à História do Usuário.
 
-## Registrar Venda: Adicione o produto ao carrinho de comprasRegistrar Venda: Adicione o produto ao carrinho de compras
+## Gerenciar setores, busca, atualização, criação, etc
 ### User Story
 
 
-|                                      User Story Code: ml-add-products-to-cart-01                                       | Horas estimadas |
-|:----------------------------------------------------------------------------------------------------------------------:|:---------------:|
-|                             **User Story Name: Adicionar produto ao carrinho de compras**                              |                 |
-| **COMO** _comprador **QUERO** adicionar produtos ao carrinho de compras do Marketplace **PARA** comprá-los, se desejar ||
+|                                                                 User Story Code: ml-sections-01                                                      | Horas estimadas |
+|:----------------------------------------------------------------------------------------------------------------------------------------------------:|:---------------:|
+|                                              **User Story Name: Representante pode manipular setores**                                               |       35        |
+| **COMO** Representante do armazém, **QUERO** listar todos os setores **PARA** escolher um setor adequado para armazenar produtos que recém chegaram. |                 |
 
-| **CENÁRIO 1:** O produto de um vendedor é registrado.                  |
-|:-----------------------------------------------------------------------|
-| **DESDE** o produto de um Vendedor é registrado                        |
-| **E** que o comprador esteja cadastrado                                |
-| **E** que o produto tem estoque                                        |
-| **E** que o prazo de validade do produto não seja inferior a 3 semanas |
-| **QUANDO** o comprador adiciona o produto com a quantidade ao carrinho |
-| **ENTÃO** um produto é adicionado ao carrinho de compras               |
-| **E** atualiza o estoque atual do produto                              |
+| **CENÁRIO:** quando os Vendedores (supermercados, empresas do setor alimentício, atacadistas, etc.) nos enviam a mercadoria para armazená-la em nosso depósito, o representante tem como tarefa escolher entre uma lista de setores o que melhor se enquadra a mercadoria que chegou. |
+|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **DADO QUE** o produto de um Vendedor é registrado.                                                                                                                                                                                                                                   |
+| **E** que o armazém é válido                                                                                                                                                                                                                                                          |
+| **E** que o representante pertence ao armazém                                                                                                                                                                                                                                         |
+| **E** que o representante precisa localizar o setor adequado                                                                                                                                                                                                                          |
+| **QUANDO** o representante precisa localizar um setor adequado para o lote                                                                                                                                                                                                            |
+| **ENTÃO o representante faz** pesquisa nos setores do armazém                                                                                                                                                                                                                         |
 
-| VALIDAÇÃO                                             |
-|-------------------------------------------------------|
-| * Autentique-se como comprador e acesse os terminais. | 
-| * Consultar produto                                   |
-| * Adicione um produto ao carrinho do comprador.       |
+| VALIDAÇÃO                                                 |
+|-----------------------------------------------------------|
+| * Autentique-se como representante e acesse os terminais. | 
+| * Validação de parâmetros obrigatórios.                   |
 
-> Observação:
-Os pedidos de compra (purchaseOrder) feitos pelo comprador terão apenas o status de Order (OrderStatus) Cart
 
 ##### Representação JSON:
-<details><summary>Request</summary><p>
-
-```JSON
-{
-  "purchase_order": {
-    "date": "LocalDate",
-    "buyer_id": "String",
-    "order_status": {
-      "status_code": "String"
-    },
-    "products": [{
-      "product_id": "String",
-      "quantity": "int"
-    }]
-  }
-}
-```
-</p></details>
-
 <details><summary>Response</summary><p>
 
 ```JSON
-{
-  "total_price": "double"
-}
+[
+    {
+        "id": 2,
+        "name": "Sector 005",
+        "refrigeration_type": "FROZEN",
+        "warehouse_code": 1,
+        "stock_limit": 77,
+        "current_stock": 10,
+        "min_teperature": 0.3,
+        "max_teperature": 0.2
+    },
+    {
+        "id": 3,
+        "name": "Sector 005",
+        "refrigeration_type": "FROZEN",
+        "warehouse_code": 1,
+        "stock_limit": 77,
+        "current_stock": 10,
+        "min_teperature": 0.3,
+        "max_teperature": 0.2
+    }
+]
 ```
 </p></details>
 
+
 ### Contratos relativos a User Story
-| HTTP | Modelo de URI                                             | Descrição                                                                                                                                                                                                                                                                           | US-code |
-|------|-----------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---|
-| GET  | /api/v1/fresh-products/                                   | Veja uma lista completa de produtos. <br>Se a lista não existir, ela deve retornar um "404 Not Found".                                                                                                                                                                              | ml-add-products-to-cart-01 |
-| GET  | /api/v1/fresh-products/list?querytype=[categoría producto] | Veja uma lista de produtos por categoria. <br>category:<br> FS = Fresco <br>RF = Refrigerado <br>FF = Congelado<br> Se a lista não existir, ela deve retornar um "404 Not Found".                                                                                                   | ml-add-products-to-cart-01                                                                                                                                                                                                                                                   |
-| POST | /api/v1/fresh-products/orders/                            | Registre um sellOrder com a lista de produtos que compõem o PurchaseOrder. <br>Calcule o preço final e devolva-o juntamente com o código de status "201 CREATED". <br>Se não houver estoque de um produto, notifique a situação retornando um erro por produto, não no nível do sellOrder. | ml-add-products-to-cart-01 |
-| GET  | /api/v1/fresh-products/orders/querytype=[idOrder]|| Mostrar produtos no sellOrder. ml-add-products-to-cart-01 |
-| PUT | /api/v1/fresh-products/orders/query param=[idOrder] |Modifique o sellOrder existente. torná-lo do tipo de carrinho para modificar | ml-add-products-to-cart-01 |
+
+| HTTP   | Planilha URI                        | Descripcion                  | US-code        |
+|--------|-------------------------------------|------------------------------|----------------|
+| GET    | /api/v1/fresh-products/section      | Retorna uma lista de section | ml-sections-01 |
+| GET    | /api/v1/fresh-products/section/{id} | Retorna uma section pelo ID  | ml-sections-01 |
+| POST   | /api/v1/fresh-products/section      | Cadastrar uma nova section   | ml-sections-01 |
+| PUT    | /api/v1/fresh-products/section/{id} | Atualiza uma section pelo ID | ml-sections-01 |
+| DELETE | /api/v1/fresh-products/section/{id} | Deleta uma section pelo ID   | ml-sections-01 |
 
 > Observação:
 Contemple outros tipos de erros.
 Use o script de carregamento
-Trabalhe com o token de acesso para o sellOrder como um cliente autenticado.
+Trabalhe com o token de acesso para o pedido como um representante autenticado.
