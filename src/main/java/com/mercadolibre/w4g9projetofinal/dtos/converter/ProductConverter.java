@@ -9,14 +9,14 @@ import java.util.stream.Collectors;
 
 /***
  * Classe para realizar conversao de dados para tratativa e devolutiva de dados
- * @Autor Leonardo
+ * @author Leonardo
  */
 public class ProductConverter {
 
 
     /***
      * Metodo que recebe um ProductRequestDTO e converte em um Product
-     * @param product
+     * @param product produto
      * @return Product
      */
     public static Product convertDtoToEntity(ProductRequestDTO product) {
@@ -31,7 +31,7 @@ public class ProductConverter {
 
     /***
      * Metodo que recebe um Product e converte em um ProductResponseDTO
-     * @param newProduct
+     * @param newProduct produto
      * @return ProductResponseDTO
      */
     public static ProductResponseDTO convertEntityToDto(Product newProduct) {
@@ -43,9 +43,9 @@ public class ProductConverter {
     }
 
     /***
-     * Metodo que recebe um List<Product> e converte em um List<ProductResponseDTO>
-     * @param listProduct
-     * @return List<ProductResponseDTO>
+     * Metodo que recebe um ListProduct e converte em um ListProductResponseDTO
+     * @param listProduct lista de produtos
+     * @return ListProductResponseDTO
      */
     public static List<ProductResponseDTO> convertEntityListToDtoList(List<Product> listProduct) {
         return listProduct.stream()

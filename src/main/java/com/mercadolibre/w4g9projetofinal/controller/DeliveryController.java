@@ -19,6 +19,9 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/***
+ * @author Fernando
+ */
 @RestController
 @RequestMapping(value = "/api/v1/fresh-products/delivery")
 @PreAuthorize("hasRole('ADMIN') OR hasRole('REPRESENTATIVE')")
@@ -27,6 +30,12 @@ public class DeliveryController {
     @Autowired
     TransporterService transporterService;
 
+    /***
+     * Inclusão de Entrtegador
+     * @param transporterRequestDTO entregador
+     * @param uriBuilder uri
+     * @return entregador incluido
+     */
     @PostMapping
     public ResponseEntity<TransporterResponseDTO> insert(
             @RequestBody @Valid TransporterRequestDTO transporterRequestDTO,
@@ -42,6 +51,12 @@ public class DeliveryController {
         return ResponseEntity.created(uri).body(response);
     }
 
+    /***
+     * Atualiza entregador (se o mesmo nao estiver em rota)
+     * @param id d
+     * @param transporterRequestDTO entregador
+     * @return entregador
+     */
     @PutMapping(value = "/{id}")
     public ResponseEntity<TransporterResponseDTO> update(@PathVariable Long id,
             @RequestBody @Valid TransporterRequestDTO transporterRequestDTO) {
@@ -53,6 +68,11 @@ public class DeliveryController {
         return ResponseEntity.ok(response);
     }
 
+    /***
+     * Exclui entregador se o mesmo não estiver em rota
+     * @param id id
+     * @return informação da exclusão
+     */
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) {
         transporterService.delete(id);
@@ -73,6 +93,11 @@ public class DeliveryController {
         return ResponseEntity.ok().body(response);
     }
 
+    /***
+     * Encontra os entregadores que estão em rota OU os que não estão em rota de entrega
+     * @param isInRoute em rota de entrega (sim ou nao)
+     * @return Lista
+     */
     @GetMapping(value = "/byStatus/")
     public ResponseEntity<List<TransporterResponseDTO>> findByStatus(
             @RequestParam(defaultValue = "false")  boolean isInRoute) {
@@ -81,6 +106,12 @@ public class DeliveryController {
         return ResponseEntity.ok().body(response);
     }
 
+    /***
+     * Chama um entregador para realizar entrega
+     * @param deliveryIdList lista de ids para entrega
+     * @param uriBuilder uri
+     * @return entregador em rota
+     */
     @PostMapping(value = "/delivery/")
     public ResponseEntity<TransporterResponseDTO> callDelivery(
             @RequestBody @Valid List<DeliveryRequestDTO> deliveryIdList,
@@ -95,6 +126,12 @@ public class DeliveryController {
         return ResponseEntity.created(uri).body(response);
     }
 
+    /***
+     * Entregador retorna com os pedidos não entregues e informa os entregues
+     * @param idTransporter entregador
+     * @param deliveryIdList id dos pedidos entregues
+     * @return Entregador livre
+     */
     @PutMapping(value = "/delivery/{idTransporter}")
     public ResponseEntity<TransporterResponseDTO> confirmDelivery(
             @PathVariable Long idTransporter,

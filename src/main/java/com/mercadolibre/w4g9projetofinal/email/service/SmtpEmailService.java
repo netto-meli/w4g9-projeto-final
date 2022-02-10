@@ -11,21 +11,24 @@ import javax.mail.internet.MimeMessage;
  *
  * @author Marcos Sá
  */
-
 public class SmtpEmailService extends AbstractEmailService{
 
+    /*** Instancia de JavaMailSender: <b>JavaMailSender</b>.
+     */
     private JavaMailSender javaMailSender;
 
+    /*** Construtor para instância de JavaMailSender.
+     * @param javaMailSender sender
+     */
     public SmtpEmailService(JavaMailSender javaMailSender) {
         this.javaMailSender = javaMailSender;
     }
 
-    private static final Logger LOG = LoggerFactory.getLogger(SmtpEmailService.class);
-
+    /*** Método para envio de email HTML.
+     * @param msg msg
+     */
     @Override
     public void sendHtmlEmail(MimeMessage msg) {
-        LOG.info("Enviando email...");
         javaMailSender.send(msg);
-        LOG.info("Envio realizado com sucesso...");
     }
 }

@@ -19,7 +19,8 @@ import java.util.stream.Collectors;
 /***
  * Classe de serviço para Representative
  *
- * @author Marcos Sá
+ * @author Fernando Netto
+ * @author Marcos
  */
 @Service
 @AllArgsConstructor
@@ -36,6 +37,7 @@ public class BatchService {
      *
      * @param idAdvertise ID do Anuncio a ser verificado o estoque
      * @param qtdProduct qantidade deitens para validar se existem no estoque
+     * @return lote
      */
     public Batch verifyStock(Long idAdvertise, int qtdProduct) {
         Batch batch = batchRepository.findByAdvertise_Id(idAdvertise).orElseThrow(() ->
@@ -44,10 +46,9 @@ public class BatchService {
         return batch;
     }
 
-
-
     /*** Realiza verificação do estoque da quantidade de itens de um produto para o carrinho
      *
+     * @param batch lote
      * @param qtd Quantidade de itens vendidos de um produto.
      */
     private void verifyStockOfBatch(Batch batch, int qtd) {
@@ -65,6 +66,7 @@ public class BatchService {
 
     /*** Realiza baixa no estoque da quantidade de itens de um produto que foi vendido
      *
+     * @param batch lote
      * @param qtd Quantidade de itens vendidos de um produto.
      */
     private void updateStock(Batch batch, int qtd) {
@@ -90,9 +92,9 @@ public class BatchService {
         batchRepository.saveAll(batchIterable);
     }
 
-
     /*** Realiza baixa no estoque da quantidade de itens de um produto que foi vendido
      *
+     * @param section setor
      * @param qtd Quantidade de itens vendidos de um produto.
      */
     public void updateStock(Section section, int qtd) {

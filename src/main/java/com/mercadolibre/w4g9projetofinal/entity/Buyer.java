@@ -11,6 +11,9 @@ import javax.persistence.Entity;
 import java.util.HashSet;
 import java.util.Objects;
 
+/**
+ * @author Leonardo
+ */
 @Getter
 @Setter
 @ToString

@@ -10,9 +10,7 @@ import com.mercadolibre.w4g9projetofinal.security.entity.UserSS;
 import com.mercadolibre.w4g9projetofinal.service.InboundOrderService;
 import com.mercadolibre.w4g9projetofinal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.http.ResponseEntity;import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +24,9 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
+/***
+ * @author Fernando
+ */
 @RestController
 @RequestMapping(value = "/api/v1/fresh-products/inboundorder")
 @PreAuthorize("hasRole('ADMIN') OR hasRole('REPRESENTATIVE')")
@@ -35,7 +36,7 @@ public class InboundOrderController {
     InboundOrderService inboundOrderService;
 
     @PostMapping
-    public ResponseEntity<List<BatchResponseDTO>> createInboundOrder(
+    public ResponseEntity<List<BatchResponseDTO>> insert(
             @RequestBody @Valid InboundOrderRequestDTO inboundOrderRequestDTO,
             UriComponentsBuilder uriBuilder) {
         UserSS user = UserService.authenticated();
@@ -50,7 +51,7 @@ public class InboundOrderController {
     }
 
     @PutMapping
-    public ResponseEntity<List<BatchResponseDTO>> updateInboundOrder(
+    public ResponseEntity<List<BatchResponseDTO>> update(
             @RequestBody @Valid InboundOrderRequestDTO request,
             UriComponentsBuilder uriBuilder) {
         UserSS user = UserService.authenticated();
@@ -65,14 +66,14 @@ public class InboundOrderController {
     }
 
     @GetMapping
-    public ResponseEntity<List<InboundOrderResponseDTO>> findAllInboundOrders() {
+    public ResponseEntity<List<InboundOrderResponseDTO>> findAll() {
         List<InboundOrder> inboundOrderList = inboundOrderService.findAll();
         List<InboundOrderResponseDTO> response = InboundOrderConverter.convertEntityListToDtoList(inboundOrderList);
         return ResponseEntity.ok().body(response);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<InboundOrderResponseDTO> findInboundOrderById(@PathVariable Long id) {
+    public ResponseEntity<InboundOrderResponseDTO> findById(@PathVariable Long id) {
         InboundOrder io = inboundOrderService.findById(id);
         InboundOrderResponseDTO response = InboundOrderConverter.convertEntityToDto(io);
         return ResponseEntity.ok().body(response);

@@ -12,17 +12,25 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/***
+ * Service para Usuário
+ * @author Fernando
+ * @author Marcos
+ */
 @Service
 @AllArgsConstructor
 public class UserService {
 
-    @Autowired
     private UserRepository repository;
 
     public List<User> findAll() {
         return repository.findAll();
     }
 
+    /***
+     * Autenticação de usuário
+     * @return usuário autenticado
+     */
     public static UserSS authenticated() {
         try{
             UserSS user = (UserSS) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -34,6 +42,13 @@ public class UserService {
         }
     }
 
+    /***
+     * Valida se o Id do usuário é o mesmo do usuario que está acessando
+     * OU
+     * se o mesmo é ADMIN
+     * @param id id da busca
+     * @return Usuário autenticado
+     */
     public static UserSS adminOrSameUser(Long id) {
         UserSS user = UserService.authenticated();
         if (!(user.hasRole(Profile.ADMIN) || id.equals(user.getId()))) {

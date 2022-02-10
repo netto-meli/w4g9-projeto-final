@@ -23,7 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /***
- * @autor Rafael Menezes
+ * @author Rafael Menezes
  */
 @SpringBootTest
 @AutoConfigureMockMvc

@@ -21,7 +21,8 @@ import java.util.stream.Collectors;
 /**
  * Classe de servico do produto
  *
- * @autor Leonardo
+ * @author Leonardo
+ * @author Fernando
  */
 @Service
 @AllArgsConstructor
@@ -45,7 +46,7 @@ public class ProductService {
     /**
      * Metodo pra buscar o produto por meio do id
      *
-     * @param id
+     * @param id id
      * @return produto do id da busca
      */
     public Product findById(Long id) {
@@ -70,7 +71,7 @@ public class ProductService {
     /**
      * Metodo para buscar o lote em que o produto esta cadastrado
      *
-     * @param idProduct
+     * @param idProduct id
      * @return lotes em que o produto foi cadastrado
      */
     public List<Batch> findByBatchInProduct(Long idProduct) {
@@ -80,7 +81,7 @@ public class ProductService {
     /**
      * Metodo para ordenar lote em que o produto esta cadastrado
      *
-     * @param idProduct
+     * @param idProduct id
      * @param orderBy   Ordenacao:
      *                  L = Lote
      *                  C = qtd atual
@@ -102,6 +103,7 @@ public class ProductService {
 
     /*** Método que insere um Product
      * @param product objeto Product a ser inserido
+     * @return produto
      */
     public Product insert(Product product) {
         return repository.save(product);
@@ -110,6 +112,7 @@ public class ProductService {
     /*** Método que atualiza um Seller já existente
      *
      * @param product Objeto com informações para atualização de um seller existente
+     * @return produto
      */
     public Product update(Product product) {
         Product pr = findById(product.getId());

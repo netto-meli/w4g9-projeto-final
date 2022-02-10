@@ -11,8 +11,6 @@ import javax.validation.constraints.*;
 /**
  * @author fbontempo
  * @version 0.3
- * @see {@link Section}
- * @see {@link com.mercadolibre.w4g9projetofinal.dtos.response.SectionResponseDTO}
  * */
 @Data
 @NoArgsConstructor

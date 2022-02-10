@@ -17,18 +17,28 @@ import java.util.Date;
  *
  * @author Marcos Sá
  */
-
 public abstract class AbstractEmailService implements EmailService{
 
+    /*** sender definido em Application.yml: <b>{default.sender}</b>.
+     */
     @Value("${default.sender}")
     private String sender;
 
+    /*** Instancia de TemplateEngine: <b>TemplateEngine</b>.
+     */
     @Autowired
     private TemplateEngine templateEngine;
 
+    /*** Instancia de JavaMailSender: <b>JavaMailSender</b>.
+     */
     @Autowired
     private JavaMailSender javaMailSender;
 
+    /*** Método que faz intância de User e newPass para template de Email HTML
+     * @param user objeto user a ser inserido no template HTML
+     * @param newPass objeto newwPass a ser inserido no template HTML
+     * @return string
+     */
     protected String htmlFromTemplateNewPassword(User user, String newPass) {
         Context context = new Context();
         context.setVariable("user", user);
@@ -36,6 +46,10 @@ public abstract class AbstractEmailService implements EmailService{
         return templateEngine.process("email/newPassword", context);
     }
 
+    /*** Método que faz envio de Email HTML
+     * @param user objeto user vindo do template HTML
+     * @param newPass objeto newPass vindo do template HTML
+     */
     @Override
     public void sendNewPasswordHtml(User user, String newPass) {
         try{
@@ -47,6 +61,12 @@ public abstract class AbstractEmailService implements EmailService{
         }
     }
 
+    /*** Método que faz ajustes para envio de Email HTML
+     * @param user objeto user vindo do template HTML
+     * @param newPass objeto newPass vindo do template HTML
+     * @return msg
+     * @throws MessagingException ex
+     */
     protected MimeMessage prepareMimeMessagePassword(User user, String newPass) throws MessagingException {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper mmh = new MimeMessageHelper(mimeMessage, true);

@@ -59,9 +59,9 @@ public class AdvertiseServiceTest {
     }
 
     @Test
-    public void insertAdvertise(){
+    public void insertAdvertise() {
 
-        Advertise adv = new Advertise(1L,"primeiro",new Product(), new Seller(),new BigDecimal(4),AdvertiseStatus.ATIVO, true);
+        Advertise adv = new Advertise(1L, "primeiro", new Product(), new Seller(), new BigDecimal(4), AdvertiseStatus.ATIVO, true);
 
         AdvertiseRepository advertiseRepository = Mockito.mock(AdvertiseRepository.class);
         Mockito.when(advertiseRepository.save(adv)).thenReturn(adv);
@@ -69,7 +69,7 @@ public class AdvertiseServiceTest {
         AdvertiseService advertiseService = new AdvertiseService(advertiseRepository);
         Advertise adInsert = advertiseService.insert(adv);
 
-        assertEquals(adv,adInsert);
+        assertEquals(adv, adInsert);
     }
 
     @Test

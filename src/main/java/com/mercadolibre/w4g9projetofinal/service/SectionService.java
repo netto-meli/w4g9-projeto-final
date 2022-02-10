@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
+ * @author Fernando
  * @author fbontempo
  * @version 0.3
  */
@@ -26,21 +27,31 @@ public class SectionService {
 
     private SectionRepository sectionRepository;
 
+    /***
+     * Valida Lotes e Setor
+     * @param batchStock lote
+     * @param dbSection setor
+     * @param isUpdate inserção ou atualização
+     * @return Setor
+     */
     public Section validateBatchSection(List<Batch> batchStock, Section dbSection, boolean isUpdate) {
         StringBuilder msg1 = new StringBuilder();
         StringBuilder msg2 = new StringBuilder();
         boolean throwExeption = false;
         for (Batch b : batchStock) {
             if ( !b.getDueDate().isAfter(LocalDate.now()) ){
-                msg2 = new StringBuilder("\nBatch: " + b.getId()
-                        + " has a Due Date of " + b.getDueDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+                msg2.append("\nBatch: ");
+                msg2.append(b.getId());
+                msg2.append(" has a Due Date of ");
+                msg2.append(b.getDueDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
             }
             if (b.getMinTemperature() != dbSection.getMinTeperature()) {
                 if (!throwExeption) {
                     throwExeption = true;
                     msg1 = new StringBuilder("Batch number(s): ");
                 }
-                msg1.append(b.getId()).append(", ");
+                msg1.append(b.getId());
+                msg1.append(", ");
             } else {
                 int qtd = 0;
                 if (isUpdate) qtd = b.getCurrentQuantity();
@@ -58,15 +69,30 @@ public class SectionService {
         return dbSection;
     }
 
+    /***
+     * Valida o espaço no estoque
+     * @param quantity quantidade
+     * @param maxStock estoque maximo
+     * @param currentStock estoque atual
+     * @param name nome para o caso de erro
+     * @param id id
+     * @return estoque atual
+     */
     private int validateAvailableSpaceInStock(int quantity, int maxStock, int currentStock, String name, Long id) {
         currentStock += quantity;
         if ( maxStock < currentStock )
-            throw new SectionManagementException("Setor "
+            throw new SectionManagementException("Setor: "
                     + name
-                    + " doesn't have available stock for this update");
+                    + ", doesn't have stock space available for this update");
         return currentStock;
     }
 
+    /**
+     * Metodo que atualiza Ordem de Entrada
+     * @param oldInboundOrder ordem de entrada a ser atualizada
+     * @param newBatch lista de lotes
+     * @return ordem de entrada atualizada
+     */
     public List<Batch> updateOldSectionStock(InboundOrder oldInboundOrder, List<Batch> newBatch) {
         Section sectionToUpdate = oldInboundOrder.getSection();
         int qtd = sectionToUpdate.getCurrentStock();
@@ -102,9 +128,8 @@ public class SectionService {
     }
 
     public void delete(Long id) {
-        Optional<Section> section = sectionRepository.findById(id);
-        section.orElseThrow(() -> new ObjectNotFoundException("Setor não encontrado"));
-        sectionRepository.deleteById(id);
+        Section section = findById(id);
+        sectionRepository.delete(section);
     }
 
     public List<Section> findAll() {

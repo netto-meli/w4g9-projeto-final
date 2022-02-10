@@ -4,6 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/***
+ * Classe de Response para Seller
+ *
+ * @author Marcos Sá
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

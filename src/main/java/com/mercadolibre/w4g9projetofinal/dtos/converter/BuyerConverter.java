@@ -9,13 +9,13 @@ import java.util.stream.Collectors;
 
 /***
  * Classe para realizar conversao de dados para tratativa e devolutiva de dados
- * @Autor Leonardo
+ * @author Leonardo
  */
 public class BuyerConverter {
 
     /***
      * Metodo que recebe um BuyerRequestDTO e converte em um Buyer
-     * @param buyer
+     * @param buyer comprador
      * @return Buyer
      */
     public static Buyer convertDtoToEntity(BuyerRequestDTO buyer) {
@@ -24,7 +24,7 @@ public class BuyerConverter {
 
     /***
      * Metodo que recebe um Buyer e converte em um BuyerResponseDTO
-     * @param newBuyer
+     * @param newBuyer comprador
      * @return BuyerResponseDTO
      */
     public static BuyerResponseDTO convertEntityToDto(Buyer newBuyer) {
@@ -32,8 +32,8 @@ public class BuyerConverter {
     }
 
     /***
-     * Metodo que recebe um ist<BuyerResponseDTO> e converte em um listBuyer
-     * @param listBuyer
+     * Metodo que recebe um istBuyerResponseDTO e converte em um listBuyer
+     * @param listBuyer id
      * @return listBuyer
      */
     public static List<BuyerResponseDTO> convertEntityListToDtoList(List<Buyer> listBuyer) {

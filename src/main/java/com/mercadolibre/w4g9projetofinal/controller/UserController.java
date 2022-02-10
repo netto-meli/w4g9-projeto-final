@@ -13,6 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/***
+ * Classe de controle para User
+ *
+ * @author Marcos Sá
+ * @author Fernando
+ */
 @RestController
 @RequestMapping("/api/v1/fresh-products/users")
 @PreAuthorize("hasRole('ADMIN') OR hasRole('REPRESENTATIVE')")
@@ -21,6 +27,10 @@ public class UserController {
     @Autowired
     private UserService service;
 
+    /*** Método para buscar todos os Users do banco de dados<br>
+     * GET - /users
+     * @return Payload com Lista de Users e ResponseEntity com status <b>OK</b>
+     */
     @GetMapping
     public ResponseEntity<List<UserResponseDTO>> findAll() {
         List<User> list = service.findAll();
