@@ -14,7 +14,6 @@ import java.util.List;
  * @author Marcos Sá
  * @author Fernando
  */
-
 public class RepresentativeConverter {
 
     public static Representative convertDtoToEntity (RepresentativeRequestDTO objDTO){

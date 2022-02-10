@@ -13,7 +13,6 @@ import java.util.List;
  * @author Marcos Sá
  * @author Fernando
  */
-
 public class SellerConverter {
 
     public static Seller convertDtoToEntity (SellerRequestDTO objDTO){

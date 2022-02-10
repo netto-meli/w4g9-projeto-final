@@ -40,15 +40,18 @@ public class SectionService {
         boolean throwExeption = false;
         for (Batch b : batchStock) {
             if ( !b.getDueDate().isAfter(LocalDate.now()) ){
-                msg2 = new StringBuilder("\nBatch: " + b.getId()
-                        + " has a Due Date of " + b.getDueDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+                msg2.append("\nBatch: ");
+                msg2.append(b.getId());
+                msg2.append(" has a Due Date of ");
+                msg2.append(b.getDueDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
             }
             if (b.getMinTemperature() != dbSection.getMinTeperature()) {
                 if (!throwExeption) {
                     throwExeption = true;
                     msg1 = new StringBuilder("Batch number(s): ");
                 }
-                msg1.append(b.getId()).append(", ");
+                msg1.append(b.getId());
+                msg1.append(", ");
             } else {
                 int qtd = 0;
                 if (isUpdate) qtd = b.getCurrentQuantity();
@@ -78,9 +81,9 @@ public class SectionService {
     private int validateAvailableSpaceInStock(int quantity, int maxStock, int currentStock, String name, Long id) {
         currentStock += quantity;
         if ( maxStock < currentStock )
-            throw new SectionManagementException("Setor "
+            throw new SectionManagementException("Setor: "
                     + name
-                    + " doesn't have available stock for this update");
+                    + ", doesn't have stock space available for this update");
         return currentStock;
     }
 

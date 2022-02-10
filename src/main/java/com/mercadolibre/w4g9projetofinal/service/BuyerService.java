@@ -28,7 +28,7 @@ public class BuyerService {
 
     /*** Instancia de BCryptPasswordEncoder: <b>BCryptPasswordEncoder</b>.
      */
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     /**
      * Instancia para Buyer Repository
