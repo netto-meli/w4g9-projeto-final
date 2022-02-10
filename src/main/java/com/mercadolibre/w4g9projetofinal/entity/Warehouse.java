@@ -34,6 +34,10 @@ public class Warehouse {
         return id != null && Objects.equals(id, warehouse.id);
     }
 
+    public Long getId() {
+        return id;
+    }
+
     @Override
     public int hashCode() {
         return getClass().hashCode();
