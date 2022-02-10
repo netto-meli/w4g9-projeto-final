@@ -58,10 +58,12 @@ public class AdvertiseServiceTest {
         assertTrue(ex.getMessage().contains("Anuncio não encontrado! Por favor verifique o id."));
     }
 
-    @Test
-    public void insertAdvertise(){
 
-        Advertise adv = new Advertise(1L,"primeiro",new Product(), new Seller(),new BigDecimal(4),AdvertiseStatus.ATIVO, true);
+    @Test
+    public void insertAdvertise() {
+
+        Advertise adv = new Advertise(1L, "primeiro", new Product(), new Seller(), new BigDecimal(4), AdvertiseStatus.ATIVO, true);
+        Advertise adv1 = new Advertise(2L, "primeiro", new Product(), new Seller(), new BigDecimal(4), AdvertiseStatus.ATIVO, true);
 
         AdvertiseRepository advertiseRepository = Mockito.mock(AdvertiseRepository.class);
         Mockito.when(advertiseRepository.save(adv)).thenReturn(adv);
@@ -72,7 +74,7 @@ public class AdvertiseServiceTest {
 
         BusinessException businessException = assertThrows(BusinessException.class, () -> advertiseService.insert(adv1));
 
-        assertEquals(adv,adInsert);
+        assertEquals(adv, adInsert);
         assertTrue(businessException.getMessage().contains("Não foi possivel incluir o anuncio."));
     }
 
