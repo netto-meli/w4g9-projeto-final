@@ -2,21 +2,23 @@ package com.mercadolibre.w4g9projetofinal.test.unit;
 
 import com.mercadolibre.w4g9projetofinal.entity.*;
 import com.mercadolibre.w4g9projetofinal.entity.enums.RefrigerationType;
+import com.mercadolibre.w4g9projetofinal.exceptions.BusinessException;
+import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.exceptions.SectionManagementException;
 import com.mercadolibre.w4g9projetofinal.repository.SectionRepository;
 import com.mercadolibre.w4g9projetofinal.service.SectionService;
-import org.hibernate.ObjectNotFoundException;
+import com.sun.xml.bind.v2.TODO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 class SectionServiceTest {
 
@@ -140,39 +142,180 @@ class SectionServiceTest {
     }
 
     @Test
-    public void sectionValidateAvailableSpaceInStock(){
+    public void validaDataDeValidadeDosLotes() {
+        //Assert
+        Batch b1 = new Batch(1L, 1, 1, 1F, 1F,
+                LocalDate.now(), LocalDate.now(),LocalDateTime.now(), null, null );
+        Batch b2 = new Batch(2L, 1, 1, 1F, 1F,
+                LocalDate.now().plusDays(2), LocalDate.now(),LocalDateTime.now(), null, null );
+        Batch b3 = new Batch(3L, 1, 1, 1F, 1F,
+                LocalDate.now().minusDays(5), LocalDate.now(),LocalDateTime.now(), null, null );
+        List<Batch> list = new ArrayList<>();
+        list.add(b1);
+        list.add(b2);
+        list.add(b3);
+        Section section = new Section(1L, null, "name", RefrigerationType.COLD,
+                1, 10, 1F, 1F ,null );
+
         SectionRepository repositoryMock = Mockito.mock(SectionRepository.class);
+
         SectionService sectionService = new SectionService(repositoryMock);
- //TODO tem que terminar
-        List<InboundOrder> list = new ArrayList<>();
-        InboundOrder inboundOrder = new InboundOrder();
-        inboundOrder.setId(1L);
-        list.add(inboundOrder);
 
-        Section section = new Section(1L, new Warehouse(1L,"nome","nome"), "nome", RefrigerationType.COLD, 10, 19, 10, 5, list);
+        SectionManagementException expectedException = assertThrows(SectionManagementException.class, () ->
+                sectionService.validateBatchSection(list, section, true));
 
-        List<Batch> batchList = new ArrayList<>();
-
-       Batch batch = new Batch(1L, 10, 10, 10, 5,
-                LocalDate.of(2023,11,30), LocalDate.of(2023,1,29), LocalDateTime.of(2023,2,6,6,8,1), null, new InboundOrder(1L,LocalDate.now(),new Seller(),new Representative(),batchList,section));
-
-        Batch batch2 = new Batch(2L, 10, 10, 10, 5,
-                LocalDate.of(2023,11,30), LocalDate.of(2023,1,29), LocalDateTime.of(2023,2,6,6,8,1), null, new InboundOrder(1L,LocalDate.now(),new Seller(),new Representative(),batchList,section));
-
-        batchList.add(batch);
-        batchList.add(batch2);
-
-       //Section section = new Section(1L, new Warehouse(1L,"nome","nome"), "nome", RefrigerationType.COLD, 10, 19, 10, 5, list);
-
-      //  Mockito.when(repositoryMock.findByInboundOrder_Id(1L)).thenReturn(Optional.of(section));
-          Mockito.when(sectionService.validateBatchSection(batchList,section,true)).thenThrow(SectionManagementException.class);
-      //  Section sectionResult = sectionService.validateBatchSection(batchList,section,true);
-
-        SectionManagementException expectedException = assertThrows(SectionManagementException.class, () -> sectionService.validateBatchSection(new ArrayList<>(),new Section(),true));
-
-        Assertions.assertTrue(expectedException.getMessage().contains("Batch number(s): 1, 2, does not belong to the Section Informed."));
-
+        assertTrue(expectedException.getMessage().contains("Batch: 1 has a Due Date of "));
+        assertTrue(expectedException.getMessage().contains("Batch: 3 has a Due Date of "));
     }
 
+    @Test
+    public void validaSetoresDosLotes_QuandoLotesTiveremTemperaturasDiferentes() {
+        //Assert
+        Batch b1 = new Batch(1L, 1, 1, 1F, 10F,
+                LocalDate.now(), LocalDate.now().plusDays(1),LocalDateTime.now(), null, null );
+        Batch b2 = new Batch(2L, 1, 1, 1F, 1F,
+                LocalDate.now().plusDays(2), LocalDate.now(),LocalDateTime.now(), null, null );
+        Batch b3 = new Batch(3L, 1, 1, 1F, -10F,
+                LocalDate.now().plusDays(5), LocalDate.now(),LocalDateTime.now(), null, null );
+        List<Batch> list = new ArrayList<>();
+        list.add(b1);
+        list.add(b2);
+        list.add(b3);
+        Section section = new Section(1L, null, "name", RefrigerationType.COLD,
+                1, 10, 1F, 1F ,null );
 
+        SectionRepository repositoryMock = Mockito.mock(SectionRepository.class);
+
+        SectionService sectionService = new SectionService(repositoryMock);
+
+        SectionManagementException expectedException = assertThrows(SectionManagementException.class, () ->
+                sectionService.validateBatchSection(list, section, true));
+
+        assertTrue(expectedException.getMessage().contains("Batch number(s): 1, 3, does not belong to the Section Informed."));
+    }
+
+    @Test
+    public void validaSetoresDosLotes_QuandoNaoTemEspaco() {
+        //Assert
+        Batch b1 = new Batch(1L, 1, 1, 1F, 1F,
+                LocalDate.now().plusDays(7), LocalDate.now().plusDays(1),LocalDateTime.now(), null, null );
+        Batch b2 = new Batch(2L, 1, 1, 1F, 1F,
+                LocalDate.now().plusDays(2), LocalDate.now(),LocalDateTime.now(), null, null );
+        Batch b3 = new Batch(3L, 1, 1, 1F, 1F,
+                LocalDate.now().plusDays(5), LocalDate.now(),LocalDateTime.now(), null, null );
+        List<Batch> list = new ArrayList<>();
+        list.add(b1);
+        list.add(b2);
+        list.add(b3);
+        Section section = new Section(1L, null, "nameSetor", RefrigerationType.COLD,
+                1, 1, 1F, 1F ,null );
+
+        SectionRepository repositoryMock = Mockito.mock(SectionRepository.class);
+
+        SectionService sectionService = new SectionService(repositoryMock);
+
+
+
+        SectionManagementException expectedException = assertThrows(SectionManagementException.class, () ->
+                sectionService.validateBatchSection(list, section, true));
+
+        assertTrue(expectedException.getMessage().contains("Setor: nameSetor, doesn't have stock space available for this update"));
+    }
+
+    @Test
+    public void validaSetoresDosLotes() {
+        //Assert
+        Batch b1 = new Batch(1L, 1, 1, 1F, 1F,
+                LocalDate.now().plusDays(7), LocalDate.now().plusDays(1),LocalDateTime.now(), null, null );
+        Batch b2 = new Batch(2L, 1, 1, 1F, 1F,
+                LocalDate.now().plusDays(2), LocalDate.now(),LocalDateTime.now(), null, null );
+        Batch b3 = new Batch(3L, 1, 1, 1F, 1F,
+                LocalDate.now().plusDays(5), LocalDate.now(),LocalDateTime.now(), null, null );
+        List<Batch> list = new ArrayList<>();
+        list.add(b1);
+        list.add(b2);
+        list.add(b3);
+        Section section = new Section(1L, null, "name", RefrigerationType.COLD,
+                1, 10, 1F, 1F ,null );
+
+        SectionRepository repositoryMock = Mockito.mock(SectionRepository.class);
+
+        SectionService sectionService = new SectionService(repositoryMock);
+
+        Section sectionReturn = sectionService.validateBatchSection(list, section, false);
+
+        Assertions.assertEquals(sectionReturn,section);
+    }
+
+    @Test
+    public void validaEspacoDoEstoqueDoSetor_QuandoAnunciForDiferente() {
+        //Assert
+        Advertise advertise = new Advertise();
+        Advertise advertise2 = new Advertise();
+        advertise.setId(1L);
+        advertise2.setId(2L);
+        Batch b1 = new Batch(1L, 1, 1, 1F, 1F,
+                LocalDate.now().plusDays(7), LocalDate.now().plusDays(1),LocalDateTime.now(), advertise, null );
+        Batch b2 = new Batch(2L, 1, 1, 1F, 1F,
+                LocalDate.now().plusDays(2), LocalDate.now(),LocalDateTime.now(), advertise, null );
+        Batch b2b = new Batch(2L, 1, 1, 1F, 1F,
+                LocalDate.now().plusDays(2), LocalDate.now(),LocalDateTime.now(), advertise2, null );
+        Batch b3 = new Batch(3L, 1, 1, 1F, 1F,
+                LocalDate.now().plusDays(5), LocalDate.now(),LocalDateTime.now(), advertise, null );
+        List<Batch> list1 = new ArrayList<>();
+        List<Batch> lis2 = new ArrayList<>();
+        list1.add(b1);
+        list1.add(b2);
+        lis2.add(b2b);
+        lis2.add(b3);
+        Section section = new Section(1L, null, "nameSetor", RefrigerationType.COLD,
+                1, 1, 1F, 1F ,null );
+        InboundOrder inboundOrder = new InboundOrder();
+        inboundOrder.setSection(section);
+        inboundOrder.setBatchList(list1);
+
+        SectionRepository repositoryMock = Mockito.mock(SectionRepository.class);
+
+        SectionService sectionService = new SectionService(repositoryMock);
+
+        BusinessException expectedException = assertThrows(BusinessException.class, () ->
+                sectionService.updateOldSectionStock(inboundOrder,lis2));
+
+        assertTrue(expectedException.getMessage().contains("Cannot change Advertise of a Batch"));
+    }
+
+    @Test
+    public void validaEspacoDoEstoqueDoSetor() {
+        //Assert
+        Advertise advertise = new Advertise();
+        advertise.setId(1L);
+        Batch b1 = new Batch(1L, 1, 1, 1F, 1F,
+                LocalDate.now().plusDays(7), LocalDate.now().plusDays(1),LocalDateTime.now(), advertise, null );
+        Batch b2 = new Batch(2L, 1, 1, 1F, 1F,
+                LocalDate.now().plusDays(2), LocalDate.now(),LocalDateTime.now(), advertise, null );
+        Batch b2b = new Batch(2L, 1, 1, 1F, 1F,
+                LocalDate.now().plusDays(2), LocalDate.now(),LocalDateTime.now(), advertise, null );
+        Batch b3 = new Batch(3L, 1, 1, 1F, 1F,
+                LocalDate.now().plusDays(5), LocalDate.now(),LocalDateTime.now(), advertise, null );
+        List<Batch> list1 = new ArrayList<>();
+        List<Batch> lis2 = new ArrayList<>();
+        list1.add(b1);
+        list1.add(b2);
+        lis2.add(b2b);
+        lis2.add(b3);
+        Section section = new Section(1L, null, "nameSetor", RefrigerationType.COLD,
+                1, 1, 1F, 1F ,null );
+        InboundOrder inboundOrder = new InboundOrder();
+        inboundOrder.setSection(section);
+        inboundOrder.setBatchList(list1);
+
+        SectionRepository repositoryMock = Mockito.mock(SectionRepository.class);
+
+        SectionService sectionService = new SectionService(repositoryMock);
+
+        List<Batch> listaRetornada = sectionService.updateOldSectionStock(inboundOrder,lis2);
+        list1.add(b3);
+
+        assertEquals(list1,listaRetornada);
+    }
 }

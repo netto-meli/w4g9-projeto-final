@@ -28,7 +28,7 @@ public class BuyerService {
 
     /*** Instancia de BCryptPasswordEncoder: <b>BCryptPasswordEncoder</b>.
      */
-    private final BCryptPasswordEncoder pe;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     /**
      * Instancia para Buyer Repository
@@ -60,7 +60,7 @@ public class BuyerService {
      * @return status 200
      */
     public Buyer insert(Buyer buyer) {
-        buyer.setPassword(pe.encode(buyer.getPassword()));
+        buyer.setPassword(bCryptPasswordEncoder.encode(buyer.getPassword()));
         try {
             return repository.save(buyer);
         } catch (DataIntegrityViolationException e) {
@@ -76,7 +76,7 @@ public class BuyerService {
     public Buyer update(Buyer buyer) {
         Buyer newBuyer = findById(buyer.getId());
         updateRepresentation(newBuyer, buyer);
-        buyer.setPassword(pe.encode(buyer.getPassword()));
+        buyer.setPassword(bCryptPasswordEncoder.encode(buyer.getPassword()));
         return repository.save(buyer);
     }
 
