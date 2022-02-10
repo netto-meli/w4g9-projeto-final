@@ -69,6 +69,7 @@ public class SellerService {
     public Seller update(Seller newObj) {
         Seller obj = findById(newObj.getId());
         updateSeller(newObj, obj);
+        obj.setPassword(bCryptPasswordEncoder.encode(obj.getPassword()));
         return repository.save(obj);
     }
 

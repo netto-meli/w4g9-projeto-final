@@ -61,12 +61,12 @@ public class AdvertiseController {
      */
 
     @PostMapping
-    public ResponseEntity<Advertise> insert(@RequestBody @Valid AdvertiseRequestDTO advertise) {
+    public ResponseEntity<AdvertiseResponseDTO> insert(@RequestBody @Valid AdvertiseRequestDTO advertise) {
         Advertise newAdvertise = AdvertiseConverter.convertDtoToEntity(advertise);
         newAdvertise = service.insert(newAdvertise);
         AdvertiseResponseDTO newAdvertisedto = AdvertiseConverter.convertEntityToDto(newAdvertise);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newAdvertisedto.getId()).toUri();
-        return ResponseEntity.created(uri).body(newAdvertise);
+        return ResponseEntity.created(uri).body(newAdvertisedto);
     }
 
     /*** Método para Alterar Anuncio<br>
@@ -75,12 +75,12 @@ public class AdvertiseController {
      */
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<AdvertiseRequestDTO> update(@RequestBody @Valid AdvertiseRequestDTO advertiseDto,
+    public ResponseEntity<AdvertiseResponseDTO> update(@RequestBody @Valid AdvertiseRequestDTO advertiseDto,
                                                       @PathVariable Long id) {
         Advertise advertise = AdvertiseConverter.convertDtoToEntity(advertiseDto);
         advertise.setId(id);
-        service.update(advertise);
-        return ResponseEntity.accepted().body(advertiseDto);
+        advertise = service.update(advertise);
+        return ResponseEntity.accepted().body(AdvertiseConverter.convertEntityToDto(advertise));
     }
 
     /*** Método para deltear Anuncio<br>

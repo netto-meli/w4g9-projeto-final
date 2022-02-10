@@ -64,6 +64,7 @@ public class RepresentativeService {
     public Representative update(Representative newObj) {
         Representative obj = findById(newObj.getId());
         updateRepresentation(newObj, obj);
+        obj.setPassword(bCryptPasswordEncoder.encode(obj.getPassword()));
         return repository.save(obj);
     }
 

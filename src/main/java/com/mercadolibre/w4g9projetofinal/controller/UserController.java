@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/***
+ * @author Fernando
+ */
 @RestController
 @RequestMapping("/api/v1/fresh-products/users")
 @PreAuthorize("hasRole('ADMIN') OR hasRole('REPRESENTATIVE')")

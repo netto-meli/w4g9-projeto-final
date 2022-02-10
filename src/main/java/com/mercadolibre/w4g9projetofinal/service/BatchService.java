@@ -19,7 +19,8 @@ import java.util.stream.Collectors;
 /***
  * Classe de serviço para Representative
  *
- * @author Marcos Sá
+ * @author Fernando Netto
+ * @author Marcos
  */
 @Service
 @AllArgsConstructor
@@ -43,8 +44,6 @@ public class BatchService {
         this.verifyStockOfBatch(batch, qtdProduct);
         return batch;
     }
-
-
 
     /*** Realiza verificação do estoque da quantidade de itens de um produto para o carrinho
      *
@@ -89,7 +88,6 @@ public class BatchService {
         }
         batchRepository.saveAll(batchIterable);
     }
-
 
     /*** Realiza baixa no estoque da quantidade de itens de um produto que foi vendido
      *

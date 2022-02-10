@@ -11,7 +11,6 @@ import javax.mail.internet.MimeMessage;
  *
  * @author Marcos Sá
  */
-
 public class SmtpEmailService extends AbstractEmailService{
 
     private JavaMailSender javaMailSender;

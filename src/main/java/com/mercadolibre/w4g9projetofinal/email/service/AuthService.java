@@ -14,7 +14,6 @@ import java.util.Random;
  *
  * @author Marcos Sá
  */
-
 @Service
 public class AuthService {
 

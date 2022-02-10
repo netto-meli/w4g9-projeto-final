@@ -17,7 +17,6 @@ import java.util.Date;
  *
  * @author Marcos Sá
  */
-
 public abstract class AbstractEmailService implements EmailService{
 
     @Value("${default.sender}")

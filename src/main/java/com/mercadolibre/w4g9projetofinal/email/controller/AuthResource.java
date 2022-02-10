@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
  *
  * @author Marcos Sá
  */
-
 @RestController
 @RequestMapping(value = "/api/v1/auth")
 public class AuthResource {

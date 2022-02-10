@@ -75,12 +75,12 @@ public class ProductController {
      * @return ResponseEntity com status <b>NO CONTENT</b>
      */
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Product> update(@PathVariable Long id,
+    public ResponseEntity<ProductResponseDTO> update(@PathVariable Long id,
                                           @RequestBody @Valid ProductRequestDTO newProd) {
         Product product = ProductConverter.convertDtoToEntity(newProd);
         product.setId(id);
         product = service.update(product);
-        return ResponseEntity.ok().body(product);
+        return ResponseEntity.ok().body(ProductConverter.convertEntityToDto(product));
     }
 
     /*** Método para atualização de Seller existente<br>
