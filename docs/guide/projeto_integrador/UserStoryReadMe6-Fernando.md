@@ -3,7 +3,7 @@
 ### // Especificações de Requisitos
 
 #### Requerimientos US:
-#### ml-delivery-orders-01
+#### [ml-delivery-orders-01](https://netto-meli.github.io/w4g9-projeto-final/guide/projeto_integrador/US-6/UserStory_6_DELIVERY_-_Fernando_Netto.pdf) <-(clique para acessar PDF)
 
 **Importante:**
 As histórias dos usuários são contadas do ponto de vista do representante e com base em suas necessidades.

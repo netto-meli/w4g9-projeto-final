@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.mercadolibre.w4g9projetofinal.entity</OriginalElement>
+  <nodes>
+    <node x="1913.6999999999998" y="1629.0">com.mercadolibre.w4g9projetofinal.entity.OrderItem</node>
+    <node x="1697.086842105263" y="473.0">com.mercadolibre.w4g9projetofinal.entity.Product</node>
+    <node x="144.0" y="2188.0">com.mercadolibre.w4g9projetofinal.entity.InboundOrder</node>
+    <node x="2269.7" y="1695.0">com.mercadolibre.w4g9projetofinal.entity.Buyer</node>
+    <node x="2729.45" y="0.0">com.mercadolibre.w4g9projetofinal.entity.enums</node>
+    <node x="612.6999999999999" y="1673.0">com.mercadolibre.w4g9projetofinal.entity.Representative</node>
+    <node x="1701.0" y="2661.0">com.mercadolibre.w4g9projetofinal.entity.Transporter</node>
+    <node x="1635.586842105263" y="978.0">com.mercadolibre.w4g9projetofinal.entity.Advertise</node>
+    <node x="2078.45" y="2188.0">com.mercadolibre.w4g9projetofinal.entity.SellOrder</node>
+    <node x="943.25" y="0.0">com.mercadolibre.w4g9projetofinal.entity.User</node>
+    <node x="1196.6999999999998" y="1497.0">com.mercadolibre.w4g9projetofinal.entity.Batch</node>
+    <node x="746.3249999999999" y="1066.0">com.mercadolibre.w4g9projetofinal.entity.Warehouse</node>
+    <node x="0.0" y="2727.0">com.mercadolibre.w4g9projetofinal.entity.Section</node>
+    <node x="122.96184210526303" y="588.0">com.mercadolibre.w4g9projetofinal.entity.Seller</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.mercadolibre.w4g9projetofinal.entity.Section" target="com.mercadolibre.w4g9projetofinal.entity.InboundOrder" relationship="DEPENDENCY">
+      <point x="-170.75" y="-271.5" />
+      <point x="170.75" y="2640.0" />
+      <point x="406.875" y="2640.0" />
+      <point x="406.875" y="2630.0" />
+      <point x="286.5" y="2630.0" />
+      <point x="-142.5" y="205.5" />
+    </edge>
+    <edge source="com.mercadolibre.w4g9projetofinal.entity.InboundOrder" target="com.mercadolibre.w4g9projetofinal.entity.Section" relationship="DEPENDENCY">
+      <point x="-142.5" y="205.5" />
+      <point x="286.5" y="2630.0" />
+      <point x="406.875" y="2630.0" />
+      <point x="406.875" y="2640.0" />
+      <point x="170.75" y="2640.0" />
+      <point x="-170.75" y="-271.5" />
+    </edge>
+    <edge source="com.mercadolibre.w4g9projetofinal.entity.InboundOrder" target="com.mercadolibre.w4g9projetofinal.entity.Seller" relationship="DEPENDENCY">
+      <point x="-142.5" y="-205.5" />
+      <point x="286.5" y="2126.0" />
+      <point x="111.5" y="2126.0" />
+      <point x="111.5" y="936.0" />
+      <point x="225.96184210526303" y="936.0" />
+      <point x="-103.0" y="95.5" />
+    </edge>
+    <edge source="com.mercadolibre.w4g9projetofinal.entity.Transporter" target="com.mercadolibre.w4g9projetofinal.entity.SellOrder" relationship="DEPENDENCY">
+      <point x="-214.0" y="-337.5" />
+      <point x="1915.0" y="2640.0" />
+      <point x="2124.0" y="2640.0" />
+      <point x="2124.0" y="2630.0" />
+      <point x="2229.95" y="2630.0" />
+      <point x="-151.5" y="205.5" />
+    </edge>
+    <edge source="com.mercadolibre.w4g9projetofinal.entity.Buyer" target="com.mercadolibre.w4g9projetofinal.entity.User" relationship="GENERALIZATION">
+      <point x="0.0" y="-95.5" />
+      <point x="2445.2" y="447.0" />
+      <point x="1156.75" y="447.0" />
+      <point x="0.0" y="210.5" />
+    </edge>
+    <edge source="com.mercadolibre.w4g9projetofinal.entity.Advertise" target="com.mercadolibre.w4g9projetofinal.entity.Seller" relationship="DEPENDENCY">
+      <point x="-144.0" y="-227.5" />
+      <point x="1779.586842105263" y="956.0" />
+      <point x="1918.586842105263" y="956.0" />
+      <point x="1918.586842105263" y="946.0" />
+      <point x="111.5" y="946.0" />
+      <point x="111.5" y="936.0" />
+      <point x="225.96184210526303" y="936.0" />
+      <point x="-103.0" y="95.5" />
+    </edge>
+    <edge source="com.mercadolibre.w4g9projetofinal.entity.Seller" target="com.mercadolibre.w4g9projetofinal.entity.Advertise" relationship="DEPENDENCY">
+      <point x="-103.0" y="95.5" />
+      <point x="225.96184210526303" y="936.0" />
+      <point x="111.5" y="936.0" />
+      <point x="111.5" y="946.0" />
+      <point x="1918.586842105263" y="946.0" />
+      <point x="1918.586842105263" y="956.0" />
+      <point x="1779.586842105263" y="956.0" />
+      <point x="-144.0" y="-227.5" />
+    </edge>
+    <edge source="com.mercadolibre.w4g9projetofinal.entity.Batch" target="com.mercadolibre.w4g9projetofinal.entity.Advertise" relationship="TO_ONE">
+      <point x="-174.25" y="-293.5" />
+      <point x="1370.9499999999998" y="1475.0" />
+      <point x="1695.461842105263" y="1475.0" />
+      <point x="1695.461842105263" y="1455.0" />
+      <point x="1779.586842105263" y="1455.0" />
+      <point x="-144.0" y="227.5" />
+    </edge>
+    <edge source="com.mercadolibre.w4g9projetofinal.entity.Transporter" target="com.mercadolibre.w4g9projetofinal.entity.Representative" relationship="TO_ONE">
+      <point x="214.0" y="-337.5" />
+      <point x="2343.0" y="2640.0" />
+      <point x="2139.5" y="2640.0" />
+      <point x="2139.5" y="2620.0" />
+      <point x="1553.925" y="2620.0" />
+      <point x="1553.925" y="2106.0" />
+      <point x="1035.6999999999998" y="2106.0" />
+      <point x="141.0" y="117.5" />
+    </edge>
+    <edge source="com.mercadolibre.w4g9projetofinal.entity.Seller" target="com.mercadolibre.w4g9projetofinal.entity.Advertise" relationship="TO_MANY">
+      <point x="103.0" y="95.5" />
+      <point x="431.96184210526303" y="916.0" />
+      <point x="504.625" y="916.0" />
+      <point x="504.625" y="926.0" />
+      <point x="1928.586842105263" y="926.0" />
+      <point x="1928.586842105263" y="956.0" />
+      <point x="2067.586842105263" y="956.0" />
+      <point x="144.0" y="-227.5" />
+    </edge>
+    <edge source="com.mercadolibre.w4g9projetofinal.entity.Representative" target="com.mercadolibre.w4g9projetofinal.entity.Warehouse" relationship="DEPENDENCY">
+      <point x="-188.0" y="-117.5" />
+      <point x="706.6999999999999" y="1475.0" />
+      <point x="549.5" y="1475.0" />
+      <point x="549.5" y="1455.0" />
+      <point x="814.0749999999999" y="1455.0" />
+      <point x="-67.75" y="139.5" />
+    </edge>
+    <edge source="com.mercadolibre.w4g9projetofinal.entity.OrderItem" target="com.mercadolibre.w4g9projetofinal.entity.Advertise" relationship="TO_ONE">
+      <point x="-84.0" y="-161.5" />
+      <point x="1997.6999999999998" y="1475.0" />
+      <point x="1695.461842105263" y="1475.0" />
+      <point x="1695.461842105263" y="1455.0" />
+      <point x="1779.586842105263" y="1455.0" />
+      <point x="-144.0" y="227.5" />
+    </edge>
+    <edge source="com.mercadolibre.w4g9projetofinal.entity.Advertise" target="com.mercadolibre.w4g9projetofinal.entity.Seller" relationship="TO_ONE">
+      <point x="144.0" y="-227.5" />
+      <point x="2067.586842105263" y="956.0" />
+      <point x="1928.586842105263" y="956.0" />
+      <point x="1928.586842105263" y="926.0" />
+      <point x="504.625" y="926.0" />
+      <point x="504.625" y="916.0" />
+      <point x="431.96184210526303" y="916.0" />
+      <point x="103.0" y="95.5" />
+    </edge>
+    <edge source="com.mercadolibre.w4g9projetofinal.entity.InboundOrder" target="com.mercadolibre.w4g9projetofinal.entity.Seller" relationship="TO_ONE">
+      <point x="142.5" y="-205.5" />
+      <point x="571.5" y="2166.0" />
+      <point x="1372.3249999999998" y="2166.0" />
+      <point x="1372.3249999999998" y="2116.0" />
+      <point x="504.625" y="2116.0" />
+      <point x="504.625" y="916.0" />
+      <point x="431.96184210526303" y="916.0" />
+      <point x="103.0" y="95.5" />
+    </edge>
+    <edge source="com.mercadolibre.w4g9projetofinal.entity.Transporter" target="com.mercadolibre.w4g9projetofinal.entity.Representative" relationship="DEPENDENCY">
+      <point x="-214.0" y="-337.5" />
+      <point x="1915.0" y="2640.0" />
+      <point x="2124.0" y="2640.0" />
+      <point x="2124.0" y="2630.0" />
+      <point x="791.125" y="2630.0" />
+      <point x="791.125" y="2106.0" />
+      <point x="753.6999999999999" y="2106.0" />
+      <point x="-141.0" y="117.5" />
+    </edge>
+    <edge source="com.mercadolibre.w4g9projetofinal.entity.OrderItem" target="com.mercadolibre.w4g9projetofinal.entity.Advertise" relationship="DEPENDENCY">
+      <point x="84.0" y="-161.5" />
+      <point x="2165.7" y="1455.0" />
+      <point x="2067.586842105263" y="1455.0" />
+      <point x="144.0" y="227.5" />
+    </edge>
+    <edge source="com.mercadolibre.w4g9projetofinal.entity.Advertise" target="com.mercadolibre.w4g9projetofinal.entity.Product" relationship="DEPENDENCY">
+      <point x="-144.0" y="-227.5" />
+      <point x="1779.586842105263" y="956.0" />
+      <point x="1918.586842105263" y="956.0" />
+      <point x="1918.586842105263" y="936.0" />
+      <point x="1810.336842105263" y="936.0" />
+      <point x="-113.25" y="210.5" />
+    </edge>
+    <edge source="com.mercadolibre.w4g9projetofinal.entity.SellOrder" target="com.mercadolibre.w4g9projetofinal.entity.OrderItem" relationship="DEPENDENCY">
+      <point x="-151.5" y="-205.5" />
+      <point x="2229.95" y="2166.0" />
+      <point x="2415.586842105263" y="2166.0" />
+      <point x="2415.586842105263" y="2156.0" />
+      <point x="1997.6999999999998" y="2156.0" />
+      <point x="-84.0" y="161.5" />
+    </edge>
+    <edge source="com.mercadolibre.w4g9projetofinal.entity.Representative" target="com.mercadolibre.w4g9projetofinal.entity.Warehouse" relationship="TO_ONE">
+      <point x="0.0" y="-117.5" />
+      <point x="894.6999999999999" y="1465.0" />
+      <point x="903.711842105263" y="1465.0" />
+      <point x="903.711842105263" y="1455.0" />
+      <point x="949.5749999999999" y="1455.0" />
+      <point x="67.75" y="139.5" />
+    </edge>
+    <edge source="com.mercadolibre.w4g9projetofinal.entity.OrderItem" target="com.mercadolibre.w4g9projetofinal.entity.SellOrder" relationship="DEPENDENCY">
+      <point x="-84.0" y="161.5" />
+      <point x="1997.6999999999998" y="2156.0" />
+      <point x="2415.586842105263" y="2156.0" />
+      <point x="2415.586842105263" y="2166.0" />
+      <point x="2229.95" y="2166.0" />
+      <point x="-151.5" y="-205.5" />
+    </edge>
+    <edge source="com.mercadolibre.w4g9projetofinal.entity.InboundOrder" target="com.mercadolibre.w4g9projetofinal.entity.Batch" relationship="TO_MANY">
+      <point x="142.5" y="-205.5" />
+      <point x="571.5" y="2166.0" />
+      <point x="1372.3249999999998" y="2166.0" />
+      <point x="1372.3249999999998" y="2116.0" />
+      <point x="1719.4499999999998" y="2116.0" />
+      <point x="174.25" y="293.5" />
+    </edge>
+    <edge source="com.mercadolibre.w4g9projetofinal.entity.Batch" target="com.mercadolibre.w4g9projetofinal.entity.InboundOrder" relationship="TO_ONE">
+      <point x="174.25" y="293.5" />
+      <point x="1719.4499999999998" y="2116.0" />
+      <point x="1372.3249999999998" y="2116.0" />
+      <point x="1372.3249999999998" y="2166.0" />
+      <point x="571.5" y="2166.0" />
+      <point x="142.5" y="-205.5" />
+    </edge>
+    <edge source="com.mercadolibre.w4g9projetofinal.entity.Batch" target="com.mercadolibre.w4g9projetofinal.entity.Advertise" relationship="DEPENDENCY">
+      <point x="174.25" y="-293.5" />
+      <point x="1719.4499999999998" y="1465.0" />
+      <point x="2165.7" y="1465.0" />
+      <point x="2165.7" y="1455.0" />
+      <point x="2067.586842105263" y="1455.0" />
+      <point x="144.0" y="227.5" />
+    </edge>
+    <edge source="com.mercadolibre.w4g9projetofinal.entity.Advertise" target="com.mercadolibre.w4g9projetofinal.entity.Product" relationship="TO_ONE">
+      <point x="144.0" y="-227.5" />
+      <point x="2067.586842105263" y="956.0" />
+      <point x="1928.586842105263" y="956.0" />
+      <point x="1928.586842105263" y="946.0" />
+      <point x="2036.836842105263" y="946.0" />
+      <point x="113.25" y="210.5" />
+    </edge>
+    <edge source="com.mercadolibre.w4g9projetofinal.entity.Representative" target="com.mercadolibre.w4g9projetofinal.entity.User" relationship="GENERALIZATION">
+      <point x="188.0" y="-117.5" />
+      <point x="1082.6999999999998" y="1475.0" />
+      <point x="1156.75" y="1475.0" />
+      <point x="0.0" y="210.5" />
+    </edge>
+    <edge source="com.mercadolibre.w4g9projetofinal.entity.InboundOrder" target="com.mercadolibre.w4g9projetofinal.entity.Batch" relationship="DEPENDENCY">
+      <point x="-142.5" y="-205.5" />
+      <point x="286.5" y="2126.0" />
+      <point x="1370.9499999999998" y="2126.0" />
+      <point x="-174.25" y="293.5" />
+    </edge>
+    <edge source="com.mercadolibre.w4g9projetofinal.entity.InboundOrder" target="com.mercadolibre.w4g9projetofinal.entity.Representative" relationship="TO_ONE">
+      <point x="142.5" y="-205.5" />
+      <point x="571.5" y="2166.0" />
+      <point x="1372.3249999999998" y="2166.0" />
+      <point x="1372.3249999999998" y="2156.0" />
+      <point x="1553.925" y="2156.0" />
+      <point x="1553.925" y="2106.0" />
+      <point x="1035.6999999999998" y="2106.0" />
+      <point x="141.0" y="117.5" />
+    </edge>
+    <edge source="com.mercadolibre.w4g9projetofinal.entity.Batch" target="com.mercadolibre.w4g9projetofinal.entity.InboundOrder" relationship="DEPENDENCY">
+      <point x="-174.25" y="293.5" />
+      <point x="1370.9499999999998" y="2126.0" />
+      <point x="286.5" y="2126.0" />
+      <point x="-142.5" y="-205.5" />
+    </edge>
+    <edge source="com.mercadolibre.w4g9projetofinal.entity.InboundOrder" target="com.mercadolibre.w4g9projetofinal.entity.Representative" relationship="DEPENDENCY">
+      <point x="-142.5" y="-205.5" />
+      <point x="286.5" y="2156.0" />
+      <point x="791.125" y="2156.0" />
+      <point x="791.125" y="2106.0" />
+      <point x="753.6999999999999" y="2106.0" />
+      <point x="-141.0" y="117.5" />
+    </edge>
+    <edge source="com.mercadolibre.w4g9projetofinal.entity.Section" target="com.mercadolibre.w4g9projetofinal.entity.Warehouse" relationship="TO_ONE">
+      <point x="170.75" y="-271.5" />
+      <point x="512.25" y="2640.0" />
+      <point x="467.5" y="2640.0" />
+      <point x="467.5" y="2620.0" />
+      <point x="133.5" y="2620.0" />
+      <point x="133.5" y="2146.0" />
+      <point x="560.25" y="2146.0" />
+      <point x="560.25" y="1465.0" />
+      <point x="903.711842105263" y="1465.0" />
+      <point x="903.711842105263" y="1455.0" />
+      <point x="949.5749999999999" y="1455.0" />
+      <point x="67.75" y="139.5" />
+    </edge>
+    <edge source="com.mercadolibre.w4g9projetofinal.entity.InboundOrder" target="com.mercadolibre.w4g9projetofinal.entity.Section" relationship="TO_ONE">
+      <point x="142.5" y="205.5" />
+      <point x="571.5" y="2620.0" />
+      <point x="467.5" y="2620.0" />
+      <point x="467.5" y="2640.0" />
+      <point x="512.25" y="2640.0" />
+      <point x="170.75" y="-271.5" />
+    </edge>
+    <edge source="com.mercadolibre.w4g9projetofinal.entity.Section" target="com.mercadolibre.w4g9projetofinal.entity.InboundOrder" relationship="TO_MANY">
+      <point x="170.75" y="-271.5" />
+      <point x="512.25" y="2640.0" />
+      <point x="467.5" y="2640.0" />
+      <point x="467.5" y="2620.0" />
+      <point x="571.5" y="2620.0" />
+      <point x="142.5" y="205.5" />
+    </edge>
+    <edge source="com.mercadolibre.w4g9projetofinal.entity.Seller" target="com.mercadolibre.w4g9projetofinal.entity.User" relationship="GENERALIZATION">
+      <point x="0.0" y="-95.5" />
+      <point x="328.96184210526303" y="447.0" />
+      <point x="1156.75" y="447.0" />
+      <point x="0.0" y="210.5" />
+    </edge>
+    <edge source="com.mercadolibre.w4g9projetofinal.entity.SellOrder" target="com.mercadolibre.w4g9projetofinal.entity.Buyer" relationship="DEPENDENCY">
+      <point x="-151.5" y="-205.5" />
+      <point x="2229.95" y="2166.0" />
+      <point x="2415.586842105263" y="2166.0" />
+      <point x="2415.586842105263" y="2156.0" />
+      <point x="2357.45" y="2156.0" />
+      <point x="-87.75" y="95.5" />
+    </edge>
+    <edge source="com.mercadolibre.w4g9projetofinal.entity.SellOrder" target="com.mercadolibre.w4g9projetofinal.entity.Buyer" relationship="TO_ONE">
+      <point x="151.5" y="-205.5" />
+      <point x="2532.95" y="2166.0" />
+      <point x="2425.586842105263" y="2166.0" />
+      <point x="2425.586842105263" y="2146.0" />
+      <point x="2532.95" y="2146.0" />
+      <point x="87.75" y="95.5" />
+    </edge>
+    <edge source="com.mercadolibre.w4g9projetofinal.entity.Transporter" target="com.mercadolibre.w4g9projetofinal.entity.SellOrder" relationship="TO_MANY">
+      <point x="214.0" y="-337.5" />
+      <point x="2343.0" y="2640.0" />
+      <point x="2139.5" y="2640.0" />
+      <point x="2139.5" y="2620.0" />
+      <point x="2532.95" y="2620.0" />
+      <point x="151.5" y="205.5" />
+    </edge>
+    <edge source="com.mercadolibre.w4g9projetofinal.entity.SellOrder" target="com.mercadolibre.w4g9projetofinal.entity.OrderItem" relationship="TO_MANY">
+      <point x="151.5" y="-205.5" />
+      <point x="2532.95" y="2166.0" />
+      <point x="2425.586842105263" y="2166.0" />
+      <point x="2425.586842105263" y="2146.0" />
+      <point x="2165.7" y="2146.0" />
+      <point x="84.0" y="161.5" />
+    </edge>
+    <edge source="com.mercadolibre.w4g9projetofinal.entity.OrderItem" target="com.mercadolibre.w4g9projetofinal.entity.SellOrder" relationship="TO_ONE">
+      <point x="84.0" y="161.5" />
+      <point x="2165.7" y="2146.0" />
+      <point x="2425.586842105263" y="2146.0" />
+      <point x="2425.586842105263" y="2166.0" />
+      <point x="2532.95" y="2166.0" />
+      <point x="151.5" y="-205.5" />
+    </edge>
+    <edge source="com.mercadolibre.w4g9projetofinal.entity.Section" target="com.mercadolibre.w4g9projetofinal.entity.Warehouse" relationship="DEPENDENCY">
+      <point x="-170.75" y="-271.5" />
+      <point x="170.75" y="2640.0" />
+      <point x="406.875" y="2640.0" />
+      <point x="406.875" y="2630.0" />
+      <point x="100.5" y="2630.0" />
+      <point x="100.5" y="2136.0" />
+      <point x="549.25" y="2136.0" />
+      <point x="549.5" y="1455.0" />
+      <point x="814.0749999999999" y="1455.0" />
+      <point x="-67.75" y="139.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.2806912991656735" showDependencies="true" x="1443.5" y="1667.9999999999995" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

@@ -1,5 +1,9 @@
 # Modelagem de Classe e ER
-## Versão Final
+## Versões do Diagrama exibidos em PlantUML e Mermaid
+### Verificar no menu ao lado, o modelo UML gerado pelo InteliJ, e o modelo ER gerado pelo DBeaver.
+
+###
+
 #### Diagrama de Classes UML
 ```plantuml
 @startuml
