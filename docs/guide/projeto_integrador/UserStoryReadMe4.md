@@ -2,7 +2,7 @@
 ## Requisito 4
 ### // Especificações de Requisitos
 
-#### Requerimientos US:
+#### Requerimentos US:
 #### ml-check-product-stock-in-warehouses-04
 
 **Importante:**
@@ -47,8 +47,8 @@ Sinônimos do Representante: supervisor, líder.
 </details>
 
 ### Contratos referentes a User Story
-| HTTP | Modelo de URI                                                                                                                                       | Descrição                                                                                                                                 | US-code                                 |
-|---|-----------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------|
+| HTTP | Modelo de URI                                          | Descrição                                                                                                                                 | US-code                                 |
+|------|--------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------|
 | POST | /api/v1/fresh-products/warehouse/querytype=id product] | Obtenha a quantidade total de produtos por armazém.<br>Se o produto não existe em nenhum depósito, você deve retornar um "404 Not Found". | ml-check-product-stock-in-warehouses-01 |
 
 > Observação:

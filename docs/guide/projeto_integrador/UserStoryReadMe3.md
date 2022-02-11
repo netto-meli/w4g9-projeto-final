@@ -1,11 +1,8 @@
 # Programação Java
-
 ## Requisito 3
-
 ### // Especificações de Requisitos
 
-#### Requerimientos US:
-
+#### Requerimentos US:
 #### ml-check-product-location-in-warehouse-01
 
 **Importante:**
@@ -70,10 +67,10 @@ Sinônimos do Representante: supervisor, líder.
 
 ### Contratos relativos a User Story
 
-| HTTP | Modelo de URI                                                    | Descrição                                                                                                                                                                          | US-code                    |
-|------|------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------|
-| GET  | /api/v1/fresh-products/list?querytype=[idProducto]               | Veja uma lista de produtos com todos os lotes onde aparece.<br>Se a lista não existir, ela deve retornar um “404 Not Found”.                                                       | ml-check-product-location-in-warehouse-01 |
-| GET  | /api/v1/fresh-products/list?querytype=[idProducto]&querytype=[L] | Veja uma lista de produtos com todos os lotes onde aparece.<br>Ordenados por:<br>L = ordenado por lote<br>C = ordenado por quantidade atual<br>F = ordenado por data de vencimento | ml-check-product-location-in-warehouse-01 |
+| HTTP | Modelo de URI                                                  | Descrição                                                                                                                                                                          | US-code                                   |
+|------|----------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------|
+| GET  | /api/v1/fresh-products/list?querytype=[idProduct]              | Veja uma lista de produtos com todos os lotes onde aparece.<br>Se a lista não existir, ela deve retornar um “404 Not Found”.                                                       | ml-check-product-location-in-warehouse-01 |
+| GET  | /api/v1/fresh-products/list?querytype=[idProduct]&querytype=[L] | Veja uma lista de produtos com todos os lotes onde aparece.<br>Ordenados por:<br>L = ordenado por lote<br>C = ordenado por quantidade atual<br>F = ordenado por data de vencimento | ml-check-product-location-in-warehouse-01 |
 
 > Observação:
 Contemple outros tipos de erros. Trabalhe com o token de acesso para o pedido como um cliente autenticado.

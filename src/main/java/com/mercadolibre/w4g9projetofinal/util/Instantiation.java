@@ -1,27 +1,22 @@
 package com.mercadolibre.w4g9projetofinal.util;
 
-import com.mercadolibre.w4g9projetofinal.entity.*;
-import com.mercadolibre.w4g9projetofinal.entity.enums.AdvertiseStatus;
+import com.mercadolibre.w4g9projetofinal.entity.Buyer;
 import com.mercadolibre.w4g9projetofinal.entity.enums.Profile;
-import com.mercadolibre.w4g9projetofinal.entity.enums.RefrigerationType;
-import com.mercadolibre.w4g9projetofinal.entity.enums.RepresentativeJob;
 import com.mercadolibre.w4g9projetofinal.exceptions.ExistingUserException;
-import com.mercadolibre.w4g9projetofinal.repository.*;
+import com.mercadolibre.w4g9projetofinal.repository.AdvertiseRepository;
+import com.mercadolibre.w4g9projetofinal.repository.BuyerRepository;
+import com.mercadolibre.w4g9projetofinal.repository.InboundOrderRepository;
+import com.mercadolibre.w4g9projetofinal.repository.ProductRepository;
+import com.mercadolibre.w4g9projetofinal.repository.RepresentativeRepository;
+import com.mercadolibre.w4g9projetofinal.repository.SectionRepository;
+import com.mercadolibre.w4g9projetofinal.repository.SellerRepository;
+import com.mercadolibre.w4g9projetofinal.repository.UserRepository;
+import com.mercadolibre.w4g9projetofinal.repository.WarehouseRepository;
 import com.mercadolibre.w4g9projetofinal.service.BuyerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
 
 @Configuration
 public class Instantiation implements CommandLineRunner {

@@ -4,17 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 /***
  * DTO para Deserialização do Buyer
  * contem id (Long),
  * address (String),
  * name(String),
  * email(String)
- * @autor LEonardo
+ * @author LEonardo
  */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class BuyerResponseDTO {
     private Long id;
     private String username;

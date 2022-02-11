@@ -1,7 +1,5 @@
 package com.mercadolibre.w4g9projetofinal.email.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.mail.javamail.JavaMailSender;
 
 import javax.mail.internet.MimeMessage;

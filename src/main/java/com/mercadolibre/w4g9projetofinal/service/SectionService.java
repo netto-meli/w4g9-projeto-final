@@ -14,17 +14,26 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-/**
+/*** Service dos métodos do setor
+ * <b> {@link #validateBatchSection(List, Section, boolean)} Valida se lote está valida, temperatura indicada do setor e se o estoque tem espaço</b>
+ * <b> {@link #updateOldSectionStock(InboundOrder, List)} Atualiza o valor do estoque com base no lote recebido</b>
+ * <b> {@link #save(Section)} Método para salvar uma setor</b>
+ * <b> {@link #update(Section)} Método para atualizar uma setor</b>
+ * <b> {@link #delete(Long)} Método para deletar uma setor</b>
+ * <b> {@link #findAll()} Método para listar os setores disponiveis</b>
+ * <b> {@link #findById(Long)} Método que retorna um setor buscado pelo ID</b>
+ * <b> {@link #findByInboundOrderId(Long)} Método para retornar uma ordem de entrada pelo ID</b>
+ *
+ * @author Felipe bontempo
  * @author Fernando
- * @author fbontempo
  * @version 0.3
  */
 @Service
 @AllArgsConstructor
 public class SectionService {
-
+    /*** Instancia de repositório: <b>SectionRepository</b>.
+     */
     private SectionRepository sectionRepository;
 
     /***

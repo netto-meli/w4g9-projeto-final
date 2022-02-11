@@ -2,7 +2,7 @@
 ## Requisito 1
 ### // Especificações de Requisitos
 
-#### Requerimientos US:
+#### Requerimentos US:
 #### ml-insert-batch-in-fulfillment-warehouse-01
 
 **Importante:**
@@ -96,8 +96,8 @@ se possa mostrar ao colaborador que vai procurar o produto (picking).
 </details>
 
 ### Contratos relativos a User Story
-| HTTP | Modelo de URI                        | Descrição                                                                                                            | US-code |
-|------|--------------------------------------|----------------------------------------------------------------------------------------------------------------------|---|
+| HTTP | Modelo de URI                        | Descrição                                                                                                            | US-code                                     |
+|------|--------------------------------------|----------------------------------------------------------------------------------------------------------------------|---------------------------------------------|
 | POST | /api/v1/fresh-products/inboundorder/ | Cadastre um lote com o estoque de produtos que o compõe. Devolva o lote criado com o código de status "201 CREATED". | ml-insert-batch-in-fulfillment-warehouse-01 |
 | PUT  | /api/v1/fresh-products/inboundorder/ | Caso o lote já exista e deva ser atualizado. <br>Devolva o estoque atualizado com o código de status "201 CREATED".  | ml-insert-batch-in-fulfillment-warehouse-01 |
 

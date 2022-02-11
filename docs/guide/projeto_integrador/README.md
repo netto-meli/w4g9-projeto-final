@@ -1,4 +1,4 @@
-# MERCADO LIVRE - FRESCOS
+# MERCADO LIVRE - PRODUTOS FRESCOS
 ## Projeto Final
 ### Objetivo
 O objetivo deste projeto final é implementar uma API REST no âmbito do slogan e aplicar
