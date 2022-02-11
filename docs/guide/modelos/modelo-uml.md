@@ -16,6 +16,6 @@ abrir em outra janela para poder visualizar melhor
 <br>
 <details><summary>Versão inicial - Diagrama de Classes UML</summary><p>
 
-</p></details>
+![Versão do Diagrama de Classes UML inicial](images/ProjetoIntegrador.jpg "Versão do Diagrama de Classes UML inicial")
 
 </p></details>

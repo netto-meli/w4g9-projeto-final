@@ -16,6 +16,9 @@ import javax.persistence.ManyToOne;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+/**
+ * @author Leonardo
+ */
 @Getter
 @Setter
 @ToString

@@ -41,6 +41,7 @@ import java.util.Arrays;
 
 /***
  * @author Rafael Menezes
+ * @author Marcos Sá
  */
 @SpringBootTest
 @AutoConfigureMockMvc
