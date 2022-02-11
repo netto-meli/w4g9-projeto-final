@@ -3,9 +3,10 @@ package com.mercadolibre.w4g9projetofinal.dtos.converter;
 import com.mercadolibre.w4g9projetofinal.dtos.request.InboundOrderRequestDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.BatchResponseDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.InboundOrderResponseDTO;
-import com.mercadolibre.w4g9projetofinal.dtos.response.SectionResponseDTO;
 import com.mercadolibre.w4g9projetofinal.dtos.response.SectionResponseDTOForInboundOrder;
-import com.mercadolibre.w4g9projetofinal.entity.*;
+import com.mercadolibre.w4g9projetofinal.entity.Batch;
+import com.mercadolibre.w4g9projetofinal.entity.InboundOrder;
+import com.mercadolibre.w4g9projetofinal.entity.Section;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ public class InboundOrderConverter {
         List<Batch> batchList = BatchConverter.convertDtoListToEntityList(iorDTO.getBatchStock());
         Section section = SectionConverter.convertDtoFIOToEntity(iorDTO.getSection());
         return new InboundOrder(
-                (long) iorDTO.getOrderNumber(),
+                iorDTO.getOrderNumber(),
                 iorDTO.getOrderDate(),
                 null,
                 null,

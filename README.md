@@ -1,10 +1,22 @@
-# MERCADO LIVRE — FRESCOS
+# MERCADO LIVRE — _Produtos FRESCOS_
 ## Projeto Integrador
-***
+
+* Implementado em Java Spring, apoiado por ferramentas Fury, utilizando a IDE IntelliJ.
+* Modelo base de documentação gerado pelo framework do Fury.
+* Banco de Dados de desenvolvimento H2 em arquivo.
+* Banco de Dados de teste H2 em memória.
+* Banco de Dados de produção MySQL.
+* Segurança utilizando JWT.
+* JavaDoc e Swagger gerados automaticamente.
+* JSON para importação das Collections do Postman, gerado pelo aplicativo do próprio Postman.
+* Endpoints referentes aos Requisitos solicitados (inclusive Requisito 6), podem ser visualizados
+[neste link](https://netto-meli.github.io/w4g9-projeto-final/guide/#/projeto_integrador/Endpoints).
+
 ## Links Úteis
 #### -> Documentação [Docsify](https://netto-meli.github.io/w4g9-projeto-final/guide/#/) do projeto
 #### -> Link para o [JavaDoc](https://netto-meli.github.io/w4g9-projeto-final/JavaDoc/) do pacote
-#### -> Yaml/Json do [Swagger](https://netto-meli.github.io/w4g9-projeto-final/guide/swagger) para testar Endpoints
+#### -> Yaml/Json do [Swagger](https://netto-meli.github.io/w4g9-projeto-final/guide/#/swagger) para testar Endpoints
+#### -> Apresentação do Projeto pelo [Grupo 9 da Wave 4](https://netto-meli.github.io/w4g9-projeto-final/ppt/Apresentacao_W4G6.pptx) para testar Endpoints
 ## Repositórios da Equipe 9
 [GitHub](https://github.com/fpbontempo) - <b>Felipe Pereira Bontempo</b>
 

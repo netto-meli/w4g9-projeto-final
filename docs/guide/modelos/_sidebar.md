@@ -1,3 +1,3 @@
 - [Modelagem de Classe e ER](/modelos/)
 - [Modelo Relacional](modelo-er)
-- [Modelo de Classes inicial](modelo-uml)
+- [Modelo de Classes](modelo-uml)

@@ -2,7 +2,7 @@
 ## Requisito 2
 ### // Especificações de Requisitos
 
-#### Requerimientos US:
+#### Requerimentos US:
 #### ml-add-products-to-cart-01
 
 **Importante:**

@@ -1,7 +1,5 @@
 package com.mercadolibre.w4g9projetofinal.dtos.response;
 
-import com.mercadolibre.w4g9projetofinal.entity.Product;
-import com.mercadolibre.w4g9projetofinal.entity.Seller;
 import com.mercadolibre.w4g9projetofinal.entity.enums.AdvertiseStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,9 +7,6 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 /***
  * DTO para Deserialização do Advertise
  * contem id(Long),
@@ -21,8 +16,11 @@ import java.math.BigDecimal;
  * price(BigDecimal),
  * status(AdvertiseStatus),
  * freeShipping (boolean)
- * @autor Leonardo
+ * @author Leonardo
  */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class AdvertiseResponseDTO {
     private Long id;
     private String description;

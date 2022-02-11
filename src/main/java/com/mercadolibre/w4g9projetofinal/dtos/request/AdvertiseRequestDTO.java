@@ -13,9 +13,6 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 /***
  * DTO para serialização
  * Classe de request
@@ -26,8 +23,11 @@ import java.math.BigDecimal;
  * preco(BigDecimal),
  * status de anuncio(AdvertiseStatus)
  * frete gratuito(boolean)
- * @autor Leonardo
- ***/
+ * @author Leonardo
+ */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class AdvertiseRequestDTO {
     @NotEmpty(message = "Campo Obrigatório")
     @Size(min=4,max=20,message="Descrição deve ter no máximo 20 caracteres e no minimo 4 caracteres. ")

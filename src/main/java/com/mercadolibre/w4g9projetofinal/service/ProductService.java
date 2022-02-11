@@ -5,12 +5,9 @@ import com.mercadolibre.w4g9projetofinal.entity.Product;
 import com.mercadolibre.w4g9projetofinal.entity.enums.OrderByProductInBatch;
 import com.mercadolibre.w4g9projetofinal.entity.enums.RefrigerationType;
 import com.mercadolibre.w4g9projetofinal.exceptions.BusinessException;
-import com.mercadolibre.w4g9projetofinal.exceptions.ExistingUserException;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.ProductRepository;
 import lombok.AllArgsConstructor;
-import net.bytebuddy.implementation.bytecode.Throw;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;

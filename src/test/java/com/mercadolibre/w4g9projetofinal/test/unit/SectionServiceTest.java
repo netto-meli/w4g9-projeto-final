@@ -1,22 +1,24 @@
 package com.mercadolibre.w4g9projetofinal.test.unit;
 
-import com.mercadolibre.w4g9projetofinal.entity.*;
+import com.mercadolibre.w4g9projetofinal.entity.Advertise;
+import com.mercadolibre.w4g9projetofinal.entity.Batch;
+import com.mercadolibre.w4g9projetofinal.entity.InboundOrder;
+import com.mercadolibre.w4g9projetofinal.entity.Section;
 import com.mercadolibre.w4g9projetofinal.entity.enums.RefrigerationType;
 import com.mercadolibre.w4g9projetofinal.exceptions.BusinessException;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.exceptions.SectionManagementException;
 import com.mercadolibre.w4g9projetofinal.repository.SectionRepository;
 import com.mercadolibre.w4g9projetofinal.service.SectionService;
-import com.sun.xml.bind.v2.TODO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 

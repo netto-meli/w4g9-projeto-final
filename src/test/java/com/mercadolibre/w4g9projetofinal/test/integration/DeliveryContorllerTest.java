@@ -1,12 +1,24 @@
 package com.mercadolibre.w4g9projetofinal.test.integration;
 
-import com.mercadolibre.w4g9projetofinal.entity.*;
+import com.mercadolibre.w4g9projetofinal.entity.Advertise;
+import com.mercadolibre.w4g9projetofinal.entity.Buyer;
+import com.mercadolibre.w4g9projetofinal.entity.OrderItem;
+import com.mercadolibre.w4g9projetofinal.entity.Product;
+import com.mercadolibre.w4g9projetofinal.entity.Representative;
+import com.mercadolibre.w4g9projetofinal.entity.SellOrder;
+import com.mercadolibre.w4g9projetofinal.entity.Seller;
+import com.mercadolibre.w4g9projetofinal.entity.Warehouse;
 import com.mercadolibre.w4g9projetofinal.entity.enums.AdvertiseStatus;
 import com.mercadolibre.w4g9projetofinal.entity.enums.RefrigerationType;
 import com.mercadolibre.w4g9projetofinal.entity.enums.RepresentativeJob;
 import com.mercadolibre.w4g9projetofinal.entity.enums.SellOrderStatus;
-import com.mercadolibre.w4g9projetofinal.repository.*;
-import com.newrelic.api.agent.NewRelic;
+import com.mercadolibre.w4g9projetofinal.repository.AdvertiseRepository;
+import com.mercadolibre.w4g9projetofinal.repository.BuyerRepository;
+import com.mercadolibre.w4g9projetofinal.repository.ProductRepository;
+import com.mercadolibre.w4g9projetofinal.repository.RepresentativeRepository;
+import com.mercadolibre.w4g9projetofinal.repository.SellOrderRepository;
+import com.mercadolibre.w4g9projetofinal.repository.SellerRepository;
+import com.mercadolibre.w4g9projetofinal.repository.WarehouseRepository;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -24,10 +36,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @SpringBootTest

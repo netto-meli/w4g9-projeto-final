@@ -5,7 +5,6 @@ import com.mercadolibre.w4g9projetofinal.entity.enums.Profile;
 import com.mercadolibre.w4g9projetofinal.repository.UserRepository;
 import com.mercadolibre.w4g9projetofinal.security.entity.UserSS;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
