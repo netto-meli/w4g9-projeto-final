@@ -8,12 +8,12 @@ public enum SellOrderStatus {
 
     CART(0, "Cart"),
     CREATED(1, "Order Created"),
-    PAID(1,"Order Paid"),
-    SEPARATION(2, "Products in Separation"),
-    SHIPPED(3, "Order Shipped"),
-    DELIVERED(4, "Order Dilivered"),
-    NOT_DELIVERED(5, "Order Not Dilivered"),
-    CANCELED(6,"Order Canceled");
+    PAID(2,"Order Paid"),
+    SEPARATION(3, "Products in Separation"),
+    SHIPPED(4, "Order Shipped"),
+    DELIVERED(5, "Order Dilivered"),
+    NOT_DELIVERED(6, "Order Not Dilivered"),
+    CANCELED(7,"Order Canceled");
 
     private final int cod;
     private final String descricao;
