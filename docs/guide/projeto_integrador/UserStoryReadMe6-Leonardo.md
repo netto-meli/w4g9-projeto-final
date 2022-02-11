@@ -2,7 +2,7 @@
 ## Requisito 6
 ### // Especificações de Requisitos
 
-#### Requerimientos US:
+#### Requerimentos US:
 #### [ml-creat-crud-for-buyer-01](https://netto-meli.github.io/w4g9-projeto-final/guide/projeto_integrador/US-6/Requisito_6_CRUD_Buyer_Leonardo.pdf) <-(clique para acessar PDF)
 
 **Importante:**
@@ -18,7 +18,7 @@ pelos representantes, comprador e vendedor solicitante. Os contratos referem-se
 
 |                                                                                        User Story Code: ml-creat-crud-for-buyer-06                                                                                        | Horas estimadas |
 |:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:---------------:|
-|                                                                                    **User Story Name: Cadastro do comprador**                                                                                             |      20 H       |
+|                                                                                        **User Story Name: Cadastro do comprador**                                                                                         |      20 H       |
 | **COMO** vendedor,comprador e representante **QUERO** poder realizar buscas, incluir, deletar e alterar um comprador **PARA** manter a base de compradores sempre atualizada ou consultar seus próprios dados(Comprador). |                 | 
 
 | **CENÁRIO 1:** Um comprador é registrado.                                                                                                                                                                                                 |     
@@ -79,13 +79,13 @@ pelos representantes, comprador e vendedor solicitante. Os contratos referem-se
 </p></details>
 
 ### Contratos relativos a User Story
-| HTTP   | Modelo de URI                      | Descrição                                                                                                                | US-code                   |
-|--------|------------------------------------|--------------------------------------------------------------------------------------------------------------------------|---------------------------|
-| GET    | api/v1/fresh-products/buyer        | Listar todos compradores da base de dados com o retorno código de status "200 ok".                                       | ml-creat-crud-for-buye-06 |
-| GET    | api/v1/fresh-products/buyer/{{id}} | Listar dados de um comprador com base no id informado e com o retorno código de status "200 ok".                         | ml-creat-crud-for-buye-06 |
-| POST   | api/v1/fresh-products/buyer        | Cadastrar um comprador e devolver o código de status "201 - CREATED" e no body as informações do comprador adicionado.   | ml-creat-crud-for-buye-06 |
-| DELETE | api/v1/fresh-products/buyer/{{id}} | Deletar um comprador e devolver o codigo de retorno de status "200 - OK" e no body uma mensagem informando o id excluido | ml-creat-crud-for-buye-06 |
-| PUT    | api/v1/fresh-products/buyer/{{id}} | Alterar um comprador pelo número de id e devolver o código de status "200 - OK" com os dados alterados no body.          | ml-creat-crud-for-buye-06 |
+| HTTP   | Modelo de URI                      | Descrição                                                                                                                | US-code                    |
+|--------|------------------------------------|--------------------------------------------------------------------------------------------------------------------------|----------------------------|
+| GET    | api/v1/fresh-products/buyer        | Listar todos compradores da base de dados com o retorno código de status "200 ok".                                       | ml-creat-crud-for-buyer-06 |
+| GET    | api/v1/fresh-products/buyer/{{id}} | Listar dados de um comprador com base no id informado e com o retorno código de status "200 ok".                         | ml-creat-crud-for-buyer-06 |
+| POST   | api/v1/fresh-products/buyer        | Cadastrar um comprador e devolver o código de status "201 - CREATED" e no body as informações do comprador adicionado.   | ml-creat-crud-for-buyer-06 |
+| DELETE | api/v1/fresh-products/buyer/{{id}} | Deletar um comprador e devolver o codigo de retorno de status "200 - OK" e no body uma mensagem informando o id excluido | ml-creat-crud-for-buyer-06 |
+| PUT    | api/v1/fresh-products/buyer/{{id}} | Alterar um comprador pelo número de id e devolver o código de status "200 - OK" com os dados alterados no body.          | ml-creat-crud-for-buyer-06 |
 
 > Observação:
 Contemple outros tipos de erros.

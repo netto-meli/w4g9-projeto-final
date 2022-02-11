@@ -3,7 +3,7 @@
 login: **admin**<br>
 senha: **123**
 ### Facilitadores Postman:
-#### -> [Link para importar Collection](https://www.getpostman.com/collections/a0598b1f6201e72b7d40) para o Postman (copiar e colar)
+#### ->  [Link para importar Collection](https://www.getpostman.com/collections/a0598b1f6201e72b7d40) para o Postman (copiar e colar)
 #### -> Download do [JSON](JSONs/Postman_endpoint.json) salvo.
 
 JSON para utilização dos endPoint no Postman

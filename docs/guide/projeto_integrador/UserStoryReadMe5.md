@@ -1,11 +1,8 @@
 # Programação Java
-
 ## Requisito 5
-
 ### // Especificações de Requisitos
 
-#### Requerimientos US:
-
+#### Requerimentos US:
 #### ml-check-batch-stock-due-date-01
 
 **Importante:**

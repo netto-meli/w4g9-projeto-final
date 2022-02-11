@@ -6,17 +6,17 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.*;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 /***
  * DTO para serialização
  * Classe de Request
  * contem: name(String),
  * endereco(String),
  * email(String)
- * @autor Leonardo
+ * @author Leonardo
  */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class BuyerRequestDTO {
     @NotNull(message = "Campo Obrigatório")
     @NotEmpty(message = "Campo Obrigatório")
