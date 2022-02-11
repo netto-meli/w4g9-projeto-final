@@ -2,7 +2,7 @@
 ## Requisito 6
 ### // Especificações de Requisitos
 
-#### Requerimientos US:
+#### Requerimentos US:
 #### [ml-sections-06](https://netto-meli.github.io/w4g9-projeto-final/guide/projeto_integrador/US-6/Requisito_6_-_Felipe_Bontempo.pdf) <-(clique para acessar PDF)
 
 **Importante:**
@@ -14,7 +14,7 @@ consumidos pelo comprador que os solicita. Os contratos referem-se à História 
 ### User Story
 
 
-|                                                                 User Story Code: ml-sections-01                                                      | Horas estimadas |
+|                                                           User Story Code: ml-sections-01                                                            | Horas estimadas |
 |:----------------------------------------------------------------------------------------------------------------------------------------------------:|:---------------:|
 |                                              **User Story Name: Representante pode manipular setores**                                               |       35        |
 | **COMO** Representante do armazém, **QUERO** listar todos os setores **PARA** escolher um setor adequado para armazenar produtos que recém chegaram. |                 |
@@ -66,7 +66,7 @@ consumidos pelo comprador que os solicita. Os contratos referem-se à História 
 
 ### Contratos relativos a User Story
 
-| HTTP   | Planilha URI                        | Descripcion                  | US-code        |
+| HTTP   | Planilha URI                        | Descrição                    | US-code        |
 |--------|-------------------------------------|------------------------------|----------------|
 | GET    | /api/v1/fresh-products/section      | Retorna uma lista de section | ml-sections-01 |
 | GET    | /api/v1/fresh-products/section/{id} | Retorna uma section pelo ID  | ml-sections-01 |

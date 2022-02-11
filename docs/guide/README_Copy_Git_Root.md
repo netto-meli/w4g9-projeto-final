@@ -6,6 +6,7 @@
 * Banco de Dados de desenvolvimento H2 em arquivo.
 * Banco de Dados de teste H2 em memória.
 * Banco de Dados de produção MySQL.
+* Segurança utilizando JWT.
 * JavaDoc e Swagger gerados automaticamente.
 * JSON para importação das Collections do Postman, gerado pelo aplicativo do próprio Postman.
 * Endpoints referentes aos Requisitos solicitados (inclusive Requisito 6), podem ser visualizados

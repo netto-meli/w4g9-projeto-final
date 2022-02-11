@@ -31,7 +31,7 @@ public class BatchConverter {
 
     public static Batch convertDtoToEntity (BatchRequestDTO b){
         return new Batch(
-                (long) b.getBatchNumber(),
+                b.getBatchNumber(),
                 b.getInitialQuantity(),
                 b.getCurrentQuantity(),
                 b.getCurrentTemperature(),

@@ -4,10 +4,10 @@ import com.mercadolibre.w4g9projetofinal.entity.Advertise;
 import com.mercadolibre.w4g9projetofinal.entity.Product;
 import com.mercadolibre.w4g9projetofinal.entity.Seller;
 import com.mercadolibre.w4g9projetofinal.entity.enums.AdvertiseStatus;
-import com.mercadolibre.w4g9projetofinal.exceptions.BusinessException;
 import com.mercadolibre.w4g9projetofinal.exceptions.ObjectNotFoundException;
 import com.mercadolibre.w4g9projetofinal.repository.AdvertiseRepository;
 import com.mercadolibre.w4g9projetofinal.service.AdvertiseService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -16,8 +16,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /***
  * @author Leonardo
@@ -38,8 +36,8 @@ public class AdvertiseServiceTest {
         AdvertiseService advertiseService = new AdvertiseService(advertiseRepository);
         List<Advertise> AdFindAll = advertiseService.findAll();
 
-        assertEquals(listAdvertise, AdFindAll);
-        assertNotNull(advertiseService);
+        Assertions.assertEquals(listAdvertise, AdFindAll);
+        Assertions.assertNotNull(advertiseService);
     }
 
     @Test
@@ -52,10 +50,10 @@ public class AdvertiseServiceTest {
         AdvertiseService advertiseService = new AdvertiseService(advertiseRepository);
 
         Advertise adFindId = advertiseService.findById(1L);
-        ObjectNotFoundException ex = assertThrows(ObjectNotFoundException.class,() -> advertiseService.findById(2L));
+        ObjectNotFoundException ex = Assertions.assertThrows(ObjectNotFoundException.class,() -> advertiseService.findById(2L));
 
-        assertEquals(adFindId, adv);
-        assertTrue(ex.getMessage().contains("Anuncio não encontrado! Por favor verifique o id."));
+        Assertions.assertEquals(adFindId, adv);
+        Assertions.assertTrue(ex.getMessage().contains("Anuncio não encontrado! Por favor verifique o id."));
     }
 
     @Test
@@ -69,7 +67,7 @@ public class AdvertiseServiceTest {
         AdvertiseService advertiseService = new AdvertiseService(advertiseRepository);
         Advertise adInsert = advertiseService.insert(adv);
 
-        assertEquals(adv, adInsert);
+        Assertions.assertEquals(adv, adInsert);
     }
 
     @Test
@@ -87,11 +85,11 @@ public class AdvertiseServiceTest {
         AdvertiseService advertiseService = new AdvertiseService(advertiseRepository);
 
         Advertise advUpdate = advertiseService.update(adv);
-        ObjectNotFoundException ex = assertThrows(ObjectNotFoundException.class,() -> advertiseService.findById(4L));
+        ObjectNotFoundException ex = Assertions.assertThrows(ObjectNotFoundException.class,() -> advertiseService.findById(4L));
 
-        assertEquals(adv, advUpdate);
-        assertNotNull(adv);
-        assertTrue(ex.getMessage().contains("Anuncio não encontrado! Por favor verifique o id."));
+        Assertions.assertEquals(adv, advUpdate);
+        Assertions.assertNotNull(adv);
+        Assertions.assertTrue(ex.getMessage().contains("Anuncio não encontrado! Por favor verifique o id."));
     }
 
     @Test
@@ -111,10 +109,10 @@ public class AdvertiseServiceTest {
         AdvertiseService advertiseService = new AdvertiseService(advertiseRepository);
 
         advertiseService.delete(1L);
-        ObjectNotFoundException ex = assertThrows(ObjectNotFoundException.class,() -> advertiseService.findById(2L));
+        ObjectNotFoundException ex = Assertions.assertThrows(ObjectNotFoundException.class,() -> advertiseService.findById(2L));
 
         Mockito.verify(advertiseRepository, Mockito.times(1)).delete(adv);
-        assertTrue(ex.getMessage().contains("Anuncio não encontrado! Por favor verifique o id."));
+        Assertions.assertTrue(ex.getMessage().contains("Anuncio não encontrado! Por favor verifique o id."));
     }
 
 }

@@ -39,10 +39,10 @@ public class Section {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
     /***
      * Um warehouse registrada
      */
+    @ManyToOne
     private Warehouse warehouse;
     /***
      * Nome do Setor

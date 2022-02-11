@@ -5,9 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 /***
  * DTO para Deserialização do Advertise
  * contem id (Long),
@@ -15,6 +12,9 @@ import lombok.NoArgsConstructor;
  * descricao (String),
  * categoryRefrigeration (RefrigerationType)
  */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProductResponseDTO {
     private Long id;
     private String name;

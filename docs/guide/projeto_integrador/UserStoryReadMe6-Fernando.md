@@ -2,7 +2,7 @@
 ## Requisito 6
 ### // Especificações de Requisitos
 
-#### Requerimientos US:
+#### Requerimentos US:
 #### [ml-delivery-orders-01](https://netto-meli.github.io/w4g9-projeto-final/guide/projeto_integrador/US-6/UserStory_6_DELIVERY_-_Fernando_Netto.pdf) <-(clique para acessar PDF)
 
 **Importante:**
@@ -25,7 +25,7 @@ Sinônimos do Representante: supervisor, líder.
 | **DESDE** o Representante esteja autorizado                |
 | **E** que o Entregador tenha um meio de condução           |
 | **E** que o meio de condução tenha placa                   |
-| **E/OU** que o haja espaço para produtos frescos            |
+| **E/OU** que o haja espaço para produtos frescos           |
 | **E/OU** que o haja espaço para produtos refrigerados      |
 | **E/OU** que o haja espaço para produtos congelados        |
 | **QUANDO** o Representante aciona o cadastro do Entregador |
@@ -37,7 +37,7 @@ Sinônimos do Representante: supervisor, líder.
 | **DESDE** o Entregador não esteja fazendo uma entrega                        |
 | **E** que o haja espaço para produtos frescos da lista de pedidos            |
 | **E** que o haja espaço para produtos refrigerados da lista de pedidos       |
-| **E** que o haja espaço para produtos congelados da lista de pedidos      |
+| **E** que o haja espaço para produtos congelados da lista de pedidos         |
 | **QUANDO** o Representante aciona a busca de Entregadores                    |
 | **ENTÃO** um Entregador estipulado para a entrega dos pedidos                |
 | **E** seu estatus fica como indisponível para entrega ("Em Rota de Entrega") |
