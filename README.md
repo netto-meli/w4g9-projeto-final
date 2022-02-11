@@ -16,6 +16,7 @@
 #### -> Documentação [Docsify](https://netto-meli.github.io/w4g9-projeto-final/guide/#/) do projeto
 #### -> Link para o [JavaDoc](https://netto-meli.github.io/w4g9-projeto-final/JavaDoc/) do pacote
 #### -> Yaml/Json do [Swagger](https://netto-meli.github.io/w4g9-projeto-final/guide/#/swagger) para testar Endpoints
+#### -> Apresentação do Projeto pelo [Grupo 9 da Wave 4](https://netto-meli.github.io/w4g9-projeto-final/ppt/Apresentacao_W4G6.pptx) para testar Endpoints
 ## Repositórios da Equipe 9
 [GitHub](https://github.com/fpbontempo) - <b>Felipe Pereira Bontempo</b>
 
